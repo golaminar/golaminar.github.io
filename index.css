@@ -28,6 +28,12 @@ a:hover {
 
 h1 {
     margin: 0 0 6rem 0;
+    font-size: calc((2.4 - 1) * 1.2vw + 1rem);
+    font-weight: 750;
+}
+
+h1:after {
+    content: ".";
 }
 
 footer {
