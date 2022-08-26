@@ -19,13 +19,6 @@ a:hover {
     color: #333;
 }
 
-.intro, h1 {
-    font-size: calc((2.8 - 1) * 1.2vw + 1rem);
-    line-height: calc(1.4 * (1 + (1 - 2.8)/25));
-    margin: 0 0 2rem 0;
-    font-weight: initial;
-}
-
 h1 {
     margin: 0 0 6rem 0;
     font-size: calc((2.4 - 1) * 1.2vw + 1rem);
@@ -34,6 +27,12 @@ h1 {
 
 h1:after {
     content: ".";
+}
+
+.intro {
+    font-size: calc((3.2 - 1) * 1.2vw + 1rem);
+    line-height: calc(1.4 * (1 + (1 - 2.8)/25));
+    margin: 0 0 2rem 0;
 }
 
 footer {
