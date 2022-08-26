@@ -42,7 +42,8 @@ footer {
     left: 0;
     width: 100%;
     background-color: rgba(2, 2, 2, 0.3);
-    font-size: calc((1.2 - 1) * 1.2vw + 1rem); 
+    font-size: calc((1.2 - 1) * 1.2vw + 1rem);
+    padding: 0.25rem 0;
 }
 
 footer a {
