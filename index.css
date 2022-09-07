@@ -46,14 +46,37 @@ h1:after {
 }
 
 #about-us {
+    display: flex;
+    flex-wrap: wrap;
 }
 
-.image-frame {
+#about-us h2 {
+    text-align: center;
+}
+
+#about-us > div {
+    flex-basis: 40%;
+    padding-right: 20px;
+    text-align: center;
+}
+
+#about-us ul {
+   list-style: none;
+   padding: 0;
+   text-align: left;
+}
+
+#about-us li {
+    margin: .25em;
+}
+
+.bio .image-frame {
     width: 300px;
     height: 300px;
     position: relative;
     overflow: hidden;
     border-radius: 50%;
+    display: inline-block;
 }
 
 .image-frame img {
