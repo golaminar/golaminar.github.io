@@ -50,24 +50,25 @@ h1:after {
     flex-wrap: wrap;
 }
 
-#about-us h2 {
-    text-align: center;
-}
-
 #about-us > div {
     flex-basis: 40%;
     padding-right: 20px;
     text-align: center;
 }
 
-#about-us ul {
-   list-style: none;
-   padding: 0;
-   text-align: left;
+.bio h2 {
+    text-align: center;
 }
 
-#about-us li {
-    margin: .25em;
+.bio ul {
+    list-style: square;
+    margin: 0;
+    text-align: left;
+    font-size: 0.9em;
+}
+
+.bio li {
+    margin-bottom: .25em;
 }
 
 .bio .image-frame {
@@ -79,7 +80,7 @@ h1:after {
     display: inline-block;
 }
 
-.image-frame img {
+.bio .image-frame img {
     display: inline;
     margin: 0 auto;
     width: 100%;
