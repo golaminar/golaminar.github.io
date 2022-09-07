@@ -59,8 +59,8 @@ h1:after {
 .image-frame img {
     display: inline;
     margin: 0 auto;
-    height: 100%;
-    width: auto;
+    width: 100%;
+    height: auto;
 }
 
 footer {
