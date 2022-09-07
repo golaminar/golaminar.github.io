@@ -127,3 +127,13 @@ footer .names:after {
         font-size: 0.6em;
     }
 }
+
+.writing .page {
+    max-width: 800px;
+}
+
+body.writing {
+    background-color: #eee;
+    color: #333;
+}
+
