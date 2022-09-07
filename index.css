@@ -17,7 +17,6 @@ body {
 
 p, ul, ol {
     max-width: 800px;
-    margin: 0 0 1em 0;
 }
 
 a {
@@ -55,6 +54,14 @@ h1:after {
 .cols > div {
     flex: 300px;
     max-width: 500px;
+}
+
+.cols p {
+    margin: 0;
+}
+
+.cols p:not(:last-child) {
+    margin-bottom: 1em;
 }
 
 #about-us > div {
