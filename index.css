@@ -40,9 +40,20 @@ h1:after {
 }
 
 .tagline {
-    font-size: 1.5em;
+    font-size: 2.6em;
     margin-bottom: 1em;
     line-height: 1.2;
+}
+
+.cols {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.cols > div {
+    flex-basis: 40%;
+    padding-right: 20px;
+    min-width: 300px;
 }
 
 #about-us {
@@ -54,6 +65,7 @@ h1:after {
     flex-basis: 40%;
     padding-right: 20px;
     text-align: center;
+    margin-bottom: 2em;
 }
 
 .bio h2 {
@@ -72,8 +84,8 @@ h1:after {
 }
 
 .bio .image-frame {
-    width: 300px;
-    height: 300px;
+    width: 250px;
+    height: 250px;
     position: relative;
     overflow: hidden;
     border-radius: 50%;
@@ -112,7 +124,7 @@ footer .names:after {
     color: #111;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 600px) {
     body {
         padding: 1em;
     }
