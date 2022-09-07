@@ -106,7 +106,7 @@ footer {
     left: 0;
     width: 100%;
     background-color: #8b8b8b;
-    font-size: 0.6em;
+    font-size: 0.8em;
     padding: 0.25em 0;
 }
 
@@ -127,11 +127,5 @@ footer .names:after {
 @media (max-width: 600px) {
     body {
         padding: 1em;
-    }
-}
-
-@media (min-width: 1200px) {
-    p {
-        width: 75%;
     }
 }
