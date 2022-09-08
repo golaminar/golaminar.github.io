@@ -162,7 +162,7 @@ footer {
     width: 100%;
     background-color: #8b8b8b;
     font-size: 0.8em;
-    padding: 0.25em 0;
+    padding: 0.5em 0;
 }
 
 footer a {
@@ -177,6 +177,11 @@ footer .names:after {
     padding: 0 0.5em;
     content: " | ";
     color: #111;
+}
+
+footer .names a:link, footer .names a:hover, footer .names a:visited, footer .names, a:visited {
+    color: #fff;
+    border-bottom-color: #fff;
 }
 
 @media (max-width: 600px) {
