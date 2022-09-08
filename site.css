@@ -150,6 +150,18 @@ header {
     font-family: Georgia, Cambria, "Times New Roman", Times, serif;
 }
 
+.writing article h3 {
+    margin-bottom: 0.25em;
+}
+
+.writing article p {
+    margin-top: 0;
+}
+
+.writing article li {
+    margin-bottom: 0.5em;
+}
+
 .footnote {
     font-size: 0.8em;
 }
