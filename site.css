@@ -142,8 +142,7 @@ header {
 .writing main {
     background-color: #eee;
     color: #111;
-    width: 100%;
-    padding: 0.5em 0 3em 0;
+    padding: 0.5em 2em 3em 2em;
 }
 
 .footnote {
