@@ -2,7 +2,6 @@ body {
     font-family: "proxima-nova","Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 1.2em;
     line-height: 1.3;
-    padding: 2em;
     margin: 0;
     color: #fff;
     background-color: #b5b5b5;
@@ -10,7 +9,8 @@ body {
 }
 
 .page {
-    max-width: 1200px;
+    padding: 2em;
+    max-width: 800px;
     margin: auto;
     margin-bottom: 3em;
 }
@@ -26,9 +26,15 @@ a:hover {
 }
 
 h1 {
-    margin: 0 0 2.5em 0;
     font-size: 1.4em;
     font-weight: 750;
+    margin: 1em 0;
+}
+
+h1 a:link, h1 a:hover, h1 a:visited, h1 a:active {
+    text-decoration: none;
+    border-bottom: none;
+    color: #fff;
 }
 
 h1:after {
@@ -39,7 +45,6 @@ h1:after {
     font-size: 2.6em;
     margin-bottom: 1em;
     line-height: 1.2;
-    max-width: 800px;
 }
 
 .cols {
@@ -93,6 +98,53 @@ h1:after {
     height: auto;
 }
 
+.byline {
+    font-size: 0.8em;
+}
+
+.byline .image-frame {
+    width: 50px;
+    height: 50px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.byline .image-frame img {
+    display: inline;
+    margin: 0 auto;
+    width: 100%;
+    height: auto;
+}
+
+.byline .author::after {
+    content: " | "
+}
+
+.byline .author {
+    padding-left: 0.5em;
+    font-style: italic;
+}
+
+header {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1em 2em;
+}
+
+.writing article {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.writing main {
+    background-color: #eee;
+    color: #111;
+    width: 100%;
+    padding: 0.5em 0 3em 0;
+}
+
 footer {
     text-align: center;
     position: fixed;
@@ -119,21 +171,7 @@ footer .names:after {
 }
 
 @media (max-width: 600px) {
-    body {
-        padding: 1em;
-    }
-
     footer {
         font-size: 0.6em;
     }
 }
-
-.writing .page {
-    max-width: 800px;
-}
-
-body.writing {
-    background-color: #eee;
-    color: #333;
-}
-
