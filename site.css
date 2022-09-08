@@ -101,6 +101,8 @@ h1:after {
 
 .byline {
     font-size: 0.8em;
+    color: #8b8b8b;
+    font-variant: small-caps;
 }
 
 .byline .image-frame {
@@ -125,7 +127,6 @@ h1:after {
 
 .byline .author {
     padding-left: 0.5em;
-    font-style: italic;
 }
 
 header {
@@ -143,6 +144,10 @@ header {
     background-color: #eee;
     color: #111;
     padding: 0.5em 2em 3em 2em;
+}
+
+.writing article p, .writing article ol, .writing article ul {
+    font-family: Georgia, Cambria, "Times New Roman", Times, serif;
 }
 
 .footnote {
