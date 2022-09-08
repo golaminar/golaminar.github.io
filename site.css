@@ -179,7 +179,7 @@ footer .names:after {
     color: #111;
 }
 
-footer .names a:link, footer .names a:hover, footer .names a:visited, footer .names, a:visited {
+footer .names a:link, footer .names a:hover, footer .names a:visited, footer .names a:visited {
     color: #fff;
     border-bottom-color: #fff;
 }
