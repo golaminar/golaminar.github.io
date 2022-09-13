@@ -72,14 +72,14 @@ h1:after {
     text-align: center;
 }
 
-.bio ul {
+.homepage ul {
     list-style: square;
     margin: 0;
     text-align: left;
     font-size: 0.9em;
 }
 
-.bio li {
+.homepage li {
     margin-bottom: .25em;
 }
 
@@ -160,6 +160,16 @@ header {
 
 .writing article li {
     margin-bottom: 0.5em;
+}
+
+.offering p, .offering ul {
+    font-size: 0.9em;
+}
+
+.offering p.summary {
+    font-size: 1em;
+    font-weight: bold;
+    font-style: normal;
 }
 
 .footnote {
