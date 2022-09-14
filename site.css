@@ -175,6 +175,14 @@ header {
     font-size: 0.8em;
 }
 
+.testimonial p:before {
+    content: "“";
+    font-size: 400%;
+    line-height: 1em;
+    vertical-align: bottom;
+    overflow: hidden;
+}
+
 footer {
     text-align: center;
     position: fixed;
