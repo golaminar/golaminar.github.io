@@ -56,7 +56,6 @@ h1:after {
 
 .cols > div {
     flex: 300px;
-    max-width: 500px;
 }
 
 .cols p {
