@@ -75,7 +75,6 @@ h1:after {
     list-style: square;
     margin: 0;
     text-align: left;
-    font-size: 0.9em;
 }
 
 .homepage li {
@@ -159,6 +158,15 @@ header {
 
 .writing article li {
     margin-bottom: 0.5em;
+}
+
+#what-we-offer .col {
+    padding: 0.5em 1.5em 1.5em 1.5em;
+}
+
+.offering {
+    background-color: rgba(255, 255, 255, 0.7);
+    color: #444;
 }
 
 .offering p, .offering ul {
