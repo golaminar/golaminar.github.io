@@ -227,6 +227,10 @@ header {
     top: -19px;
 }
 
+#final-pitch {
+    text-align: center;
+}
+
 footer {
     text-align: center;
     position: fixed;
