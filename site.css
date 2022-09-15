@@ -201,6 +201,10 @@ header {
     text-indent: 1.75em;
 }
 
+.testimonial:nth-child(even) {
+    margin-top: 4em;
+}
+
 .testimonial:before {
     content: "“";
     display: inline-block;
