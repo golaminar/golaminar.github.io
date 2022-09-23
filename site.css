@@ -156,6 +156,11 @@ header {
     margin-bottom: 0.5em;
 }
 
+.writing article a {
+    color: #666;
+    border-bottom: 1px solid #666;
+}
+
 #what-we-offer .col {
     padding: 0.5em 1.5em 1.5em 1.5em;
 }
