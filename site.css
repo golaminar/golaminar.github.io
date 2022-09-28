@@ -240,7 +240,16 @@ footer {
     width: 100%;
     background-color: #8b8b8b;
     font-size: 0.8em;
-    padding: 0.5em 0;
+    padding: 0;
+}
+
+.footer-container {
+    padding: 0.5em;
+    line-height: 2;
+}
+
+footer span {
+    white-space: nowrap;
 }
 
 footer a {
@@ -252,10 +261,10 @@ footer a:hover {
     color: #111;
 }
 
-footer .names:after {
+footer span:not(:last-child):after {
     padding: 0 0.5em;
     content: " | ";
-    color: #111;
+    color: rgb(99, 99, 99);
 }
 
 footer .names a:link, footer .names a:hover, footer .names a:visited, footer .names a:visited {
