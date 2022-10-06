@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Laminar | Two Weird Things</title>
+    <link rel="stylesheet" href="../site.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
+</head>
+<body class="writing">
+<header>
+    <h1><a href="https://golaminar.de">Laminar</a></h1>
+</header>
+<main>
+<article>
+    <h2>Two weird things</h2>
+    <div class="byline"><span class="image-frame"><img src="../images/tom.jpg"></span><span class="author"><a href="mailto:tom@golaminar.de">Tom</a></span><span class="date">18<sup>th</sup> October 2022</span></div>
+    <p>There’s something weird about randomness.</p>
+    <p>Let’s play a game to demonstrate. Imagine I flip a coin repeatedly, and each time it lands on heads, you add 1 to a total which starts at 0. Whenever it lands on tails, you subtract 1 from this total.</p>
+    <figure>
+        <figcaption>Coin-flipping chart</figcaption>
+    </figure>
+    <p>There’s something weird about queues.</p>
+    <figure>
+        <input name="expected-arrival-time-interval" value="121">
+        <label for="expected-arrival-time-interval">Interval between arrivals (seconds)</label>
+        <br>
+        <span>Average arrival time: </span><span id="avg-arrival-time-interval"></span>
+        <ol id="arrival-time-intervals"></ol>
+        <input name="expected-service-time" value="120">
+        <label for="expected-service-time">Service time (seconds)</label>
+        <br>
+        <span>Average service time: </span><span id="avg-service-time"></span>
+        <button id="start-simulation">Start simulation</button>
+        <ol id="queue"></ol>
+        <figcaption>Expect queue length interactive illustration</figcaption>
+        <script src="queue-illustrations.js"></script>
+    </figure>
+    <p></p>
+</article>
+</main>
+<footer>
+    <span class="names"><a href="https://www.linkedin.com/in/tconroy/">Tiffany Conroy</a> & <a href="https://www.linkedin.com/in/another-tom-stuart/">Thomas Stuart</a></span>
+    <span class="email"><a href="mailto:hello@golaminar.de">hello@golaminar.de</a></span>
+</footer>
+</body>
+</html>
