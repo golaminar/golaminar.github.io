@@ -57,7 +57,10 @@ const queueObservable = {
     },
     addQueuer: function () {
         this.count++;
-        this.queue.push(this.count);
+        this.queue.push({
+            order: this.count,
+            color: randomColor(),
+        });
         this.notifyObservers();
     },
     removeQueuer: function () {
@@ -88,7 +91,7 @@ const serviceTimesLog = {
 
 const queueLog = {
     queueChanged: function (queue) {
-        console.log(queue);
+        console.table(queue);
     }
 };
 
@@ -127,10 +130,11 @@ const queueList = {
     queueChanged: function (queue) {
         d3.select("#queue")
             .selectAll("li")
+            .remove() // would be better to not repaint the whole thing every time
             .data(queue)
             .enter().append("li")
-            .text(d => { return d; })
-            .style("color", randomColor());
+            .text(d => { return d.order; })
+            .style("color", d => { return d.color; });
     }
 }
 
