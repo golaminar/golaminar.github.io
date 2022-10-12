@@ -58,6 +58,18 @@ const serviceTimesLog = {
 
 serviceTimesObservable.addObserver(serviceTimesLog);
 
+const arrivalTimesList = {
+    newArrival: function (arrivals) {
+        d3.select("#arrival-time-intervals")
+            .selectAll("li")
+            .data(arrivals)
+            .enter().append("li")
+            .text(d => { return d; });
+    }
+}
+
+arrivalsObservable.addObserver(arrivalTimesList);
+
 function randomColor() {
     const colors = ["red", "yellow", "blue", "orange", "green", "purple", "pink", "black"];
     const i = Math.floor(Math.random() * colors.length);
