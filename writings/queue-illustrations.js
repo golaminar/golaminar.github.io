@@ -118,6 +118,19 @@ const enqueueArrival = {
 
 arrivalsObservable.addObserver(enqueueArrival);
 
+const queueList = {
+    queueChanged: function (queue) {
+        d3.select("#queue")
+            .selectAll("li")
+            .data(queue)
+            .enter().append("li")
+            .text(d => { return d; })
+            .style("color", randomColor());
+    }
+}
+
+queueObservable.addObserver(queueList);
+
 function randomColor() {
     const colors = ["red", "yellow", "blue", "orange", "green", "purple", "pink", "black"];
     const i = Math.floor(Math.random() * colors.length);
