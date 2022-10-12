@@ -1,4 +1,4 @@
-let scalingFactor = 0.001;
+let scalingFactor = 0.0001;
 
 function simulate() {
     const expectedArrivalInterval = parseInt(document.querySelector("[name=expected-arrival-time-interval]").value);
@@ -100,7 +100,7 @@ const queueLog = {
     }
 };
 
-queueObservable.addObserver(queueLog);
+//queueObservable.addObserver(queueLog);
 
 const arrivalTimesList = {
     newArrival: function (arrivals) {
@@ -117,11 +117,20 @@ arrivalsObservable.addObserver(arrivalTimesList);
 const arrivalAverageDisplay = {
     newArrival: function (arrivals) {
         d3.select("#avg-arrival-time-interval")
-            .text(() => { return d3.mean(arrivals); });
+            .text(() => { return d3.mean(arrivals).toFixed(2); });
     }
 };
 
 arrivalsObservable.addObserver(arrivalAverageDisplay);
+
+const displayElapsedTime = {
+    newArrival: function (arrivals) {
+        d3.select("#elapsed-time")
+            .text(() => { return `${(d3.sum(arrivals)/60).toFixed(2)} minutes`; });
+    }
+};
+
+arrivalsObservable.addObserver(displayElapsedTime);
 
 const enqueueArrival = {
     newArrival: function (arrivals) {
@@ -134,7 +143,7 @@ arrivalsObservable.addObserver(enqueueArrival);
 const serviceTimeAverageDisplay = {
     newServiceTime: function (serviceTimes) {
         d3.select("#avg-service-time")
-            .text(() => { return d3.mean(serviceTimes); });
+            .text(() => { return d3.mean(serviceTimes).toFixed(2); });
     }
 };
 
@@ -194,7 +203,7 @@ const displayQueueLength = {
             .text(() => { return queue.length; });
 
         d3.select("#expected-wait-time")
-            .text(() => { return `${waitTime} seconds `; });
+            .text(() => { return `${(waitTime / 60).toFixed(2)} minutes`; });
     }
 };
 
