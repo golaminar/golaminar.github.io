@@ -70,6 +70,15 @@ const arrivalTimesList = {
 
 arrivalsObservable.addObserver(arrivalTimesList);
 
+const arrivalAverageDisplay = {
+    newArrival: function (arrivals) {
+        d3.select("#avg-arrival-time-interval")
+            .text(() => { return d3.mean(arrivals); });
+    }
+};
+
+arrivalsObservable.addObserver(arrivalAverageDisplay);
+
 function randomColor() {
     const colors = ["red", "yellow", "blue", "orange", "green", "purple", "pink", "black"];
     const i = Math.floor(Math.random() * colors.length);
