@@ -177,6 +177,21 @@ const attemptService = {
 
 queueObservable.addObserver(attemptService);
 
+const displayQueueLength = {
+    queueChanged: function (queue) {
+        const expectedServiceTime = parseInt(document.querySelector("[name=expected-service-time]").value);
+        const waitTime = queue.length * expectedServiceTime;
+
+        d3.select("#queue-length")
+            .text(() => { return queue.length; });
+
+        d3.select("#expected-wait-time")
+            .text(() => { return `${waitTime} seconds `; });
+    }
+};
+
+queueObservable.addObserver(displayQueueLength);
+
 function randomColor() {
     const colors = ["red", "yellow", "blue", "orange", "green", "purple", "pink", "black"];
     const i = Math.floor(Math.random() * colors.length);
