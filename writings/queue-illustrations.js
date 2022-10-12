@@ -157,6 +157,9 @@ const queueList = {
         d3.select("#queue")
             .selectAll("li")
             .remove() // would be better to not repaint the whole thing every time
+
+        d3.select("#queue")
+            .selectAll("li")
             .data(queue)
             .enter().append("li")
             .text(d => { return d.order; })
