@@ -2,14 +2,9 @@ let scalingFactor = 0.01;
 
 function simulate() {
     const expectedArrivalInterval = parseInt(document.querySelector("[name=expected-arrival-time-interval]").value);
-    const expectedServiceTime = parseInt(document.querySelector("[name=expected-service-time]").value);
 
     const arrivalGenerator = new Process(expectedArrivalInterval, function (interval) {
         arrivalsObservable.addArrival(interval);
-    }).start();
-
-    const serverGenerator = new Process(expectedServiceTime, function (interval) {
-        serviceTimesObservable.addServiceTime(interval);
     }).start();
 }
 
