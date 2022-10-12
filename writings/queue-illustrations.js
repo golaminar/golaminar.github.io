@@ -6,13 +6,11 @@ function simulate() {
 
     const arrivalGenerator = new Process(expectedArrivalInterval, function (interval) {
         arrivalsObservable.addArrival(interval);
-    });
+    }).start();
 
     const serverGenerator = new Process(expectedServiceTime, function (interval) {
         serviceTimesObservable.addServiceTime(interval);
-    });
-
-    arrivalGenerator.start();
+    }).start();
 }
 
 const arrivalsObservable = {
@@ -51,11 +49,19 @@ const serviceTimesObservable = {
 
 const arrivalTimesLog = {
     newArrival: function(arrivals) {
-        console.log(arrivals);
+        console.log("arrivals", arrivals);
     }
 };
 
 arrivalsObservable.addObserver(arrivalTimesLog);
+
+const serviceTimesLog = {
+    newServiceTime: function (serviceTimes) {
+        console.log("serviceTimes", serviceTimes);
+    }
+};
+
+serviceTimesObservable.addObserver(serviceTimesLog);
 
 function randomColor() {
     const colors = ["red", "yellow", "blue", "orange", "green", "purple", "pink", "black"];
