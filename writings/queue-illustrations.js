@@ -76,7 +76,7 @@ const arrivalTimesLog = {
     }
 };
 
-arrivalsObservable.addObserver(arrivalTimesLog);
+// arrivalsObservable.addObserver(arrivalTimesLog);
 
 const serviceTimesLog = {
     newServiceTime: function (serviceTimes) {
@@ -84,7 +84,7 @@ const serviceTimesLog = {
     }
 };
 
-serviceTimesObservable.addObserver(serviceTimesLog);
+//serviceTimesObservable.addObserver(serviceTimesLog);
 
 const queueLog = {
     queueChanged: function (queue) {
