@@ -42,6 +42,29 @@ const serviceTimesObservable = {
     },
 };
 
+const queueObservable = {
+    observers: [],
+    queue: [],
+    count: 0,
+    addObserver: function (observer) {
+        this.observers.push(observer);
+    },
+    notifyObservers: function () {
+        this.observers.forEach(observer => {
+            observer.queueChanged(this.queue);
+        });
+    },
+    addQueuer: function () {
+        this.count++;
+        this.queue.push(this.count);
+        this.notifyObservers();
+    },
+    removeQueuer: function () {
+        this.queue.shift();
+        this.notifyObservers();
+    },
+};
+
 const arrivalTimesLog = {
     newArrival: function(arrivals) {
         console.log("latest arrival", arrivals.at(-1));
@@ -57,6 +80,14 @@ const serviceTimesLog = {
 };
 
 serviceTimesObservable.addObserver(serviceTimesLog);
+
+const queueLog = {
+    queueChanged: function (queue) {
+        console.log(queue);
+    }
+};
+
+queueObservable.addObserver(queueLog);
 
 const arrivalTimesList = {
     newArrival: function (arrivals) {
@@ -78,6 +109,14 @@ const arrivalAverageDisplay = {
 };
 
 arrivalsObservable.addObserver(arrivalAverageDisplay);
+
+const enqueueArrival = {
+    newArrival: function (arrivals) {
+        queueObservable.addQueuer();
+    }
+}
+
+arrivalsObservable.addObserver(enqueueArrival);
 
 function randomColor() {
     const colors = ["red", "yellow", "blue", "orange", "green", "purple", "pink", "black"];
