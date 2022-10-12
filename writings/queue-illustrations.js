@@ -126,6 +126,27 @@ const enqueueArrival = {
 
 arrivalsObservable.addObserver(enqueueArrival);
 
+const serviceTimeAverageDisplay = {
+    newServiceTime: function (serviceTimes) {
+        d3.select("#avg-service-time")
+            .text(() => { return d3.mean(serviceTimes); });
+    }
+};
+
+serviceTimesObservable.addObserver(serviceTimeAverageDisplay);
+
+const serviceTimesList = {
+    newServiceTime: function (serviceTimes) {
+        d3.select("#service-times")
+            .selectAll("li")
+            .data(serviceTimes)
+            .enter().append("li")
+            .text(d => { return d; });
+    }
+};
+
+serviceTimesObservable.addObserver(serviceTimesList);
+
 const queueList = {
     queueChanged: function (queue) {
         d3.select("#queue")
