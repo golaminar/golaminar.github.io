@@ -1,4 +1,4 @@
-let scalingFactor = 0.01;
+let scalingFactor = 0.001;
 
 function simulate() {
     const expectedArrivalInterval = parseInt(document.querySelector("[name=expected-arrival-time-interval]").value);
