@@ -1,41 +1,61 @@
 let scalingFactor = 0.01;
 
 function simulate() {
-    const queue = document.getElementById("queue");
-    const arrivalTimes = [];
-    const serviceTimes = [];
-    const expectedArrivalInterval = document.querySelector("[name=expected-arrival-time-interval]").value;
-    const expectedServiceTime = document.querySelector("[name=expected-service-time]").value;
+    const expectedArrivalInterval = parseInt(document.querySelector("[name=expected-arrival-time-interval]").value);
+    const expectedServiceTime = parseInt(document.querySelector("[name=expected-service-time]").value);
 
-    const requestService = createServiceRequester(queue, serviceTimes, expectedServiceTime);
+    const arrivalGenerator = new Process(expectedArrivalInterval, function (interval) {
+        arrivalsObservable.addArrival(interval);
+    });
 
-    arrive(queue, arrivalTimes, expectedArrivalInterval, requestService);
+    const serverGenerator = new Process(expectedServiceTime, function (interval) {
+        serviceTimesObservable.addServiceTime(interval);
+    });
+
+    arrivalGenerator.start();
 }
 
-function arrive(queue, arrivalTimes, expectedArrivalInterval, requestService) {
-    const timeToArrive = genRandomTime(expectedArrivalInterval);
+const arrivalsObservable = {
+    observers: [],
+    arrivals: [],
+    addObserver: function(observer) {
+        this.observers.push(observer);
+    },
+    notifyObservers: function() {
+        this.observers.forEach(observer => {
+            observer.newArrival(this.arrivals);
+        });
+    },
+    addArrival: function(interval) {
+        this.arrivals.push(interval);
+        this.notifyObservers();
+    },
+};
 
-    //after the arrival interval, the queuer arrives
-    //and triggers a service request
-    //and triggers a following arrival
-    setTimeout(() => {
-        const queuer = createQueuer();
-        queue.appendChild(queuer);
-        arrivalTimes.push(timeToArrive);
+const serviceTimesObservable = {
+    observers: [],
+    serviceTimes: [],
+    addObserver: function(observer) {
+        this.observers.push(observer);
+    },
+    notifyObservers: function() {
+        this.observers.forEach(observer => {
+            observer.newServiceTime(this.serviceTimes);
+        });
+    },
+    addServiceTime: function(interval) {
+        this.serviceTimes.push(interval);
+        this.notifyObservers();
+    },
+};
 
-        updateArrivalDisplay(arrivalTimes);
-        requestService();
+const arrivalTimesLog = {
+    newArrival: function(arrivals) {
+        console.log(arrivals);
+    }
+};
 
-        arrive(queue, arrivalTimes, expectedArrivalInterval, requestService);
-    }, timeToArrive * 1000 * scalingFactor);
-}
-
-function createQueuer() {
-    const queuer = document.createElement('li');
-    queuer.innerText = "⊛";
-    queuer.style.color = randomColor();
-    return queuer;
-}
+arrivalsObservable.addObserver(arrivalTimesLog);
 
 function randomColor() {
     const colors = ["red", "yellow", "blue", "orange", "green", "purple", "pink", "black"];
@@ -43,63 +63,44 @@ function randomColor() {
     return colors[i];
 }
 
-function createServiceRequester(queue, serviceTimes, expectedServiceTime) {
-    let serving = false;
+var Process = function (interval, fn) {
+    // Parameters:
+    //   interval
+    //     number of milliseconds
+    if (typeof interval !== 'number') {
+        throw new Error(interval + ' should be a number.');
+    }
+    if (typeof fn !== 'function') {
+        throw new Error('Callee ' + fn + ' should be a function.');
+    }
+    if (interval < 0) {
+        throw new Error(interval + ' should be a non-negative number.');
+    }
+    this.interval = interval;
+    this.fn = fn;
+    this.timeout = null;
+};
 
-    function requestService() {
-        if (serving === true) {
-            return;
-        }
+Process.prototype.start = function () {
 
-        if (!queue.firstChild) {
-            return;
-        }
+    function genRandomTime(avgTime) {
+        // generate a random number of seconds between 0 and infinity,
+        // where avgTime is the most likely value
+        // following a Poisson process
 
-        serving = true;
-        queue.firstChild.innerText = queue.firstChild.innerText + " being served …"
-
-        const timeToServe = genRandomTime(expectedServiceTime);
-        serviceTimes.push(timeToServe);
-
-        setTimeout(() => {
-            finishServing(queue, serviceTimes);
-            serving = false;
-            requestService(queue);
-        }, timeToServe * 1000 * scalingFactor);
+        return (-Math.log(1 - Math.random())) * avgTime;
     }
 
-    return requestService;
-}
+    var dt = genRandomTime(this.interval);
+    var self = this;
+    this.timeout = setTimeout(function () {
+        self.start();
+        self.fn(dt);
+    }, dt);
+};
 
-function finishServing(queue, serviceTimes) {
-    queue.removeChild(queue.firstChild);
-    updateServiceDisplay(serviceTimes);
-}
-
-function updateArrivalDisplay(arrivalTimes) {
-    const arrivalTimeItem = document.createElement('li');
-    arrivalTimeItem.innerText = arrivalTimes[arrivalTimes.length - 1];
-    document.getElementById("arrival-time-intervals").appendChild(arrivalTimeItem);
-
-    const avgArrivalTime = arrivalTimes.reduce((a, b) => a + b, 0) / arrivalTimes.length;
-    document.getElementById("avg-arrival-time-interval").innerText = avgArrivalTime;
-}
-
-function updateServiceDisplay(serviceTimes) {
-    const serviceTimeItem = document.createElement('li');
-    serviceTimeItem.innerText = serviceTimes[serviceTimes.length - 1];
-    document.getElementById("service-times").appendChild(serviceTimeItem);
-
-    const avgServiceTime = serviceTimes.reduce((a, b) => a + b, 0) / serviceTimes.length;
-    document.getElementById("avg-service-time").innerText = avgServiceTime;
-}
-
-function genRandomTime(avgTime) {
-    // generate a random number of seconds between 0 and infinity,
-    // where avgTime is the most likely value
-    // following a Poisson process
-
-    return (-Math.log(1 - Math.random())) * avgTime;
-}
+Process.prototype.stop = function () {
+    clearTimeout(this.timeout);
+};
 
 document.getElementById("start-simulation").addEventListener("click", simulate);
