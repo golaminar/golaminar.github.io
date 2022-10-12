@@ -137,6 +137,10 @@ function randomColor() {
     return colors[i];
 }
 
+function computeTimeout(intervalInSeconds) {
+    return intervalInSeconds * 1000 * scalingFactor;
+}
+
 const Process = function (interval, fn) {
     // Parameters:
     //   interval
@@ -170,7 +174,7 @@ Process.prototype.start = function () {
     this.timeout = setTimeout(function () {
         self.start();
         self.fn(dt);
-    }, dt);
+    }, computeTimeout(dt));
 };
 
 Process.prototype.stop = function () {
