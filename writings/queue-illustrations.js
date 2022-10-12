@@ -69,7 +69,7 @@ function randomColor() {
     return colors[i];
 }
 
-var Process = function (interval, fn) {
+const Process = function (interval, fn) {
     // Parameters:
     //   interval
     //     number of milliseconds
@@ -97,8 +97,8 @@ Process.prototype.start = function () {
         return (-Math.log(1 - Math.random())) * avgTime;
     }
 
-    var dt = genRandomTime(this.interval);
-    var self = this;
+    const dt = genRandomTime(this.interval);
+    const self = this;
     this.timeout = setTimeout(function () {
         self.start();
         self.fn(dt);
