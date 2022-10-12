@@ -25,6 +25,11 @@
     <figure>
         <button id="start-simulation">Start simulation</button>
 
+        <div>
+            <span>Queue Length: </span><span id="queue-length">0</span>
+            <span>Expected wait time: </span><span id="expected-wait-time">0</span>
+        </div>
+
         <div class="cols">
             <div class="col">
                 <label for="expected-arrival-time-interval">Interval between arrivals (seconds)</label>
@@ -40,10 +45,6 @@
                 <span>Average service time: </span><span id="avg-service-time"></span>
                 <ol id="service-times"></ol>
                 <ol id="queue"></ol>
-            </div>
-            <div class="col">
-                <span>Queue Length: </span><span id="queue-length"></span>
-                <span>Expected wait time: </span><span id="expected-wait-time"></span>
             </div>
         </div>
         <figcaption>Expected queue length interactive illustration</figcaption>
