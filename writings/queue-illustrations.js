@@ -234,14 +234,18 @@ const Process = function (interval, fn) {
     this.interval = interval;
     this.fn = fn;
     this.timeout = null;
+    this.iteration = 0;
 };
 
 Process.prototype.start = function () {
     const dt = genRandomTime(this.interval);
     const self = this;
     this.timeout = setTimeout(function () {
-        self.start();
-        self.fn(dt);
+        if (self.iteration < 10000) {
+            self.iteration++;
+            self.start();
+            self.fn(dt);
+        }
     }, computeTimeout(dt));
 };
 
