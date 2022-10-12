@@ -94,6 +94,8 @@ const serviceTimesLog = {
 
 const queueLog = {
     queueChanged: function (queue) {
+        console.clear();
+        console.log(queue.length);
         console.table(queue);
     }
 };
