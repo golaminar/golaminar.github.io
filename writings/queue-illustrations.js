@@ -65,7 +65,7 @@ const queueObservable = {
     },
     removeQueuer: function () {
         this.queue.shift();
-        this.serving = false;
+        this.beingServed = false;
         this.notifyObservers();
     },
     occupyServer: function () {
