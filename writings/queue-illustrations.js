@@ -71,6 +71,9 @@ const queueObservable = {
     occupyServer: function () {
         this.beingServed = true;
     },
+    readyToServe: function () {
+        return !!this.queue.length && this.beingServed === false;
+    },
 };
 
 const arrivalTimesLog = {
@@ -162,8 +165,8 @@ const queueList = {
 queueObservable.addObserver(queueList);
 
 const attemptService = {
-    queueChanged: function (queue) {
-        if (queue.length && queueObservable.beingServed === false) {
+    queueChanged: function () {
+        if (queueObservable.readyToServe()) {
             const expectedServiceTime = parseInt(document.querySelector("[name=expected-service-time]").value);
             const serviceTime = genRandomTime(expectedServiceTime);
             queueObservable.occupyServer();
