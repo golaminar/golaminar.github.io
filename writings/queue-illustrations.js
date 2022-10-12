@@ -49,7 +49,7 @@ const serviceTimesObservable = {
 
 const arrivalTimesLog = {
     newArrival: function(arrivals) {
-        console.log("arrivals", arrivals);
+        console.log("latest arrival", arrivals.at(-1));
     }
 };
 
