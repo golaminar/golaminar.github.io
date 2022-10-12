@@ -23,21 +23,30 @@
     </figure>
     <p>There’s something weird about queues.</p>
     <figure>
-        <input name="expected-arrival-time-interval" value="121">
-        <label for="expected-arrival-time-interval">Interval between arrivals (seconds)</label>
-        <br>
-        <span>Average arrival time: </span><span id="avg-arrival-time-interval"></span>
-        <ol id="arrival-time-intervals"></ol>
-        <input name="expected-service-time" value="120">
-        <label for="expected-service-time">Service time (seconds)</label>
-        <br>
-        <span>Average service time: </span><span id="avg-service-time"></span>
-        <ol id="service-times"></ol>
         <button id="start-simulation">Start simulation</button>
-        <span>Queue Length: </span><span id="queue-length"></span>
-        <span>Expected wait time: </span><span id="expected-wait-time"></span>
-        <ol id="queue"></ol>
-        <figcaption>Expect queue length interactive illustration</figcaption>
+
+        <div class="cols">
+            <div class="col">
+                <label for="expected-arrival-time-interval">Interval between arrivals (seconds)</label>
+                <input name="expected-arrival-time-interval" value="121">
+                <br>
+                <span>Average arrival time: </span><span id="avg-arrival-time-interval"></span>
+                <ol id="arrival-time-intervals"></ol>
+            </div>
+            <div class="col">
+                <label for="expected-service-time">Service time (seconds)</label>
+                <input name="expected-service-time" value="120">
+                <br>
+                <span>Average service time: </span><span id="avg-service-time"></span>
+                <ol id="service-times"></ol>
+                <ol id="queue"></ol>
+            </div>
+            <div class="col">
+                <span>Queue Length: </span><span id="queue-length"></span>
+                <span>Expected wait time: </span><span id="expected-wait-time"></span>
+            </div>
+        </div>
+        <figcaption>Expected queue length interactive illustration</figcaption>
         <script src="queue-illustrations.js"></script>
     </figure>
     <p></p>
