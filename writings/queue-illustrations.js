@@ -46,6 +46,7 @@ const queueObservable = {
     observers: [],
     queue: [],
     count: 0,
+    beingServed: false,
     addObserver: function (observer) {
         this.observers.push(observer);
     },
@@ -61,7 +62,11 @@ const queueObservable = {
     },
     removeQueuer: function () {
         this.queue.shift();
+        this.serving = false;
         this.notifyObservers();
+    },
+    occupyServer: function () {
+        this.beingServed = true;
     },
 };
 
@@ -131,10 +136,34 @@ const queueList = {
 
 queueObservable.addObserver(queueList);
 
+const attemptService = {
+    queueChanged: function (queue) {
+        if (queue.length && queueObservable.beingServed === false) {
+            const expectedServiceTime = parseInt(document.querySelector("[name=expected-service-time]").value);
+            const serviceTime = genRandomTime(expectedServiceTime);
+            queueObservable.occupyServer();
+            setTimeout(() => {
+                serviceTimesObservable.addServiceTime(serviceTime);
+                queueObservable.removeQueuer();
+            }, computeTimeout(serviceTime));
+        }
+    }
+}
+
+queueObservable.addObserver(attemptService);
+
 function randomColor() {
     const colors = ["red", "yellow", "blue", "orange", "green", "purple", "pink", "black"];
     const i = Math.floor(Math.random() * colors.length);
     return colors[i];
+}
+
+function genRandomTime(avgTime) {
+    // generate a random number of seconds between 0 and infinity,
+    // where avgTime is the most likely value
+    // following a Poisson process
+
+    return (-Math.log(1 - Math.random())) * avgTime;
 }
 
 function computeTimeout(intervalInSeconds) {
@@ -160,15 +189,6 @@ const Process = function (interval, fn) {
 };
 
 Process.prototype.start = function () {
-
-    function genRandomTime(avgTime) {
-        // generate a random number of seconds between 0 and infinity,
-        // where avgTime is the most likely value
-        // following a Poisson process
-
-        return (-Math.log(1 - Math.random())) * avgTime;
-    }
-
     const dt = genRandomTime(this.interval);
     const self = this;
     this.timeout = setTimeout(function () {
