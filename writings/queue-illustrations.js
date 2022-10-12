@@ -66,7 +66,7 @@ const arrivalTimesList = {
             .enter().append("li")
             .text(d => { return d; });
     }
-}
+};
 
 arrivalsObservable.addObserver(arrivalTimesList);
 
