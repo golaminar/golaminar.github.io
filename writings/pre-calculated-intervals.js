@@ -638,6 +638,12 @@ function computeServiceEndTimes(serviceTimes, cumulativeArrivalTimes) {
         // vlookup(max(filter(D:D, D:D < K3)), D:E, 2)
         //    => arrival order of the last person who arrived before the server became ready
         //       i.e. how many people have arrived up until this moment
+
+        // Alterative formula that works
+        // =count(filter(D:D, D:D < K3))-I2
+        // count(filter(D:D, D:D < K3))
+        //    => count of the arrivals before this readyAt value
+
         const queueSizeWhenReady = index ? 2 : 0;  // 2 is dummy value
 
         accumulator.push({
