@@ -588,13 +588,14 @@ const outputFixture = [
     }];
 
 function computeArrivalsPerTick(arrivalTimes, tickDuration) {
-    let arrivalsPerTick = [];
-    const maxTickTime = d3.sum(arrivalTimes);
-
-    let cumulativeArrivalTimes = arrivalTimes.reduce((accumulator, arrivalTime) => {
+    const cumulativeArrivalTimes = arrivalTimes.reduce((accumulator, arrivalTime) => {
         accumulator.push((accumulator.length ? accumulator.at(-1) : 0) + arrivalTime);
         return accumulator;
     }, []);
+
+    const maxTickTime = cumulativeArrivalTimes.at(-1);
+
+    let arrivalsPerTick = [];
 
     for (let tickTime = tickDuration; tickTime <= maxTickTime; tickTime += tickDuration) {
         arrivalsPerTick.push({
