@@ -596,8 +596,6 @@ function computeArrivalsPerTick(arrivalTimes, tickDuration) {
         return accumulator;
     }, []);
 
-    console.log(cumulativeArrivalTimes);
-
     for (let tickTime = tickDuration; tickTime <= maxTickTime; tickTime += tickDuration) {
         arrivalsPerTick.push({
             "tickTime": tickTime,
