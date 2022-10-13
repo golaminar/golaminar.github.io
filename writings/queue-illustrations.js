@@ -227,6 +227,24 @@ function computeTimeout(intervalInSeconds) {
     return intervalInSeconds * 1000 * scalingFactor;
 }
 
+function computeTimeouts(expectedArrivalInterval, expectedServiceTime, scalingFactor) {
+    let arrivalTimeout = expectedArrivalInterval * 1000 * scalingFactor;
+    let serviceTimeout = expectedServiceTime * 1000 * scalingFactor;
+
+    // with very small scaling factors, different original numbers (e.g. 120, 121)
+    // can end up being equal in the simulation because we can't go lower than 1ms.
+    // In this case, force the larger value to be larger by 1ms.
+    if (expectedArrivalInterval !== expectedServiceTime && arrivalTimeout === serviceTimeout) {
+        if (expectedArrivalInterval > expectedServiceTime) {
+            arrivalTimeout += 1;
+        } else {
+            serviceTimeout += 1;
+        }
+    }
+
+    return arrivalTimeout, serviceTimeout;
+}
+
 const Process = function (interval, fn) {
     // Parameters:
     //   interval
@@ -250,7 +268,7 @@ Process.prototype.start = function () {
     const dt = genRandomTime(this.interval);
     const self = this;
     this.timeout = setTimeout(function () {
-        if (self.iteration < 10000) {
+        if (self.iteration < 200) {
             self.iteration++;
             self.start();
             self.fn(dt);
