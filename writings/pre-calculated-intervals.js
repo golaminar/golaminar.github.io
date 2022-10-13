@@ -587,12 +587,12 @@ const outputFixture = [
         "served": 4,
     }];
 
-function computeArrivalsPerTick(arrivalTimes, tickDuration) {
-    const cumulativeArrivalTimes = arrivalTimes.reduce((accumulator, arrivalTime) => {
-        accumulator.push((accumulator.length ? accumulator.at(-1) : 0) + arrivalTime);
-        return accumulator;
-    }, []);
+const cumulativeArrivalTimes = arrivalTimes.reduce((accumulator, arrivalTime) => {
+    accumulator.push((accumulator.length ? accumulator.at(-1) : 0) + arrivalTime);
+    return accumulator;
+}, []);
 
+function computeArrivalsPerTick(cumulativeArrivalTimes, tickDuration) {
     const maxTickTime = cumulativeArrivalTimes.at(-1);
 
     let arrivalsPerTick = [];
@@ -607,6 +607,6 @@ function computeArrivalsPerTick(arrivalTimes, tickDuration) {
     return arrivalsPerTick;
 }
 
-const arrivalsPerTick = computeArrivalsPerTick(arrivalTimes, 600, 200);
+const arrivalsPerTick = computeArrivalsPerTick(cumulativeArrivalTimes, 600, 200);
 
 console.log(arrivalsPerTick);
