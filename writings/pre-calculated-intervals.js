@@ -610,3 +610,34 @@ function computeArrivalsPerTick(cumulativeArrivalTimes, tickDuration) {
 const arrivalsPerTick = computeArrivalsPerTick(cumulativeArrivalTimes, 600, 200);
 
 console.log(arrivalsPerTick);
+
+function computeServiceEndTimes(serviceTimes, cumulativeArrivalTimes) {
+    const serviceBehaviour = serviceTimes.reduce((accumulator, serviceTime, index) => {
+
+        // endsAt of the previous entry
+        const readyAt = accumulator.length ? accumulator.at(-1).endsAt : 0;
+
+        // =if (N3 > 0, K3 + J3, D3 + J3)
+        const endsAt = 100 * index; // dummy value
+
+        // =vlookup(max(filter(D:D, D:D < K3)), D:E, 2)-I2
+        const queueSizeWhenReady = index ? 2 : 0;  // 2 is dummy value
+
+        accumulator.push({
+            "serviceTime": serviceTime,
+            "readyAt": readyAt, // Redundant?
+            "endsAt": endsAt,
+            "queueSizeWhenReady": queueSizeWhenReady,
+        });
+
+        return accumulator;
+    }, []);
+
+    console.log(serviceBehaviour);
+
+    return serviceBehaviour.map(behaviour => { return behaviour.endsAt; });
+}
+
+const serviceEndTimes = computeServiceEndTimes(serviceTimes, cumulativeArrivalTimes);
+
+console.log(serviceEndTimes);
