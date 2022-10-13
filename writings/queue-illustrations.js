@@ -2,212 +2,212 @@ let scalingFactor = 0.0001;
 
 function simulate() {
     const expectedArrivalInterval = parseInt(document.querySelector("[name=expected-arrival-time-interval]").value);
+    const expectedServiceTime = parseInt(document.querySelector("[name=expected-service-time]").value);
+
+    const arrivalsObservable = {
+        observers: [],
+        arrivals: [],
+        addObserver: function (observer) {
+            this.observers.push(observer);
+        },
+        notifyObservers: function () {
+            this.observers.forEach(observer => {
+                observer.newArrival(this.arrivals);
+            });
+        },
+        addArrival: function (interval) {
+            this.arrivals.push(interval);
+            this.notifyObservers();
+        },
+    };
+
+    const serviceTimesObservable = {
+        observers: [],
+        serviceTimes: [],
+        addObserver: function (observer) {
+            this.observers.push(observer);
+        },
+        notifyObservers: function () {
+            this.observers.forEach(observer => {
+                observer.newServiceTime(this.serviceTimes);
+            });
+        },
+        addServiceTime: function (interval) {
+            this.serviceTimes.push(interval);
+            this.notifyObservers();
+        },
+    };
+
+    const queueObservable = {
+        observers: [],
+        queue: [],
+        count: 0,
+        beingServed: false,
+        addObserver: function (observer) {
+            this.observers.push(observer);
+        },
+        notifyObservers: function () {
+            this.observers.forEach(observer => {
+                observer.queueChanged(this.queue);
+            });
+        },
+        addQueuer: function () {
+            this.count++;
+            this.queue.push({
+                order: this.count,
+                color: randomColor(),
+            });
+            this.notifyObservers();
+        },
+        removeQueuer: function () {
+            this.queue.shift();
+            this.beingServed = false;
+            this.notifyObservers();
+        },
+        occupyServer: function () {
+            this.beingServed = true;
+        },
+        readyToServe: function () {
+            return !!this.queue.length && this.beingServed === false;
+        },
+    };
+
+    const arrivalTimesLog = {
+        newArrival: function (arrivals) {
+            console.log("latest arrival", arrivals.at(-1));
+        }
+    };
+
+    // arrivalsObservable.addObserver(arrivalTimesLog);
+
+    const serviceTimesLog = {
+        newServiceTime: function (serviceTimes) {
+            console.log("serviceTimes", serviceTimes);
+        }
+    };
+
+    //serviceTimesObservable.addObserver(serviceTimesLog);
+
+    const queueLog = {
+        queueChanged: function (queue) {
+            console.clear();
+            console.log(queue.length);
+            console.table(queue);
+        }
+    };
+
+    //queueObservable.addObserver(queueLog);
+
+    const arrivalTimesList = {
+        newArrival: function (arrivals) {
+            d3.select("#arrival-time-intervals")
+                .selectAll("li")
+                .data(arrivals)
+                .enter().append("li")
+                .text(d => { return d; });
+        }
+    };
+
+    arrivalsObservable.addObserver(arrivalTimesList);
+
+    const arrivalAverageDisplay = {
+        newArrival: function (arrivals) {
+            d3.select("#avg-arrival-time-interval")
+                .text(() => { return d3.mean(arrivals).toFixed(2); });
+        }
+    };
+
+    arrivalsObservable.addObserver(arrivalAverageDisplay);
+
+    const displayElapsedTime = {
+        newArrival: function (arrivals) {
+            d3.select("#elapsed-time")
+                .text(() => { return `${(d3.sum(arrivals) / 60).toFixed(2)} minutes`; });
+        }
+    };
+
+    arrivalsObservable.addObserver(displayElapsedTime);
+
+    const enqueueArrival = {
+        newArrival: function (arrivals) {
+            queueObservable.addQueuer();
+        }
+    }
+
+    arrivalsObservable.addObserver(enqueueArrival);
+
+    const serviceTimeAverageDisplay = {
+        newServiceTime: function (serviceTimes) {
+            d3.select("#avg-service-time")
+                .text(() => { return d3.mean(serviceTimes).toFixed(2); });
+        }
+    };
+
+    serviceTimesObservable.addObserver(serviceTimeAverageDisplay);
+
+    const serviceTimesList = {
+        newServiceTime: function (serviceTimes) {
+            d3.select("#service-times")
+                .selectAll("li")
+                .data(serviceTimes)
+                .enter().append("li")
+                .text(d => { return d; });
+        }
+    };
+
+    serviceTimesObservable.addObserver(serviceTimesList);
+
+    const queueList = {
+        queueChanged: function (queue) {
+            d3.select("#queue")
+                .selectAll("li")
+                .remove() // would be better to not repaint the whole thing every time
+
+            d3.select("#queue")
+                .selectAll("li")
+                .data(queue)
+                .enter().append("li")
+                .text(d => { return d.order; })
+                .style("color", d => { return d.color; });
+        }
+    }
+
+    queueObservable.addObserver(queueList);
+
+    const attemptService = {
+        queueChanged: function () {
+            if (queueObservable.readyToServe()) {
+                const serviceTime = genRandomTime(expectedServiceTime);
+                queueObservable.occupyServer();
+                setTimeout(() => {
+                    serviceTimesObservable.addServiceTime(serviceTime);
+                    queueObservable.removeQueuer();
+                }, computeTimeout(serviceTime));
+            }
+        }
+    }
+
+    queueObservable.addObserver(attemptService);
+
+    const displayQueueLength = {
+        queueChanged: function (queue) {
+            const expectedServiceTime = parseInt(document.querySelector("[name=expected-service-time]").value);
+            const waitTime = queue.length * expectedServiceTime;
+
+            d3.select("#queue-length")
+                .text(() => { return queue.length; });
+
+            d3.select("#expected-wait-time")
+                .text(() => { return `${(waitTime / 60).toFixed(2)} minutes`; });
+        }
+    };
+
+    queueObservable.addObserver(displayQueueLength);
 
     const arrivalGenerator = new Process(expectedArrivalInterval, function (interval) {
         arrivalsObservable.addArrival(interval);
     }).start();
 }
-
-const arrivalsObservable = {
-    observers: [],
-    arrivals: [],
-    addObserver: function(observer) {
-        this.observers.push(observer);
-    },
-    notifyObservers: function() {
-        this.observers.forEach(observer => {
-            observer.newArrival(this.arrivals);
-        });
-    },
-    addArrival: function(interval) {
-        this.arrivals.push(interval);
-        this.notifyObservers();
-    },
-};
-
-const serviceTimesObservable = {
-    observers: [],
-    serviceTimes: [],
-    addObserver: function(observer) {
-        this.observers.push(observer);
-    },
-    notifyObservers: function() {
-        this.observers.forEach(observer => {
-            observer.newServiceTime(this.serviceTimes);
-        });
-    },
-    addServiceTime: function(interval) {
-        this.serviceTimes.push(interval);
-        this.notifyObservers();
-    },
-};
-
-const queueObservable = {
-    observers: [],
-    queue: [],
-    count: 0,
-    beingServed: false,
-    addObserver: function (observer) {
-        this.observers.push(observer);
-    },
-    notifyObservers: function () {
-        this.observers.forEach(observer => {
-            observer.queueChanged(this.queue);
-        });
-    },
-    addQueuer: function () {
-        this.count++;
-        this.queue.push({
-            order: this.count,
-            color: randomColor(),
-        });
-        this.notifyObservers();
-    },
-    removeQueuer: function () {
-        this.queue.shift();
-        this.beingServed = false;
-        this.notifyObservers();
-    },
-    occupyServer: function () {
-        this.beingServed = true;
-    },
-    readyToServe: function () {
-        return !!this.queue.length && this.beingServed === false;
-    },
-};
-
-const arrivalTimesLog = {
-    newArrival: function(arrivals) {
-        console.log("latest arrival", arrivals.at(-1));
-    }
-};
-
-// arrivalsObservable.addObserver(arrivalTimesLog);
-
-const serviceTimesLog = {
-    newServiceTime: function (serviceTimes) {
-        console.log("serviceTimes", serviceTimes);
-    }
-};
-
-//serviceTimesObservable.addObserver(serviceTimesLog);
-
-const queueLog = {
-    queueChanged: function (queue) {
-        console.clear();
-        console.log(queue.length);
-        console.table(queue);
-    }
-};
-
-//queueObservable.addObserver(queueLog);
-
-const arrivalTimesList = {
-    newArrival: function (arrivals) {
-        d3.select("#arrival-time-intervals")
-            .selectAll("li")
-            .data(arrivals)
-            .enter().append("li")
-            .text(d => { return d; });
-    }
-};
-
-arrivalsObservable.addObserver(arrivalTimesList);
-
-const arrivalAverageDisplay = {
-    newArrival: function (arrivals) {
-        d3.select("#avg-arrival-time-interval")
-            .text(() => { return d3.mean(arrivals).toFixed(2); });
-    }
-};
-
-arrivalsObservable.addObserver(arrivalAverageDisplay);
-
-const displayElapsedTime = {
-    newArrival: function (arrivals) {
-        d3.select("#elapsed-time")
-            .text(() => { return `${(d3.sum(arrivals)/60).toFixed(2)} minutes`; });
-    }
-};
-
-arrivalsObservable.addObserver(displayElapsedTime);
-
-const enqueueArrival = {
-    newArrival: function (arrivals) {
-        queueObservable.addQueuer();
-    }
-}
-
-arrivalsObservable.addObserver(enqueueArrival);
-
-const serviceTimeAverageDisplay = {
-    newServiceTime: function (serviceTimes) {
-        d3.select("#avg-service-time")
-            .text(() => { return d3.mean(serviceTimes).toFixed(2); });
-    }
-};
-
-serviceTimesObservable.addObserver(serviceTimeAverageDisplay);
-
-const serviceTimesList = {
-    newServiceTime: function (serviceTimes) {
-        d3.select("#service-times")
-            .selectAll("li")
-            .data(serviceTimes)
-            .enter().append("li")
-            .text(d => { return d; });
-    }
-};
-
-serviceTimesObservable.addObserver(serviceTimesList);
-
-const queueList = {
-    queueChanged: function (queue) {
-        d3.select("#queue")
-            .selectAll("li")
-            .remove() // would be better to not repaint the whole thing every time
-
-        d3.select("#queue")
-            .selectAll("li")
-            .data(queue)
-            .enter().append("li")
-            .text(d => { return d.order; })
-            .style("color", d => { return d.color; });
-    }
-}
-
-queueObservable.addObserver(queueList);
-
-const attemptService = {
-    queueChanged: function () {
-        if (queueObservable.readyToServe()) {
-            const expectedServiceTime = parseInt(document.querySelector("[name=expected-service-time]").value);
-            const serviceTime = genRandomTime(expectedServiceTime);
-            queueObservable.occupyServer();
-            setTimeout(() => {
-                serviceTimesObservable.addServiceTime(serviceTime);
-                queueObservable.removeQueuer();
-            }, computeTimeout(serviceTime));
-        }
-    }
-}
-
-queueObservable.addObserver(attemptService);
-
-const displayQueueLength = {
-    queueChanged: function (queue) {
-        const expectedServiceTime = parseInt(document.querySelector("[name=expected-service-time]").value);
-        const waitTime = queue.length * expectedServiceTime;
-
-        d3.select("#queue-length")
-            .text(() => { return queue.length; });
-
-        d3.select("#expected-wait-time")
-            .text(() => { return `${(waitTime / 60).toFixed(2)} minutes`; });
-    }
-};
-
-queueObservable.addObserver(displayQueueLength);
 
 function randomColor() {
     const colors = ["red", "yellow", "blue", "orange", "green", "purple", "pink", "black"];
