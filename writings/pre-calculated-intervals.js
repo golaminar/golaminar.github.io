@@ -587,3 +587,27 @@ const outputFixture = [
         "served": 4,
     }];
 
+function computeArrivalsPerTick(arrivalTimes, tickDuration) {
+    let arrivalsPerTick = [];
+    const maxTickTime = d3.sum(arrivalTimes);
+
+    let cumulativeArrivalTimes = arrivalTimes.reduce((accumulator, arrivalTime) => {
+        accumulator.push((accumulator.length ? accumulator.at(-1) : 0) + arrivalTime);
+        return accumulator;
+    }, []);
+
+    console.log(cumulativeArrivalTimes);
+
+    for (let tickTime = tickDuration; tickTime <= maxTickTime; tickTime += tickDuration) {
+        arrivalsPerTick.push({
+            "tickTime": tickTime,
+            "arrivals": cumulativeArrivalTimes.filter((time) => { return time <= tickTime && time > (tickTime - tickDuration)}).length
+        });
+    }
+
+    return arrivalsPerTick;
+}
+
+const arrivalsPerTick = computeArrivalsPerTick(arrivalTimes, 600, 200);
+
+console.log(arrivalsPerTick);
