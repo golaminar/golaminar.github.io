@@ -658,22 +658,23 @@ const serviceEndTimes = computeServiceEndTimes(serviceTimes, cumulativeArrivalTi
 
 console.log(serviceEndTimes);
 
-function computeArrivalsPerTick(cumulativeArrivalTimes, tickDuration) {
+function computeQueueChangesPerTick(cumulativeArrivalTimes, serviceEndTimes, tickDuration) {
     const maxTickTime = cumulativeArrivalTimes.at(-1);
 
-    let arrivalsPerTick = [];
+    const queueChangesPerTick = [];
 
     for (let tickTime = tickDuration; tickTime <= maxTickTime; tickTime += tickDuration) {
-        arrivalsPerTick.push({
+        queueChangesPerTick.push({
             "tickTime": tickTime,
-            "arrivals": cumulativeArrivalTimes.filter((time) => { return time <= tickTime && time > (tickTime - tickDuration) }).length
+            "arrivals": cumulativeArrivalTimes.filter((time) => { return time <= tickTime && time > (tickTime - tickDuration) }).length,
+            "served": serviceEndTimes.filter((time) => { return time <= tickTime && time > (tickTime - tickDuration) }).length,
         });
     }
 
-    return arrivalsPerTick;
+    return queueChangesPerTick;
 }
 
-const arrivalsPerTick = computeArrivalsPerTick(cumulativeArrivalTimes, 600, 200);
+const queueChangesPerTick = computeQueueChangesPerTick(cumulativeArrivalTimes, serviceEndTimes, 600);
 
-console.log(arrivalsPerTick);
+console.log(queueChangesPerTick);
 
