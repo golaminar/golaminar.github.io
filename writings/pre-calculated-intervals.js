@@ -635,7 +635,14 @@ function computeServiceEndTimes(serviceTimes, cumulativeArrivalTimes) {
         // =count(filter(D:D, D:D < K3))-I2
         // count(filter(D:D, D:D < K3))
         //    => count of the arrivals before this readyAt value
-        const queueSizeWhenReady = index ? 2 : 0;  // 2 is dummy value
+
+        const arrivalsBeforeReadyAt = cumulativeArrivalTimes.filter((cumulativeArrivalTime) => {
+            return cumulativeArrivalTime < readyAt;
+        }).length;
+
+        const peopleServedBeforeReadyAt = index;
+
+        const queueSizeWhenReady = index ? (arrivalsBeforeReadyAt - peopleServedBeforeReadyAt): 0;
 
         // =if (N3 > 0, K3 + J3, D3 + J3)
         // N3 => this queueSizeWhenReady value
@@ -643,7 +650,9 @@ function computeServiceEndTimes(serviceTimes, cumulativeArrivalTimes) {
         // J3 => this serviceTime value
         // D3 => the cumulativeArrivalTime at the same index value
         //       i.e. the arrival time of the person who will be serviced
-        const endsAt = 100 * index; // dummy value
+        const endsAt = queueSizeWhenReady > 0 ?
+                        readyAt + serviceTime :
+                        cumulativeArrivalTimes[index] + serviceTime;
 
         accumulator.push({
             "serviceTime": serviceTime,
