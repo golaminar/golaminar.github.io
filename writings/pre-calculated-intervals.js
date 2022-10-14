@@ -592,25 +592,6 @@ const cumulativeArrivalTimes = arrivalTimes.reduce((accumulator, arrivalTime) =>
     return accumulator;
 }, []);
 
-function computeArrivalsPerTick(cumulativeArrivalTimes, tickDuration) {
-    const maxTickTime = cumulativeArrivalTimes.at(-1);
-
-    let arrivalsPerTick = [];
-
-    for (let tickTime = tickDuration; tickTime <= maxTickTime; tickTime += tickDuration) {
-        arrivalsPerTick.push({
-            "tickTime": tickTime,
-            "arrivals": cumulativeArrivalTimes.filter((time) => { return time <= tickTime && time > (tickTime - tickDuration)}).length
-        });
-    }
-
-    return arrivalsPerTick;
-}
-
-const arrivalsPerTick = computeArrivalsPerTick(cumulativeArrivalTimes, 600, 200);
-
-console.log(arrivalsPerTick);
-
 function computeServiceEndTimes(serviceTimes, cumulativeArrivalTimes) {
     const serviceBehaviour = serviceTimes.reduce((accumulator, serviceTime, index) => {
 
@@ -676,3 +657,23 @@ function computeServiceEndTimes(serviceTimes, cumulativeArrivalTimes) {
 const serviceEndTimes = computeServiceEndTimes(serviceTimes, cumulativeArrivalTimes);
 
 console.log(serviceEndTimes);
+
+function computeArrivalsPerTick(cumulativeArrivalTimes, tickDuration) {
+    const maxTickTime = cumulativeArrivalTimes.at(-1);
+
+    let arrivalsPerTick = [];
+
+    for (let tickTime = tickDuration; tickTime <= maxTickTime; tickTime += tickDuration) {
+        arrivalsPerTick.push({
+            "tickTime": tickTime,
+            "arrivals": cumulativeArrivalTimes.filter((time) => { return time <= tickTime && time > (tickTime - tickDuration) }).length
+        });
+    }
+
+    return arrivalsPerTick;
+}
+
+const arrivalsPerTick = computeArrivalsPerTick(cumulativeArrivalTimes, 600, 200);
+
+console.log(arrivalsPerTick);
+
