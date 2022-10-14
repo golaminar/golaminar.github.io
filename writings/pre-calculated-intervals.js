@@ -666,6 +666,10 @@ function computeServiceEndTimes(serviceTimes, cumulativeArrivalTimes) {
 
     console.log(serviceBehaviour);
 
+    // Note: instead of doing this in two steps, the `reduce` could push endsAt
+    // since the other values are not used in subsequent steps.
+    // It was useful to do this in two steps to be able to compare the
+    // `serviceBehaviour` result to the Google Sheets data
     return serviceBehaviour.map(behaviour => { return behaviour.endsAt; });
 }
 
