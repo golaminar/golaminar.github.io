@@ -587,10 +587,14 @@ const outputFixture = [
         "served": 4,
     }];
 
-const cumulativeArrivalTimes = arrivalTimes.reduce((accumulator, arrivalTime) => {
-    accumulator.push((accumulator.length ? accumulator.at(-1) : 0) + arrivalTime);
-    return accumulator;
-}, []);
+function computeCumulativeArrivalTimes(arrivalTimes) {
+    return arrivalTimes.reduce((accumulator, arrivalTime) => {
+        accumulator.push((accumulator.length ? accumulator.at(-1) : 0) + arrivalTime);
+        return accumulator;
+    }, []);
+}
+
+const cumulativeArrivalTimes = computeCumulativeArrivalTimes(arrivalTimes);
 
 function computeServiceEndTimes(serviceTimes, cumulativeArrivalTimes) {
     const serviceBehaviour = serviceTimes.reduce((accumulator, serviceTime, index) => {
