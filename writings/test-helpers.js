@@ -23,3 +23,7 @@ const isDeepEqual = (object1, object2) => {
 const isObject = (object) => {
   return object != null && typeof object === "object";
 };
+
+module.exports = {
+  isDeepEqual,
+};
