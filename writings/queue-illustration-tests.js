@@ -1,7 +1,7 @@
 const { isDeepEqual } = require("./test-helpers");
 
 // this is the tests!!
-console.log("this is the tests!!");
+console.log("These are the tests:\n-----------------");
 
 (function () {
 
@@ -11,7 +11,7 @@ console.log("this is the tests!!");
     const serviceEndTimes = computeServiceEndTimes(serviceTimes, cumulativeArrivalTimes);
     const queueChangesPerTick = computeQueueChangesPerTick(cumulativeArrivalTimes, serviceEndTimes, 600);
 
-    console.log(isDeepEqual(queueChangesPerTick, outputFixture));
+    console.log("correctly computes queue changes per tick", isDeepEqual(queueChangesPerTick, outputFixture));
 
 })();
 
@@ -26,6 +26,6 @@ console.log("this is the tests!!");
     const arrivalTimes = generateArrivalTimes(expectedArrivalTime, tickDuration, numberOfTicks);
     const serviceTimes = generateServiceTimes(expectedServiceTime, arrivalTimes.length);
 
-    console.log(computeCumulativeArrivalTimes(arrivalTimes).at(-1) < totalTime);
-    console.log(arrivalTimes.length === serviceTimes.length);
+    console.log("all arrivals happen before the end of the last tick", computeCumulativeArrivalTimes(arrivalTimes).at(-1) < totalTime);
+    console.log("a service time is generated for each arrival time", arrivalTimes.length === serviceTimes.length);
 })();
