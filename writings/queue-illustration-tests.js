@@ -33,7 +33,6 @@ console.log("These are the tests:\n-----------------");
     const serviceEndTimes = computeServiceEndTimes(serviceTimes, cumulativeArrivalTimes);
     const queueChangesPerTick = computeQueueChangesPerTick(cumulativeArrivalTimes, serviceEndTimes, tickDuration);
 
-    console.log(queueChangesPerTick.length, queueChangesPerTick.at(-1), totalTime, cumulativeArrivalTimes.at(-1));
     console.log("data for the desired number of ticks is generated", queueChangesPerTick.length === numberOfTicks);
     console.log("last tick happens at the desired total time", queueChangesPerTick.at(-1).tickTime === totalTime);
 })();
