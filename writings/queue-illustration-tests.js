@@ -36,3 +36,11 @@ console.log("These are the tests:\n-----------------");
     console.log("data for the desired number of ticks is generated", queueChangesPerTick.length === numberOfTicks);
     console.log("last tick happens at the desired total time", queueChangesPerTick.at(-1).tickTime === totalTime);
 })();
+
+(function () {
+    const tickDuration = 600;
+    const numberOfTicks = 100;
+
+    console.log("number of ticks is computed correctly for max arrival of 59690", numOfTicks(tickDuration, 59690) === 100);
+    console.log("number of ticks is computed correctly for max arrival of 59990", numOfTicks(tickDuration, 59990) === 100);
+})();

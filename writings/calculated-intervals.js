@@ -99,8 +99,12 @@ function computeServiceEndTimes(serviceTimes, cumulativeArrivalTimes) {
     return serviceBehaviour.map(behaviour => { return behaviour.endsAt; });
 }
 
+function numOfTicks(tickDuration, maxArrivalTime) {
+    return Math.ceil(Math.round(maxArrivalTime / tickDuration));
+}
+
 function computeQueueChangesPerTick(cumulativeArrivalTimes, serviceEndTimes, tickDuration) {
-    const numberOfTicks = Math.ceil(Math.round(cumulativeArrivalTimes.at(-1) / tickDuration));
+    const numberOfTicks = numOfTicks(tickDuration, cumulativeArrivalTimes.at(-1));
     const maxTickTime = numberOfTicks * tickDuration;
 
     const queueChangesPerTick = [];
