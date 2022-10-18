@@ -1,3 +1,37 @@
+function genRandomTime(avgTime) {
+    // generate a random number of seconds between 0 and infinity,
+    // where avgTime is the most likely value
+    // following a Poisson process
+
+    return (-Math.log(1 - Math.random())) * avgTime;
+}
+
+function generateArrivalTimes(expectedArrivalTime, tickDuration, numberOfTicks) {
+    const totalTime = tickDuration * numberOfTicks;
+
+    let arrivalTimes = [];
+    let nextArrivalInterval = genRandomTime(expectedArrivalTime);
+    let accumulatedTime = nextArrivalInterval;
+
+    while (accumulatedTime < totalTime) {
+        arrivalTimes.push(nextArrivalInterval);
+        nextArrivalInterval = genRandomTime(expectedArrivalTime);
+        accumulatedTime += nextArrivalInterval;
+    }
+
+    return arrivalTimes;
+}
+
+function generateServiceTimes(expectedServiceTime, numberOfArrivals) {
+    let serviceTimes = [];
+
+    do {
+        serviceTimes.push(genRandomTime(expectedServiceTime));
+    } while (serviceTimes.length < numberOfArrivals)
+
+    return serviceTimes;
+}
+
 function computeCumulativeArrivalTimes(arrivalTimes) {
     return arrivalTimes.reduce((accumulator, arrivalTime) => {
         accumulator.push((accumulator.length ? accumulator.at(-1) : 0) + arrivalTime);

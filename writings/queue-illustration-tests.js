@@ -15,3 +15,17 @@ console.log("this is the tests!!");
 
 })();
 
+
+(function () {
+    const expectedArrivalTime = 121;
+    const expectedServiceTime = 120;
+    const tickDuration = 600;
+    const numberOfTicks = 100;
+    const totalTime = tickDuration * numberOfTicks;
+
+    const arrivalTimes = generateArrivalTimes(expectedArrivalTime, tickDuration, numberOfTicks);
+    const serviceTimes = generateServiceTimes(expectedServiceTime, arrivalTimes.length);
+
+    console.log(computeCumulativeArrivalTimes(arrivalTimes).at(-1) < totalTime);
+    console.log(arrivalTimes.length === serviceTimes.length);
+})();
