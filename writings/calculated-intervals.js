@@ -36,7 +36,7 @@ function computeServiceEndTimes(serviceTimes, cumulativeArrivalTimes) {
 
         const peopleServedBeforeReadyAt = index;
 
-        const queueSizeWhenReady = index ? (arrivalsBeforeReadyAt - peopleServedBeforeReadyAt): 0;
+        const queueSizeWhenReady = index ? (arrivalsBeforeReadyAt - peopleServedBeforeReadyAt) : 0;
 
         // =if (N3 > 0, K3 + J3, D3 + J3)
         // N3 => this queueSizeWhenReady value
@@ -45,8 +45,8 @@ function computeServiceEndTimes(serviceTimes, cumulativeArrivalTimes) {
         // D3 => the cumulativeArrivalTime at the same index value
         //       i.e. the arrival time of the person who will be serviced
         const endsAt = queueSizeWhenReady > 0 ?
-                        readyAt + serviceTime :
-                        cumulativeArrivalTimes[index] + serviceTime;
+            readyAt + serviceTime :
+            cumulativeArrivalTimes[index] + serviceTime;
 
         accumulator.push({
             "serviceTime": serviceTime,
