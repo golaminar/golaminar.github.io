@@ -26,6 +26,14 @@ console.log("These are the tests:\n-----------------");
     const arrivalTimes = generateArrivalTimes(expectedArrivalTime, tickDuration, numberOfTicks);
     const serviceTimes = generateServiceTimes(expectedServiceTime, arrivalTimes.length);
 
-    console.log("all arrivals happen before the end of the last tick", computeCumulativeArrivalTimes(arrivalTimes).at(-1) < totalTime);
+    console.log("all arrivals happen by the end of the last tick", computeCumulativeArrivalTimes(arrivalTimes).at(-1) <= totalTime);
     console.log("a service time is generated for each arrival time", arrivalTimes.length === serviceTimes.length);
+
+    const cumulativeArrivalTimes = computeCumulativeArrivalTimes(arrivalTimes);
+    const serviceEndTimes = computeServiceEndTimes(serviceTimes, cumulativeArrivalTimes);
+    const queueChangesPerTick = computeQueueChangesPerTick(cumulativeArrivalTimes, serviceEndTimes, tickDuration);
+
+    console.log(queueChangesPerTick.length, queueChangesPerTick.at(-1), totalTime, cumulativeArrivalTimes.at(-1));
+    console.log("data for the desired number of ticks is generated", queueChangesPerTick.length === numberOfTicks);
+    console.log("last tick happens at the desired total time", queueChangesPerTick.at(-1).tickTime === totalTime);
 })();

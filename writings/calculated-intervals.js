@@ -13,7 +13,7 @@ function generateArrivalTimes(expectedArrivalTime, tickDuration, numberOfTicks) 
     let nextArrivalInterval = genRandomTime(expectedArrivalTime);
     let accumulatedTime = nextArrivalInterval;
 
-    while (accumulatedTime < totalTime) {
+    while (accumulatedTime <= totalTime) {
         arrivalTimes.push(nextArrivalInterval);
         nextArrivalInterval = genRandomTime(expectedArrivalTime);
         accumulatedTime += nextArrivalInterval;
@@ -100,7 +100,7 @@ function computeServiceEndTimes(serviceTimes, cumulativeArrivalTimes) {
 }
 
 function computeQueueChangesPerTick(cumulativeArrivalTimes, serviceEndTimes, tickDuration) {
-    const maxTickTime = cumulativeArrivalTimes.at(-1);
+    const maxTickTime = Math.ceil(Math.round(cumulativeArrivalTimes.at(-1) / tickDuration)) * tickDuration;
 
     const queueChangesPerTick = [];
 
