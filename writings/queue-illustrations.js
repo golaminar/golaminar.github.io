@@ -285,7 +285,65 @@ Process.prototype.stop = function () {
 
 ///////////////////////
 
+function updateQueueUI(queueChanges) {
+    console.log(queueChanges);
+}
+
 function playbackQueueBahaviour() {
+    const expectedArrivalInterval = parseInt(document.querySelector("[name=expected-arrival-time-interval]").value);
+    const expectedServiceTime = parseInt(document.querySelector("[name=expected-service-time]").value);
+
+    // Could optimal illustrative values be computed,
+    // such as from the above parameters?
+    const tickDuration = 600;
+    const numberOfTicks = 100;
+
+    const arrivalTimes = generateArrivalTimes(expectedArrivalInterval, tickDuration, numberOfTicks);
+    const serviceTimes = generateServiceTimes(expectedServiceTime, arrivalTimes.length);
+
+    const cumulativeArrivalTimes = computeCumulativeArrivalTimes(arrivalTimes);
+    const serviceEndTimes = computeServiceEndTimes(serviceTimes, cumulativeArrivalTimes);
+
+    const queueChangesPerTick = computeQueueChangesPerTick(cumulativeArrivalTimes, serviceEndTimes, 600);
+
+    let tickIndex = 0;
+    let animationStart;
+    let elapsedTime;
+    let scalingFactor = 5;
+
+    function animateQueue(timestamp) {
+        if (animationStart === undefined) {
+            // anchor the start of the animation in time
+            animationStart = timestamp;
+
+            // announce the end of the animation
+            console.log("started at:", timestamp);
+        }
+
+        // compute how much time has elapsed
+        elapsedTime = (timestamp - animationStart) * scalingFactor;
+
+        if (elapsedTime < queueChangesPerTick[tickIndex].tickTime) {
+            // keep on waiting
+            requestAnimationFrame(animateQueue);
+        } else {
+            // animate what happened
+            updateQueueUI(queueChangesPerTick[tickIndex]);
+
+            // advance to the next frame, if it exists
+            tickIndex++;
+
+            if (tickIndex < queueChangesPerTick.length) {
+                requestAnimationFrame(animateQueue);
+            } else {
+                // announce the end of the animation
+                console.log("ended at:", timestamp);
+            }
+        }
+    }
+
+    // kick off the animation
+    requestAnimationFrame(animateQueue);
 }
 
 document.querySelector("#figure-MM1-queue .playback-queue-behaviour").addEventListener("click", playbackQueueBahaviour);
