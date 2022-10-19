@@ -280,7 +280,9 @@ Process.prototype.stop = function () {
     clearTimeout(this.timeout);
 };
 
-//document.getElementById("start-simulation").addEventListener("click", simulate);
+if (document.getElementById("start-simulation")) {
+    document.getElementById("start-simulation").addEventListener("click", simulate);
+}
 
 
 ///////////////////////
@@ -346,4 +348,6 @@ function playbackQueueBahaviour() {
     requestAnimationFrame(animateQueue);
 }
 
-document.querySelector("#figure-MM1-queue .playback-queue-behaviour").addEventListener("click", playbackQueueBahaviour);
+if (document.querySelector("#figure-MM1-queue .playback-queue-behaviour")) {
+    document.querySelector("#figure-MM1-queue .playback-queue-behaviour").addEventListener("click", playbackQueueBahaviour);
+}
