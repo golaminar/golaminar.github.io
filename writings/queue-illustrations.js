@@ -133,7 +133,7 @@ const queueList = {
             .data(queue)
             .enter().append("li")
             .text(d => { return d.order; })
-            .style("color", d => { return d.color; });
+            .style("background-color", d => { return d.color; });
     }
 }
 
@@ -155,7 +155,19 @@ const displayQueueLength = {
 queueObservable.addObserver(displayQueueLength);
 
 function randomColor() {
-    const colors = ["red", "yellow", "blue", "orange", "green", "purple", "pink", "black"];
+    const colors = [
+        /*--flickr-pink */ "#f72585ff",
+        /*--byzantine */ "#b5179eff",
+        /*--purple */ "#7209b7ff",
+        /*--purple-2 */ "#560badff",
+        /*--trypan-blue */ "#480ca8ff",
+        /*--trypan-blue-2 */ "#3a0ca3ff",
+        /*--persian-blue */ "#3f37c9ff",
+        /*--ultramarine-blue */ "#4361eeff",
+        /*--dodger-blue */ "#4895efff",
+        /*--vivid-sky-blue */ "#4cc9f0ff",
+    ];
+
     const i = Math.floor(Math.random() * colors.length);
     return colors[i];
 }
@@ -214,7 +226,7 @@ function playbackQueueBahaviour() {
     let tickIndex = 0;
     let animationStart;
     let elapsedTime;
-    let scalingFactor = 10;
+    let scalingFactor = 5;
 
     function animateQueue(timestamp) {
         if (animationStart === undefined) {
