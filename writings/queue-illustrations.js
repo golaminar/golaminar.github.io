@@ -15,6 +15,9 @@ const arrivalsObservable = {
         this.arrivals.push(interval);
         this.notifyObservers();
     },
+    nextArrivalIndex() {
+        return this.arrivals.length;
+    },
 };
 
 const serviceTimesObservable = {
@@ -31,6 +34,9 @@ const serviceTimesObservable = {
     addServiceTime: function (interval) {
         this.serviceTimes.push(interval);
         this.notifyObservers();
+    },
+    nextServedIndex() {
+        return this.serviceTimes.length;
     },
 };
 
@@ -292,30 +298,32 @@ if (document.getElementById("start-simulation")) {
 
 ///////////////////////
 
-function addQueuers(arrivals) {
+function addQueuers(arrivals, arrivalTimes) {
     console.log("arrivals:", arrivals);
-    let interval = 121; // needs to be fetched for each arrival
+    let interval;
 
     do {
+        interval = arrivalTimes[arrivalsObservable.nextArrivalIndex()];
         arrivalsObservable.addArrival(interval);
         arrivals--;
     } while (arrivals > 0);
 }
 
-function serveQueuers(served) {
+function serveQueuers(served, serviceTimes) {
     console.log("served:", served);
-    let interval = 120; // needs to be fetch for each served
+    let interval;
 
     do {
+        interval = serviceTimes[serviceTimesObservable.nextServedIndex()];
         serviceTimesObservable.addServiceTime(interval);
         queueObservable.removeQueuer();
         served--;
     } while (served > 0);
 }
 
-function updateQueueUI(queueChanges) {
-    addQueuers(queueChanges.arrivals);
-    serveQueuers(queueChanges.served);
+function updateQueueUI(queueChanges, arrivalTimes, serviceTimes) {
+    addQueuers(queueChanges.arrivals, arrivalTimes);
+    serveQueuers(queueChanges.served, serviceTimes);
 }
 
 function playbackQueueBahaviour() {
@@ -357,7 +365,7 @@ function playbackQueueBahaviour() {
             requestAnimationFrame(animateQueue);
         } else {
             // animate what happened
-            updateQueueUI(queueChangesPerTick[tickIndex]);
+            updateQueueUI(queueChangesPerTick[tickIndex], arrivalTimes, serviceTimes);
 
             // advance to the next frame, if it exists
             tickIndex++;
