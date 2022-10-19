@@ -95,15 +95,6 @@ const arrivalAverageDisplay = {
 
 arrivalsObservable.addObserver(arrivalAverageDisplay);
 
-const displayElapsedTime = {
-    newArrival: function (arrivals) {
-        d3.select("#elapsed-time")
-            .text(() => { return `${(d3.sum(arrivals) / 60).toFixed(2)} minutes`; });
-    }
-};
-
-arrivalsObservable.addObserver(displayElapsedTime);
-
 const enqueueArrival = {
     newArrival: function (arrivals) {
         queueObservable.addQueuer();
@@ -197,6 +188,15 @@ function simulate() {
     };
 
     //queueObservable.addObserver(queueLog);
+
+    const displayElapsedTime = {
+        newArrival: function (arrivals) {
+            d3.select("#elapsed-time")
+                .text(() => { return `${(d3.sum(arrivals) / 60).toFixed(2)} minutes`; });
+        }
+    };
+
+    arrivalsObservable.addObserver(displayElapsedTime);
 
     const attemptService = {
         queueChanged: function () {
@@ -321,9 +321,15 @@ function serveQueuers(served, serviceTimes) {
     } while (served > 0);
 }
 
+function displayElapsedTime(tickTime) {
+    d3.select("#elapsed-time")
+        .text(() => { return `${(tickTime / 60).toFixed(2)} minutes`; });
+}
+
 function updateQueueUI(queueChanges, arrivalTimes, serviceTimes) {
     addQueuers(queueChanges.arrivals, arrivalTimes);
     serveQueuers(queueChanges.served, serviceTimes);
+    displayElapsedTime(queueChanges.tickTime);
 }
 
 function playbackQueueBahaviour() {
