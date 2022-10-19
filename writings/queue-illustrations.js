@@ -1,5 +1,3 @@
-let scalingFactor = 0.0001;
-
 const arrivalsObservable = {
     observers: [],
     arrivals: [],
@@ -156,145 +154,11 @@ const displayQueueLength = {
 
 queueObservable.addObserver(displayQueueLength);
 
-
-
-
-function simulate() {
-    const expectedArrivalInterval = parseInt(document.querySelector("[name=expected-arrival-time-interval]").value);
-    const expectedServiceTime = parseInt(document.querySelector("[name=expected-service-time]").value);
-
-    const arrivalTimesLog = {
-        newArrival: function (arrivals) {
-            console.log("latest arrival", arrivals.at(-1));
-        }
-    };
-
-    // arrivalsObservable.addObserver(arrivalTimesLog);
-
-    const serviceTimesLog = {
-        newServiceTime: function (serviceTimes) {
-            console.log("serviceTimes", serviceTimes);
-        }
-    };
-
-    //serviceTimesObservable.addObserver(serviceTimesLog);
-
-    const queueLog = {
-        queueChanged: function (queue) {
-            console.clear();
-            console.log(queue.length);
-            console.table(queue);
-        }
-    };
-
-    //queueObservable.addObserver(queueLog);
-
-    const displayElapsedTime = {
-        newArrival: function (arrivals) {
-            d3.select("#elapsed-time")
-                .text(() => { return `${(d3.sum(arrivals) / 60).toFixed(2)} minutes`; });
-        }
-    };
-
-    arrivalsObservable.addObserver(displayElapsedTime);
-
-    const attemptService = {
-        queueChanged: function () {
-            const expectedServiceTime = parseInt(document.querySelector("[name=expected-service-time]").value);
-
-            if (queueObservable.readyToServe()) {
-                const serviceTime = genRandomTime(expectedServiceTime);
-                queueObservable.occupyServer();
-                setTimeout(() => {
-                    serviceTimesObservable.addServiceTime(serviceTime);
-                    queueObservable.removeQueuer();
-                }, computeTimeout(serviceTime));
-            }
-        }
-    }
-
-    queueObservable.addObserver(attemptService);
-
-    const arrivalGenerator = new Process(expectedArrivalInterval, function (interval) {
-        arrivalsObservable.addArrival(interval);
-    }).start();
-}
-
 function randomColor() {
     const colors = ["red", "yellow", "blue", "orange", "green", "purple", "pink", "black"];
     const i = Math.floor(Math.random() * colors.length);
     return colors[i];
 }
-
-function genRandomTime(avgTime) {
-    // generate a random number of seconds between 0 and infinity,
-    // where avgTime is the most likely value
-    // following a Poisson process
-
-    return (-Math.log(1 - Math.random())) * avgTime;
-}
-
-function computeTimeout(intervalInSeconds) {
-    return intervalInSeconds * 1000 * scalingFactor;
-}
-
-function computeTimeouts(expectedArrivalInterval, expectedServiceTime, scalingFactor) {
-    let arrivalTimeout = expectedArrivalInterval * 1000 * scalingFactor;
-    let serviceTimeout = expectedServiceTime * 1000 * scalingFactor;
-
-    // with very small scaling factors, different original numbers (e.g. 120, 121)
-    // can end up being equal in the simulation because we can't go lower than 1ms.
-    // In this case, force the larger value to be larger by 1ms.
-    if (expectedArrivalInterval !== expectedServiceTime && arrivalTimeout === serviceTimeout) {
-        if (expectedArrivalInterval > expectedServiceTime) {
-            arrivalTimeout += 1;
-        } else {
-            serviceTimeout += 1;
-        }
-    }
-
-    return arrivalTimeout, serviceTimeout;
-}
-
-const Process = function (interval, fn) {
-    // Parameters:
-    //   interval
-    //     number of milliseconds
-    if (typeof interval !== 'number') {
-        throw new Error(interval + ' should be a number.');
-    }
-    if (typeof fn !== 'function') {
-        throw new Error('Callee ' + fn + ' should be a function.');
-    }
-    if (interval < 0) {
-        throw new Error(interval + ' should be a non-negative number.');
-    }
-    this.interval = interval;
-    this.fn = fn;
-    this.timeout = null;
-    this.iteration = 0;
-};
-
-Process.prototype.start = function () {
-    const dt = genRandomTime(this.interval);
-    const self = this;
-    this.timeout = setTimeout(function () {
-        if (self.iteration < 400) {
-            self.iteration++;
-            self.start();
-            self.fn(dt);
-        }
-    }, computeTimeout(dt));
-};
-
-Process.prototype.stop = function () {
-    clearTimeout(this.timeout);
-};
-
-if (document.getElementById("start-simulation")) {
-    document.getElementById("start-simulation").addEventListener("click", simulate);
-}
-
 
 ///////////////////////
 
