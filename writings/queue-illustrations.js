@@ -299,7 +299,6 @@ if (document.getElementById("start-simulation")) {
 ///////////////////////
 
 function addQueuers(arrivals, arrivalTimes) {
-    console.log("arrivals:", arrivals);
     let interval;
 
     do {
@@ -310,7 +309,6 @@ function addQueuers(arrivals, arrivalTimes) {
 }
 
 function serveQueuers(served, serviceTimes) {
-    console.log("served:", served);
     let interval;
 
     do {
