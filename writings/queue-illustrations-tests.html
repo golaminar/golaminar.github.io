@@ -1,21 +1,55 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Laminar | Two Weird Things</title>
+    <title>Laminar | Queue Illustrations</title>
     <link rel="stylesheet" href="../site.css">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
     <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link rel="stylesheet" href="queue-illustrations.css">
 </head>
 <body class="writing">
 <header>
-    <h1>Tests</h1>
+    <h1><a href="https://golaminar.de">Laminar</a></h1>
 </header>
 <main>
-    <button id="start-simulation">Start</button>
+
+    <article>
+    <figure id="figure-MM1-queue">
+        <button id="start-simulation">Start simulation</button>
+
+        <div>
+            <span>Queue Length: </span><span id="queue-length">0</span>
+            <br>
+            <span>Expected wait time: </span><span id="expected-wait-time">0.00 minutes</span>
+            <br>
+            <span>Elapsed time: </span><span id="elapsed-time">0.00 minutes</span>
+        </div>
+
+        <div class="cols">
+            <div class="col">
+                <label for="expected-arrival-time-interval">Interval between arrivals (seconds)</label>
+                <input name="expected-arrival-time-interval" value="121">
+                <br>
+                <span>Average arrival time: </span><span id="avg-arrival-time-interval"></span>
+                <ol id="arrival-time-intervals"></ol>
+            </div>
+            <div class="col">
+                <label for="expected-service-time">Service time (seconds)</label>
+                <input name="expected-service-time" value="120">
+                <br>
+                <span>Average service time: </span><span id="avg-service-time"></span>
+                <ol id="service-times"></ol>
+                <ol id="queue"></ol>
+            </div>
+        </div>
+        <figcaption>Expected queue length interactive illustration</figcaption>
+        <script src="calculated-intervals.js"></script>
+        <script src="queue-illustrations.js"></script>
+    </figure>
+    </article>
+
 </main>
-<script src="queue-illustrations.js"></script>
-<script src="pre-calculated-intervals.js"></script>
 </body>
 </html>
