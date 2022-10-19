@@ -280,4 +280,12 @@ Process.prototype.stop = function () {
     clearTimeout(this.timeout);
 };
 
-document.getElementById("start-simulation").addEventListener("click", simulate);
+//document.getElementById("start-simulation").addEventListener("click", simulate);
+
+
+///////////////////////
+
+function playbackQueueBahaviour() {
+}
+
+document.querySelector("#figure-MM1-queue .playback-queue-behaviour").addEventListener("click", playbackQueueBahaviour);
