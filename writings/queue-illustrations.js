@@ -292,8 +292,30 @@ if (document.getElementById("start-simulation")) {
 
 ///////////////////////
 
+function addQueuers(arrivals) {
+    console.log("arrivals:", arrivals);
+    let interval = 121; // needs to be fetched for each arrival
+
+    do {
+        arrivalsObservable.addArrival(interval);
+        arrivals--;
+    } while (arrivals > 0);
+}
+
+function serveQueuers(served) {
+    console.log("served:", served);
+    let interval = 120; // needs to be fetch for each served
+
+    do {
+        serviceTimesObservable.addServiceTime(interval);
+        queueObservable.removeQueuer();
+        served--;
+    } while (served > 0);
+}
+
 function updateQueueUI(queueChanges) {
-    console.log(queueChanges);
+    addQueuers(queueChanges.arrivals);
+    serveQueuers(queueChanges.served);
 }
 
 function playbackQueueBahaviour() {
