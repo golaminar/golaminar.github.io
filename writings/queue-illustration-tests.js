@@ -17,13 +17,13 @@ console.log("These are the tests:\n-----------------");
 
 
 (function () {
-    const expectedArrivalTime = 121;
+    const expectedArrivalInterval = 121;
     const expectedServiceTime = 120;
     const tickDuration = 600;
     const numberOfTicks = 100;
     const totalTime = tickDuration * numberOfTicks;
 
-    const arrivalTimes = generateArrivalTimes(expectedArrivalTime, tickDuration, numberOfTicks);
+    const arrivalTimes = generateArrivalTimes(expectedArrivalInterval, tickDuration, numberOfTicks);
     const serviceTimes = generateServiceTimes(expectedServiceTime, arrivalTimes.length);
 
     console.log("all arrivals happen by the end of the last tick", computeCumulativeArrivalTimes(arrivalTimes).at(-1) <= totalTime);

@@ -6,16 +6,16 @@ function genRandomTime(avgTime) {
     return (-Math.log(1 - Math.random())) * avgTime;
 }
 
-function generateArrivalTimes(expectedArrivalTime, tickDuration, numberOfTicks) {
+function generateArrivalTimes(expectedArrivalInterval, tickDuration, numberOfTicks) {
     const totalTime = tickDuration * numberOfTicks;
 
     let arrivalTimes = [];
-    let nextArrivalInterval = genRandomTime(expectedArrivalTime);
+    let nextArrivalInterval = genRandomTime(expectedArrivalInterval);
     let accumulatedTime = nextArrivalInterval;
 
     while (accumulatedTime <= totalTime) {
         arrivalTimes.push(nextArrivalInterval);
-        nextArrivalInterval = genRandomTime(expectedArrivalTime);
+        nextArrivalInterval = genRandomTime(expectedArrivalInterval);
         accumulatedTime += nextArrivalInterval;
     }
 
