@@ -279,7 +279,7 @@ Process.prototype.start = function () {
     const dt = genRandomTime(this.interval);
     const self = this;
     this.timeout = setTimeout(function () {
-        if (self.iteration < 200) {
+        if (self.iteration < 400) {
             self.iteration++;
             self.start();
             self.fn(dt);
@@ -352,7 +352,7 @@ function playbackQueueBahaviour() {
     let tickIndex = 0;
     let animationStart;
     let elapsedTime;
-    let scalingFactor = 5;
+    let scalingFactor = 10;
 
     function animateQueue(timestamp) {
         if (animationStart === undefined) {
