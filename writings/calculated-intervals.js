@@ -100,7 +100,7 @@ function computeServiceEndTimes(serviceTimes, cumulativeArrivalTimes) {
 }
 
 function numOfTicks(tickDuration, maxArrivalTime) {
-    return Math.ceil(Math.round(maxArrivalTime / tickDuration));
+    return Math.ceil(maxArrivalTime / tickDuration);
 }
 
 function computeQueueChangesPerTick(cumulativeArrivalTimes, serviceEndTimes, tickDuration) {

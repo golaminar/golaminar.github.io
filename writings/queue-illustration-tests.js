@@ -41,6 +41,8 @@ console.log("These are the tests:\n-----------------");
     const tickDuration = 600;
     const numberOfTicks = 100;
 
-    console.log("number of ticks is computed correctly for max arrival of 59690", numOfTicks(tickDuration, 59690) === 100);
-    console.log("number of ticks is computed correctly for max arrival of 59990", numOfTicks(tickDuration, 59990) === 100);
+    console.log("number of ticks is computed correctly for max arrival of less than half way through the last tick", numOfTicks(tickDuration, 59690) === 100);
+    console.log("number of ticks is computed correctly for max arrival of just under the last tick", numOfTicks(tickDuration, 59990) === 100);
+    console.log("number of ticks is computed when max arrival is one unit into the last tick", numOfTicks(tickDuration, 59401) === 100);
+    console.log("number of ticks is computed correctly for max arrival at the moment of a tick", numOfTicks(tickDuration, 59400) === 99);
 })();
