@@ -144,23 +144,6 @@ const queueList = {
 
 queueObservable.addObserver(queueList);
 
-const attemptService = {
-    queueChanged: function () {
-        const expectedServiceTime = parseInt(document.querySelector("[name=expected-service-time]").value);
-
-        if (queueObservable.readyToServe()) {
-            const serviceTime = genRandomTime(expectedServiceTime);
-            queueObservable.occupyServer();
-            setTimeout(() => {
-                serviceTimesObservable.addServiceTime(serviceTime);
-                queueObservable.removeQueuer();
-            }, computeTimeout(serviceTime));
-        }
-    }
-}
-
-queueObservable.addObserver(attemptService);
-
 const displayQueueLength = {
     queueChanged: function (queue) {
         const expectedServiceTime = parseInt(document.querySelector("[name=expected-service-time]").value);
@@ -208,6 +191,23 @@ function simulate() {
     };
 
     //queueObservable.addObserver(queueLog);
+
+    const attemptService = {
+        queueChanged: function () {
+            const expectedServiceTime = parseInt(document.querySelector("[name=expected-service-time]").value);
+
+            if (queueObservable.readyToServe()) {
+                const serviceTime = genRandomTime(expectedServiceTime);
+                queueObservable.occupyServer();
+                setTimeout(() => {
+                    serviceTimesObservable.addServiceTime(serviceTime);
+                    queueObservable.removeQueuer();
+                }, computeTimeout(serviceTime));
+            }
+        }
+    }
+
+    queueObservable.addObserver(attemptService);
 
     const arrivalGenerator = new Process(expectedArrivalInterval, function (interval) {
         arrivalsObservable.addArrival(interval);
