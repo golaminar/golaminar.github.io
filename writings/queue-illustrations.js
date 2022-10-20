@@ -134,18 +134,6 @@ const serviceTimesList = {
 serviceTimesObservable.addObserver(serviceTimesList);
 
 const queueList = {
-    OLDqueueChanged: function (queue) {
-        d3.select("#queue")
-            .selectAll("li")
-            .remove() // would be better to not repaint the whole thing every time
-
-        d3.select("#queue")
-            .selectAll("li")
-            .data(queue)
-            .enter().append("li")
-            .text(d => { return d.order; })
-            .style("background-color", d => { return d.color; });
-    },
     newArrival: function (queuer) {
         d3.select("#queue")
             .append("li")
