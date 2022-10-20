@@ -53,7 +53,6 @@ const queueObservable = {
             } else {
                 if (change === "newArrival" && observer.newArrival) {
                     observer.newArrival(queuer);
-                    console.log("arrived", queuer);
                 }
                 if (change === "newServiceTime" && observer.newServiceTime) {
                     observer.newServiceTime(queuer);
