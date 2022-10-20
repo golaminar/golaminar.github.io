@@ -259,8 +259,8 @@ function playbackQueueBahaviour() {
             // anchor the start of the animation in time
             animationStart = timestamp;
 
-            // announce the end of the animation
-            console.log("started at:", timestamp);
+            // announce the start of the animation
+            console.log("started at:", animationStart);
         }
 
         // compute how much time has elapsed
@@ -281,6 +281,7 @@ function playbackQueueBahaviour() {
             } else {
                 // announce the end of the animation
                 console.log("ended at:", timestamp);
+                console.log("unscaled elapsed time", timestamp - animationStart);
             }
         }
     }
