@@ -17,31 +17,34 @@
 
     <article>
     <figure id="figure-MM1-queue">
-        <button class="playback-queue-behaviour">Start simulation</button>
+        <div class="cols">
+            <div class="col">
+                <button class="playback-queue-behaviour">Start simulation</button>
+            </div>
+            <div class="col">
+                <span>Queue Length: </span><span id="queue-length">0</span>
+                <br>
+                <span>Expected wait time: </span><span id="expected-wait-time">0.00 minutes</span>
+                <br>
+                <span>Elapsed time: </span><span id="elapsed-time">0.00 minutes</span>
+            </div>
+        </div>
 
         <ol class="queue" id="queue"></ol>
 
-        <div>
-            <span>Queue Length: </span><span id="queue-length">0</span>
-            <br>
-            <span>Expected wait time: </span><span id="expected-wait-time">0.00 minutes</span>
-            <br>
-            <span>Elapsed time: </span><span id="elapsed-time">0.00 minutes</span>
-        </div>
-
         <div class="cols">
             <div class="col">
-                <label for="expected-arrival-time-interval">Interval between arrivals (seconds)</label>
+                <label for="expected-arrival-time-interval">Expected interval between arrivals (seconds)</label>
                 <input name="expected-arrival-time-interval" value="121">
                 <br>
-                <span>Average arrival time: </span><span id="avg-arrival-time-interval"></span>
+                <span>Actual average arrival interval: </span><span id="avg-arrival-time-interval">—</span>
                 <ol id="arrival-time-intervals"></ol>
             </div>
             <div class="col">
-                <label for="expected-service-time">Service time (seconds)</label>
+                <label for="expected-service-time">Expected service time (seconds)</label>
                 <input name="expected-service-time" value="120">
                 <br>
-                <span>Average service time: </span><span id="avg-service-time"></span>
+                <span>Actual average service time: </span><span id="avg-service-time">—</span>
                 <ol id="service-times"></ol>
             </div>
         </div>
