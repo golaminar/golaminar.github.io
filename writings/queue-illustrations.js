@@ -253,7 +253,7 @@ function playbackQueueBahaviour() {
     let tickIndex = 0;
     let animationStart;
     let elapsedTime;
-    let scalingFactor = 5;
+    let scalingFactor = 3;
 
     function animateQueue(timestamp) {
         if (animationStart === undefined) {
