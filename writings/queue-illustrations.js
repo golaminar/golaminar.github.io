@@ -55,7 +55,7 @@ const queueObservable = {
         this.count++;
         this.queue.push({
             order: this.count,
-            color: randomColor(),
+            color: indexedColor(this.count),
         });
         this.notifyObservers();
     },
@@ -170,6 +170,23 @@ function randomColor() {
 
     const i = Math.floor(Math.random() * colors.length);
     return colors[i];
+}
+
+function indexedColor(index) {
+    const colors = [
+        /*--flickr-pink */ "#f72585ff",
+        /*--byzantine */ "#b5179eff",
+        /*--purple */ "#7209b7ff",
+        /*--purple-2 */ "#560badff",
+        /*--trypan-blue */ "#480ca8ff",
+        /*--trypan-blue-2 */ "#3a0ca3ff",
+        /*--persian-blue */ "#3f37c9ff",
+        /*--ultramarine-blue */ "#4361eeff",
+        /*--dodger-blue */ "#4895efff",
+        /*--vivid-sky-blue */ "#4cc9f0ff",
+    ];
+
+    return colors[index % colors.length];
 }
 
 ///////////////////////
