@@ -46,23 +46,34 @@ const queueObservable = {
     addObserver: function (observer) {
         this.observers.push(observer);
     },
-    notifyObservers: function () {
+    notifyObservers: function (change, queuer) {
         this.observers.forEach(observer => {
-            observer.queueChanged(this.queue);
+            if (observer.queueChanged) {
+                observer.queueChanged(this.queue);
+            } else {
+                if (change === "newArrival" && observer.newArrival) {
+                    observer.newArrival(queuer);
+                    console.log("arrived", queuer);
+                }
+                if (change === "newServiceTime" && observer.newServiceTime) {
+                    observer.newServiceTime(queuer);
+                }
+            }
         });
     },
     addQueuer: function () {
         this.count++;
-        this.queue.push({
+        const queuer = {
             order: this.count,
             color: indexedColor(this.count),
-        });
-        this.notifyObservers();
+        };
+        this.queue.push(queuer);
+        this.notifyObservers("newArrival", queuer);
     },
     removeQueuer: function () {
-        this.queue.shift();
+        const queuer = this.queue.shift();
         this.beingServed = false;
-        this.notifyObservers();
+        this.notifyObservers("newServiceTime", queuer);
     },
     occupyServer: function () {
         this.beingServed = true;
@@ -123,7 +134,7 @@ const serviceTimesList = {
 serviceTimesObservable.addObserver(serviceTimesList);
 
 const queueList = {
-    queueChanged: function (queue) {
+    OLDqueueChanged: function (queue) {
         d3.select("#queue")
             .selectAll("li")
             .remove() // would be better to not repaint the whole thing every time
@@ -134,7 +145,18 @@ const queueList = {
             .enter().append("li")
             .text(d => { return d.order; })
             .style("background-color", d => { return d.color; });
-    }
+    },
+    newArrival: function (queuer) {
+        d3.select("#queue")
+            .append("li")
+            .attr("id", `queuer_${ queuer.order }`)
+            .text(queuer.order)
+            .style("background-color", queuer.color);
+    },
+    newServiceTime: function (queuer) {
+        d3.select(`#queuer_${queuer.order}`)
+            .remove();
+    },
 }
 
 queueObservable.addObserver(queueList);
