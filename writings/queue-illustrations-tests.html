@@ -20,6 +20,9 @@
         <div class="cols">
             <div class="col">
                 <button class="playback-queue-behaviour">Start simulation</button>
+                <br>
+                <label for="play-speed-factor">Playback speed-factor</label>
+                <input name="play-speed-factor" value="5" type="number">
             </div>
             <div class="col">
                 <span>Queue Length: </span><span id="queue-length">0</span>
@@ -35,14 +38,14 @@
         <div class="cols">
             <div class="col">
                 <label for="expected-arrival-time-interval">Expected interval between arrivals (seconds)</label>
-                <input name="expected-arrival-time-interval" value="121">
+                <input name="expected-arrival-time-interval" value="121" type="number">
                 <br>
                 <span>Actual average arrival interval: </span><span id="avg-arrival-time-interval">—</span>
                 <ol id="arrival-time-intervals"></ol>
             </div>
             <div class="col">
                 <label for="expected-service-time">Expected service time (seconds)</label>
-                <input name="expected-service-time" value="120">
+                <input name="expected-service-time" value="120" type="number">
                 <br>
                 <span>Actual average service time: </span><span id="avg-service-time">—</span>
                 <ol id="service-times"></ol>

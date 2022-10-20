@@ -240,6 +240,7 @@ function playbackQueueBahaviour() {
     // such as from the above parameters?
     const tickDuration = 600;
     const numberOfTicks = 100;
+    const scalingFactor = parseInt(document.querySelector("[name=play-speed-factor]").value);
 
     const arrivalTimes = generateArrivalTimes(expectedArrivalInterval, tickDuration, numberOfTicks);
     const serviceTimes = generateServiceTimes(expectedServiceTime, arrivalTimes.length);
@@ -252,7 +253,6 @@ function playbackQueueBahaviour() {
     let tickIndex = 0;
     let animationStart;
     let elapsedTime;
-    let scalingFactor = 3;
 
     function animateQueue(timestamp) {
         if (animationStart === undefined) {
