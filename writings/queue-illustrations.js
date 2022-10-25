@@ -223,7 +223,7 @@ function serveQueuers(served, serviceTimes) {
 
 function displayElapsedTime(tickTime) {
     d3.select("#elapsed-time")
-        .text(() => { return `${(tickTime / 60).toFixed(2)} minutes`; });
+        .text(() => { return `${(tickTime / 60 / 60).toFixed(2)} hours`; });
 }
 
 function updateQueueUI(queueChanges, arrivalTimes, serviceTimes) {
