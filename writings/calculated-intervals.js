@@ -64,6 +64,10 @@ function computeServiceEndTimes(serviceTimes, cumulativeArrivalTimes) {
         // count(filter(D:D, D:D < K3))
         //    => count of the arrivals before this readyAt value
 
+        // TO DO:
+        // Consider whether this should this be changed to “ByReadyAt”
+        // i.e. cumulativeArrivalTime <= readyAt?
+        // Write a test and then adjust.
         const arrivalsBeforeReadyAt = cumulativeArrivalTimes.filter((cumulativeArrivalTime) => {
             return cumulativeArrivalTime < readyAt;
         }).length;
