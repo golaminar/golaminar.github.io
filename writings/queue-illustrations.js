@@ -238,8 +238,9 @@ function playbackQueueBahaviour() {
 
     // Could optimal illustrative values be computed,
     // such as from the above parameters?
-    const tickDuration = 600;
-    const numberOfTicks = 100;
+    const tickDuration = 360;
+    const numberOfTicks = 240;
+
     const scalingFactor = parseInt(document.querySelector("[name=play-speed-factor]").value);
 
     const arrivalTimes = generateArrivalTimes(expectedArrivalInterval, tickDuration, numberOfTicks);
