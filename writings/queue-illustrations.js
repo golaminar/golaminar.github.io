@@ -203,22 +203,22 @@ function indexedColor(index) {
 function addQueuers(arrivals, arrivalTimes) {
     let interval;
 
-    do {
+    while (arrivals > 0) {
         interval = arrivalTimes[arrivalsObservable.nextArrivalIndex()];
         arrivalsObservable.addArrival(interval);
         arrivals--;
-    } while (arrivals > 0);
+    }
 }
 
 function serveQueuers(served, serviceTimes) {
     let interval;
 
-    do {
+    while (served > 0) {
         interval = serviceTimes[serviceTimesObservable.nextServedIndex()];
         serviceTimesObservable.addServiceTime(interval);
         queueObservable.removeQueuer();
         served--;
-    } while (served > 0);
+    }
 }
 
 function displayElapsedTime(tickTime) {
