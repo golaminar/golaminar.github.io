@@ -46,3 +46,20 @@ console.log("These are the tests:\n-----------------");
     console.log("number of ticks is computed when max arrival is one unit into the last tick", numOfTicks(tickDuration, 59401) === expectedNumOfTicks);
     console.log("number of ticks is computed correctly for max arrival at the moment of a tick", numOfTicks(tickDuration, 60000) === expectedNumOfTicks);
 })();
+
+(function () {
+    const arrivals = 10;
+    const served = 10;
+
+    addQueuers(arrivals, []);
+    serveQueuers(served, []);
+
+    console.log("arrivalsObservable.arrivals has as many items there were arrivals", arrivalsObservable.arrivals.length === arrivals);
+    console.log("serviceTimesObservable.serviceTimes has as many times as there were served", serviceTimesObservable.serviceTimes.length === served);
+
+    addQueuers(0, []);
+    serveQueuers(0, []);
+
+    console.log("arrivalsObservable.arrivals does not grow when there are no arrivals", arrivalsObservable.arrivals.length === arrivals);
+    console.log("serviceTimesObservable.serviceTimes does not grow when there are none served", serviceTimesObservable.serviceTimes.length === served);
+})();
