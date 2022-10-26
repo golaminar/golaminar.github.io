@@ -88,7 +88,7 @@ const arrivalTimesList = {
             .selectAll("li")
             .data(arrivals)
             .enter().append("li")
-            .text(d => { return d; });
+            .text(d => { return Math.round(d); });
     }
 };
 
@@ -126,7 +126,7 @@ const serviceTimesList = {
             .selectAll("li")
             .data(serviceTimes)
             .enter().append("li")
-            .text(d => { return d; });
+            .text(d => { return Math.round(d); });
     }
 };
 
