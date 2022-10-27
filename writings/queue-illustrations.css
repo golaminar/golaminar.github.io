@@ -59,3 +59,8 @@ td.number {
 .list-of-times li {
     list-style: none;
 }
+.lists-of-times td ol {
+    font-family: "proxima-nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    margin: 0;
+}
+

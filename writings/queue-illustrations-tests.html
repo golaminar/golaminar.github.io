@@ -56,16 +56,25 @@
 
                 <ol class="queue"></ol>
 
-                <div class="cols">
-                    <div class="col">
-                        <span>Actual average arrival interval: </span><span class="avg-arrival-time-interval">—</span>
-                        <ol class="arrival-time-intervals"></ol>
-                    </div>
-                    <div class="col">
-                        <span>Actual average service time: </span><span class="avg-service-time">—</span>
-                        <ol class="service-times"></ol>
-                    </div>
-                </div>
+                <table class="queue-status">
+                    <tr>
+                        <th>Average arrival interval:</th>
+                        <th>Average service time:</th>
+                    </tr>
+                    <tr>
+                        <td class="number"><span class="avg-arrival-time-interval">—</span></td>
+                        <td class="number"><span class="avg-service-time">—</span></td>
+                    </tr>
+                    <!--tr>
+                        <th>Arrival intervals (seconds):</th>
+                        <th>Service times (seconds):</th>
+                    </tr>
+                    <tr class="lists-of-times">
+                        <td class="number"><ol class="arrival-time-intervals list-of-times"></ol></td>
+                        <td class="number"><ol class="service-times list-of-times"></ol></td>
+                    </tr-->
+                </table>
+
             </div>
         </template>
 

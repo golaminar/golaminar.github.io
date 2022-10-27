@@ -133,7 +133,7 @@ function queueSimulation () {
         }
     };
 
-    arrivalsObservable.addObserver(arrivalTimesList);
+    // arrivalsObservable.addObserver(arrivalTimesList);
 
     const arrivalAverageDisplay = {
         newArrival: function (arrivals) {
@@ -171,7 +171,7 @@ function queueSimulation () {
         }
     };
 
-    serviceTimesObservable.addObserver(serviceTimesList);
+    // serviceTimesObservable.addObserver(serviceTimesList);
 
     const queueList = {
         newArrival: function (queuer) {
