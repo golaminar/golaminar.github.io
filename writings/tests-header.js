@@ -5,6 +5,17 @@ let document = {
     querySelector: function () {
         return false;
     },
+    getElementById: function () {
+        return this;
+    },
+    appendChild: function () {
+        return this;
+    },
+    content: {
+        cloneNode: function () {
+            return this;
+        },
+    },
 };
 
 let d3 = {

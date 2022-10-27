@@ -35,6 +35,11 @@ function indexedColor(index) {
 
 function queueSimulation () {
 
+    const template = document.getElementById("queue-simulation-template");
+    const clone = template.content.cloneNode(true);
+
+    document.getElementById("queue-simulations").appendChild(clone);
+
     const arrivalsObservable = {
         observers: [],
         arrivals: [],
