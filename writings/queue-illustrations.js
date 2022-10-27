@@ -216,7 +216,7 @@ function queueSimulation () {
                 .text(() => { return queue.length; });
 
             d3.select(parentElem).select(".expected-wait-time")
-                .text(() => { return `${(waitTime / 60).toFixed(2)} minutes`; });
+                .text(() => { return (waitTime / 60).toFixed(2); /*minutes*/ });
         }
     };
 
@@ -247,7 +247,7 @@ function queueSimulation () {
 
     function displayElapsedTime(tickTime) {
         d3.select(parentElem).select(".elapsed-time")
-            .text(() => { return `${(tickTime / 60 / 60).toFixed(2)} hours`; });
+            .text(() => { return (tickTime / 60 / 60).toFixed(2); /*hours*/ });
     }
 
     function updateQueueUI(queueChanges, arrivalTimes, serviceTimes) {
