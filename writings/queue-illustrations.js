@@ -310,4 +310,4 @@ function queueSimulation () {
     };
 }
 
-const queueSimulations = [queueSimulation()];
+const queueSimulations = [queueSimulation(), queueSimulation()];
