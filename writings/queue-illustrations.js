@@ -1,3 +1,38 @@
+function randomColor() {
+    const colors = [
+        /*--flickr-pink */ "#f72585ff",
+        /*--byzantine */ "#b5179eff",
+        /*--purple */ "#7209b7ff",
+        /*--purple-2 */ "#560badff",
+        /*--trypan-blue */ "#480ca8ff",
+        /*--trypan-blue-2 */ "#3a0ca3ff",
+        /*--persian-blue */ "#3f37c9ff",
+        /*--ultramarine-blue */ "#4361eeff",
+        /*--dodger-blue */ "#4895efff",
+        /*--vivid-sky-blue */ "#4cc9f0ff",
+    ];
+
+    const i = Math.floor(Math.random() * colors.length);
+    return colors[i];
+}
+
+function indexedColor(index) {
+    const colors = [
+        /*--flickr-pink */ "#f72585ff",
+        /*--byzantine */ "#b5179eff",
+        /*--purple */ "#7209b7ff",
+        /*--purple-2 */ "#560badff",
+        /*--trypan-blue */ "#480ca8ff",
+        /*--trypan-blue-2 */ "#3a0ca3ff",
+        /*--persian-blue */ "#3f37c9ff",
+        /*--ultramarine-blue */ "#4361eeff",
+        /*--dodger-blue */ "#4895efff",
+        /*--vivid-sky-blue */ "#4cc9f0ff",
+    ];
+
+    return colors[index % colors.length];
+}
+
 const arrivalsObservable = {
     observers: [],
     arrivals: [],
@@ -134,7 +169,7 @@ serviceTimesObservable.addObserver(serviceTimesList);
 
 const queueList = {
     newArrival: function (queuer) {
-        d3.select("#queue")
+        d3.select(".queue")
             .append("li")
             .attr("id", `queuer_${ queuer.order }`)
             .text(queuer.order)
@@ -162,41 +197,6 @@ const displayQueueLength = {
 };
 
 queueObservable.addObserver(displayQueueLength);
-
-function randomColor() {
-    const colors = [
-        /*--flickr-pink */ "#f72585ff",
-        /*--byzantine */ "#b5179eff",
-        /*--purple */ "#7209b7ff",
-        /*--purple-2 */ "#560badff",
-        /*--trypan-blue */ "#480ca8ff",
-        /*--trypan-blue-2 */ "#3a0ca3ff",
-        /*--persian-blue */ "#3f37c9ff",
-        /*--ultramarine-blue */ "#4361eeff",
-        /*--dodger-blue */ "#4895efff",
-        /*--vivid-sky-blue */ "#4cc9f0ff",
-    ];
-
-    const i = Math.floor(Math.random() * colors.length);
-    return colors[i];
-}
-
-function indexedColor(index) {
-    const colors = [
-        /*--flickr-pink */ "#f72585ff",
-        /*--byzantine */ "#b5179eff",
-        /*--purple */ "#7209b7ff",
-        /*--purple-2 */ "#560badff",
-        /*--trypan-blue */ "#480ca8ff",
-        /*--trypan-blue-2 */ "#3a0ca3ff",
-        /*--persian-blue */ "#3f37c9ff",
-        /*--ultramarine-blue */ "#4361eeff",
-        /*--dodger-blue */ "#4895efff",
-        /*--vivid-sky-blue */ "#4cc9f0ff",
-    ];
-
-    return colors[index % colors.length];
-}
 
 ///////////////////////
 
