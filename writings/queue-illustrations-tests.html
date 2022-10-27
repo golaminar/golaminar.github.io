@@ -17,41 +17,48 @@
 
     <article>
     <figure id="figure-MM1-queue">
-        <div class="cols">
-            <div class="col">
-                <button class="playback-queue-behaviour">Start simulation</button>
-                <br>
-                <label for="play-speed-factor">Playback speed factor</label>
-                <input name="play-speed-factor" value="10" type="number">
-            </div>
-            <div class="col">
-                <span>Queue Length: </span><span id="queue-length">0</span>
-                <br>
-                <span>Expected wait time: </span><span id="expected-wait-time">0.00 minutes</span>
-                <br>
-                <span>Elapsed time: </span><span id="elapsed-time">0.00 hours</span>
-            </div>
-        </div>
 
-        <ol class="queue" id="queue"></ol>
-
-        <div class="cols">
-            <div class="col">
-                <label for="expected-arrival-time-interval">Expected interval between arrivals (seconds)</label>
-                <input name="expected-arrival-time-interval" value="121" type="number">
-                <br>
-                <span>Actual average arrival interval: </span><span id="avg-arrival-time-interval">—</span>
-                <ol id="arrival-time-intervals"></ol>
-            </div>
-            <div class="col">
-                <label for="expected-service-time">Expected service time (seconds)</label>
-                <input name="expected-service-time" value="120" type="number">
-                <br>
-                <span>Actual average service time: </span><span id="avg-service-time">—</span>
-                <ol id="service-times"></ol>
-            </div>
-        </div>
         <figcaption>Expected queue length interactive illustration</figcaption>
+
+        <button class="playback-queue-behaviour">Start</button>
+        <br>
+
+        <label for="play-speed-factor">Playback speed factor</label>
+        <input name="play-speed-factor" value="10" type="number">
+        <br>
+
+        <label for="expected-arrival-time-interval">Expected interval between arrivals (seconds)</label>
+        <input name="expected-arrival-time-interval" value="121" type="number">
+        <br>
+
+        <label for="expected-service-time">Expected service time (seconds)</label>
+        <input name="expected-service-time" value="120" type="number">
+        <br>
+
+        <div id="queue-simulations">
+            <div class="queue-simulation">
+                <div>
+                    <span>Queue Length: </span><span id="queue-length">0</span>
+                    <br>
+                    <span>Expected wait time: </span><span id="expected-wait-time">0.00 minutes</span>
+                    <br>
+                    <span>Elapsed time: </span><span id="elapsed-time">0.00 hours</span>
+                </div>
+                <ol class="queue"></ol>
+
+                <div class="cols">
+                    <div class="col">
+                        <span>Actual average arrival interval: </span><span id="avg-arrival-time-interval">—</span>
+                        <ol id="arrival-time-intervals"></ol>
+                    </div>
+                    <div class="col">
+                        <span>Actual average service time: </span><span id="avg-service-time">—</span>
+                        <ol id="service-times"></ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <script src="calculated-intervals.js"></script>
         <script src="queue-illustrations.js"></script>
     </figure>
