@@ -5,7 +5,7 @@ figure {
 
 .queue {
     position: relative;
-    height: 18em;
+    min-height: 20em;
     font-size: 4px;
     margin: 20px 0;
     padding: 0;
@@ -29,6 +29,33 @@ figure {
 .queue-simulation.col {
     flex: 10%;
 }
+
 .queue-simulation.col .cols > div {
     flex: 40%;
+}
+
+.queue-simulation {
+    font-size: 12px;
+    border: 1px solid #bbb;
+    padding: 5px;
+}
+
+th {
+    text-align: left;
+}
+
+.queue-length {
+    font-size: 2em;
+}
+
+td.number {
+    text-align: right;
+}
+
+.list-of-times {
+    padding: 0;
+}
+
+.list-of-times li {
+    list-style: none;
 }
