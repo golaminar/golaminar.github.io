@@ -309,4 +309,8 @@ function queueSimulation () {
     };
 }
 
-const queueSimulations = [queueSimulation(), queueSimulation()];
+const queueSimulations = []
+
+for (let numSimulations = 5; numSimulations > 0; numSimulations--) {
+    queueSimulations.push(queueSimulation());
+}

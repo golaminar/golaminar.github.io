@@ -58,10 +58,6 @@ h1:after {
     flex: 300px;
 }
 
-.cols .cols > div {
-    flex: 150px;
-}
-
 .cols p {
     margin: 0;
 }

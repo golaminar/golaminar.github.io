@@ -9,6 +9,7 @@ figure {
     font-size: 4px;
     margin: 20px 0;
     padding: 0;
+    overflow: auto;
 }
 
 .queue > * {
@@ -23,4 +24,8 @@ figure {
     padding: 0;
     list-style-type: none;
     color: transparent;
+}
+
+#queue-simulations.cols>div {
+    flex: 10%;
 }
