@@ -26,6 +26,9 @@ figure {
     color: transparent;
 }
 
-#queue-simulations.cols>div {
+.queue-simulation.col {
     flex: 10%;
+}
+.queue-simulation.col .cols > div {
+    flex: 40%;
 }
