@@ -144,6 +144,15 @@ function queueSimulation () {
 
     arrivalsObservable.addObserver(arrivalAverageDisplay);
 
+    const totalArrivalsDisplay = {
+        newArrival: function (arrivals) {
+            d3.select(parentElem).select(".total-arrivals")
+                .text(() => { return arrivals.length; });
+        }
+    };
+
+    arrivalsObservable.addObserver(totalArrivalsDisplay);
+
     const enqueueArrival = {
         newArrival: function (arrivals) {
             queueObservable.addQueuer();
@@ -172,6 +181,15 @@ function queueSimulation () {
     };
 
     // serviceTimesObservable.addObserver(serviceTimesList);
+
+    const totalServedDisplay = {
+        newServiceTime: function (served) {
+            d3.select(parentElem).select(".total-served")
+                .text(() => { return served.length; });
+        }
+    };
+
+    serviceTimesObservable.addObserver(totalServedDisplay);
 
     const queueList = {
         newArrival: function (queuer) {
