@@ -41,6 +41,10 @@ figure {
     background-color: #ffffff55;
 }
 
+.simulation-settings {
+    font-size: 14px;
+}
+
 table.queue-status {
     width: 100%;
 }

@@ -20,22 +20,44 @@
 
         <figcaption>Expected queue length interactive illustration</figcaption>
 
-        <button class="playback-queue-behaviour">Start</button>
-        <br>
+        <div class="cols">
+            <div class="col">
 
-         Elapsed time: <span id="elapsed-time">0.00</span> hours<br>
+                <button class="playback-queue-behaviour">Start</button>
+                <br>
 
-        <label for="play-speed-factor">Playback speed factor</label>
-        <input name="play-speed-factor" value="10" type="number">
-        <br>
+                Elapsed time: <span id="elapsed-time">0.00</span> hours<br>
 
-        <label for="expected-arrival-time-interval">Expected interval between arrivals (seconds)</label>
-        <input name="expected-arrival-time-interval" value="121" type="number">
-        <br>
-
-        <label for="expected-service-time">Expected service time (seconds)</label>
-        <input name="expected-service-time" value="120" type="number">
-        <br>
+            </div>
+            <div class="col">
+                <table class="simulation-settings">
+                    <tr>
+                        <th>
+                            <label for="play-speed-factor">Playback speed factor</label>
+                        </th>
+                        <td class="number">
+                            <input name="play-speed-factor" value="10" type="number">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="expected-arrival-time-interval">Expected interval between arrivals (seconds)</label>
+                        </th>
+                        <td class="number">
+                            <input name="expected-arrival-time-interval" value="121" type="number">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="expected-service-time">Expected service time (seconds)</label>
+                        </th>
+                        <td class="number">
+                            <input name="expected-service-time" value="120" type="number">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
 
         <div id="queue-simulations" class="cols">
 
