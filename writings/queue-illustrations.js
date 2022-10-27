@@ -36,9 +36,8 @@ function indexedColor(index) {
 function queueSimulation () {
 
     const template = document.getElementById("queue-simulation-template");
-    const clone = template.content.cloneNode(true);
-
-    document.getElementById("queue-simulations").appendChild(clone);
+    const parentElem = document.getElementById("queue-simulations")
+        .appendChild(template.content.firstElementChild.cloneNode(true));
 
     const arrivalsObservable = {
         observers: [],
@@ -126,7 +125,7 @@ function queueSimulation () {
 
     const arrivalTimesList = {
         newArrival: function (arrivals) {
-            d3.select("#arrival-time-intervals")
+            d3.select(parentElem).select(".arrival-time-intervals")
                 .selectAll("li")
                 .data(arrivals)
                 .enter().append("li")
@@ -138,7 +137,7 @@ function queueSimulation () {
 
     const arrivalAverageDisplay = {
         newArrival: function (arrivals) {
-            d3.select("#avg-arrival-time-interval")
+            d3.select(parentElem).select(".avg-arrival-time-interval")
                 .text(() => { return d3.mean(arrivals).toFixed(2); });
         }
     };
@@ -155,7 +154,7 @@ function queueSimulation () {
 
     const serviceTimeAverageDisplay = {
         newServiceTime: function (serviceTimes) {
-            d3.select("#avg-service-time")
+            d3.select(parentElem).select(".avg-service-time")
                 .text(() => { return d3.mean(serviceTimes).toFixed(2); });
         }
     };
@@ -164,7 +163,7 @@ function queueSimulation () {
 
     const serviceTimesList = {
         newServiceTime: function (serviceTimes) {
-            d3.select("#service-times")
+            d3.select(parentElem).select(".service-times")
                 .selectAll("li")
                 .data(serviceTimes)
                 .enter().append("li")
@@ -176,14 +175,14 @@ function queueSimulation () {
 
     const queueList = {
         newArrival: function (queuer) {
-            d3.select(".queue")
+            d3.select(parentElem).select(".queue")
                 .append("li")
-                .attr("id", `queuer_${queuer.order}`)
+                .attr("class", `queuer_${queuer.order}`)
                 .text(queuer.order)
                 .style("background-color", queuer.color);
         },
         newServiceTime: function (queuer) {
-            d3.select(`#queuer_${queuer.order}`)
+            d3.select(parentElem).select(`.queuer_${queuer.order}`)
                 .remove();
         },
     }
@@ -195,10 +194,10 @@ function queueSimulation () {
             const expectedServiceTime = parseInt(document.querySelector("[name=expected-service-time]").value);
             const waitTime = queue.length * expectedServiceTime;
 
-            d3.select("#queue-length")
+            d3.select(parentElem).select(".queue-length")
                 .text(() => { return queue.length; });
 
-            d3.select("#expected-wait-time")
+            d3.select(parentElem).select(".expected-wait-time")
                 .text(() => { return `${(waitTime / 60).toFixed(2)} minutes`; });
         }
     };
@@ -229,7 +228,7 @@ function queueSimulation () {
     }
 
     function displayElapsedTime(tickTime) {
-        d3.select("#elapsed-time")
+        d3.select(parentElem).select(".elapsed-time")
             .text(() => { return `${(tickTime / 60 / 60).toFixed(2)} hours`; });
     }
 

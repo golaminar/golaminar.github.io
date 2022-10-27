@@ -15,6 +15,11 @@ let document = {
         cloneNode: function () {
             return this;
         },
+        firstElementChild: {
+            cloneNode: function() {
+                return this;
+            },
+        },
     },
 };
 
