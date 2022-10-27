@@ -33,7 +33,9 @@ function indexedColor(index) {
     return colors[index % colors.length];
 }
 
-function queueSimulation () {
+function queueSimulation(index) {
+
+    const primarySimulation = index === 0;
 
     const template = document.getElementById("queue-simulation-template");
     const parentElem = document.getElementById("queue-simulations")
@@ -246,14 +248,16 @@ function queueSimulation () {
     }
 
     function displayElapsedTime(tickTime) {
-        d3.select(parentElem).select(".elapsed-time")
+        d3.select("#elapsed-time")
             .text(() => { return (tickTime / 60 / 60).toFixed(2); /*hours*/ });
     }
 
     function updateQueueUI(queueChanges, arrivalTimes, serviceTimes) {
         addQueuers(queueChanges.arrivals, arrivalTimes);
         serveQueuers(queueChanges.served, serviceTimes);
-        displayElapsedTime(queueChanges.tickTime);
+        if (primarySimulation) {
+            displayElapsedTime(queueChanges.tickTime);
+        }
     }
 
     function playbackQueueBahaviour() {
@@ -328,7 +332,8 @@ function queueSimulation () {
 }
 
 const queueSimulations = []
+const numSimulations = 5;
 
-for (let numSimulations = 5; numSimulations > 0; numSimulations--) {
-    queueSimulations.push(queueSimulation());
+for (let simIndex = 0; simIndex < numSimulations; simIndex++) {
+    queueSimulations.push(queueSimulation(simIndex));
 }
