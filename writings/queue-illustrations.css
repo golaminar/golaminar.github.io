@@ -41,6 +41,10 @@ figure {
     background-color: #ffffff55;
 }
 
+table.queue-status {
+    width: 100%;
+}
+
 th {
     text-align: left;
 }
