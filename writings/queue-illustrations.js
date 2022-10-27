@@ -331,7 +331,7 @@ function queueSimulation(index) {
     };
 }
 
-const queueSimulations = []
+const queueSimulations = [];
 const numSimulations = 5;
 
 for (let simIndex = 0; simIndex < numSimulations; simIndex++) {
