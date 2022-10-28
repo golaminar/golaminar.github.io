@@ -22,12 +22,11 @@
 
         <div class="cols">
             <div class="col">
-
-                <button class="playback-queue-behaviour">Start</button>
-                <br>
-
-                Elapsed time: <span id="elapsed-time">0.00</span> hours<br>
-
+                <div class="simulation-controls">
+                    <button class="playback-queue-behaviour">Start</button>
+                    <br><br>
+                    Elapsed time: <span id="elapsed-time">0.00</span> hours<br>
+                </div>
             </div>
             <div class="col">
                 <table class="simulation-settings">
@@ -38,21 +37,30 @@
                         <td class="number">
                             <input name="play-speed-factor" value="10" type="number">
                         </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            <label for="expected-arrival-time-interval">Expected interval between arrivals (seconds)</label>
-                        </th>
-                        <td class="number">
-                            <input name="expected-arrival-time-interval" value="121" type="number">
+                        <td class="unit">
+                            seconds / frame
                         </td>
                     </tr>
                     <tr>
                         <th>
-                            <label for="expected-service-time">Expected service time (seconds)</label>
+                            <label for="expected-arrival-time-interval">Expected interval between arrivals</label>
+                        </th>
+                        <td class="number">
+                            <input name="expected-arrival-time-interval" value="121" type="number">
+                        </td>
+                        <td class="unit">
+                            seconds
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="expected-service-time">Expected service time</label>
                         </th>
                         <td class="number">
                             <input name="expected-service-time" value="120" type="number">
+                        </td>
+                        <td class="unit">
+                            seconds
                         </td>
                     </tr>
                 </table>

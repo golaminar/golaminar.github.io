@@ -3,6 +3,10 @@ figure {
     padding: 0;
 }
 
+figcaption {
+    margin: 1em 0;
+}
+
 .queue {
     position: relative;
     min-height: 30em;
@@ -26,6 +30,10 @@ figure {
     color: transparent;
 }
 
+#queue-simulations {
+    margin: 1em 0;
+}
+
 .queue-simulation.col {
     flex: 10%;
 }
@@ -41,8 +49,29 @@ figure {
     background-color: #ffffff55;
 }
 
+figure input {
+    width: 5em;
+    font-size: 16px;
+}
+
+figure button {
+    font-size: 18px;
+    border: 1px solid #bbb;
+    background: #e6e6e6 url(button-bg.png) 50% 50% repeat-x;
+    font-weight: normal;
+    border-radius: 4px;
+    padding: 0.4em 1em;
+    cursor: pointer;
+}
+
+figure button:hover {
+    border-color: #999;
+    background-image: url(button-bg-hover.png);
+    color: #000;
+}
+
 .simulation-settings {
-    font-size: 14px;
+    font-size: 12px;
 }
 
 table.queue-status {
@@ -73,4 +102,3 @@ td.number {
     font-family: "proxima-nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
     margin: 0;
 }
-
