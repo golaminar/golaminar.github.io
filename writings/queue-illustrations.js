@@ -41,6 +41,9 @@ function queueSimulation(index, queueDataset) {
     const parentElem = document.getElementById("queue-simulations")
         .appendChild(template.content.firstElementChild.cloneNode(true));
 
+    d3.select(parentElem).select(".queue-status th")
+        .attr("style", `color: ${queueDataset.borderColor}` );
+
     const queueObservable = {
         observers: [],
         queue: [],
@@ -255,7 +258,7 @@ const queueLengthsChartConfig = {
             x: {
                 type: 'linear',
                 suggestedMin: 0,
-                suggestedMax: 10,
+                suggestedMax: 500,
                 title: {
                     display: true,
                     text: "Elapsed seconds",
@@ -289,7 +292,7 @@ const queueLengthsChartConfig = {
         animation: false,
         plugins: {
             legend: {
-                display: true, // SET TO FALSE?
+                display: false,
             },
         },
         elements: {
