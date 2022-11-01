@@ -43,21 +43,16 @@ function queueSimulation(index, queueDataset) {
 
     const arrivalsObservable = {
         observers: [],
-        arrivals: [],
         addObserver: function (observer) {
             this.observers.push(observer);
         },
         notifyObservers: function () {
             this.observers.forEach(observer => {
-                observer.newArrival(this.arrivals);
+                observer.newArrival();
             });
         },
-        addArrival: function (interval) {
-            this.arrivals.push(interval);
+        addArrival: function () {
             this.notifyObservers();
-        },
-        nextArrivalIndex() {
-            return this.arrivals.length;
         },
     };
 
@@ -126,7 +121,7 @@ function queueSimulation(index, queueDataset) {
     };
 
     const enqueueArrival = {
-        newArrival: function (arrivals) {
+        newArrival: function () {
             queueObservable.addQueuer();
         }
     }
@@ -160,12 +155,9 @@ function queueSimulation(index, queueDataset) {
 
     ///////////////////////
 
-    function addQueuers(arrivals, arrivalTimes) {
-        let interval;
-
+    function addQueuers(arrivals) {
         while (arrivals > 0) {
-            interval = arrivalTimes[arrivalsObservable.nextArrivalIndex()];
-            arrivalsObservable.addArrival(interval);
+            arrivalsObservable.addArrival();
             arrivals--;
         }
     }
@@ -186,8 +178,8 @@ function queueSimulation(index, queueDataset) {
             .text(() => { return (tickTime / 60 / 60).toFixed(2); /*hours*/ });
     }
 
-    function updateQueueUI(queueChanges, arrivalTimes, serviceTimes) {
-        addQueuers(queueChanges.arrivals, arrivalTimes);
+    function updateQueueUI(queueChanges, serviceTimes) {
+        addQueuers(queueChanges.arrivals);
         serveQueuers(queueChanges.served, serviceTimes);
         if (primarySimulation) {
             displayElapsedTime(queueChanges.tickTime);
@@ -261,7 +253,7 @@ function queueSimulation(index, queueDataset) {
                 requestAnimationFrame(animateQueue);
             } else {
                 // animate what happened
-                updateQueueUI(queueChangesPerTick[tickIndex], arrivalTimes, serviceTimes);
+                updateQueueUI(queueChangesPerTick[tickIndex], serviceTimes);
 
                 // update the chart in batches
                 updateChart(queueChangesPerTick[tickIndex].tickTime, queueEvents);
