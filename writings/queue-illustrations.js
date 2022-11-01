@@ -278,13 +278,6 @@ function queueSimulation(index, queueDataset) {
     if (document.querySelector("#figure-MM1-queue .playback-queue-behaviour")) {
         document.querySelector("#figure-MM1-queue .playback-queue-behaviour").addEventListener("click", playbackQueueBahaviour);
     }
-
-    return {
-        addQueuers,
-        serveQueuers,
-        arrivalsObservable,
-        serviceTimesObservable,
-    };
 }
 
 function createQueueDataset(index) {
@@ -362,12 +355,11 @@ const queueLengthsChart = new Chart(
     queueLengthsChartConfig
 );
 
-const queueSimulations = [];
 const numSimulations = 5;
 
 for (let simIndex = 0; simIndex < numSimulations; simIndex++) {
     const queueDataset = createQueueDataset(simIndex);
     queueLengthsDatasets.push(queueDataset);
     queueLengthsChart.update();
-    queueSimulations.push(queueSimulation(simIndex, queueDataset));
+    queueSimulation(simIndex, queueDataset);
 }

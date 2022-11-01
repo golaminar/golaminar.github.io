@@ -48,25 +48,6 @@ console.log("These are the tests:\n-----------------");
 })();
 
 (function () {
-    const arrivals = 10;
-    const served = 10;
-
-    qS = queueSimulations[0]; // grab one queueSimulation instance
-
-    qS.addQueuers(arrivals, []);
-    qS.serveQueuers(served, []);
-
-    console.log("arrivalsObservable.arrivals has as many items there were arrivals", qS.arrivalsObservable.arrivals.length === arrivals);
-    console.log("serviceTimesObservable.serviceTimes has as many times as there were served", qS.serviceTimesObservable.serviceTimes.length === served);
-
-    qS.addQueuers(0, []);
-    qS.serveQueuers(0, []);
-
-    console.log("arrivalsObservable.arrivals does not grow when there are no arrivals", qS.arrivalsObservable.arrivals.length === arrivals);
-    console.log("serviceTimesObservable.serviceTimes does not grow when there are none served", qS.serviceTimesObservable.serviceTimes.length === served);
-})();
-
-(function () {
     const tickDuration = 10;
 
     const arrivalTimes = [10, 11, 15, 8, 6, 14];
