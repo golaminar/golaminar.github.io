@@ -286,7 +286,7 @@ function queueSimulation(index) {
         const cumulativeArrivalTimes = computeCumulativeArrivalTimes(arrivalTimes);
         const serviceEndTimes = computeServiceEndTimes(serviceTimes, cumulativeArrivalTimes);
 
-        const queueChangesPerTick = computeQueueChangesPerTick(cumulativeArrivalTimes, serviceEndTimes, 600);
+        const queueChangesPerTick = computeQueueChangesPerTick(cumulativeArrivalTimes, serviceEndTimes, tickDuration);
 
         let tickIndex = 0;
         let animationStart;
