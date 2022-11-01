@@ -56,26 +56,6 @@ function queueSimulation(index, queueDataset) {
         },
     };
 
-    const serviceTimesObservable = {
-        observers: [],
-        serviceTimes: [],
-        addObserver: function (observer) {
-            this.observers.push(observer);
-        },
-        notifyObservers: function () {
-            this.observers.forEach(observer => {
-                observer.newServiceTime(this.serviceTimes);
-            });
-        },
-        addServiceTime: function (interval) {
-            this.serviceTimes.push(interval);
-            this.notifyObservers();
-        },
-        nextServedIndex() {
-            return this.serviceTimes.length;
-        },
-    };
-
     const queueObservable = {
         observers: [],
         queue: [],
@@ -162,12 +142,8 @@ function queueSimulation(index, queueDataset) {
         }
     }
 
-    function serveQueuers(served, serviceTimes) {
-        let interval;
-
+    function serveQueuers(served) {
         while (served > 0) {
-            interval = serviceTimes[serviceTimesObservable.nextServedIndex()];
-            serviceTimesObservable.addServiceTime(interval);
             queueObservable.removeQueuer();
             served--;
         }
@@ -178,9 +154,9 @@ function queueSimulation(index, queueDataset) {
             .text(() => { return (tickTime / 60 / 60).toFixed(2); /*hours*/ });
     }
 
-    function updateQueueUI(queueChanges, serviceTimes) {
+    function updateQueueUI(queueChanges) {
         addQueuers(queueChanges.arrivals);
-        serveQueuers(queueChanges.served, serviceTimes);
+        serveQueuers(queueChanges.served);
         if (primarySimulation) {
             displayElapsedTime(queueChanges.tickTime);
         }
@@ -253,7 +229,7 @@ function queueSimulation(index, queueDataset) {
                 requestAnimationFrame(animateQueue);
             } else {
                 // animate what happened
-                updateQueueUI(queueChangesPerTick[tickIndex], serviceTimes);
+                updateQueueUI(queueChangesPerTick[tickIndex]);
 
                 // update the chart in batches
                 updateChart(queueChangesPerTick[tickIndex].tickTime, queueEvents);
