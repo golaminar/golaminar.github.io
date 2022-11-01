@@ -298,6 +298,7 @@ const queueLengthsChartConfig = {
             },
             line: {
                 stepped: true,
+                borderWidth: 2,
             },
         }
     }
