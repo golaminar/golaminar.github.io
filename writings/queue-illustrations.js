@@ -33,7 +33,7 @@ function indexedColor(index) {
     return colors[index % colors.length];
 }
 
-function queueSimulation(index) {
+function queueSimulation(index, queueDataset) {
 
     const primarySimulation = index === 0;
 
@@ -260,6 +260,22 @@ function queueSimulation(index) {
         }
     }
 
+    function updateChart(tickWindow, queueEvents) {
+        const events = queueEvents.filter((event) => {
+            return event.tickWindow === tickWindow;
+        });
+
+        events.forEach((event) => {
+            const point = {
+                x: event.timestamp,
+                y: event.queueLength,
+            };
+            queueDataset.data.push(point);
+        });
+
+        queueLengthsChart.update();
+    }
+
     // function resetSimulation() {
     //     drainArrivals();
     //     drainServiceTimes();
@@ -288,6 +304,8 @@ function queueSimulation(index) {
 
         const queueChangesPerTick = computeQueueChangesPerTick(cumulativeArrivalTimes, serviceEndTimes, tickDuration);
 
+        const queueEvents = computeQueueEvents(cumulativeArrivalTimes, serviceEndTimes, tickDuration);
+
         let tickIndex = 0;
         let animationStart;
         let elapsedTime;
@@ -310,6 +328,9 @@ function queueSimulation(index) {
             } else {
                 // animate what happened
                 updateQueueUI(queueChangesPerTick[tickIndex], arrivalTimes, serviceTimes);
+
+                // update the chart in batches
+                updateChart(queueChangesPerTick[tickIndex].tickTime, queueEvents);
 
                 // advance to the next frame, if it exists
                 tickIndex++;
@@ -340,9 +361,87 @@ function queueSimulation(index) {
     };
 }
 
+function createQueueDataset(index) {
+    return {
+        label: `Queue ${index + 1}`,
+        data: [{ x: 0, y: 0 }],
+        backgroundColor: indexedColor(index * 2),
+        borderColor: indexedColor(index * 2),
+        showLine: true,
+    };
+}
+
+const queueLengthsDatasets = [];
+
+const queueLengthsChartConfig = {
+    type: 'scatter',
+    data: {
+        datasets: queueLengthsDatasets,
+    },
+    options: {
+        scales: {
+            x: {
+                type: 'linear',
+                suggestedMin: 0,
+                suggestedMax: 10,
+                title: {
+                    display: true,
+                    text: "Elapsed seconds",
+                },
+            },
+            y: {
+                suggestedMin: -5,
+                suggestedMax: 15,
+                title: {
+                    display: true,
+                    text: "Queue length",
+                },
+                grid: {
+                    color: function (context) {
+                        if (context.tick.value === 0) {
+                            return '#f72585ff';
+                        } else {
+                            return 'rgb(201, 203, 207)';
+                        }
+                    },
+                    borderDash: function (context) {
+                        if (context.tick.value === 0) {
+                            return [5, 5];
+                        } else {
+                            return [0];
+                        }
+                    },
+                },
+            },
+        },
+        animation: false,
+        plugins: {
+            legend: {
+                display: true, // SET TO FALSE?
+            },
+        },
+        elements: {
+            point: {
+                pointRadius: 0,
+            },
+            line: {
+                stepped: true,
+            },
+        }
+    }
+};
+
+const queueLengthsChart = new Chart(
+    document.getElementById('queue-lengths-graph-canvas'),
+    queueLengthsChartConfig
+);
+
 const queueSimulations = [];
 const numSimulations = 5;
 
 for (let simIndex = 0; simIndex < numSimulations; simIndex++) {
-    queueSimulations.push(queueSimulation(simIndex));
+    const queueDataset = createQueueDataset(simIndex);
+    queueLengthsDatasets.push(queueDataset);
+    queueLengthsChart.update();
+    queueSimulations.push(queueSimulation(simIndex, queueDataset));
 }

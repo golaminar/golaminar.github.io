@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
     <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
     <link rel="stylesheet" href="queue-illustrations.css">
 </head>
 <body class="writing">
@@ -73,7 +74,7 @@
             <div class="queue-simulation col">
                 <table class="queue-status">
                     <tr>
-                        <th>People<br>in queue:</th>
+                        <th>Queue<br>length:</th>
                         <td class="number"><span class="queue-length">0</span></td>
                     </tr>
                 </table>
@@ -84,6 +85,8 @@
         </template>
 
         </div>
+
+        <canvas id="queue-lengths-graph-canvas"></canvas>
 
         <script src="calculated-intervals.js"></script>
         <script src="queue-illustrations.js"></script>
