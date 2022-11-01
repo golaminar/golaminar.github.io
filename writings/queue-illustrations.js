@@ -144,7 +144,7 @@ function queueSimulation(index) {
         }
     };
 
-    arrivalsObservable.addObserver(arrivalAverageDisplay);
+//    arrivalsObservable.addObserver(arrivalAverageDisplay);
 
     const totalArrivalsDisplay = {
         newArrival: function (arrivals) {
@@ -153,7 +153,7 @@ function queueSimulation(index) {
         }
     };
 
-    arrivalsObservable.addObserver(totalArrivalsDisplay);
+//    arrivalsObservable.addObserver(totalArrivalsDisplay);
 
     const enqueueArrival = {
         newArrival: function (arrivals) {
@@ -170,7 +170,7 @@ function queueSimulation(index) {
         }
     };
 
-    serviceTimesObservable.addObserver(serviceTimeAverageDisplay);
+//    serviceTimesObservable.addObserver(serviceTimeAverageDisplay);
 
     const serviceTimesList = {
         newServiceTime: function (serviceTimes) {
@@ -191,7 +191,7 @@ function queueSimulation(index) {
         }
     };
 
-    serviceTimesObservable.addObserver(totalServedDisplay);
+//    serviceTimesObservable.addObserver(totalServedDisplay);
 
     const queueList = {
         newArrival: function (queuer) {
