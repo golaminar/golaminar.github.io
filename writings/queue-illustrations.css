@@ -17,7 +17,7 @@ figcaption {
 }
 
 .queue > * {
-    float: right;
+    float: left;
     width: 3em;
     height: 3em;
     border-radius: 100%;
