@@ -211,14 +211,14 @@ function queueSimulation(index) {
 
     const displayQueueLength = {
         queueChanged: function (queue) {
-            const expectedServiceTime = parseInt(document.querySelector("[name=expected-service-time]").value);
-            const waitTime = queue.length * expectedServiceTime;
+            // const expectedServiceTime = parseInt(document.querySelector("[name=expected-service-time]").value);
+            // const waitTime = queue.length * expectedServiceTime;
 
             d3.select(parentElem).select(".queue-length")
                 .text(() => { return queue.length; });
 
-            d3.select(parentElem).select(".expected-wait-time")
-                .text(() => { return (waitTime / 60).toFixed(2); /*minutes*/ });
+            // d3.select(parentElem).select(".expected-wait-time")
+            //     .text(() => { return (waitTime / 60).toFixed(2); /*minutes*/ });
         }
     };
 
