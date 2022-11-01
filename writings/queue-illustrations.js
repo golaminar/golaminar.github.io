@@ -41,21 +41,6 @@ function queueSimulation(index, queueDataset) {
     const parentElem = document.getElementById("queue-simulations")
         .appendChild(template.content.firstElementChild.cloneNode(true));
 
-    const arrivalsObservable = {
-        observers: [],
-        addObserver: function (observer) {
-            this.observers.push(observer);
-        },
-        notifyObservers: function () {
-            this.observers.forEach(observer => {
-                observer.newArrival();
-            });
-        },
-        addArrival: function () {
-            this.notifyObservers();
-        },
-    };
-
     const queueObservable = {
         observers: [],
         queue: [],
@@ -100,14 +85,6 @@ function queueSimulation(index, queueDataset) {
         },
     };
 
-    const enqueueArrival = {
-        newArrival: function () {
-            queueObservable.addQueuer();
-        }
-    }
-
-    arrivalsObservable.addObserver(enqueueArrival);
-
     const queueList = {
         newArrival: function (queuer) {
             d3.select(parentElem).select(".queue")
@@ -137,7 +114,7 @@ function queueSimulation(index, queueDataset) {
 
     function addQueuers(arrivals) {
         while (arrivals > 0) {
-            arrivalsObservable.addArrival();
+            queueObservable.addQueuer();
             arrivals--;
         }
     }
