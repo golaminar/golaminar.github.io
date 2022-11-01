@@ -123,3 +123,42 @@ function computeQueueChangesPerTick(cumulativeArrivalTimes, serviceEndTimes, tic
 
     return queueChangesPerTick;
 }
+
+function computeQueueEvents(cumulativeArrivalTimes, serviceEndTimes, tickDuration) {
+    const events = [];
+
+    cumulativeArrivalTimes.forEach(time => {
+        const event = {
+            timestamp: time,
+            type: "arrival",
+            tickWindow: Math.ceil(time / tickDuration) * tickDuration,
+        }
+        events.push(event);
+    });
+
+    serviceEndTimes.forEach(time => {
+        const event = {
+            timestamp: time,
+            type: "service",
+            tickWindow: Math.ceil(time / tickDuration) * tickDuration,
+        }
+        events.push(event);
+    });
+
+    events.sort((a, b) => {
+        if (a.timestamp === b.timestamp) {
+            // order service times after arrival times
+            return a.type === "service" ? 1 : -1;
+        } else {
+            // put the events in chronological order
+            return a.timestamp > b.timestamp ? 1 : -1;
+        }
+    });
+
+    let queueLength = 0;
+
+    return events.map((event) => {
+        event.queueLength = event.type === "arrival" ? ++queueLength : --queueLength;
+        return event;
+    });
+}

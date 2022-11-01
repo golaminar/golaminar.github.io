@@ -52,3 +52,11 @@ let d3 = {
         return this;
     },
 };
+
+let Chart = function () {
+    return {
+        update: function () {
+            return this;
+        },
+    };
+}

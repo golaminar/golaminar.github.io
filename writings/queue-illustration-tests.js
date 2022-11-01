@@ -65,3 +65,32 @@ console.log("These are the tests:\n-----------------");
     console.log("arrivalsObservable.arrivals does not grow when there are no arrivals", qS.arrivalsObservable.arrivals.length === arrivals);
     console.log("serviceTimesObservable.serviceTimes does not grow when there are none served", qS.serviceTimesObservable.serviceTimes.length === served);
 })();
+
+(function () {
+    const tickDuration = 10;
+
+    const arrivalTimes = [10, 11, 15, 8, 6, 14];
+    const serviceTimes = [11, 8, 16, 20, 12, 5];
+
+    const expectedQueueEvents = [
+        { timestamp: 10, type: 'arrival', tickWindow: 10, queueLength: 1 },
+        { timestamp: 21, type: 'arrival', tickWindow: 30, queueLength: 2 },
+        { timestamp: 21, type: 'service', tickWindow: 30, queueLength: 1 },
+        { timestamp: 29, type: 'service', tickWindow: 30, queueLength: 0 },
+        { timestamp: 36, type: 'arrival', tickWindow: 40, queueLength: 1 },
+        { timestamp: 44, type: 'arrival', tickWindow: 50, queueLength: 2 },
+        { timestamp: 50, type: 'arrival', tickWindow: 50, queueLength: 3 },
+        { timestamp: 52, type: 'service', tickWindow: 60, queueLength: 2 },
+        { timestamp: 64, type: 'arrival', tickWindow: 70, queueLength: 3 },
+        { timestamp: 72, type: 'service', tickWindow: 80, queueLength: 2 },
+        { timestamp: 84, type: 'service', tickWindow: 90, queueLength: 1 },
+        { timestamp: 89, type: 'service', tickWindow: 90, queueLength: 0 },
+    ];
+
+    const cumulativeArrivalTimes = computeCumulativeArrivalTimes(arrivalTimes);
+    const serviceEndTimes = computeServiceEndTimes(serviceTimes, cumulativeArrivalTimes);
+
+    const queueEvents = computeQueueEvents(cumulativeArrivalTimes, serviceEndTimes, tickDuration);
+
+    console.log("ordered queue events are properly computed", isDeepEqual(queueEvents, expectedQueueEvents));
+})();
