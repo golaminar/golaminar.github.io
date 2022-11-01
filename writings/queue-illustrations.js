@@ -125,36 +125,6 @@ function queueSimulation(index, queueDataset) {
         },
     };
 
-    const arrivalTimesList = {
-        newArrival: function (arrivals) {
-            d3.select(parentElem).select(".arrival-time-intervals")
-                .selectAll("li")
-                .data(arrivals)
-                .enter().append("li")
-                .text(d => { return Math.round(d); });
-        }
-    };
-
-    // arrivalsObservable.addObserver(arrivalTimesList);
-
-    const arrivalAverageDisplay = {
-        newArrival: function (arrivals) {
-            d3.select(parentElem).select(".avg-arrival-time-interval")
-                .text(() => { return d3.mean(arrivals).toFixed(2); });
-        }
-    };
-
-//    arrivalsObservable.addObserver(arrivalAverageDisplay);
-
-    const totalArrivalsDisplay = {
-        newArrival: function (arrivals) {
-            d3.select(parentElem).select(".total-arrivals")
-                .text(() => { return arrivals.length; });
-        }
-    };
-
-//    arrivalsObservable.addObserver(totalArrivalsDisplay);
-
     const enqueueArrival = {
         newArrival: function (arrivals) {
             queueObservable.addQueuer();
@@ -162,36 +132,6 @@ function queueSimulation(index, queueDataset) {
     }
 
     arrivalsObservable.addObserver(enqueueArrival);
-
-    const serviceTimeAverageDisplay = {
-        newServiceTime: function (serviceTimes) {
-            d3.select(parentElem).select(".avg-service-time")
-                .text(() => { return d3.mean(serviceTimes).toFixed(2); });
-        }
-    };
-
-//    serviceTimesObservable.addObserver(serviceTimeAverageDisplay);
-
-    const serviceTimesList = {
-        newServiceTime: function (serviceTimes) {
-            d3.select(parentElem).select(".service-times")
-                .selectAll("li")
-                .data(serviceTimes)
-                .enter().append("li")
-                .text(d => { return Math.round(d); });
-        }
-    };
-
-    // serviceTimesObservable.addObserver(serviceTimesList);
-
-    const totalServedDisplay = {
-        newServiceTime: function (served) {
-            d3.select(parentElem).select(".total-served")
-                .text(() => { return served.length; });
-        }
-    };
-
-//    serviceTimesObservable.addObserver(totalServedDisplay);
 
     const queueList = {
         newArrival: function (queuer) {
@@ -211,14 +151,8 @@ function queueSimulation(index, queueDataset) {
 
     const displayQueueLength = {
         queueChanged: function (queue) {
-            // const expectedServiceTime = parseInt(document.querySelector("[name=expected-service-time]").value);
-            // const waitTime = queue.length * expectedServiceTime;
-
             d3.select(parentElem).select(".queue-length")
                 .text(() => { return queue.length; });
-
-            // d3.select(parentElem).select(".expected-wait-time")
-            //     .text(() => { return (waitTime / 60).toFixed(2); /*minutes*/ });
         }
     };
 
