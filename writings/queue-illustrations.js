@@ -248,21 +248,17 @@ function queueSimulation(simIndex, queueDataset) {
 
     function diableStartButton(startButton) {
         startButton.innerText = "Running …";
-        startButton.removeEventListener("click", playbackQueueBahaviour);
         startButton.disabled = true;
     }
 
     function reengageStartButton(startButton) {
         startButton.innerText = "Run again";
-        startButton.addEventListener("click", playbackQueueBahaviour);
         startButton.disabled = false;
     }
 
-    function playbackQueueBahaviour() {
-        const startButton = document.querySelector("#figure-MM1-queue .playback-queue-behaviour");
-
+    function playbackQueueBahaviour(event) {
+        const startButton = event.srcElement;
         diableStartButton(startButton);
-
         resetSimulation();
 
         const expectedArrivalInterval = parseInt(document.querySelector("[name=expected-arrival-time-interval]").value);
