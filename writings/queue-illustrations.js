@@ -221,6 +221,17 @@ function queueSimulation(simIndex, queueDataset) {
         queueLengthsChart.update();
     }
 
+    function updateWaitTime(tickWindow, queueEvents) {
+        const waitTimes = queueEvents.filter((event) => {
+            return event.tickWindow <= tickWindow;
+        }).map(event => {
+            return event.waitTime;
+        });
+
+        d3.select(parentElem).select(".avg-wait-time")
+            .text(Math.round(d3.mean(waitTimes)));
+    }
+
     // function resetSimulation() {
     //     drainArrivals();
     //     drainServiceTimes();
@@ -250,6 +261,8 @@ function queueSimulation(simIndex, queueDataset) {
 
         const queueEvents = computeQueueEvents(cumulativeArrivalTimes, serviceEndTimes, tickDuration);
 
+        const waitTimes = computeWaitTimes(cumulativeArrivalTimes, serviceEndTimes, serviceTimes, tickDuration);
+
         let tickIndex = 0;
         let animationStart;
         let elapsedTime;
@@ -275,6 +288,9 @@ function queueSimulation(simIndex, queueDataset) {
 
                 // update the chart in batches
                 updateChart(queueChangesPerTick[tickIndex].tickTime, queueEvents);
+
+                // update the average wait time display
+                updateWaitTime(queueChangesPerTick[tickIndex].tickTime, waitTimes);
 
                 // advance to the next frame, if it exists
                 tickIndex++;

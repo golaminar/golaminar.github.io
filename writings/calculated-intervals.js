@@ -162,3 +162,17 @@ function computeQueueEvents(cumulativeArrivalTimes, serviceEndTimes, tickDuratio
         return event;
     });
 }
+
+function computeWaitTimes(cumulativeArrivalTimes, serviceEndTimes, serviceTimes, tickDuration) {
+    return serviceEndTimes.map((serviceEndTime, index) => {
+        const arrivalTime = cumulativeArrivalTimes[index];
+        const serviceTime = serviceTimes[index];
+        const waitTime = serviceEndTime - serviceTime - arrivalTime;
+
+        return {
+            timestamp: serviceEndTime,
+            tickWindow: Math.ceil(serviceEndTime / tickDuration) * tickDuration,
+            waitTime: waitTime,
+        };
+    });
+}

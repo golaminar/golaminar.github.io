@@ -68,10 +68,22 @@ console.log("These are the tests:\n-----------------");
         { timestamp: 89, type: 'service', tickWindow: 90, queueLength: 0 },
     ];
 
+    const expectedWaitTimes = [
+        { timestamp: 21, tickWindow: 30, waitTime: 0 },
+        { timestamp: 29, tickWindow: 30, waitTime: 0 },
+        { timestamp: 52, tickWindow: 60, waitTime: 0 },
+        { timestamp: 72, tickWindow: 80, waitTime: 8 },
+        { timestamp: 84, tickWindow: 90, waitTime: 22 },
+        { timestamp: 89, tickWindow: 90, waitTime: 20 },
+    ];
+
     const cumulativeArrivalTimes = computeCumulativeArrivalTimes(arrivalTimes);
     const serviceEndTimes = computeServiceEndTimes(serviceTimes, cumulativeArrivalTimes);
 
     const queueEvents = computeQueueEvents(cumulativeArrivalTimes, serviceEndTimes, tickDuration);
-
     console.log("ordered queue events are properly computed", isDeepEqual(queueEvents, expectedQueueEvents));
+
+    const waitTimes = computeWaitTimes(cumulativeArrivalTimes, serviceEndTimes, serviceTimes, tickDuration);
+    console.log("wait times are properly computed", isDeepEqual(waitTimes, expectedWaitTimes));
+
 })();
