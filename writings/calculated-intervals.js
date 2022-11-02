@@ -124,7 +124,7 @@ function computeQueueChangesPerTick(cumulativeArrivalTimes, serviceEndTimes, tic
     return queueChangesPerTick;
 }
 
-function computeQueueEvents(cumulativeArrivalTimes, serviceEndTimes, tickDuration) {
+function computeQueueEvents(cumulativeArrivalTimes, serviceEndTimes, serviceTimes, tickDuration) {
     const events = [];
 
     cumulativeArrivalTimes.forEach(time => {
@@ -136,11 +136,17 @@ function computeQueueEvents(cumulativeArrivalTimes, serviceEndTimes, tickDuratio
         events.push(event);
     });
 
-    serviceEndTimes.forEach(time => {
+    serviceEndTimes.forEach((time, index) => {
+        // TO DO computing wait times with computing serviceEndTimes?
+        const arrivalTime = cumulativeArrivalTimes[index];
+        const serviceTime = serviceTimes[index];
+        const waitTime = time - serviceTime - arrivalTime;
+
         const event = {
             timestamp: time,
             type: "service",
             tickWindow: Math.ceil(time / tickDuration) * tickDuration,
+            waitTime: waitTime,
         }
         events.push(event);
     });
@@ -160,21 +166,5 @@ function computeQueueEvents(cumulativeArrivalTimes, serviceEndTimes, tickDuratio
     return events.map((event) => {
         event.queueLength = event.type === "arrival" ? ++queueLength : --queueLength;
         return event;
-    });
-}
-
-// TO DO computing wait times with computing serviceEndTimes?
-
-function computeWaitTimes(cumulativeArrivalTimes, serviceEndTimes, serviceTimes, tickDuration) {
-    return serviceEndTimes.map((serviceEndTime, index) => {
-        const arrivalTime = cumulativeArrivalTimes[index];
-        const serviceTime = serviceTimes[index];
-        const waitTime = serviceEndTime - serviceTime - arrivalTime;
-
-        return {
-            timestamp: serviceEndTime,
-            tickWindow: Math.ceil(serviceEndTime / tickDuration) * tickDuration,
-            waitTime: waitTime,
-        };
     });
 }

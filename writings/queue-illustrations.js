@@ -220,7 +220,7 @@ function queueSimulation(simIndex, queueDataset) {
 
     function updateWaitTime(tickWindow, queueEvents) {
         const waitTimes = queueEvents.filter((event) => {
-            return event.tickWindow <= tickWindow;
+            return !(event.waitTime === undefined) && event.tickWindow <= tickWindow;
         }).map(event => {
             return event.waitTime;
         });
@@ -278,9 +278,7 @@ function queueSimulation(simIndex, queueDataset) {
 
         const queueChangesPerTick = computeQueueChangesPerTick(cumulativeArrivalTimes, serviceEndTimes, tickDuration);
 
-        const queueEvents = computeQueueEvents(cumulativeArrivalTimes, serviceEndTimes, tickDuration);
-
-        const waitTimes = computeWaitTimes(cumulativeArrivalTimes, serviceEndTimes, serviceTimes, tickDuration);
+        const queueEvents = computeQueueEvents(cumulativeArrivalTimes, serviceEndTimes, serviceTimes, tickDuration);
 
         let tickIndex = 0;
         let animationStart;
@@ -311,7 +309,7 @@ function queueSimulation(simIndex, queueDataset) {
                 updateChart(tickTime, queueEvents);
 
                 // update the average wait time display
-                updateWaitTime(tickTime, waitTimes);
+                updateWaitTime(tickTime, queueEvents);
 
                 // update the queue length once per tick
                 updateQueueLengthDisplay(tickTime, queueEvents);

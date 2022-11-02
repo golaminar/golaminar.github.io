@@ -56,34 +56,21 @@ console.log("These are the tests:\n-----------------");
     const expectedQueueEvents = [
         { timestamp: 10, type: 'arrival', tickWindow: 10, queueLength: 1 },
         { timestamp: 21, type: 'arrival', tickWindow: 30, queueLength: 2 },
-        { timestamp: 21, type: 'service', tickWindow: 30, queueLength: 1 },
-        { timestamp: 29, type: 'service', tickWindow: 30, queueLength: 0 },
+        { timestamp: 21, type: 'service', tickWindow: 30, queueLength: 1, waitTime: 0 },
+        { timestamp: 29, type: 'service', tickWindow: 30, queueLength: 0, waitTime: 0 },
         { timestamp: 36, type: 'arrival', tickWindow: 40, queueLength: 1 },
         { timestamp: 44, type: 'arrival', tickWindow: 50, queueLength: 2 },
         { timestamp: 50, type: 'arrival', tickWindow: 50, queueLength: 3 },
-        { timestamp: 52, type: 'service', tickWindow: 60, queueLength: 2 },
+        { timestamp: 52, type: 'service', tickWindow: 60, queueLength: 2, waitTime: 0 },
         { timestamp: 64, type: 'arrival', tickWindow: 70, queueLength: 3 },
-        { timestamp: 72, type: 'service', tickWindow: 80, queueLength: 2 },
-        { timestamp: 84, type: 'service', tickWindow: 90, queueLength: 1 },
-        { timestamp: 89, type: 'service', tickWindow: 90, queueLength: 0 },
-    ];
-
-    const expectedWaitTimes = [
-        { timestamp: 21, tickWindow: 30, waitTime: 0 },
-        { timestamp: 29, tickWindow: 30, waitTime: 0 },
-        { timestamp: 52, tickWindow: 60, waitTime: 0 },
-        { timestamp: 72, tickWindow: 80, waitTime: 8 },
-        { timestamp: 84, tickWindow: 90, waitTime: 22 },
-        { timestamp: 89, tickWindow: 90, waitTime: 20 },
+        { timestamp: 72, type: 'service', tickWindow: 80, queueLength: 2, waitTime: 8 },
+        { timestamp: 84, type: 'service', tickWindow: 90, queueLength: 1, waitTime: 22 },
+        { timestamp: 89, type: 'service', tickWindow: 90, queueLength: 0, waitTime: 20 },
     ];
 
     const cumulativeArrivalTimes = computeCumulativeArrivalTimes(arrivalTimes);
     const serviceEndTimes = computeServiceEndTimes(serviceTimes, cumulativeArrivalTimes);
 
-    const queueEvents = computeQueueEvents(cumulativeArrivalTimes, serviceEndTimes, tickDuration);
+    const queueEvents = computeQueueEvents(cumulativeArrivalTimes, serviceEndTimes, serviceTimes, tickDuration);
     console.log("ordered queue events are properly computed", isDeepEqual(queueEvents, expectedQueueEvents));
-
-    const waitTimes = computeWaitTimes(cumulativeArrivalTimes, serviceEndTimes, serviceTimes, tickDuration);
-    console.log("wait times are properly computed", isDeepEqual(waitTimes, expectedWaitTimes));
-
 })();
