@@ -332,7 +332,7 @@ const queueLengthsChartConfig = {
         datasets: queueLengthsDatasets,
     },
     options: {
-        aspectRatio: 1|1,
+        aspectRatio: 1,
         scales: {
             x: {
                 type: 'linear',
