@@ -145,6 +145,12 @@ function queueSimulation(simIndex, queueDataset) {
             const queuer = this.queue.shift();
             this.notifyObservers("newServiceTime", queuer);
         },
+        reset: function () {
+            this.count = 0;
+            while (this.queue.length) {
+                this.removeQueuer();
+            }
+        }
     };
 
     const queueList = {
@@ -223,11 +229,22 @@ function queueSimulation(simIndex, queueDataset) {
             .text(Math.round(d3.mean(waitTimes)));
     }
 
-    // function resetSimulation() {
-    //     drainArrivals();
-    //     drainServiceTimes();
-    //     drainQueue();
-    // }
+    function resetChart() {
+        queueDataset.data.splice(0, queueDataset.data.length);
+        queueDataset.data.push({ x: 0, y: 0 });
+        queueLengthsChart.update();
+    }
+
+    function resetSimulation() {
+        queueObservable.reset();
+        resetChart();
+
+        d3.select(parentElem).select(".queue-length")
+            .text(() => { return "0"; });
+
+        d3.select(parentElem).select(".avg-wait-time")
+            .text("–");
+    }
 
     function diableStartButton(startButton) {
         startButton.innerText = "Running …";
@@ -235,10 +252,18 @@ function queueSimulation(simIndex, queueDataset) {
         startButton.disabled = true;
     }
 
+    function reengageStartButton(startButton) {
+        startButton.innerText = "Run again";
+        startButton.addEventListener("click", playbackQueueBahaviour);
+        startButton.disabled = false;
+    }
+
     function playbackQueueBahaviour() {
         const startButton = document.querySelector("#figure-MM1-queue .playback-queue-behaviour");
 
         diableStartButton(startButton);
+
+        resetSimulation();
 
         const expectedArrivalInterval = parseInt(document.querySelector("[name=expected-arrival-time-interval]").value);
         const expectedServiceTime = parseInt(document.querySelector("[name=expected-service-time]").value);
@@ -304,6 +329,7 @@ function queueSimulation(simIndex, queueDataset) {
                     // announce the end of the animation
                     console.log("ended at:", timestamp);
                     console.log("unscaled elapsed time", timestamp - animationStart);
+                    reengageStartButton(startButton);
                 }
             }
         }
