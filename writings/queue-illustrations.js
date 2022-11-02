@@ -321,10 +321,16 @@ const queueLengthsChartConfig = {
             x: {
                 type: 'linear',
                 suggestedMin: 0,
-                suggestedMax: 500,
+                suggestedMax: 1,
                 title: {
                     display: true,
-                    text: "Elapsed seconds",
+                    text: "Elapsed time",
+                },
+                ticks: {
+                    display: false,
+                },
+                grid: {
+                    display: false,
                 },
             },
             y: {
