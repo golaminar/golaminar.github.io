@@ -236,10 +236,9 @@ function queueSimulation(simIndex, queueDataset) {
 
         // Could optimal illustrative values be computed,
         // such as from the above parameters?
-        const tickDuration = 360;
+        const tickDuration = expectedArrivalInterval * 3;
         const numberOfTicks = 240;
-
-        const scalingFactor = parseInt(document.querySelector("[name=play-speed-factor]").value);
+        const scalingFactor = expectedArrivalInterval / 12;
 
         const arrivalTimes = generateArrivalTimes(expectedArrivalInterval, tickDuration, numberOfTicks);
         const serviceTimes = generateServiceTimes(expectedServiceTime, arrivalTimes.length);
