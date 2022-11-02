@@ -259,6 +259,8 @@ function queueSimulation(simIndex, queueDataset) {
         let elapsedTime;
 
         function animateQueue(timestamp) {
+            const tickTime = queueChangesPerTick[tickIndex].tickTime;
+
             if (animationStart === undefined) {
                 // anchor the start of the animation in time
                 animationStart = timestamp;
@@ -270,7 +272,7 @@ function queueSimulation(simIndex, queueDataset) {
             // compute how much time has elapsed
             elapsedTime = (timestamp - animationStart) * scalingFactor;
 
-            if (elapsedTime < queueChangesPerTick[tickIndex].tickTime) {
+            if (elapsedTime < tickTime) {
                 // keep on waiting
                 requestAnimationFrame(animateQueue);
             } else {
@@ -278,13 +280,13 @@ function queueSimulation(simIndex, queueDataset) {
                 updateQueueUI(queueChangesPerTick[tickIndex]);
 
                 // update the chart in batches
-                updateChart(queueChangesPerTick[tickIndex].tickTime, queueEvents);
+                updateChart(tickTime, queueEvents);
 
                 // update the average wait time display
-                updateWaitTime(queueChangesPerTick[tickIndex].tickTime, waitTimes);
+                updateWaitTime(tickTime, waitTimes);
 
-                // update the queue length
-                updateQueueLengthDisplay(queueChangesPerTick[tickIndex].tickTime, queueEvents)
+                // update the queue length once per tick
+                updateQueueLengthDisplay(tickTime, queueEvents);
 
                 // advance to the next frame, if it exists
                 tickIndex++;
