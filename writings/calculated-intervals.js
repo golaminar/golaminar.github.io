@@ -163,6 +163,8 @@ function computeQueueEvents(cumulativeArrivalTimes, serviceEndTimes, tickDuratio
     });
 }
 
+// TO DO computing wait times with computing serviceEndTimes?
+
 function computeWaitTimes(cumulativeArrivalTimes, serviceEndTimes, serviceTimes, tickDuration) {
     return serviceEndTimes.map((serviceEndTime, index) => {
         const arrivalTime = cumulativeArrivalTimes[index];
