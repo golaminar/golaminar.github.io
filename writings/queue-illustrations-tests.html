@@ -21,59 +21,63 @@
 
         <figcaption>Expected queue length interactive illustration</figcaption>
 
+        <div class="simulation-controls">
+            <button class="playback-queue-behaviour">Start</button>
+        </div>
+
+        <table class="simulation-settings">
+            <tr>
+                <td>
+                    <label for="expected-arrival-time-interval">Expected interval between arrivals</label>
+                </td>
+                <td class="number">
+                    <input name="expected-arrival-time-interval" value="121" type="number">
+                </td>
+                <td class="unit">
+                    seconds
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="expected-service-time">Expected service time</label>
+                </td>
+                <td class="number">
+                    <input name="expected-service-time" value="120" type="number">
+                </td>
+                <td class="unit">
+                    seconds
+                </td>
+            </tr>
+        </table>
+
         <div class="cols">
             <div class="col">
-                <div class="simulation-controls">
-                    <button class="playback-queue-behaviour">Start</button>
+
+                <div id="queue-simulations" class="cols">
+
+                    <template id="queue-simulation-template">
+                        <div class="queue-simulation col">
+                            <table class="queue-status">
+                                <tr>
+                                    <th>Queue<br>length:</th>
+                                    <td><span class="queue-length">0</span></td>
+                                    <td class="queue-container">
+                                        <ol class="queue"></ol>
+                                    </td>
+                                </tr>
+                            </table>
+
+                        </div>
+                    </template>
+
                 </div>
+
             </div>
             <div class="col">
-                <table class="simulation-settings">
-                    <tr>
-                        <th>
-                            <label for="expected-arrival-time-interval">Expected interval between arrivals</label>
-                        </th>
-                        <td class="number">
-                            <input name="expected-arrival-time-interval" value="121" type="number">
-                        </td>
-                        <td class="unit">
-                            seconds
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            <label for="expected-service-time">Expected service time</label>
-                        </th>
-                        <td class="number">
-                            <input name="expected-service-time" value="120" type="number">
-                        </td>
-                        <td class="unit">
-                            seconds
-                        </td>
-                    </tr>
-                </table>
+                <canvas id="queue-lengths-graph-canvas"></canvas>
             </div>
         </div>
 
-        <div id="queue-simulations" class="cols">
-
-        <template id="queue-simulation-template">
-            <div class="queue-simulation col">
-                <table class="queue-status">
-                    <tr>
-                        <th>Queue<br>length:</th>
-                        <td class="number"><span class="queue-length">0</span></td>
-                    </tr>
-                </table>
-
-                <ol class="queue"></ol>
-
-            </div>
-        </template>
-
-        </div>
-
-        <canvas id="queue-lengths-graph-canvas"></canvas>
 
         <script src="calculated-intervals.js"></script>
         <script src="queue-illustrations.js"></script>
