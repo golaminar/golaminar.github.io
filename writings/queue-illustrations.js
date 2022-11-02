@@ -229,9 +229,16 @@ function queueSimulation(simIndex, queueDataset) {
     //     drainQueue();
     // }
 
+    function diableStartButton(startButton) {
+        startButton.innerText = "Running …";
+        startButton.removeEventListener("click", playbackQueueBahaviour);
+        startButton.disabled = true;
+    }
+
     function playbackQueueBahaviour() {
-        document.querySelector("#figure-MM1-queue .playback-queue-behaviour").removeEventListener("click", playbackQueueBahaviour);
-        document.querySelector("#figure-MM1-queue .playback-queue-behaviour").disabled = true;
+        const startButton = document.querySelector("#figure-MM1-queue .playback-queue-behaviour");
+
+        diableStartButton(startButton);
 
         const expectedArrivalInterval = parseInt(document.querySelector("[name=expected-arrival-time-interval]").value);
         const expectedServiceTime = parseInt(document.querySelector("[name=expected-service-time]").value);
