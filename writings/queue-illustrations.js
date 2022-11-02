@@ -119,21 +119,16 @@ function queueSimulation(simIndex, queueDataset) {
         observers: [],
         queue: [],
         count: 0,
-        beingServed: false,
         addObserver: function (observer) {
             this.observers.push(observer);
         },
         notifyObservers: function (change, queuer) {
             this.observers.forEach(observer => {
-                if (observer.queueChanged) {
-                    observer.queueChanged(this.queue);
-                } else {
-                    if (change === "newArrival" && observer.newArrival) {
-                        observer.newArrival(queuer);
-                    }
-                    if (change === "newServiceTime" && observer.newServiceTime) {
-                        observer.newServiceTime(queuer);
-                    }
+                if (change === "newArrival" && observer.newArrival) {
+                    observer.newArrival(queuer);
+                }
+                if (change === "newServiceTime" && observer.newServiceTime) {
+                    observer.newServiceTime(queuer);
                 }
             });
         },
@@ -148,14 +143,7 @@ function queueSimulation(simIndex, queueDataset) {
         },
         removeQueuer: function () {
             const queuer = this.queue.shift();
-            this.beingServed = false;
             this.notifyObservers("newServiceTime", queuer);
-        },
-        occupyServer: function () {
-            this.beingServed = true;
-        },
-        readyToServe: function () {
-            return !!this.queue.length && this.beingServed === false;
         },
     };
 
