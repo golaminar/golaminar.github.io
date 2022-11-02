@@ -175,15 +175,6 @@ function queueSimulation(simIndex, queueDataset) {
 
     queueObservable.addObserver(queueList);
 
-    const displayQueueLength = {
-        queueChanged: function (queue) {
-            d3.select(parentElem).select(".queue-length")
-                .text(() => { return queue.length; });
-        }
-    };
-
-    queueObservable.addObserver(displayQueueLength);
-
     ///////////////////////
 
     function addQueuers(arrivals) {
@@ -219,6 +210,18 @@ function queueSimulation(simIndex, queueDataset) {
         });
 
         queueLengthsChart.update();
+    }
+
+    function updateQueueLengthDisplay(tickWindow, queueEvents) {
+        const queueLength = queueEvents.reduce((queueLength, event) => {
+            if (event.tickWindow <= tickWindow) {
+                queueLength = event.queueLength;
+            }
+            return  queueLength;
+        }, 0);
+
+        d3.select(parentElem).select(".queue-length")
+            .text(() => { return queueLength; });
     }
 
     function updateWaitTime(tickWindow, queueEvents) {
@@ -291,6 +294,9 @@ function queueSimulation(simIndex, queueDataset) {
 
                 // update the average wait time display
                 updateWaitTime(queueChangesPerTick[tickIndex].tickTime, waitTimes);
+
+                // update the queue length
+                updateQueueLengthDisplay(queueChangesPerTick[tickIndex].tickTime, queueEvents)
 
                 // advance to the next frame, if it exists
                 tickIndex++;
