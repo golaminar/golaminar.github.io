@@ -35,7 +35,6 @@ function indexedColor(index) {
 
 function queueSimulation(index, queueDataset) {
 
-    const primarySimulation = index === 0;
 
     const template = document.getElementById("queue-simulation-template");
     const parentElem = document.getElementById("queue-simulations")
@@ -129,17 +128,9 @@ function queueSimulation(index, queueDataset) {
         }
     }
 
-    function displayElapsedTime(tickTime) {
-        d3.select("#elapsed-time")
-            .text(() => { return (tickTime / 60 / 60).toFixed(2); /*hours*/ });
-    }
-
     function updateQueueUI(queueChanges) {
         addQueuers(queueChanges.arrivals);
         serveQueuers(queueChanges.served);
-        if (primarySimulation) {
-            displayElapsedTime(queueChanges.tickTime);
-        }
     }
 
     function updateChart(tickWindow, queueEvents) {
