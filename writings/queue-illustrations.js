@@ -226,7 +226,7 @@ function queueSimulation(simIndex, queueDataset) {
         });
 
         d3.select(parentElem).select(".avg-wait-time")
-            .text(Math.round(d3.mean(waitTimes)));
+            .text(waitTimes.length ? Math.round(d3.mean(waitTimes)) : "–");
     }
 
     function resetChart() {
@@ -238,12 +238,8 @@ function queueSimulation(simIndex, queueDataset) {
     function resetSimulation() {
         queueObservable.reset();
         resetChart();
-
-        d3.select(parentElem).select(".queue-length")
-            .text(() => { return "0"; });
-
-        d3.select(parentElem).select(".avg-wait-time")
-            .text("–");
+        updateQueueLengthDisplay(0, []);
+        updateWaitTime(0, []);
     }
 
     function diableStartButton(startButton) {
