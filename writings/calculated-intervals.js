@@ -86,11 +86,20 @@ function computeServiceEndTimes(serviceTimes, cumulativeArrivalTimes) {
             readyAt + serviceTime :
             cumulativeArrivalTimes[index] + serviceTime;
 
+        // The time that this queuer waited before being served
+        // i.e. how long after they arrived before the server was ready.
+        // The cumulativeArrivalTime at the same index value
+        // is when the person who was served arrived.
+        // Wait time can’t be negative, but the server can be ready
+        // immediately, such that there is no wait.
+        const waitTime = Math.max(readyAt - cumulativeArrivalTimes[index], 0);
+
         accumulator.push({
             "serviceTime": serviceTime,
             "readyAt": readyAt, // Redundant?
             "endsAt": endsAt,
             "queueSizeWhenReady": queueSizeWhenReady,
+            "waitTime": waitTime,
         });
 
         return accumulator;
@@ -128,7 +137,7 @@ function computeQueueChangesPerTick(cumulativeArrivalTimes, serviceEndTimes, tic
     return queueChangesPerTick;
 }
 
-function computeQueueEvents(cumulativeArrivalTimes, serviceEndTimes, serviceTimes, tickDuration) {
+function computeQueueEvents(cumulativeArrivalTimes, serviceBehaviour, tickDuration) {
     const events = [];
 
     cumulativeArrivalTimes.forEach(time => {
@@ -140,17 +149,12 @@ function computeQueueEvents(cumulativeArrivalTimes, serviceEndTimes, serviceTime
         events.push(event);
     });
 
-    serviceEndTimes.forEach((time, index) => {
-        // TO DO computing wait times with computing serviceEndTimes?
-        const arrivalTime = cumulativeArrivalTimes[index];
-        const serviceTime = serviceTimes[index];
-        const waitTime = time - serviceTime - arrivalTime;
-
+    serviceBehaviour.forEach((behaviour) => {
         const event = {
-            timestamp: time,
+            timestamp: behaviour.endsAt,
             type: "service",
-            tickWindow: Math.ceil(time / tickDuration) * tickDuration,
-            waitTime: waitTime,
+            tickWindow: Math.ceil(behaviour.endsAt / tickDuration) * tickDuration,
+            waitTime: behaviour.waitTime,
         }
         events.push(event);
     });

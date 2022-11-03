@@ -68,8 +68,9 @@ console.log("These are the tests:\n-----------------");
     ];
 
     const cumulativeArrivalTimes = computeCumulativeArrivalTimes(arrivalTimes);
-    const { serviceEndTimes } = computeServiceEndTimes(serviceTimes, cumulativeArrivalTimes);
+    const { serviceBehaviour } = computeServiceEndTimes(serviceTimes, cumulativeArrivalTimes);
 
-    const queueEvents = computeQueueEvents(cumulativeArrivalTimes, serviceEndTimes, serviceTimes, tickDuration);
+    const queueEvents = computeQueueEvents(cumulativeArrivalTimes, serviceBehaviour, tickDuration);
+
     console.log("ordered queue events are properly computed", isDeepEqual(queueEvents, expectedQueueEvents));
 })();
