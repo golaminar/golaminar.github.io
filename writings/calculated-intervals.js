@@ -39,7 +39,7 @@ function computeCumulativeArrivalTimes(arrivalTimes) {
     }, []);
 }
 
-function computeServiceEndTimes(serviceTimes, cumulativeArrivalTimes) {
+function computeServiceBehaviour(serviceTimes, cumulativeArrivalTimes) {
     const serviceBehaviour = serviceTimes.reduce((accumulator, serviceTime, index) => {
 
         // endsAt of the previous entry
@@ -105,15 +105,7 @@ function computeServiceEndTimes(serviceTimes, cumulativeArrivalTimes) {
         return accumulator;
     }, []);
 
-    // Note: instead of doing this in two steps, the `reduce` could push endsAt
-    // since the other values are not used in subsequent steps.
-    // It was useful to do this in two steps to be able to compare the
-    // `serviceBehaviour` result to the Google Sheets data
-    return {
-        serviceBehaviour: serviceBehaviour,
-        serviceEndTimes: serviceBehaviour.map(behaviour => { return behaviour.endsAt; }),
-    }
-
+    return serviceBehaviour;
 }
 
 function computeQueueEvents(cumulativeArrivalTimes, serviceBehaviour, tickDuration) {

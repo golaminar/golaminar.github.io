@@ -248,7 +248,7 @@ function queueSimulation(simIndex, queueDataset) {
         const serviceTimes = generateServiceTimes(expectedServiceTime, arrivalTimes.length);
 
         const cumulativeArrivalTimes = computeCumulativeArrivalTimes(arrivalTimes);
-        const { serviceBehaviour } = computeServiceEndTimes(serviceTimes, cumulativeArrivalTimes);
+        const serviceBehaviour = computeServiceBehaviour(serviceTimes, cumulativeArrivalTimes);
 
         const queueEvents = computeQueueEvents(cumulativeArrivalTimes, serviceBehaviour, tickDuration);
 

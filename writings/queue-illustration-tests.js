@@ -8,7 +8,7 @@ console.log("These are the tests:\n-----------------");
     const { arrivalTimes, serviceTimes, expectedServiceBehaviour } = require("./pre-calculated-intervals");
 
     const cumulativeArrivalTimes = computeCumulativeArrivalTimes(arrivalTimes);
-    const { serviceBehaviour } = computeServiceEndTimes(serviceTimes, cumulativeArrivalTimes);
+    const serviceBehaviour = computeServiceBehaviour(serviceTimes, cumulativeArrivalTimes);
 
     console.log("correctly computes service behaviour", isDeepEqual(serviceBehaviour, expectedServiceBehaviour));
 
@@ -36,7 +36,7 @@ console.log("These are the tests:\n-----------------");
     ];
 
     const cumulativeArrivalTimes = computeCumulativeArrivalTimes(arrivalTimes);
-    const { serviceBehaviour } = computeServiceEndTimes(serviceTimes, cumulativeArrivalTimes);
+    const serviceBehaviour = computeServiceBehaviour(serviceTimes, cumulativeArrivalTimes);
 
     const queueEvents = computeQueueEvents(cumulativeArrivalTimes, serviceBehaviour, tickDuration);
 
