@@ -115,7 +115,6 @@ function computeQueueEvents(cumulativeArrivalTimes, serviceBehaviour, tickDurati
         const event = {
             timestamp: time,
             type: "arrival",
-            tickWindow: Math.ceil(time / tickDuration) * tickDuration,
         }
         events.push(event);
     });
@@ -127,7 +126,6 @@ function computeQueueEvents(cumulativeArrivalTimes, serviceBehaviour, tickDurati
         const event = {
             timestamp: behaviour.endsAt,
             type: "service",
-            tickWindow: Math.ceil(behaviour.endsAt / tickDuration) * tickDuration,
             waitTime: behaviour.waitTime,
             avgWaitTime: avgWaitTime,
         }

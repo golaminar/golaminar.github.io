@@ -267,7 +267,8 @@ function queueSimulation(simIndex, queueDataset) {
         let queueEventsThisTick = [];
 
         function animateQueue(timestamp) {
-            const tickTime = (tickIndex + 1) * tickDuration;
+            const tickStart = tickIndex * tickDuration;
+            const tickEnd = tickStart + tickDuration;
 
             if (animationStart === undefined) {
                 // anchor the start of the animation in time
@@ -280,12 +281,12 @@ function queueSimulation(simIndex, queueDataset) {
             // compute how much time has elapsed
             elapsedTime = (timestamp - animationStart) * scalingFactor;
 
-            if (elapsedTime < tickTime) {
+            if (elapsedTime < tickEnd) {
                 // keep on waiting
                 requestAnimationFrame(animateQueue);
             } else {
                 queueEventsThisTick = queueEvents.filter((event) => {
-                    return event.tickWindow === tickTime;
+                    return event.timestamp > tickStart && event.timestamp <= tickEnd;
                 });
 
                 // animate what happened
