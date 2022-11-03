@@ -193,9 +193,17 @@ function queueSimulation(simIndex, queueDataset) {
         queueLengthsChart.update();
     }
 
-    function updateQueueLengthDisplay(queueLength) {
+    function updateQueueLengthDisplay(events) {
+        let queueLength;
+
+        if (events.length === 0) {
+            queueLength = 0;
+        } else {
+            queueLength = events.at(-1).queueLength;
+        }
+
         d3.select(parentElem).select(".queue-length")
-            .text(() => { return queueLength; });
+            .text(queueLength);
     }
 
     function updateWaitTime(events) {
@@ -226,7 +234,7 @@ function queueSimulation(simIndex, queueDataset) {
     function resetSimulation() {
         queueObservable.reset();
         resetChart();
-        updateQueueLengthDisplay(0, []);
+        updateQueueLengthDisplay([]);
         updateWaitTime([]);
     }
 
@@ -299,7 +307,7 @@ function queueSimulation(simIndex, queueDataset) {
                     updateWaitTime(queueEventsThisTick);
 
                     // update the queue length once per tick
-                    updateQueueLengthDisplay(queueEventsThisTick.at(-1).queueLength);
+                    updateQueueLengthDisplay(queueEventsThisTick);
                 }
 
                 // advance to the next frame, if it exists
