@@ -196,26 +196,31 @@ function queueSimulation(simIndex, queueDataset) {
     function updateQueueLengthDisplay(events) {
         let queueLength;
 
-        if (events.length === 0) {
+        if (events === undefined) {
             queueLength = 0;
-        } else {
+        } else if (events.length) {
             queueLength = events.at(-1).queueLength;
         }
 
-        d3.select(parentElem).select(".queue-length")
-            .text(queueLength);
+        if (queueLength !== undefined) {
+            d3.select(parentElem).select(".queue-length")
+                .text(queueLength);
+        }
     }
 
     function updateWaitTime(events) {
-        const serviceEvents = events.filter(event => {
-            return !(event.avgWaitTime === undefined);
-        });
-
         let avgWaitTime;
+        let serviceEvents = [];
 
-        if (events.length === 0) {
-            avgWaitTime = "–";
-        } else if (serviceEvents.length) {
+        if (events === undefined) {
+            avgWaitTime = "—";
+        } else {
+            serviceEvents = events.filter(event => {
+                return !(event.avgWaitTime === undefined);
+            });
+        }
+
+        if (serviceEvents.length) {
             avgWaitTime = Math.round(serviceEvents.at(-1).avgWaitTime);
         }
 
@@ -234,8 +239,8 @@ function queueSimulation(simIndex, queueDataset) {
     function resetSimulation() {
         queueObservable.reset();
         resetChart();
-        updateQueueLengthDisplay([]);
-        updateWaitTime([]);
+        updateQueueLengthDisplay();
+        updateWaitTime();
     }
 
     function diableStartButton(startButton) {
