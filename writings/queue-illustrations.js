@@ -240,10 +240,8 @@ function queueSimulation(simIndex, queueDataset) {
         const expectedArrivalInterval = parseInt(document.querySelector("[name=expected-arrival-time-interval]").value);
         const expectedServiceTime = parseInt(document.querySelector("[name=expected-service-time]").value);
 
-        // Could optimal illustrative values be computed,
-        // such as from the above parameters?
-        const tickDuration = expectedArrivalInterval * 3;
-        const numberOfTicks = 240;
+        const tickDuration = expectedArrivalInterval * 3 * 2;
+        const numberOfTicks = 240 / 2;
         const scalingFactor = expectedArrivalInterval / 12;
 
         const arrivalTimes = generateArrivalTimes(expectedArrivalInterval, tickDuration, numberOfTicks);
@@ -295,7 +293,6 @@ function queueSimulation(simIndex, queueDataset) {
                     // update the queue length once per tick
                     updateQueueLengthDisplay(queueEventsThisTick.at(-1).queueLength);
                 }
-
 
                 // advance to the next frame, if it exists
                 tickIndex++;
