@@ -169,8 +169,6 @@ function queueSimulation(simIndex, queueDataset) {
 
     queueObservable.addObserver(queueList);
 
-    ///////////////////////
-
     const queueLengthDisplay = {
         updateDisplay: function (event) {
             d3.select(parentElem).select(".queue-length")
@@ -290,13 +288,11 @@ function queueSimulation(simIndex, queueDataset) {
                     return event.tickWindow === tickTime;
                 });
 
-                if (queueEventsThisTick.length) {
-                    // animate what happened
-                    updateQueueUI(queueEventsThisTick);
+                // animate what happened
+                updateQueueUI(queueEventsThisTick);
 
-                    // update the chart in batches
-                    updateChart(queueEventsThisTick);
-                }
+                // update the chart in batches
+                updateChart(queueEventsThisTick);
 
                 // advance to the next frame, if it exists
                 tickIndex++;
