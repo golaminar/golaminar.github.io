@@ -100,7 +100,11 @@ function computeServiceEndTimes(serviceTimes, cumulativeArrivalTimes) {
     // since the other values are not used in subsequent steps.
     // It was useful to do this in two steps to be able to compare the
     // `serviceBehaviour` result to the Google Sheets data
-    return serviceBehaviour.map(behaviour => { return behaviour.endsAt; });
+    return {
+        serviceBehaviour: serviceBehaviour,
+        serviceEndTimes: serviceBehaviour.map(behaviour => { return behaviour.endsAt; }),
+    }
+
 }
 
 function numOfTicks(tickDuration, maxArrivalTime) {

@@ -8,13 +8,12 @@ console.log("These are the tests:\n-----------------");
     const { arrivalTimes, serviceTimes, outputFixture } = require("./pre-calculated-intervals");
 
     const cumulativeArrivalTimes = computeCumulativeArrivalTimes(arrivalTimes);
-    const serviceEndTimes = computeServiceEndTimes(serviceTimes, cumulativeArrivalTimes);
+    const { serviceEndTimes } = computeServiceEndTimes(serviceTimes, cumulativeArrivalTimes);
     const queueChangesPerTick = computeQueueChangesPerTick(cumulativeArrivalTimes, serviceEndTimes, 600);
 
     console.log("correctly computes queue changes per tick", isDeepEqual(queueChangesPerTick, outputFixture));
 
 })();
-
 
 (function () {
     const expectedArrivalInterval = 121;
@@ -30,7 +29,7 @@ console.log("These are the tests:\n-----------------");
     console.log("a service time is generated for each arrival time", arrivalTimes.length === serviceTimes.length);
 
     const cumulativeArrivalTimes = computeCumulativeArrivalTimes(arrivalTimes);
-    const serviceEndTimes = computeServiceEndTimes(serviceTimes, cumulativeArrivalTimes);
+    const { serviceEndTimes } = computeServiceEndTimes(serviceTimes, cumulativeArrivalTimes);
     const queueChangesPerTick = computeQueueChangesPerTick(cumulativeArrivalTimes, serviceEndTimes, tickDuration);
 
     console.log("data for the desired number of ticks is generated", queueChangesPerTick.length === numberOfTicks);
@@ -69,7 +68,7 @@ console.log("These are the tests:\n-----------------");
     ];
 
     const cumulativeArrivalTimes = computeCumulativeArrivalTimes(arrivalTimes);
-    const serviceEndTimes = computeServiceEndTimes(serviceTimes, cumulativeArrivalTimes);
+    const { serviceEndTimes } = computeServiceEndTimes(serviceTimes, cumulativeArrivalTimes);
 
     const queueEvents = computeQueueEvents(cumulativeArrivalTimes, serviceEndTimes, serviceTimes, tickDuration);
     console.log("ordered queue events are properly computed", isDeepEqual(queueEvents, expectedQueueEvents));
