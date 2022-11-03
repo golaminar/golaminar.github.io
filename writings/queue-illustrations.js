@@ -198,15 +198,23 @@ function queueSimulation(simIndex, queueDataset) {
             .text(() => { return queueLength; });
     }
 
-    function updateWaitTime(tickWindow, queueEvents) {
-        const waitTimes = queueEvents.filter((event) => {
-            return !(event.waitTime === undefined) && event.tickWindow <= tickWindow;
-        }).map(event => {
-            return event.waitTime;
+    function updateWaitTime(events) {
+        const serviceEvents = events.filter(event => {
+            return !(event.avgWaitTime === undefined);
         });
 
-        d3.select(parentElem).select(".avg-wait-time")
-            .text(waitTimes.length ? Math.round(d3.mean(waitTimes)) : "–");
+        let avgWaitTime;
+
+        if (events.length === 0) {
+            avgWaitTime = "–";
+        } else if (serviceEvents.length) {
+            avgWaitTime = Math.round(serviceEvents.at(-1).avgWaitTime);
+        }
+
+        if (avgWaitTime !== undefined) {
+            d3.select(parentElem).select(".avg-wait-time")
+                .text(avgWaitTime);
+        }
     }
 
     function resetChart() {
@@ -219,7 +227,7 @@ function queueSimulation(simIndex, queueDataset) {
         queueObservable.reset();
         resetChart();
         updateQueueLengthDisplay(0, []);
-        updateWaitTime(0, []);
+        updateWaitTime([]);
     }
 
     function diableStartButton(startButton) {
@@ -288,7 +296,7 @@ function queueSimulation(simIndex, queueDataset) {
                     updateChart(queueEventsThisTick);
 
                     // update the average wait time display
-                    updateWaitTime(tickTime, queueEvents);
+                    updateWaitTime(queueEventsThisTick);
 
                     // update the queue length once per tick
                     updateQueueLengthDisplay(queueEventsThisTick.at(-1).queueLength);
