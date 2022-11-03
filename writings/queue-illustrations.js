@@ -250,9 +250,7 @@ function queueSimulation(simIndex, queueDataset) {
         const serviceTimes = generateServiceTimes(expectedServiceTime, arrivalTimes.length);
 
         const cumulativeArrivalTimes = computeCumulativeArrivalTimes(arrivalTimes);
-        const { serviceBehaviour, serviceEndTimes } = computeServiceEndTimes(serviceTimes, cumulativeArrivalTimes);
-
-        const queueChangesPerTick = computeQueueChangesPerTick(cumulativeArrivalTimes, serviceEndTimes, tickDuration);
+        const { serviceBehaviour } = computeServiceEndTimes(serviceTimes, cumulativeArrivalTimes);
 
         const queueEvents = computeQueueEvents(cumulativeArrivalTimes, serviceBehaviour, tickDuration);
 
@@ -263,7 +261,7 @@ function queueSimulation(simIndex, queueDataset) {
         let queueEventsThisTick = [];
 
         function animateQueue(timestamp) {
-            const tickTime = queueChangesPerTick[tickIndex].tickTime;
+            const tickTime = (tickIndex + 1) * tickDuration;
 
             if (animationStart === undefined) {
                 // anchor the start of the animation in time
@@ -302,7 +300,7 @@ function queueSimulation(simIndex, queueDataset) {
                 // advance to the next frame, if it exists
                 tickIndex++;
 
-                if (tickIndex < queueChangesPerTick.length) {
+                if (tickIndex < numberOfTicks) {
                     requestAnimationFrame(animateQueue);
                 } else {
                     // announce the end of the animation
