@@ -148,14 +148,7 @@ function queueSimulation(simIndex, queueDataset) {
         reset: function () {
             this.count = 0;
             while (this.queue.length) {
-                this.removeQueuer({
-                    timestamp: 0,
-                    type: "served",
-                    queueLength: this.queue.length - 1,
-                    waitTime: 0,
-                    tickWindow: 0,
-                    avgWaitTime: "–",
-                });
+                this.removeQueuer();
             }
         }
     };
@@ -181,7 +174,9 @@ function queueSimulation(simIndex, queueDataset) {
     const queueLengthDisplay = {
         updateDisplay: function (event) {
             d3.select(parentElem).select(".queue-length")
-                .text(event.queueLength);
+                .text(() => {
+                    return event === undefined ? 0 : event.queueLength;
+                });
         },
         newArrival: function (_, event) {
             this.updateDisplay(event);
