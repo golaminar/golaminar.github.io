@@ -120,15 +120,21 @@ function computeQueueEvents(cumulativeArrivalTimes, serviceBehaviour, tickDurati
         events.push(event);
     });
 
-    serviceBehaviour.forEach((behaviour) => {
+    serviceBehaviour.reduce((avgWaitTime, behaviour, index) => {
+
+        avgWaitTime = (behaviour.waitTime + avgWaitTime * index) / (index + 1);
+
         const event = {
             timestamp: behaviour.endsAt,
             type: "service",
             tickWindow: Math.ceil(behaviour.endsAt / tickDuration) * tickDuration,
             waitTime: behaviour.waitTime,
+            avgWaitTime: avgWaitTime,
         }
         events.push(event);
-    });
+
+        return avgWaitTime;
+    }, 0);
 
     events.sort((a, b) => {
         if (a.timestamp === b.timestamp) {
