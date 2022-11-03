@@ -188,6 +188,17 @@ function queueSimulation(simIndex, queueDataset) {
 
     queueObservable.addObserver(queueLengthDisplay);
 
+    const avgWaitTimeDisplay = {
+        newServiceTime: function (_, event) {
+            d3.select(parentElem).select(".avg-wait-time")
+                .text(() => {
+                    return event === undefined ? "–" : Math.round(event.avgWaitTime);
+                });
+        },
+    }
+
+    queueObservable.addObserver(avgWaitTimeDisplay);
+
     function updateQueueUI(events) {
         events.forEach(event => {
             if (event.type === "arrival") {
@@ -210,28 +221,6 @@ function queueSimulation(simIndex, queueDataset) {
         queueLengthsChart.update();
     }
 
-    function updateWaitTime(events) {
-        let avgWaitTime;
-        let serviceEvents = [];
-
-        if (events === undefined) {
-            avgWaitTime = "—";
-        } else {
-            serviceEvents = events.filter(event => {
-                return !(event.avgWaitTime === undefined);
-            });
-        }
-
-        if (serviceEvents.length) {
-            avgWaitTime = Math.round(serviceEvents.at(-1).avgWaitTime);
-        }
-
-        if (avgWaitTime !== undefined) {
-            d3.select(parentElem).select(".avg-wait-time")
-                .text(avgWaitTime);
-        }
-    }
-
     function resetChart() {
         queueDataset.data.splice(0, queueDataset.data.length);
         queueDataset.data.push({ x: 0, y: 0 });
@@ -241,7 +230,6 @@ function queueSimulation(simIndex, queueDataset) {
     function resetSimulation() {
         queueObservable.reset();
         resetChart();
-        updateWaitTime();
     }
 
     function diableStartButton(startButton) {
@@ -308,9 +296,6 @@ function queueSimulation(simIndex, queueDataset) {
 
                     // update the chart in batches
                     updateChart(queueEventsThisTick);
-
-                    // update the average wait time display
-                    updateWaitTime(queueEventsThisTick);
                 }
 
                 // advance to the next frame, if it exists
