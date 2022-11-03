@@ -25,9 +25,9 @@ function generateArrivalTimes(expectedArrivalInterval, tickDuration, numberOfTic
 function generateServiceTimes(expectedServiceTime, numberOfArrivals) {
     let serviceTimes = [];
 
-    do {
+    while (serviceTimes.length < numberOfArrivals) {
         serviceTimes.push(genRandomTime(expectedServiceTime));
-    } while (serviceTimes.length < numberOfArrivals)
+    }
 
     return serviceTimes;
 }
