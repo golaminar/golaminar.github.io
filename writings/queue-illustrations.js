@@ -122,33 +122,40 @@ function queueSimulation(simIndex, queueDataset) {
         addObserver: function (observer) {
             this.observers.push(observer);
         },
-        notifyObservers: function (change, queuer) {
+        notifyObservers: function (change, queuer, event) {
             this.observers.forEach(observer => {
                 if (change === "newArrival" && observer.newArrival) {
-                    observer.newArrival(queuer);
+                    observer.newArrival(queuer, event);
                 }
                 if (change === "newServiceTime" && observer.newServiceTime) {
-                    observer.newServiceTime(queuer);
+                    observer.newServiceTime(queuer, event);
                 }
             });
         },
-        addQueuer: function () {
+        addQueuer: function (event) {
             this.count++;
             const queuer = {
                 order: this.count,
                 color: indexedColor(this.count, simIndex),
             };
             this.queue.push(queuer);
-            this.notifyObservers("newArrival", queuer);
+            this.notifyObservers("newArrival", queuer, event);
         },
-        removeQueuer: function () {
+        removeQueuer: function (event) {
             const queuer = this.queue.shift();
-            this.notifyObservers("newServiceTime", queuer);
+            this.notifyObservers("newServiceTime", queuer, event);
         },
         reset: function () {
             this.count = 0;
             while (this.queue.length) {
-                this.removeQueuer();
+                this.removeQueuer({
+                    timestamp: 0,
+                    type: "served",
+                    queueLength: this.queue.length - 1,
+                    waitTime: 0,
+                    tickWindow: 0,
+                    avgWaitTime: "–",
+                });
             }
         }
     };
@@ -174,9 +181,9 @@ function queueSimulation(simIndex, queueDataset) {
     function updateQueueUI(events) {
         events.forEach(event => {
             if (event.type === "arrival") {
-                queueObservable.addQueuer();
+                queueObservable.addQueuer(event);
             } else {
-                queueObservable.removeQueuer();
+                queueObservable.removeQueuer(event);
             }
         });
     }
