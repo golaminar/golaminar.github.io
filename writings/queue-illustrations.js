@@ -171,30 +171,17 @@ function queueSimulation(simIndex, queueDataset) {
 
     ///////////////////////
 
-    function addQueuers(arrivals) {
-        while (arrivals > 0) {
-            queueObservable.addQueuer();
-            arrivals--;
-        }
-    }
-
-    function serveQueuers(served) {
-        while (served > 0) {
-            queueObservable.removeQueuer();
-            served--;
-        }
-    }
-
-    function updateQueueUI(queueChanges) {
-        addQueuers(queueChanges.arrivals);
-        serveQueuers(queueChanges.served);
-    }
-
-    function updateChart(tickWindow, queueEvents) {
-        const events = queueEvents.filter((event) => {
-            return event.tickWindow === tickWindow;
+    function updateQueueUI(events) {
+        events.forEach(event => {
+            if (event.type === "arrival") {
+                queueObservable.addQueuer();
+            } else {
+                queueObservable.removeQueuer();
+            }
         });
+    }
 
+    function updateChart(events) {
         events.forEach((event) => {
             const point = {
                 x: event.timestamp,
@@ -206,14 +193,7 @@ function queueSimulation(simIndex, queueDataset) {
         queueLengthsChart.update();
     }
 
-    function updateQueueLengthDisplay(tickWindow, queueEvents) {
-        const queueLength = queueEvents.reduce((queueLength, event) => {
-            if (event.tickWindow <= tickWindow) {
-                queueLength = event.queueLength;
-            }
-            return  queueLength;
-        }, 0);
-
+    function updateQueueLengthDisplay(queueLength) {
         d3.select(parentElem).select(".queue-length")
             .text(() => { return queueLength; });
     }
@@ -280,6 +260,8 @@ function queueSimulation(simIndex, queueDataset) {
         let animationStart;
         let elapsedTime;
 
+        let queueEventsThisTick = [];
+
         function animateQueue(timestamp) {
             const tickTime = queueChangesPerTick[tickIndex].tickTime;
 
@@ -298,17 +280,24 @@ function queueSimulation(simIndex, queueDataset) {
                 // keep on waiting
                 requestAnimationFrame(animateQueue);
             } else {
-                // animate what happened
-                updateQueueUI(queueChangesPerTick[tickIndex]);
+                queueEventsThisTick = queueEvents.filter((event) => {
+                    return event.tickWindow === tickTime;
+                });
 
-                // update the chart in batches
-                updateChart(tickTime, queueEvents);
+                if (queueEventsThisTick.length) {
+                    // animate what happened
+                    updateQueueUI(queueEventsThisTick);
 
-                // update the average wait time display
-                updateWaitTime(tickTime, queueEvents);
+                    // update the chart in batches
+                    updateChart(queueEventsThisTick);
 
-                // update the queue length once per tick
-                updateQueueLengthDisplay(tickTime, queueEvents);
+                    // update the average wait time display
+                    updateWaitTime(tickTime, queueEvents);
+
+                    // update the queue length once per tick
+                    updateQueueLengthDisplay(queueEventsThisTick.at(-1).queueLength);
+                }
+
 
                 // advance to the next frame, if it exists
                 tickIndex++;
