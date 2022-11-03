@@ -116,27 +116,6 @@ function computeServiceEndTimes(serviceTimes, cumulativeArrivalTimes) {
 
 }
 
-function numOfTicks(tickDuration, maxArrivalTime) {
-    return Math.ceil(maxArrivalTime / tickDuration);
-}
-
-function computeQueueChangesPerTick(cumulativeArrivalTimes, serviceEndTimes, tickDuration) {
-    const numberOfTicks = numOfTicks(tickDuration, cumulativeArrivalTimes.at(-1));
-    const maxTickTime = numberOfTicks * tickDuration;
-
-    const queueChangesPerTick = [];
-
-    for (let tickTime = tickDuration; tickTime <= maxTickTime; tickTime += tickDuration) {
-        queueChangesPerTick.push({
-            "tickTime": tickTime,
-            "arrivals": cumulativeArrivalTimes.filter((time) => { return time <= tickTime && time > (tickTime - tickDuration) }).length,
-            "served": serviceEndTimes.filter((time) => { return time <= tickTime && time > (tickTime - tickDuration) }).length,
-        });
-    }
-
-    return queueChangesPerTick;
-}
-
 function computeQueueEvents(cumulativeArrivalTimes, serviceBehaviour, tickDuration) {
     const events = [];
 
