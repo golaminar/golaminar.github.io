@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
     <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
     <link rel="stylesheet" href="queue-illustrations.css">
 </head>
 <body class="writing">
@@ -19,48 +20,89 @@
     <div class="byline"><span class="image-frame"><img src="../images/tom.jpg"></span><span class="author"><a href="mailto:tom@golaminar.de">Tom</a></span><span class="date">18<sup>th</sup> October 2022</span></div>
     <p>There’s something weird about randomness.</p>
     <p>Let’s play a game to demonstrate. Imagine I flip a coin repeatedly, and each time it lands on heads, you add 1 to a total which starts at 0. Whenever it lands on tails, you subtract 1 from this total.</p>
-    <figure>
-        <figcaption>Coin-flipping chart</figcaption>
+
+    <figure id="figure-coin-flip-graph">
+        <label for="number-of-flips">Number of flips</label>
+        <input name="number-of-flips" value="1000"></input>
+        <button id="coin-flip-start">Start</button>
+        <canvas id="coin-flip-graph-canvas"></canvas>
+        <figcaption>Accumulated sum of outcomes of n coin flips</figcaption>
     </figure>
-    <p>There’s something weird about queues.</p>
+    <script src="coin-flipping-illustration.js"></script>
+
+    <p>TEXT ABOUT QUEUES</p>
+
     <figure id="figure-MM1-queue">
+
+        <div class="simulation-controls">
+            <button class="playback-queue-behaviour">Start</button>
+        </div>
+
+        <table class="simulation-settings">
+            <tr>
+                <td>
+                    <label for="expected-arrival-time-interval">Expected interval between arrivals</label>
+                </td>
+                <td class="number">
+                    <input name="expected-arrival-time-interval" value="121" type="number">
+                </td>
+                <td class="unit">
+                    seconds
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="expected-service-time">Expected service time</label>
+                </td>
+                <td class="number">
+                    <input name="expected-service-time" value="120" type="number">
+                </td>
+                <td class="unit">
+                    seconds
+                </td>
+            </tr>
+        </table>
+
         <div class="cols">
             <div class="col">
-                <button class="playback-queue-behaviour">Start simulation</button>
-                <label for="play-speed-factor">Playback speed factor</label>
-                <input name="play-speed-factor" value="10" type="number">
+
+                <div id="queue-simulations" class="cols">
+
+                    <template id="queue-simulation-template">
+                        <div class="queue-simulation col">
+                            <table class="queue-status">
+                                <tr>
+                                    <th>Queue<br>length:</th>
+                                    <td><span class="queue-length">0</span></td>
+                                    <td class="queue-container">
+                                        <ol class="queue"></ol>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <table class="queue-status">
+                                <tr>
+                                    <th>Average wait time:</th>
+                                    <td><span class="avg-wait-time">—</span> seconds</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </template>
+
+                </div>
+
             </div>
             <div class="col">
-                <span>Queue Length: </span><span id="queue-length">0</span>
-                <br>
-                <span>Expected wait time: </span><span id="expected-wait-time">0.00 minutes</span>
-                <br>
-                <span>Elapsed time: </span><span id="elapsed-time">0.00 minutes</span>
+                <canvas id="queue-lengths-graph-canvas"></canvas>
             </div>
         </div>
 
-        <ol class="queue" id="queue"></ol>
+        <figcaption>The behaviour of five queues over time</figcaption>
 
-        <div class="cols">
-            <div class="col">
-                <label for="expected-arrival-time-interval">Expected interval between arrivals (seconds)</label>
-                <input name="expected-arrival-time-interval" value="121">
-                <br>
-                <span>Actual average arrival interval: </span><span id="avg-arrival-time-interval">—</span>
-                <ol id="arrival-time-intervals"></ol>
-            </div>
-            <div class="col">
-                <label for="expected-service-time">Expected service time (seconds)</label>
-                <input name="expected-service-time" value="120">
-                <br>
-                <span>Actual average service time: </span><span id="avg-service-time">—</span>
-                <ol id="service-times"></ol>
-            </div>
-        </div>
-        <figcaption>Expected queue length interactive illustration</figcaption>
-        <script src="calculated-intervals.js"></script>
-        <script src="queue-illustrations.js"></script>
     </figure>
+    <script src="calculated-intervals.js"></script>
+    <script src="queue-illustrations.js"></script>
+
     <p></p>
 </article>
 </main>
