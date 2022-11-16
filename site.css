@@ -103,6 +103,10 @@ h1:after {
     font-variant: small-caps;
 }
 
+.byline span {
+    vertical-align: middle;
+}
+
 .byline .image-frame {
     width: 50px;
     height: 50px;
@@ -110,6 +114,7 @@ h1:after {
     overflow: hidden;
     border-radius: 50%;
     display: inline-block;
+    margin-left: 10px;
 }
 
 .byline .image-frame img {
