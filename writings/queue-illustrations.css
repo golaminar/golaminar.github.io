@@ -76,8 +76,12 @@ figure input {
     float: right;
 }
 
+.simulation-settings {
+    min-width: 300px;
+}
+
 figure button {
-    font-size: 18px;
+    font-size: 1em;
     border: 1px solid #bbb;
     background: #e6e6e6 url(button-bg.png) 50% 50% repeat-x;
     font-weight: normal;

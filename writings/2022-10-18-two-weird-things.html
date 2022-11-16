@@ -27,9 +27,22 @@
     <p>You don&#39;t believe me, do you? I know I didn&#39;t believe it when I heard this. So, instead of you taking out a coin and a piece of paper and trying it that way, the illustration below will simulate it for you.</p>
 
     <figure id="figure-coin-flip-graph" class="illustration">
-        <label for="number-of-flips">Number of flips</label>
-        <input name="number-of-flips" value="1000"></input>
-        <button id="coin-flip-start">Start flipping</button>
+        <div class="simulation-controls">
+            <button id="coin-flip-start">Start flipping</button>
+        </div>
+        <table class="simulation-settings">
+            <tbody>
+                <tr>
+                    <td>
+                        <label for="number-of-flips">Number of flips</label>
+                    </td>
+                    <td class="number">
+                        <input name="number-of-flips" value="1000"></input>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
         <canvas id="coin-flip-graph-canvas"></canvas>
         <figcaption>This chart shows the cumulative sum of n coin flips, where a heads is counted as 1 and a tails as -1. The cumulative sum of the outcomes can swing wildly, and diverge significantly from zero as n grows.</figcaption>
     </figure>
