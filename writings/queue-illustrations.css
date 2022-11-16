@@ -104,3 +104,28 @@ figure button:not(:disabled):hover {
     font-family: "proxima-nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
     margin: 0;
 }
+
+.illustration {
+    margin: 2em 0;
+}
+
+.panel img {
+    max-width: 100%;
+    height: auto;
+}
+
+.panel {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    align-items: center;
+    font-size: 1em;
+}
+
+.panel>figcaption {
+    flex: 150px;
+}
+
+.panel>div {
+    flex: 450px;
+}

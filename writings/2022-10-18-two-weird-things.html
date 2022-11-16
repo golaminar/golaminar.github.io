@@ -17,22 +17,79 @@
 <main>
 <article>
     <h2>Two weird things</h2>
-    <div class="byline"><span class="image-frame"><img src="../images/tom.jpg"></span><span class="author"><a href="mailto:tom@golaminar.de">Tom</a></span><span class="date">18<sup>th</sup> October 2022</span></div>
-    <p>There’s something weird about randomness.</p>
-    <p>Let’s play a game to demonstrate. Imagine I flip a coin repeatedly, and each time it lands on heads, you add 1 to a total which starts at 0. Whenever it lands on tails, you subtract 1 from this total.</p>
+    <div class="byline"><span class="image-frame"><img src="../images/tom.jpg"></span><span class="author"><a href="mailto:tom@golaminar.de">Tom</a></span><span class="date">218<sup>th</sup> October 2022</span></div>
 
-    <figure id="figure-coin-flip-graph">
+    <p>There&#39;s something weird about randomness.</p>
+    <p>Let&#39;s play a game to demonstrate. Imagine I flip a coin repeatedly, and each time it lands on heads, you add 1 to a total which starts at 0. Whenever it lands on tails, you subtract 1 from this total.</p>
+    <p>What do you think your total will be after 10 flips? Think about it for a second and make a guess. What about after 100 flips? Any different? Are any values less or more likely? What about after 10,000 flips? What about (please forgive me, mathematicians) after an <em>infinite</em> number of flips?</p>
+    <p>I would bet that a lot of you guessed that the total would most likely be 0 after 10 flips. I would also bet that if you did say this, you stuck with your number even as I increased the number of flips involved. Maybe when I started talking about infinity, some of the mathematically-inclined got an inkling about the kind of weird thing that&#39;s happening here.</p>
+    <p>The weird thing is this: you&#39;re right that 0 is the most likely <em>individual</em> value for the cumulative total, <em>but</em> it is highly probable that we will have a non-zero value. The more flips we do, the <em>less</em> likely the total is to be 0. As our number of flips approaches infinity, the probability of the cumulative total being 0 approaches 0, and numbers for the cumulative total with high magnitude -- either positive or negative -- become more and more likely.</p>
+    <p>You don&#39;t believe me, do you? I know I didn&#39;t believe it when I heard this. So, instead of you taking out a coin and a piece of paper and trying it that way, the illustration below will simulate it for you.</p>
+
+    <figure id="figure-coin-flip-graph" class="illustration">
         <label for="number-of-flips">Number of flips</label>
         <input name="number-of-flips" value="1000"></input>
-        <button id="coin-flip-start">Start</button>
+        <button id="coin-flip-start">Start flipping</button>
         <canvas id="coin-flip-graph-canvas"></canvas>
-        <figcaption>Accumulated sum of outcomes of n coin flips</figcaption>
+        <figcaption>This chart shows the cumulative sum of n coin flips, where a heads is counted as 1 and a tails as -1. The cumulative sum of the outcomes can swing wildly, and diverge significantly from zero as n grows.</figcaption>
     </figure>
     <script src="coin-flipping-illustration.js"></script>
 
-    <p>TEXT ABOUT QUEUES</p>
+    <p>What&#39;s going on here? Well, let&#39;s get away for a moment from thinking about and graphing tens of thousands of
+    flips, or infinite flips. Let&#39;s talk about 2 flips.</p>
 
-    <figure id="figure-MM1-queue">
+    <div id="coin-flip-explanation" class="illustration">
+        <figure class="panel">
+            <figcaption>
+                <p>Imagine I flip heads twice in a row. That&#39;s not so improbable.</p>
+            </figcaption>
+            <div>
+                <img src="assets/one.jpg">
+            </div>
+        </figure>
+
+        <figure class="panel">
+            <figcaption>
+                <p>What&#39;s the probability that I get back to 0 in the next two flips? Well, I would need to flip two tails in a row. The probability of that is 0.25.</p>
+            </figcaption>
+            <div>
+                <img src="assets/two.jpg">
+            </div>
+        </figure>
+
+        <figure class="panel">
+            <figcaption>
+                <p>But what&#39;s the probability I instead get to 4 after the next two flips? <em>Also</em> 0.25. The coin would need to land on heads twice in a row, which is just as likely.</p>
+            </figcaption>
+            <div>
+                <img src="assets/three.jpg">
+            </div>
+        </figure>
+
+        <figure class="panel">
+            <figcaption>
+                <p>The other possibilities (heads then tails, or tails then heads) each leave me with a total of 2. So there's a 75% chance I end up with a total that is 2 or more.</p>
+            </figcaption>
+            <div>
+                <img src="assets/four.jpg">
+            </div>
+        </figure>
+    </div>
+
+    <p>This accounts for what you will have seen when playing with the simulation. Sometimes you get a line that stays close to 0 and kind of bounces around it, but this is the exception. Normally you see a line that gets away from 0, either in the negative or positive direction, and stays away.</p>
+    <p>Weird, huh?</p>
+    <hr>
+    <p>There&#39;s also something weird about queues.<p>
+    <p>Let&#39;s demonstrate with another example. At the airport, a check-in agent can serve a passenger in two minutes on average. New passengers arrive on average once every 121 seconds -- just over every 2 minutes. The check-in agent starts working at this rate in the morning and continues her admirably consistent performance until the end of her shift, serving on average 30 customers per hour. People keep arriving and on average someone new joins the queue every 121 seconds - just under 30 customers per hour.</p>
+    <p>Let this play out for a while<a href="#footnote-1" id="footnote-1-source"><sup>1</sup></a>, and tell me: how many people would you expect to be waiting in the queue, on average? Think about it for a second and make a guess.</p>
+    <p>Maybe you said 0? Maybe you said one or two? After all, the agent is capable of serving 30 customers per hour, and we&#39;re asking her to serve just under that number of passengers per hour. So it seems like she should have time to check everyone in and the queue would never grow. Right?</p>
+    <p>But maybe you were burned by my last little game and you said something different. Maybe you said a really high number for the queue size.</p>
+    <p>What if I told you the line would have 118 people in it? With an average wait time of almost four hours for a new passenger? Because that&#39;s what it works out to be if you set up a system like this and leave it running in that state for a while. Of course you would expect a long wait if there&#39;s a long line, but how did we get to such a long line, when we expected to have almost no line at all?</p>
+    <p>Now what happens when we instead have two check-in agents working at that same rate of 30 passengers per hour, and people arrive at the same rate - just under 30 passengers per hour. What would the queue length be on a typical day? Half of 118?</p>
+    <p>Well, it&#39;s 0.3, with an average wait time of just over 39 seconds.</p>
+    <p>Just like the coin flips example, these numbers might seem way off to you. Here&#39;s a simulation of five queues. Let them play out and see what happens with them, to get a feeling for how they behave.</p>
+
+    <figure id="figure-MM1-queue" class="illustration">
 
         <div class="simulation-controls">
             <button class="playback-queue-behaviour">Start</button>
@@ -103,7 +160,18 @@
     <script src="calculated-intervals.js"></script>
     <script src="queue-illustrations.js"></script>
 
-    <p></p>
+    <p>What exactly is <em>happening</em> here?</p>
+    <p>Well, notice how many times I said &#39;on average&#39; above. That&#39;s really important. If every passenger is served in <em>exactly</em> two minutes, and every new passenger arrives <em>exactly</em> 121 seconds after the previous passenger, then the queue size would always be 0 and the wait time would hence always be 0.</p>
+    <p>But that, as anyone who has ever stood in line for anything knows, is regrettably <em>not</em> the way the world works. Some passengers take longer to serve than others -- they brought their passports, <em>of course</em>, but they put them at the bottom of their rucksacks and need to fully unpack them to get them out. Oh, and by the way, their rucksacks are too big to carry on and need to be checked in. Other passengers are really quick -- they&#39;ve done this a thousand times and have everything ready for the agent. Sometimes one passenger arrives, and it&#39;s a long while until the next one arrives -- the train to the airport was cancelled so there&#39;s a gap. Sometimes a whole school trip group arrives at once, throwing stuff around, making a bunch of noise, and generally being teenagers in a place where no one wants teenagers.</p>
+    <p>In short, there is <em>randomness</em> operating on this process. And if our coin flip taught us anything about randomness, it&#39;s that randomness is <em>weird</em>, and we don&#39;t always have the best intuitions about it.</p>
+    <p>What&#39;s going on, both here and in the coin flip example, is that we have a random process which is fundamentally <em>memoryless</em>. A flip of the coin onto heads does not have any influence on the next coin flip. A passenger taking 10 minutes to check in doesn&#39;t make it any less likely that the next passenger takes 10 minutes to serve as well. And onto these memoryless processes we impose our belief -- our fervent hope -- that they will somehow &#39;fix themselves&#39; and &#39;even themselves out over time&#39;.</p>
+    <p>But that&#39;s not what happens. While our agent is checking in that passenger that takes 10 minutes, on average we get almost five more passengers joining the queue. So we&#39;ve gone &#39;above the line&#39;. To deal with that swelling of the queue behind the slow passenger and get back to zero, we need our check-in agent to deal with the next few passengers quick enough to make up the difference - actually, 9 customers in the next 10 minutes. But that&#39;s just as likely as her having another 10-minute slowcoach to deal with, and suddenly having an <em>additional</em> five people in the queue. So just like the coin flips, once this queue starts growing, it&#39;s just as likely to continue growing as it is to shrink. And clearing the queue becomes less and less likely as the queue grows.</p>
+
+    <p>SOME STATEMENT HERE??</p>
+    <p>SKETCH this is relevant to product development because we also have queues and randomness.</p>
+    <p>SKETCH notice how queue size (and therefore wait time) and agent idle time are related - you can&#39;t have 0 idle time and 0 wait time. If you run this airport and employ agents, you don&#39;t really want them to be idle. But you also don&#39;t want wait times that are so long that people are missing their flights. So there&#39;s a tradeoff here, and it comes down to one of costs. In an airport (these considerations). In software, wait time more expensive (these considerations).</p>
+    <p>SKETCH We&#39;ll talk more about that tradeoff later</p>
+    <p id="footnote-1"><a href="#footnote-1-source">1</a>: I&#39;m being intentionally inexact here. The point is to allow enough time for this system to have run and to get into a steady state where we can draw conclusions about its behaviour on average, and that varies depending on the outcomes of a series of random events.</p>
 </article>
 </main>
 <footer>
