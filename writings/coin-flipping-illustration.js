@@ -103,7 +103,7 @@
                 timeouts.push(setTimeout(() => { requestAnimationFrame(flip) }, delay));
             } else {
                 button.disabled = false;
-                button.innerText = 'Start';
+                button.innerText = 'Start flipping';
             }
         };
         requestAnimationFrame(flip);
