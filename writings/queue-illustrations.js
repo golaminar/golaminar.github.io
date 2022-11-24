@@ -251,8 +251,9 @@ function queueSimulation(simIndex, queueDataset) {
         const tickDuration = expectedArrivalInterval * 3 * 2;
         const numberOfTicks = 240 / 2;
         const scalingFactor = expectedArrivalInterval / 12;
+        const totalTime = tickDuration * numberOfTicks;
 
-        const arrivalTimes = generateArrivalTimes(expectedArrivalInterval, tickDuration, numberOfTicks);
+        const arrivalTimes = generateArrivalTimes(expectedArrivalInterval, totalTime);
         const serviceTimes = generateServiceTimes(expectedServiceTime, arrivalTimes.length);
 
         const cumulativeArrivalTimes = computeCumulativeArrivalTimes(arrivalTimes);
