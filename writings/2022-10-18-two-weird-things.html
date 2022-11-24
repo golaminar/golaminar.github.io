@@ -97,9 +97,7 @@
     <p>Let this play out for a while<sup><a href="#footnote-1" id="footnote-1-source">1</a></sup>, and tell me: how many people would you expect to be waiting in the queue, on average? Think about it for a second and make a guess.</p>
     <p>Maybe you said zero? Maybe you said one or two? After all, the agent is capable of serving 30 customers per hour, and we&#39;re asking her to serve just under that number of passengers per hour. So it seems like she should have time to check everyone in and the queue would never grow. Right?</p>
     <p>But maybe you were burned by my last little game and you said something different. Maybe you said a really high number for the queue size.</p>
-    <p>What if I told you the line would have 118 people in it? With an average wait time of almost four hours for a new passenger? Because that&#39;s what it works out to be if you set up a system like this and leave it running in that state for a while. Of course you would expect a long wait if there&#39;s a long line, but how did we get to such a long line, when we expected to have almost no line at all?</p>
-    <p>Now what happens when we instead have two check-in agents working at that same rate of 30 passengers per hour, and people arrive at the same rate — just under 30 passengers per hour. What would the queue length be on a typical day? Half of 118?</p>
-    <p>Well, it&#39;s 0.3, with an average wait time of just over 39 seconds.</p>
+    <p>What if I told you the line would have 118 people in it? With an average wait time of almost four hours for a new passenger?<sup><a href="#footnote-2" id="footnote-2-source">2</a></sup> Because that&#39;s what it works out to be if you set up a system like this and leave it running in that state for a while. Of course you would expect a long wait if there&#39;s a long line, but how did we get to such a long line, when we expected to have almost no line at all?</p>
     <p>Just like the coin flips example, these numbers might seem way off to you. Here&#39;s a simulation of five queues. Let them play out and see what happens with them, to get a feeling for how they behave.</p>
 
     <figure id="figure-MM1-queue" class="illustration">
@@ -188,6 +186,7 @@
             href="mailto:hello@golaminar.de">hello@golaminar.de</a>.
     </p>
     <p class="footnote" id="footnote-1"><a href="#footnote-1-source">1</a>: I&#39;m being intentionally inexact here. The point is to allow enough time for this system to have run and to get into a steady state where we can draw conclusions about its behaviour on average, and that varies depending on the outcomes of a series of random events.</p>
+    <p class="footnote" id="footnote-2"><a href="#footnote-2-source">2</a>: As an additional exercise/head-scratcher: what happens when we instead have two check-in agents working at that same rate of 30 passengers per hour, and people arrive at the same rate — just under 30 passengers per hour. What would the average queue length be? Half of 118? Well, it&#39;s 0.3, with an average wait time of just over 39 seconds.</p>
 </article>
 </main>
 <footer>
