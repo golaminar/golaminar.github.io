@@ -14,8 +14,6 @@ console.log("These are the tests:\n-----------------");
 })();
 
 (function () {
-    const tickDuration = 10;
-
     const arrivalTimes = [10, 11, 15, 8, 6, 14];
     const serviceTimes = [11, 8, 16, 20, 12, 5];
 
@@ -37,7 +35,7 @@ console.log("These are the tests:\n-----------------");
     const cumulativeArrivalTimes = computeCumulativeArrivalTimes(arrivalTimes);
     const serviceBehaviour = computeServiceBehaviour(serviceTimes, cumulativeArrivalTimes);
 
-    const queueEvents = computeQueueEvents(cumulativeArrivalTimes, serviceBehaviour, tickDuration);
+    const queueEvents = computeQueueEvents(cumulativeArrivalTimes, serviceBehaviour);
 
     console.log("ordered queue events are properly computed", isDeepEqual(queueEvents, expectedQueueEvents));
 })();

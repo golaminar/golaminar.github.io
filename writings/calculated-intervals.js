@@ -108,7 +108,7 @@ function computeServiceBehaviour(serviceTimes, cumulativeArrivalTimes) {
     return serviceBehaviour;
 }
 
-function computeQueueEvents(cumulativeArrivalTimes, serviceBehaviour, tickDuration) {
+function computeQueueEvents(cumulativeArrivalTimes, serviceBehaviour) {
     const events = [];
 
     cumulativeArrivalTimes.forEach(time => {
