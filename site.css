@@ -22,6 +22,11 @@ a {
     border-bottom: 1px solid #ccc;
 }
 
+.writing article a {
+    color: #666;
+    border-bottom-color: #666;
+}
+
 a:hover {
     color: #333;
 }
@@ -164,6 +169,17 @@ header {
 .writing article a {
     color: #666;
     border-bottom: 1px solid #666;
+}
+
+.author-bio {
+    padding: 1em 0;
+    border-width: 1px 0;
+    border-style: solid;
+    border-color: #ccc;
+}
+
+.author-bio {
+    font-style: italic;
 }
 
 #what-we-offer .col {
