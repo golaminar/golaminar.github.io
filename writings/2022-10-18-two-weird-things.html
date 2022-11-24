@@ -165,7 +165,7 @@
             </div>
         </div>
 
-        <figcaption>This illustration shows the behaviour of five queues operating over time, where items enter the queue randomly and are served for random durations. Such queues operating at nearly 100% utilization do not hover around zero, but have a tendency to grow.</figcaption>
+        <figcaption>This illustration shows the behaviour of five queues operating over time, where items enter the queue randomly and are served for random durations. Such queues operating at nearly 100% utilization do not hover around zero, but have a tendency to grow. For details about how these simulations are implemented, see the footnotes.<sup><a href="#footnote-3" id="footnote-3-source">3</a></sup></figcaption>
 
     </figure>
     <script src="calculated-intervals.js"></script>
@@ -187,6 +187,9 @@
     </p>
     <p class="footnote" id="footnote-1"><a href="#footnote-1-source">1</a>: I&#39;m being intentionally inexact here. The point is to allow enough time for this system to have run and to get into a steady state where we can draw conclusions about its behaviour on average, and that varies depending on the outcomes of a series of random events.</p>
     <p class="footnote" id="footnote-2"><a href="#footnote-2-source">2</a>: As an additional exercise/head-scratcher: what happens when we instead have two check-in agents working at that same rate of 30 passengers per hour, and people arrive at the same rate — just under 30 passengers per hour. What would the average queue length be? Half of 118? Well, it&#39;s 0.3, with an average wait time of just over 39 seconds.</p>
+    <p class="footnote" ><a href="#footnote-3-source">3</a>: How the queue simulations are implemented: for each queue, we pre-compute a series of arrival intervals and a series of service times such that they fall into a <a href= "https://en.wikipedia.org/wiki/Poisson_distribution">Poisson distribution</a> around their expected value. (A Poisson distribution looks a bit like a normal distribution but lop-sided and smeared out on one side because values are never negative, but they could be infinite.)</p>
+    <p class="footnote">We then compute the time of each arrival and each service completion, as well as the queue length after each of these events – arrivals add one to the queue length, and serving removes one. Arrival event times are simple to compute: each one occurs when the previous arrival occurred plus the current arrival interval. Service event times are more complex to compute: a service event starts either when the previous service event finished, or, if the queue is empty, when the next arrival occurs.</p>
+    <p class="footnote">We then combine and order all the queue change events chronologically. We push the event time and the queue length as the x and y of a data point to the chart.</p>
 </article>
 </main>
 <footer>
