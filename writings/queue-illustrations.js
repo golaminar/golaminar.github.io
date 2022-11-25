@@ -261,15 +261,16 @@ function queueSimulation(simIndex, queueDataset) {
 
         const queueEvents = computeQueueEvents(cumulativeArrivalTimes, serviceBehaviour);
 
-        let tickIndex = 0;
+        let tickStart = 0;
+        let tickEnd;
+
         let animationStart;
         let elapsedTime;
 
         let queueEventsThisTick = [];
 
         function animateQueue(timestamp) {
-            const tickStart = tickIndex * tickDuration;
-            const tickEnd = tickStart + tickDuration;
+            tickEnd = tickStart + tickDuration;
 
             if (animationStart === undefined) {
                 // anchor the start of the animation in time
@@ -296,10 +297,9 @@ function queueSimulation(simIndex, queueDataset) {
                 // update the chart in batches
                 updateChart(queueEventsThisTick);
 
-                // advance to the next frame, if it exists
-                tickIndex++;
-
-                if (tickIndex < numberOfTicks) {
+                if (tickEnd < totalTime) {
+                    // advance to the next frame in time
+                    tickStart = tickEnd;
                     requestAnimationFrame(animateQueue);
                 } else {
                     // announce the end of the animation
