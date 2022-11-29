@@ -37,6 +37,18 @@ h1 {
     margin: 1em 0;
 }
 
+.writing h2 {
+
+}
+
+.writing h2 .subtitle {
+    font-style: italic;
+    font-size: 0.75em;
+    font-weight: normal;
+    display: inline-block;
+    margin-top: 0.25em;
+}
+
 h1 a:link, h1 a:hover, h1 a:visited, h1 a:active {
     text-decoration: none;
     border-bottom: none;
