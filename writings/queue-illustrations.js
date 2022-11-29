@@ -207,7 +207,7 @@ function queueSimulation(simIndex, queueDataset) {
         });
     }
 
-    function updateChart(events) {
+    function pushEventsToChart(events) {
         events.forEach((event) => {
             const point = {
                 x: event.timestamp,
@@ -215,7 +215,10 @@ function queueSimulation(simIndex, queueDataset) {
             };
             queueDataset.data.push(point);
         });
+    }
 
+    function advanceChartElapsedTime(elapsedTime) {
+        queueLengthsChart.options.scales.x.max = elapsedTime;
         queueLengthsChart.update();
     }
 
@@ -269,6 +272,9 @@ function queueSimulation(simIndex, queueDataset) {
 
         let queueEventsThisTick = [];
 
+        pushEventsToChart(queueEvents);
+        advanceChartElapsedTime(1);
+
         function animateQueue(timestamp) {
             tickEnd = tickStart + tickDuration;
 
@@ -294,8 +300,8 @@ function queueSimulation(simIndex, queueDataset) {
                 // animate what happened
                 updateQueueUI(queueEventsThisTick);
 
-                // update the chart in batches
-                updateChart(queueEventsThisTick);
+                // advance the elapsed time shown on the chart
+                advanceChartElapsedTime(elapsedTime);
 
                 if (tickEnd < totalTime) {
                     // advance to the next frame in time
