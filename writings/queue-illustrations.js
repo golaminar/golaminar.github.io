@@ -113,7 +113,7 @@ function queueSimulation(simIndex, queueDataset) {
         .appendChild(template.content.firstElementChild.cloneNode(true));
 
     d3.select(parentElem).select(".queue-status th")
-        .attr("style", `color: ${queueDataset.borderColor}` );
+        .attr("style", `color: ${queueDataset.borderColor}`);
 
     const queueObservable = {
         observers: [],
