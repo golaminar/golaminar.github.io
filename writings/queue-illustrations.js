@@ -251,10 +251,11 @@ function queueSimulation(simIndex, queueDataset) {
         const expectedArrivalInterval = parseInt(document.querySelector("[name=expected-arrival-time-interval]").value);
         const expectedServiceTime = parseInt(document.querySelector("[name=expected-service-time]").value);
 
-        const tickDuration = expectedArrivalInterval * 3 * 2;
-        const numberOfTicks = 240 / 2;
-        const scalingFactor = expectedArrivalInterval / 12;
-        const totalTime = tickDuration * numberOfTicks;
+        const slowdownFactor = 1;
+        const tickDuration = expectedArrivalInterval * 3 * 2 / slowdownFactor;
+        const numberOfTicks = 240 / 2 * slowdownFactor;
+        const scalingFactor = expectedArrivalInterval / 12 / slowdownFactor;
+        const totalTime = tickDuration * numberOfTicks / slowdownFactor;
 
         const arrivalTimes = generateArrivalTimes(expectedArrivalInterval, totalTime);
         const serviceTimes = generateServiceTimes(expectedServiceTime, arrivalTimes.length);
