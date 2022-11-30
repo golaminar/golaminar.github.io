@@ -33,29 +33,16 @@
 
             <p>Lorem ipsum and all that.</p>
 
-            <figure id="figure-coin-flip-graph" class="illustration">
+            <figure id="figure-backlog-growth-no-wip" class="illustration">
                 <div class="simulation-controls">
-                    <button id="coin-flip-start">Start flipping</button>
+                    <button id="backlog-growth-no-wip-start">Start</button>
                 </div>
-                <table class="simulation-settings">
-                    <tbody>
-                        <tr>
-                            <td>
-                                <label for="number-of-flips">Number of flips</label>
-                            </td>
-                            <td class="number">
-                                <input name="number-of-flips" value="1000"></input>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <canvas id="coin-flip-graph-canvas"></canvas>
+                <div id="backlog-growth-no-wip-canvas"></div>
                 <figcaption>This chart shows the cumulative sum of n coin flips, where a heads is counted as 1 and a
                     tails as -1. The cumulative sum of the outcomes can swing wildly, and diverge significantly from
                     zero, as n grows.</figcaption>
             </figure>
-            <script src="coin-flipping-illustration.js"></script>
+            <script src="backlog-growth-illustrations.js"></script>
 
             <p>Lorem ipsum and all that.</p>
 
