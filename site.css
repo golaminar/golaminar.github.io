@@ -27,6 +27,10 @@ a {
     border-bottom-color: #666;
 }
 
+.aside {
+    font-style: italic;
+}
+
 a:hover {
     color: #333;
 }
