@@ -22,6 +22,10 @@
     color: transparent;
 }
 
+.queue-status th {
+    text-align: left;
+}
+
 .queue-length {
     min-width: 2em;
     text-align: center;

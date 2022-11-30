@@ -8,10 +8,6 @@ figcaption {
     margin: 1em 2em;
 }
 
-th {
-    text-align: left;
-}
-
 figure input {
     width: 5em;
     font-size: 16px;
