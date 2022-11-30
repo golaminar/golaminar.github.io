@@ -1,16 +1,11 @@
-.backlog-illustration {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
+table.board {
+    width: 100%;
 }
 
-.board {
-    flex: 300px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
+table.board th {
+    width: 50%;
 }
 
-.col {
+.backlog-illustration > div {
     flex: 150px;
 }
