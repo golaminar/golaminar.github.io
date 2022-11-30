@@ -1,0 +1,16 @@
+.backlog-illustration {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.board {
+    flex: 300px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.col {
+    flex: 150px;
+}
