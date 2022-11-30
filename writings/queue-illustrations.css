@@ -1,13 +1,3 @@
-figure {
-    margin: 1em 0;
-    padding: 0;
-    font-size: 0.75em;
-}
-
-figcaption {
-    margin: 1em 2em;
-}
-
 .queue {
     margin: 0;
     padding: 0;
@@ -47,10 +37,6 @@ figcaption {
     padding: 0 0.25em;
 }
 
-th {
-    text-align: left;
-}
-
 #queue-simulations {
     margin: 0.5em 0;
     gap: 10px;
@@ -67,35 +53,6 @@ th {
     background-color: #ffffff55;
 }
 
-figure input {
-    width: 5em;
-    font-size: 16px;
-}
-
-.simulation-controls {
-    float: right;
-}
-
-.simulation-settings {
-    min-width: 300px;
-}
-
-figure button {
-    font-size: 1em;
-    border: 1px solid #bbb;
-    background: #e6e6e6 url(button-bg.png) 50% 50% repeat-x;
-    font-weight: normal;
-    border-radius: 4px;
-    padding: 0.4em 1em;
-    cursor: pointer;
-}
-
-figure button:not(:disabled):hover {
-    border-color: #999;
-    background-image: url(button-bg-hover.png);
-    color: #000;
-}
-
 .list-of-times {
     padding: 0;
 }
@@ -107,29 +64,4 @@ figure button:not(:disabled):hover {
 .lists-of-times td ol {
     font-family: "proxima-nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
     margin: 0;
-}
-
-.illustration {
-    margin: 2em 0;
-}
-
-.panel img {
-    max-width: 100%;
-    height: auto;
-}
-
-.panel {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 30px;
-    align-items: center;
-    font-size: 1em;
-}
-
-.panel>figcaption {
-    flex: 150px;
-}
-
-.panel>div {
-    flex: 450px;
 }
