@@ -1,3 +1,32 @@
+function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
+    const backlogBehaviour = [];
+    const backlogWipLimit = (wipLimit === undefined) ? Infinity : wipLimit;
+    let backlogSize = 0;
+
+    arrivals.forEach((arrived, index) => {
+        //backlogSize = Math.min(backlogSize + arrived, backlogWipLimit);
+
+        backlogSize = backlogSize + arrived;
+
+        const capacity = capacities[index];
+        const done = (capacity > backlogSize) ? capacity : backlogSize;
+
+        backlogSize = backlogSize - done;
+
+        const iterationOutcome = {
+            arrived,
+            capacity,
+            done,
+            backlogSizeAfter: backlogSize,
+        };
+
+        backlogBehaviour.push(iterationOutcome);
+    });
+
+    return backlogBehaviour;
+};
+
+
 (function () {
 
     const iterationArrivals = [
@@ -9,7 +38,7 @@
         4,
     ];
 
-    const iterationCapacity = [
+    const iterationCapacities = [
         5,
         4,
         5,
