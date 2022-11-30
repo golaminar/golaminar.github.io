@@ -10,7 +10,6 @@ backlog-tests.js:
 
 clean:
 	touch queue-tests.js backlog-tests.js
-	rm queue-tests.js
-	rm backlog-tests.js
+	rm queue-tests.js backlog-tests.js
 
 .PHONY: test clean
