@@ -47,43 +47,60 @@
             <p>Let's run some numbers to see why. Imagine we pay a sole developer €50 per hour<sup><a href="#footnote-3" id="footnote-3-source">3</a></sup>. Let's also assume for simplicity that the ongoing value of what they deliver is the same as what we pay them. Then let's imagine there are 10 items in the development backlog, each requiring 10 hours of that developer's time to complete. The expected minimum value of each of these items, once released, is 10*€50 per hour -- €500. A new item entering the queue will need to wait 10*10 hours for the other items on the queue to be completed before it receives attention. So the cost of delay we pay on that new item is €50,000. In that time, we're also paying the cost of delay on the other items in the queue - €45,000 for the 10th item with 9 in front of it, €40,000 for the next item up, and so on. So in the time it takes for that new item to reach the front of the queue, we have paid €275,000 in delay cost for the items in this queue. Meanwhile, 100 hours of developer time have passed, costing us €5,000.</p>
 
             <figure id="figure-cost-of-delay" class="illustration">
-                <div id="backlog-illustration">
-                    <div class="col">
-                        <div class="backlog-item">
-                            <span class="title">Item 1</span>
-                            <span class="wait-time">Waits for: 0 hours</span>
-                            <span class="cost-of-delay">Cost of delay: €0</span>
-                        </div>
-                        <div class="backlog-item">
-                            <span class="title">Item 2</span>
-                            <span class="wait-time">Waits for: 10 hours</span>
-                            <span class="cost-of-delay">Cost of delay: €500</span>
-                        </div>
-                        <div class="backlog-item">
-                            <span class="title">Item 3</span>
-                            <span class="wait-time">Waits for: 20 hours</span>
-                            <span class="cost-of-delay">Cost of delay: €1000</span>
-                        </div>
-                        <div class="backlog-item">
-                            <span class="title">Item 4</span>
-                            <span class="wait-time">Waits for: 30 hours</span>
-                            <span class="cost-of-delay">Cost of delay: €1500</span>
-                        </div>
-                        <div class="backlog-item">
-                            <span class="title">Item 5</span>
-                            <span class="wait-time">Waits for: 40 hours</span>
-                            <span class="cost-of-delay">Cost of delay: €2000</span>
-                        </div>
+                <div id="backlog-illustration cols">
+                    <div class="backlog-item">
+                        <span class="title">Item 1</span>
+                        <span class="wait-time">Waits for: 0 hours</span>
+                        <span class="cost-of-delay">Cost of delay: €0</span>
                     </div>
-                    <div class="col">
-                        <div id="summary">
-                            <span class="summary-line">Total cost of delay: €5000</span>
-                            <span class="summary-line">Cost of delay for a new queue item: €2500</span>
-                        <div>
+                    <div class="cost-of-delay">
+                        <canvas id="item-1-cost-of-delay-chart"></canvas>
+                    </div>
+                    <div class="backlog-item">
+                        <span class="title">Item 2</span>
+                        <span class="wait-time">Waits for: 10 hours</span>
+                        <span class="cost-of-delay">Cost of delay: €500</span>
+                    </div>
+                    <div class="cost-of-delay">
+                        <canvas id="item-2-cost-of-delay-chart"></canvas>
+                    </div>
+                    <div class="backlog-item">
+                        <span class="title">Item 3</span>
+                        <span class="wait-time">Waits for: 20 hours</span>
+                        <span class="cost-of-delay">Cost of delay: €1000</span>
+                    </div>
+                    <div class="cost-of-delay">
+                        <canvas id="item-3-cost-of-delay-chart"></canvas>
+                    </div>
+                    <div class="backlog-item">
+                        <span class="title">Item 4</span>
+                        <span class="wait-time">Waits for: 30 hours</span>
+                        <span class="cost-of-delay">Cost of delay: €1500</span>
+                    </div>
+                    <div class="cost-of-delay">
+                        <canvas id="item-4-cost-of-delay-chart"></canvas>
+                    </div>
+                    <div class="backlog-item">
+                        <span class="title">Item 5</span>
+                        <span class="wait-time">Waits for: 40 hours</span>
+                        <span class="cost-of-delay">Cost of delay: €2000</span>
+                    </div>
+                    <div class="cost-of-delay">
+                        <canvas id="item-5-cost-of-delay-chart"></canvas>
+                    </div>
+                </div>
+                <div class="cols">
+                    <div id="summary">
+                        <span class="summary-line">Total cost of delay: €5000</span>
+                        <span class="summary-line">Cost of delay for a new queue item: €2500</span>
+                    <div>
+                    <div class="cost-of-delay">
+                        <canvas id="cost-of-delay-cumulative-chart"></canvas>
                     </div>
                 </div>
                 <figcaption>ILLUSTRATION OF A BACKLOG WITH COSTS</figcaption>
             </figure>
+            <script src="cost-of-delay-illustrations.js"></script>
 
             <p>Now, maybe you're saying it's a stretch to assume that every feature the developer works on will immediately give us €500 per hour in value. Quite often, we deliver things that deliver value less quickly than that, but we still choose to do so, because it's value that we have for as long as we maintain the feature, and eventually we break even on the initial investment of developer time and the ongoing maintenance costs. On the other hand, some things that we deliver have tremendous value as soon as we release them -- very quickly outweighing the investment of time. How much does this affect the balance of delay cost vs operating cost?</p>
 
