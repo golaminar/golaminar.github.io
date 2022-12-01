@@ -31,4 +31,26 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
 
     const unboundedBacklog = computeBacklogBehaviour(iterationArrivals, iterationCapacities);
     const boundedBacklog = computeBacklogBehaviour(iterationArrivals, iterationCapacities, wipLimit);
+
+    let iterationIndex = 0;
+
+    function startInteration(index, backlogBehaviour) {
+
+    }
+
+    function endInteration(index, backlogBehaviour) {
+
+    }
+
+    // each backlog as:
+    // * backlog behaviour
+    // * a start iteration button (grow into backlog)
+    // * an end iteration button (do work)
+
+    function backlogInterative() {
+
+    }
+
+    backlogInterative(unboundedBacklog);
+    backlogInterative(boundedBacklog);
 })();

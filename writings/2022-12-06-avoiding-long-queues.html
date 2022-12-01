@@ -35,13 +35,23 @@
 
             <p>Lorem ipsum and all that.</p>
 
-            <figure id="figure-backlog-growth-no-wip" class="illustration">
-                <button id="backlog-growth-no-wip-start">Start</button>
-                <div id="backlog-growth-no-wip" class="cols backlog-illustration">
+            <figure id="figure-backlog-growth" class="illustration">
+
+                <div class="controls">
+                    <button class="start-iteration">Start Interation</button>
+                    <button class="end-iteration">End Interation</button>
+                </div>
+
+                <div class="cols">
 
                     <div class="col">
-                        <table class="board">
+                        <table class="board no-wip">
                             <thead>
+                                <tr>
+                                    <th colspan="2">
+                                        No WIP Limits
+                                    </th>
+                                </tr>
                                 <tr>
                                     <th>
                                         Backlog
@@ -54,62 +64,43 @@
                             <tbody>
                                 <tr>
                                     <td>
-                                        <span class="item">Item</span>
-                                        <span class="item">Item</span>
-                                        <span class="item">Item</span>
+                                        <span class="item" style="background-color:#f72585ff">Item</span><span class="item" style="background-color:#f72585ff">Item</span><span class="item" style="background-color:#f72585ff">Item</span><span class="item" style="background-color:#f72585ff">Item</span><span class="item"
+                                            style="background-color:#f72585ff">Item</span><span class="item" style="background-color:#f72585ff">Item</span>
                                     </td>
                                     <td>
-                                        <span class="item">Item</span>
-                                        <span class="item">Item</span>
-                                        <span class="item">Item</span>
+                                        <span class="item" style="background-color:#f72585ff">Item</span><span class="item" style="background-color:#f72585ff">Item</span><span class="item" style="background-color:#f72585ff">Item</span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <span class="item">Item</span>
-                                        <span class="item">Item</span>
-                                        <span class="item">Item</span>
+                                        <span class="item" style="background-color:#f72585ff">Item</span><span class="item" style="background-color:#f72585ff">Item</span><span class="item" style="background-color:#f72585ff">Item</span>
                                     </td>
                                     <td>
-                                        <span class="item">Item</span>
-                                        <span class="item">Item</span>
-                                        <span class="item">Item</span>
+                                        <span class="item" style="background-color:#f72585ff">Item</span><span class="item" style="background-color:#f72585ff">Item</span><span class="item" style="background-color:#f72585ff">Item</span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <span class="item">Item</span>
-                                        <span class="item">Item</span>
-                                        <span class="item">Item</span>
+                                        <span class="item" style="background-color:#f72585ff">Item</span><span class="item" style="background-color:#f72585ff">Item</span><span class="item" style="background-color:#f72585ff">Item</span>
                                     </td>
                                     <td>
-                                        <span class="item">Item</span>
-                                        <span class="item">Item</span>
-                                        <span class="item">Item</span>
+                                        <span class="item" style="background-color:#f72585ff">Item</span><span class="item" style="background-color:#f72585ff">Item</span><span class="item" style="background-color:#f72585ff">Item</span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <span class="item">Item</span>
-                                        <span class="item">Item</span>
-                                        <span class="item">Item</span>
+                                        <span class="item" style="background-color:#f72585ff">Item</span><span class="item" style="background-color:#f72585ff">Item</span><span class="item" style="background-color:#f72585ff">Item</span>
                                     </td>
                                     <td>
-                                        <span class="item">Item</span>
-                                        <span class="item">Item</span>
-                                        <span class="item">Item</span>
+                                        <span class="item" style="background-color:#f72585ff">Item</span><span class="item" style="background-color:#f72585ff">Item</span><span class="item" style="background-color:#f72585ff">Item</span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <span class="item">Item</span>
-                                        <span class="item">Item</span>
-                                        <span class="item">Item</span>
+                                        <span class="item" style="background-color:#f72585ff">Item</span><span class="item" style="background-color:#f72585ff">Item</span><span class="item" style="background-color:#f72585ff">Item</span>
                                     </td>
                                     <td>
-                                        <span class="item">Item</span>
-                                        <span class="item">Item</span>
-                                        <span class="item">Item</span>
+                                        <span class="item" style="background-color:#f72585ff">Item</span><span class="item" style="background-color:#f72585ff">Item</span><span class="item" style="background-color:#f72585ff">Item</span>
                                     </td>
                                 </tr>
                             </tbody>
@@ -117,8 +108,13 @@
                     </div>
 
                     <div class="col">
-                        <table class="board">
+                        <table class="board with-wip">
                             <thead>
+                                <tr>
+                                    <th colspan="2">
+                                        Backlog Limited to 6 Items
+                                    </th>
+                                </tr>
                                 <tr>
                                     <th>
                                         Backlog
@@ -150,9 +146,10 @@
                                     <td> </td>
                                 </tr>
                             </tbody>
-                        </table>                    </div>
-
+                        </table>
+                    </div>
                 </div>
+
                 <figcaption>This illustration shows an example of how a backlog grows over time when it is unbounded and the number of items that appear is random follow a <a href="https://en.wikipedia.org/wiki/Poisson_distribution">Poisson process</a>. When a backlog is left to grow unbounded, the team will always be working at full capacity, and never has the opportunity to catch up on old items. Under these conditions, the backlog grow, causing new items to be left waiting longer and longer.</figcaption>
             </figure>
             <script src="backlog-growth-illustrations.js"></script>
