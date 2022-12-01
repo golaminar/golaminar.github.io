@@ -32,13 +32,68 @@
 
             <p class="aside">This is part two of a three-part series. Part 1, <a href="2022-11-29-two-weird-things.html">Two Weird Things</a>, aims to give you a better intuitive feel for how randomness makes queues likely to grow.</p>
 
-            <p>Lorem ipsum and all that.</p>
+            <p>In part one of this series, we showed you that queues are weird and don't conform to our intuitive expectations of how they will behave. They're weird because randomness is weird. Or to be more precise: when memoryless random events meet processes with cumulative effects, weird things happen. Concretely, queues have a tendency to grow much longer than we intuitively expect them to. We also pointed out that queues are everywhere in software development, and so is randomness. In this part, we're going to talk about why long queues present problems, and the surprising and escalating costs of those queues. In the next part, we'll talk about how to avoid long queues in software development processes.</p>
+
+            <p>To recap briefly: in software development processes, any time an item of work is waiting somewhere and not actively being worked on, it is in a queue. Any time we move work from one state or activity to another, and especially when the next activity is performed by another person or another team, there is an opportunity for a queue to form. Examples of queues in software development processes include: the list of pending pull requests; the product and sprint backlogs; the list of changes in a given release or deployment.</p>
+
+            <p> Why is it a problem if queues get long? Let's revisit our airport check-in queues. The longer the queues get, the more dissatisfied our customers get. Past a certain point, our queue becomes long enough that people arriving at the airport the recommended three hours before their flight cannot get checked in and through security to their gate in time. At this point, we need to have another member of staff walk through the queue, calling forward all the passengers for flights soon to depart for expedited check-in. At a certain point, if the queue is still growing, even expediting won't help us, and people will start missing their flights. If this happens too often, the airport ceases to function. So there is a cost to having people stand in line for longer, and that cost escalates and has inflection points where additional costs arise.</p>
+
+            <p>In software development, there are also direct costs to queues. The longer a product backlog becomes, the more maintenance it requires: Is this story really still relevant? What does this comment from Eliza 18 months ago mean? Is that market research still valid? The longer feature requests wait in between someone asking for them and us deploying them to customers, the more people ask for status updates, and then someone has to find out about and report the status. The more <em>stuff</em> I'm confronted with, the more effort I have to expend on determining what that <em>stuff</em> is, and what of that <em>stuff</em> is the best thing for me to pick up next<sup><a href="#footnote-1" id="footnote-1-source">1</a></sup>. Those are the direct costs of having long queues. Some call them the carrying costs.</p>
+
+            <p>But there's also a significant indirect cost. We call it <em>cost of delay</em><sup><a href="#footnote-2" id="footnote-2-source">2</a></sup>. In the case of a product backlog item, its cost of delay is the amount of value that could be realized per day [or hour, or minute], for each day [hour, minute] that it is delayed and not moving through our process. To take a concrete example: we think that allowing users of our website to 'like' each others' posts will lead to a significant increase in their engagement, and hence (via advertising impressions) to our profits. Once the feature is finally deployed, our analysts tell us that we make 1000 additional euros per hour. Unfortunately, there were various points in the development of this feature where it was in started, but waiting. After the PM, designer, and tech lead had drafted the 5 constituent stories, the engineers weren't ready to start working on it for another 4 weeks, because they were working on other things. For each story, there was a pull request which waited for code review for an average of 4 hours while potential reviewers worked on other things. After code review was complete, rework waited for an average of 2 hours per change while the engineer responsible was working on the next code change. And so on. Before long, we've amassed a huge amount of wait time. Maybe we only worked on this feature for one-person week, but it was waiting somewhere in our system for 5 weeks. And 5 weeks of €1000 per hour is a lot of cost.</p>
+
+            <p>The more items there are waiting in a queue, the longer it takes for a new item entering the queue to receive attention and be actively worked on. So the longer the queue, the more delay cost there is associated with it. Cost of delay can quickly become a huge deal, and quickly outweigh all other costs.</p>
+
+            <p>Let's run some numbers to see why. Imagine we pay a sole developer €50 per hour<sup><a href="#footnote-3" id="footnote-3-source">3</a></sup>. Let's also assume for simplicity that the ongoing value of what they deliver is the same as what we pay them. Then let's imagine there are 10 items in the development backlog, each requiring 10 hours of that developer's time to complete. The expected minimum value of each of these items, once released, is 10*€50 per hour -- €500. A new item entering the queue will need to wait 10*10 hours for the other items on the queue to be completed before it receives attention. So the cost of delay we pay on that new item is €50,000. In that time, we're also paying the cost of delay on the other items in the queue - €45,000 for the 10th item with 9 in front of it, €40,000 for the next item up, and so on. So in the time it takes for that new item to reach the front of the queue, we have paid €275,000 in delay cost for the items in this queue. Meanwhile, 100 hours of developer time have passed, costing us €5,000.</p>
 
             <figure id="figure-cost-of-delay" class="illustration">
-                <figcaption></figcaption>
+                <div id="backlog-illustration">
+                    <div class="col">
+                        <div class="backlog-item">
+                            <span class="title">Item 1</span>
+                            <span class="wait-time">Waits for: 0 hours</span>
+                            <span class="cost-of-delay">Cost of delay: €0</span>
+                        </div>
+                        <div class="backlog-item">
+                            <span class="title">Item 2</span>
+                            <span class="wait-time">Waits for: 10 hours</span>
+                            <span class="cost-of-delay">Cost of delay: €500</span>
+                        </div>
+                        <div class="backlog-item">
+                            <span class="title">Item 3</span>
+                            <span class="wait-time">Waits for: 20 hours</span>
+                            <span class="cost-of-delay">Cost of delay: €1000</span>
+                        </div>
+                        <div class="backlog-item">
+                            <span class="title">Item 4</span>
+                            <span class="wait-time">Waits for: 30 hours</span>
+                            <span class="cost-of-delay">Cost of delay: €1500</span>
+                        </div>
+                        <div class="backlog-item">
+                            <span class="title">Item 5</span>
+                            <span class="wait-time">Waits for: 40 hours</span>
+                            <span class="cost-of-delay">Cost of delay: €2000</span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div id="summary">
+                            <span class="summary-line">Total cost of delay: €5000</span>
+                            <span class="summary-line">Cost of delay for a new queue item: €2500</span>
+                        <div>
+                    </div>
+                </div>
+                <figcaption>ILLUSTRATION OF A BACKLOG WITH COSTS</figcaption>
             </figure>
 
-            <p>Lorem ipsum and all that.</p>
+            <p>Now, maybe you're saying it's a stretch to assume that every feature the developer works on will immediately give us €500 per hour in value. Quite often, we deliver things that deliver value less quickly than that, but we still choose to do so, because it's value that we have for as long as we maintain the feature, and eventually we break even on the initial investment of developer time and the ongoing maintenance costs. On the other hand, some things that we deliver have tremendous value as soon as we release them -- very quickly outweighing the investment of time. How much does this affect the balance of delay cost vs operating cost?</p>
+
+            <p>If the average value of the backlog items were 10 cents per hour -- requiring 208 days to break even -- the delay cost per item would be €1 per hour, and the total cost of delay paid for an item added to a ten-item queue would be €550. On the other hand, if every item in there were really valuable and urgent, such that delivering it would immediately give us €100 per hour in value, the delay cost would be €550,000.</p>
+
+            <p>Maybe that first number -- a delay cost of only €550, versus personnel costs of €5,000 -- doesn't concern you too much. Fair enough, but remember: queues grow if left uncontrolled, so ten items is not a state you can expect to maintain for long without intervention. Also note that we're only talking about one queue here, and a typical development process has multiple stages, with multiple opportunities for a queue to form and delay cost to be paid. Rather than thinking about a one-step process with only three states (waiting, being worked on, complete), we need to think about a typical development process, with multiple stages, multiple hand-offs, and multiple queues. When that's our situation, it's not uncommon for the time an item is being worked on to be a fraction of the time it's waiting. And since uncontrolled queues have a tendency to grow, this problem will get worse over time even if you have the most productive team in the world.</p>
+            
+            <p>It <em>is</em> possible to address the problem of growing queues by making teams more productive. If we can add people, or train the existing people, we can increase the amount of <em>stuff</em> the team can handle in a given time period. If we don't correspondingly increase demand on the team (and that's a pretty big 'if', in my experience) we would expect to see shorter queues. Two problems with this: first, it's expensive. Training costs money. Extra people cost money. Retaining good people costs money. If there are cheaper ways to achieve the same goal of shorter queues, we should explore them. Second, there are limits to what you can do on the capacity side -- people are only ever going to be <em>this</em> good at programming until a new paradigm comes along, they only have <em>this</em> much stamina, and a group of people collaborating on something can only be <em>this</em> size before the coordination efforts required start to be overwhelming. On the other hand, demand is potentially unlimited, and is likely to increase as stakeholders ask "we've added people to this team, shouldn't we be able to do more now?" Adding capacity works only in its relation to demand. That's at the macro (product backlog) level. At the micro level (e.g. code review queue), you can do similar -- make people's code reviews 50% faster. But again, that's expensive, and no amount of making people better at an activity will help if they're simply not spending enough of their time on that activity compared to others.</p>
+
+            <p>We need to avoid the scenario where our queues continue to grow and our cost of delay increases -- eventually (but sooner than we intuitively expect) reaching the point where it outweighs all other costs. This scenario in the real world wouldn't show up as a negative on our balance sheet, but as a decreasing ability to innovate, to satisfy customer demand, or to compete with the brand-new entrant to our market, eventually posing existential risks to the organization. If we want to avoid it, we must do something to prevent queues from getting out of control. That's what we'll cover in part 3.</p>
 
             <p class="author-bio">
                 Tom Stuart and Tiffany Conroy are consultants with a combined 35+ years of experience developing
@@ -48,7 +103,9 @@
                 Hire them!
                 Get in touch at <a href="mailto:hello@golaminar.de">hello@golaminar.de</a>.
             </p>
-            <p class="footnote" id="footnote-1"><a href="#footnote-1-source">1</a>: PLACEHOLDER FOOTNOTE.</p>
+            <p class="footnote" id="footnote-1"><a href="#footnote-1-source">1</a>: I'm quite certain that by now there are readers who are practically screaming at me: "but queues in product development aren't like airport check-in queues! They're not first-in, first-out. We prioritize them." This is absolutely correct, and a full response to this is beyond the scope of this article. In lieu of a full response, I'll say some provocative things here and promise to follow up with a full examination later. First, it is unlikely you are prioritizing correctly. Second, prioritizing correctly only <em>mitigates</em> the cost of queues. It doesn't solve it. Third, there is a cost to prioritizing which scales non-linearly with the size of the queue.</p>
+            <p class="footnote" id="footnote-2"><a href="#footnote-2-source">2</a>: The good people at Black Swan Farming have <a href="https://blackswanfarming.com/cost-of-delay/">explained</a> cost of delay far better than I do here, and even have a handy video explainer. I recommend you check out that explanation too.</p>
+            <p class="footnote" id="footnote-3"><a href="#footnote-3-source">3</a>: €50 per hour translates to €400 per day and €92000 for a full year (subtracting 6 weeks for annual leave and public holidays, and assuming no other absences). Taking into account other costs of having engineers on staff, this seems like a pretty reasonable ballpark figure.</p>
         </article>
     </main>
     <footer>
