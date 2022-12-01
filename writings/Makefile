@@ -3,10 +3,10 @@ test: clean queue-tests.js backlog-tests.js
 	node backlog-tests.js
 
 queue-tests.js:
-	cat tests-header.js calculated-intervals.js  queue-illustrations.js queue-illustration-tests.js > queue-tests.js
+	cat tests-header.js calculated-intervals.js illustration-helpers.js  queue-illustrations.js queue-illustration-tests.js > queue-tests.js
 
 backlog-tests.js:
-	cat tests-header.js backlog-growth-illustrations.js backlog-behaviour-tests.js > backlog-tests.js
+	cat tests-header.js illustration-helpers.js backlog-growth-illustrations.js backlog-behaviour-tests.js > backlog-tests.js
 
 clean:
 	touch queue-tests.js backlog-tests.js
