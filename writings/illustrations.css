@@ -61,23 +61,3 @@ figure button:not(:disabled):hover {
 .panel>div {
     flex: 450px;
 }
-
-#figure-cost-of-delay #backlog-illustration {
-    display: flex;
-}
-
-#figure-cost-of-delay #backlog-illustration .col {
-    display: flex;
-}
-
-#figure-cost-of-delay .backlog-item {
-    flex: 300px;
-    margin: 0.5em;
-    border: 1px solid #bbb;
-    padding: 5px;
-    background-color: #ffffff55;
-}
-
-#figure-cost-of-delay .backlog-item span {
-    display: block;
-}

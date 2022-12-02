@@ -10,6 +10,7 @@
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
     <link rel="stylesheet" href="illustrations.css">
+    <link rel="stylesheet" href="queue-illustrations.css">
     <script src="illustration-helpers.js"></script>
 </head>
 
@@ -47,13 +48,13 @@
             <p>Let's run some numbers to see why. Imagine we pay a sole developer €50 per hour<sup><a href="#footnote-3" id="footnote-3-source">3</a></sup>. Let's also assume for simplicity that the ongoing value of what they deliver is the same as what we pay them. Then let's imagine there are 10 items in the development backlog, each requiring 10 hours of that developer's time to complete. The expected minimum value of each of these items, once released, is 10*€50 per hour -- €500. A new item entering the queue will need to wait 10*10 hours for the other items on the queue to be completed before it receives attention. So the cost of delay we pay on that new item is €50,000. In that time, we're also paying the cost of delay on the other items in the queue - €45,000 for the 10th item with 9 in front of it, €40,000 for the next item up, and so on. So in the time it takes for that new item to reach the front of the queue, we have paid €275,000 in delay cost for the items in this queue. Meanwhile, 100 hours of developer time have passed, costing us €5,000.</p>
 
             <figure id="figure-cost-of-delay" class="illustration">
-                <div id="backlog-illustration cols">
+                <div id="backlog-illustration" class="cols">
                     <div class="backlog-item">
                         <span class="title">Item 1</span>
                         <span class="wait-time">Waits for: 0 hours</span>
                         <span class="cost-of-delay">Cost of delay: €0</span>
                     </div>
-                    <div class="cost-of-delay">
+                    <div class="cost-of-delay-chart">
                         <canvas id="item-1-cost-of-delay-chart"></canvas>
                     </div>
                     <div class="backlog-item">
@@ -61,7 +62,7 @@
                         <span class="wait-time">Waits for: 10 hours</span>
                         <span class="cost-of-delay">Cost of delay: €500</span>
                     </div>
-                    <div class="cost-of-delay">
+                    <div class="cost-of-delay-chart">
                         <canvas id="item-2-cost-of-delay-chart"></canvas>
                     </div>
                     <div class="backlog-item">
@@ -69,7 +70,7 @@
                         <span class="wait-time">Waits for: 20 hours</span>
                         <span class="cost-of-delay">Cost of delay: €1000</span>
                     </div>
-                    <div class="cost-of-delay">
+                    <div class="cost-of-delay-chart">
                         <canvas id="item-3-cost-of-delay-chart"></canvas>
                     </div>
                     <div class="backlog-item">
@@ -77,7 +78,7 @@
                         <span class="wait-time">Waits for: 30 hours</span>
                         <span class="cost-of-delay">Cost of delay: €1500</span>
                     </div>
-                    <div class="cost-of-delay">
+                    <div class="cost-of-delay-chart">
                         <canvas id="item-4-cost-of-delay-chart"></canvas>
                     </div>
                     <div class="backlog-item">
@@ -85,16 +86,16 @@
                         <span class="wait-time">Waits for: 40 hours</span>
                         <span class="cost-of-delay">Cost of delay: €2000</span>
                     </div>
-                    <div class="cost-of-delay">
+                    <div class="cost-of-delay-chart">
                         <canvas id="item-5-cost-of-delay-chart"></canvas>
                     </div>
                 </div>
                 <div class="cols">
-                    <div id="summary">
+                    <div class="backlog-summary">
                         <span class="summary-line">Total cost of delay: €5000</span>
                         <span class="summary-line">Cost of delay for a new queue item: €2500</span>
-                    <div>
-                    <div class="cost-of-delay">
+                    </div>
+                    <div class="cost-of-delay-chart">
                         <canvas id="cost-of-delay-cumulative-chart"></canvas>
                     </div>
                 </div>
@@ -107,7 +108,7 @@
             <p>If the average value of the backlog items were 10 cents per hour -- requiring 208 days to break even -- the delay cost per item would be €1 per hour, and the total cost of delay paid for an item added to a ten-item queue would be €550. On the other hand, if every item in there were really valuable and urgent, such that delivering it would immediately give us €100 per hour in value, the delay cost would be €550,000.</p>
 
             <p>Maybe that first number -- a delay cost of only €550, versus personnel costs of €5,000 -- doesn't concern you too much. Fair enough, but remember: queues grow if left uncontrolled, so ten items is not a state you can expect to maintain for long without intervention. Also note that we're only talking about one queue here, and a typical development process has multiple stages, with multiple opportunities for a queue to form and delay cost to be paid. Rather than thinking about a one-step process with only three states (waiting, being worked on, complete), we need to think about a typical development process, with multiple stages, multiple hand-offs, and multiple queues. When that's our situation, it's not uncommon for the time an item is being worked on to be a fraction of the time it's waiting. And since uncontrolled queues have a tendency to grow, this problem will get worse over time even if you have the most productive team in the world.</p>
-            
+
             <p>It <em>is</em> possible to address the problem of growing queues by making teams more productive. If we can add people, or train the existing people, we can increase the amount of <em>stuff</em> the team can handle in a given time period. If we don't correspondingly increase demand on the team (and that's a pretty big 'if', in my experience) we would expect to see shorter queues. Two problems with this: first, it's expensive. Training costs money. Extra people cost money. Retaining good people costs money. If there are cheaper ways to achieve the same goal of shorter queues, we should explore them. Second, there are limits to what you can do on the capacity side -- people are only ever going to be <em>this</em> good at programming until a new paradigm comes along, they only have <em>this</em> much stamina, and a group of people collaborating on something can only be <em>this</em> size before the coordination efforts required start to be overwhelming. On the other hand, demand is potentially unlimited, and is likely to increase as stakeholders ask "we've added people to this team, shouldn't we be able to do more now?" Adding capacity works only in its relation to demand. That's at the macro (product backlog) level. At the micro level (e.g. code review queue), you can do similar -- make people's code reviews 50% faster. But again, that's expensive, and no amount of making people better at an activity will help if they're simply not spending enough of their time on that activity compared to others.</p>
 
             <p>We need to avoid the scenario where our queues continue to grow and our cost of delay increases -- eventually (but sooner than we intuitively expect) reaching the point where it outweighs all other costs. This scenario in the real world wouldn't show up as a negative on our balance sheet, but as a decreasing ability to innovate, to satisfy customer demand, or to compete with the brand-new entrant to our market, eventually posing existential risks to the organization. If we want to avoid it, we must do something to prevent queues from getting out of control. That's what we'll cover in part 3.</p>
