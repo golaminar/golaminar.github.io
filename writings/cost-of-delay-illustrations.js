@@ -21,6 +21,8 @@ const generateCostOfDelayChart = function (id, dataSets) {
                 },
                 y: {
                     stacked: true,
+                    suggestedMin: 0,
+                    suggestedMax: 5000,
                 }
             },
             plugins: {
