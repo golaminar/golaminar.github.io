@@ -45,6 +45,12 @@ function cumulativeCosts(data) {
 }
 
 (function() {
+    [].forEach.call(document.querySelectorAll(".backlog-item"), function (div, i) {
+        div.style.backgroundColor = indexedColor(i, 2);
+        div.style.color = "white";
+        div.style.borderColor = indexedColor(i, 2);
+    });
+
     const item1Costs = [0, 0, 0, 0];
     const item2Costs = [500, 0, 0, 0];
     const item3Costs = [500, 500, 0, 0];

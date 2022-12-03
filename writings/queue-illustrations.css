@@ -114,3 +114,11 @@ table.board tr>td:first-child {
 .backlog-summary span {
     display: block;
 }
+
+.backlog-item .title, .summary-line {
+    font-weight: bold;
+}
+
+.backlog-items {
+    font-size: 0.9em;
+}
