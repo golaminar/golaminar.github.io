@@ -1,4 +1,5 @@
-const generateCostOfDelayChart = function (id, dataSets) {
+const generateCostOfDelayChart = function (id, dataSets, options) {
+    options = options ? options : {};
     const labels = ["Week 1", "Week 2", "Week 3", "Week 4"];
     const chartData = {
         labels: labels,
@@ -6,7 +7,8 @@ const generateCostOfDelayChart = function (id, dataSets) {
             return {
                 label: `Item ${i + 1}`,
                 backgroundColor: indexedColor(i, 2),
-                data: cumulativeCosts(data),
+                data: data,
+                order: dataSets.length - i,
             };
         })
     };
@@ -15,6 +17,7 @@ const generateCostOfDelayChart = function (id, dataSets) {
         type: 'bar',
         data: chartData,
         options: {
+            barPercentage: options.barPercentage,
             scales: {
                 x: {
                     stacked: true,
@@ -22,12 +25,31 @@ const generateCostOfDelayChart = function (id, dataSets) {
                 y: {
                     stacked: true,
                     suggestedMin: 0,
-                    suggestedMax: 5000,
+                    suggestedMax: 2500,
                 }
             },
             plugins: {
                 legend: {
                     display: false,
+                },
+                title: {
+                    display: true,
+                    text: options.title,
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function (context) {
+                            let label = context.dataset.label || '';
+
+                            if (label) {
+                                label += ': ';
+                            }
+                            if (context.parsed.y !== null) {
+                                label += new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(context.parsed.y);
+                            }
+                            return label;
+                        }
+                    },
                 },
             },
         },
@@ -57,11 +79,24 @@ function cumulativeCosts(data) {
     const item4Costs = [500, 500, 500, 0];
     const item5Costs = [500, 500, 500, 500];
 
-    generateCostOfDelayChart('item-1-cost-of-delay-chart', [item1Costs, [], [], [], []]);
-    generateCostOfDelayChart('item-2-cost-of-delay-chart', [[], item2Costs, [], [], []]);
-    generateCostOfDelayChart('item-3-cost-of-delay-chart', [[], [], item3Costs, [], []]);
-    generateCostOfDelayChart('item-4-cost-of-delay-chart', [[], [], [], item4Costs, []]);
-    generateCostOfDelayChart('item-5-cost-of-delay-chart', [[], [], [], [], item5Costs]);
+    generateCostOfDelayChart('cost-of-delay-chart', [
+        item1Costs,
+        item2Costs,
+        item3Costs,
+        item4Costs,
+        item5Costs,
+    ], {
+        barPercentage: 1.3,
+        title: "Cost of delay incurred per week",
+    });
 
-    generateCostOfDelayChart('cost-of-delay-cumulative-chart', [item1Costs, item2Costs, item3Costs, item4Costs, item5Costs]);
+    generateCostOfDelayChart('cost-of-delay-cumulative-chart', [
+        cumulativeCosts(item1Costs),
+        cumulativeCosts(item2Costs),
+        cumulativeCosts(item3Costs),
+        cumulativeCosts(item4Costs),
+        cumulativeCosts(item5Costs),
+    ], {
+        title: "Cumulative cost of delay each week",
+    });
 })();

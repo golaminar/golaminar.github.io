@@ -49,57 +49,42 @@
 
             <figure id="figure-cost-of-delay" class="illustration">
                 <div id="backlog-illustration" class="cols">
-                    <div class="backlog-item">
-                        <span class="title">Item 1</span>
-                        <span class="wait-time">Waits for: 0 hours</span>
-                        <span class="cost-of-delay">Cost of delay: €0</span>
+                    <div class="backlog-items">
+                        <div class="backlog-item">
+                            <span class="title">Item 1</span>
+                            <span class="wait-time">Waits for: 0 weeks</span>
+                            <span class="cost-of-delay">Cost of delay: €0</span>
+                        </div>
+                        <div class="backlog-item">
+                            <span class="title">Item 2</span>
+                            <span class="wait-time">Waits for: 1 week</span>
+                            <span class="cost-of-delay">Cost of delay: €500</span>
+                        </div>
+                        <div class="backlog-item">
+                            <span class="title">Item 3</span>
+                            <span class="wait-time">Waits for: 2 weeks</span>
+                            <span class="cost-of-delay">Cost of delay: €1,000</span>
+                        </div>
+                        <div class="backlog-item">
+                            <span class="title">Item 4</span>
+                            <span class="wait-time">Waits for: 3 weeks</span>
+                            <span class="cost-of-delay">Cost of delay: €1,500</span>
+                        </div>
+                        <div class="backlog-item">
+                            <span class="title">Item 5</span>
+                            <span class="wait-time">Waits for: 4 weeks</span>
+                            <span class="cost-of-delay">Cost of delay: €2,000</span>
+                        </div>
+                        <div class="backlog-summary">
+                            <span class="summary-line">Total cost of delay: €5,000</span>
+                        </div>
                     </div>
                     <div class="cost-of-delay-chart">
-                        <canvas id="item-1-cost-of-delay-chart"></canvas>
-                    </div>
-                    <div class="backlog-item">
-                        <span class="title">Item 2</span>
-                        <span class="wait-time">Waits for: 10 hours</span>
-                        <span class="cost-of-delay">Cost of delay: €500</span>
-                    </div>
-                    <div class="cost-of-delay-chart">
-                        <canvas id="item-2-cost-of-delay-chart"></canvas>
-                    </div>
-                    <div class="backlog-item">
-                        <span class="title">Item 3</span>
-                        <span class="wait-time">Waits for: 20 hours</span>
-                        <span class="cost-of-delay">Cost of delay: €1000</span>
-                    </div>
-                    <div class="cost-of-delay-chart">
-                        <canvas id="item-3-cost-of-delay-chart"></canvas>
-                    </div>
-                    <div class="backlog-item">
-                        <span class="title">Item 4</span>
-                        <span class="wait-time">Waits for: 30 hours</span>
-                        <span class="cost-of-delay">Cost of delay: €1500</span>
-                    </div>
-                    <div class="cost-of-delay-chart">
-                        <canvas id="item-4-cost-of-delay-chart"></canvas>
-                    </div>
-                    <div class="backlog-item">
-                        <span class="title">Item 5</span>
-                        <span class="wait-time">Waits for: 40 hours</span>
-                        <span class="cost-of-delay">Cost of delay: €2000</span>
-                    </div>
-                    <div class="cost-of-delay-chart">
-                        <canvas id="item-5-cost-of-delay-chart"></canvas>
-                    </div>
-                </div>
-                <div class="cols">
-                    <div class="backlog-summary">
-                        <span class="summary-line">Total cost of delay: €5000</span>
-                        <span class="summary-line">Cost of delay for a new queue item: €2500</span>
-                    </div>
-                    <div class="cost-of-delay-chart">
+                        <canvas id="cost-of-delay-chart"></canvas>
                         <canvas id="cost-of-delay-cumulative-chart"></canvas>
                     </div>
                 </div>
-                <figcaption>ILLUSTRATION OF A BACKLOG WITH COSTS</figcaption>
+                <figcaption></figcaption>
             </figure>
             <script src="cost-of-delay-illustrations.js"></script>
 

@@ -102,6 +102,10 @@ table.board tr>td:first-child {
     margin: 0.1em;
 }
 
+#figure-cost-of-delay .cols>div {
+    flex: 150px;
+}
+
 .backlog-item,
 .backlog-summary {
     margin: 0.5em;
