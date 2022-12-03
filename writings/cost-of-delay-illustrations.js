@@ -1,6 +1,9 @@
 const generateCostOfDelayChart = function (id, dataSets, options) {
     options = options ? options : {};
-    const labels = ["Week 1", "Week 2", "Week 3", "Week 4"];
+    const labels = dataSets[0].map((_, i) => {
+        return `Week ${i + 1}`;
+    });
+
     const chartData = {
         labels: labels,
         datasets: dataSets.map ((data, i) => {
@@ -66,6 +69,21 @@ function cumulativeCosts(data) {
     }, []);
 }
 
+function computeCostsPerWeek(items, costPerWeek) {
+    const costs = [];
+    const weeks = items - 1;
+
+    for (let item = 0; item < items; item++) {
+        costs.push([]);
+        for (let week = 0; week < weeks; week++) {
+            let waiting = week < item;
+            costs[item].push(waiting ? costPerWeek : 0);
+        }
+    }
+
+    return costs;
+}
+
 (function() {
     [].forEach.call(document.querySelectorAll(".backlog-item"), function (div, i) {
         div.style.backgroundColor = indexedColor(i, 2);
@@ -73,30 +91,16 @@ function cumulativeCosts(data) {
         div.style.borderColor = indexedColor(i, 2);
     });
 
-    const item1Costs = [0, 0, 0, 0];
-    const item2Costs = [500, 0, 0, 0];
-    const item3Costs = [500, 500, 0, 0];
-    const item4Costs = [500, 500, 500, 0];
-    const item5Costs = [500, 500, 500, 500];
+    const costsPerWeek = computeCostsPerWeek(5, 500);
 
-    generateCostOfDelayChart('cost-of-delay-chart', [
-        item1Costs,
-        item2Costs,
-        item3Costs,
-        item4Costs,
-        item5Costs,
-    ], {
+    generateCostOfDelayChart('cost-of-delay-chart',
+        costsPerWeek, {
         barPercentage: 1.3,
         title: "Cost of delay incurred per week",
     });
 
-    generateCostOfDelayChart('cost-of-delay-cumulative-chart', [
-        cumulativeCosts(item1Costs),
-        cumulativeCosts(item2Costs),
-        cumulativeCosts(item3Costs),
-        cumulativeCosts(item4Costs),
-        cumulativeCosts(item5Costs),
-    ], {
-        title: "Cumulative cost of delay each week",
-    });
+    generateCostOfDelayChart('cost-of-delay-cumulative-chart',
+        costsPerWeek.map(cumulativeCosts), {
+         title: "Cumulative cost of delay each week",
+        });
 })();
