@@ -91,7 +91,7 @@ function computeCostsPerWeek(items, costPerWeek) {
         div.style.borderColor = indexedColor(i, 2);
     });
 
-    const costsPerWeek = computeCostsPerWeek(5, 500);
+    const costsPerWeek = computeCostsPerWeek(5, 2000);
 
     generateCostOfDelayChart('cost-of-delay-chart',
         costsPerWeek, {
