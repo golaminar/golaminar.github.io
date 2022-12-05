@@ -222,8 +222,8 @@ function createQueueDataset(index) {
     return {
         label: `Queue ${index + 1}`,
         data: [{ x: 0, y: 0 }],
-        backgroundColor: indexedColor(5, index),
-        borderColor: indexedColor(5, index),
+        backgroundColor: indexedColor(4, index),
+        borderColor: indexedColor(4, index),
         showLine: true,
     };
 }
