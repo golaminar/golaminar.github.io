@@ -48,7 +48,7 @@ const generateCostOfDelayChart = function (id, dataSets, options) {
                                 label += ': ';
                             }
                             if (context.parsed.y !== null) {
-                                label += new Intl.NumberFormat('en-US', { style: 'currency', currency: 'EUR' }).format(context.parsed.y);
+                                label += formatCost(context.parsed.y);
                             }
                             return label;
                         }
@@ -61,7 +61,16 @@ const generateCostOfDelayChart = function (id, dataSets, options) {
     new Chart(document.getElementById(id), config);
 };
 
-function cumulativeCosts(data) {
+function formatCost(cost) {
+    return new Intl.NumberFormat( "en-GB",
+        {
+            style: "currency",
+            currency: "EUR",
+            maximumSignificantDigits: 6,
+        }).format(cost);
+}
+
+function computeCumulativeCosts(data) {
     return data.reduce((ary, val) => {
         //data = [500, 500, 0, 0] => ary = [500, 1000, 1000, 1000]
         ary.push(val + (ary.length ? ary.at(-1) : 0));
@@ -84,14 +93,52 @@ function computeCostsPerWeek(items, costPerWeek) {
     return costs;
 }
 
-(function() {
-    [].forEach.call(document.querySelectorAll(".backlog-item"), function (div, i) {
-        div.style.backgroundColor = indexedColor(i, 2);
-        div.style.color = "white";
-        div.style.borderColor = indexedColor(i, 2);
-    });
+function makeBacklogItem(parent, position, weeklyCost) {
+    // position => index starting at zero
 
-    const costsPerWeek = computeCostsPerWeek(5, 2000);
+    const template = document.getElementById("backlog-item-template");
+    const itemElem = template.content.firstElementChild.cloneNode(true);
+
+    const title = `Item ${position + 1}`;
+    const waitTime = `Waits for: ${position} week${position === 1 ? "" : "s"}`;
+    const costOfDelay = `Cost of delay: ${formatCost(position * weeklyCost)}`;
+
+    itemElem.style.backgroundColor = indexedColor(position, 2);
+    itemElem.style.borderColor = indexedColor(position, 2);
+    itemElem.style.color = "white";
+
+    itemElem.querySelector(".title").textContent = title;
+    itemElem.querySelector(".wait-time").textContent = waitTime;
+    itemElem.querySelector(".cost-of-delay").textContent = costOfDelay;
+
+    parent.appendChild(itemElem);
+}
+
+function displayBacklogSummary(totalCost, nextItemCost) {
+    const elem = document.querySelector(".backlog-summary");
+    const summaryLine = `Total cost of delay: ${formatCost(totalCost)}`;
+    const nextItemNote = `Another item would add ${formatCost(nextItemCost)} to the total cost of delay.`
+
+    elem.querySelector(".summary-line").textContent = summaryLine;
+    elem.querySelector(".next-item-note").textContent = nextItemNote;
+}
+
+(function() {
+    const items = 5;
+    const weeklyCost = 2000;
+    const costsPerWeek = computeCostsPerWeek(items, weeklyCost);
+    const cumulativeCosts = costsPerWeek.map(computeCumulativeCosts)
+    const backlogElem = document.querySelector(".backlog-items");
+    const totalCostOfDelay = cumulativeCosts.at(-1).reduce((total, next)  => {
+        return total + next;
+    },0);
+    const nextItemCost = cumulativeCosts.at(-1).at(-1) + weeklyCost;
+
+    for (let i = 0; i < items; i++) {
+        makeBacklogItem(backlogElem, i, weeklyCost);
+    }
+
+    displayBacklogSummary(totalCostOfDelay, nextItemCost);
 
     generateCostOfDelayChart('cost-of-delay-chart',
         costsPerWeek, {
@@ -100,7 +147,8 @@ function computeCostsPerWeek(items, costPerWeek) {
     });
 
     generateCostOfDelayChart('cost-of-delay-cumulative-chart',
-        costsPerWeek.map(cumulativeCosts), {
-         title: "Cumulative cost of delay each week",
-        });
+        cumulativeCosts, {
+        title: "Cumulative cost of delay each week",
+    });
+
 })();

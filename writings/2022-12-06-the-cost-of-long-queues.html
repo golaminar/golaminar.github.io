@@ -52,36 +52,20 @@
             <p>Let’s run some numbers to see why. Imagine we pay a sole developer €50 per hour<sup><a href="#footnote-3" id="footnote-3-source">3</a></sup>, i.e. €2,000 per 40 hour work week. Let’s also assume that the ongoing value of what they deliver, once released, is €2,000 per week. Then let’s imagine there are 5 items in the development backlog, each requiring 1 week of that developer’s time to complete. A new item entering the queue will need to wait 5 weeks for the other items on the queue to be completed before it receives attention. So the cost of delay we pay on that new item is €10,000. In that time, we’re also paying the cost of delay on the other items in the queue – €8,000 for the 5th item with 4 in front of it, €6,000 for the next item up, and so on. So in the time it takes for that new item to reach the front of the queue, we have paid €30,000 in delay cost for the items in this queue. Meanwhile, 5 weeks of developer time have passed, costing us €10,000.</p>
 
             <figure id="figure-cost-of-delay" class="illustration">
-                <div id="backlog-illustration" class="cols">
-                    <div class="backlog-items">
-                        <div class="backlog-item">
-                            <span class="title">Item 1</span>
-                            <span class="wait-time">Waits for: 0 weeks</span>
-                            <span class="cost-of-delay">Cost of delay: €0</span>
-                        </div>
-                        <div class="backlog-item">
-                            <span class="title">Item 2</span>
-                            <span class="wait-time">Waits for: 1 week</span>
-                            <span class="cost-of-delay">Cost of delay: €2,000</span>
-                        </div>
-                        <div class="backlog-item">
-                            <span class="title">Item 3</span>
-                            <span class="wait-time">Waits for: 2 weeks</span>
-                            <span class="cost-of-delay">Cost of delay: €4,000</span>
-                        </div>
-                        <div class="backlog-item">
-                            <span class="title">Item 4</span>
-                            <span class="wait-time">Waits for: 3 weeks</span>
-                            <span class="cost-of-delay">Cost of delay: €6,000</span>
-                        </div>
-                        <div class="backlog-item">
-                            <span class="title">Item 5</span>
-                            <span class="wait-time">Waits for: 4 weeks</span>
-                            <span class="cost-of-delay">Cost of delay: €8,000</span>
+                <div class="cols">
+                    <div class="backlog">
+                        <div class="backlog-items">
+                            <template id="backlog-item-template">
+                                <div class="backlog-item">
+                                    <span class="title"></span>
+                                    <span class="wait-time"></span>
+                                    <span class="cost-of-delay"></span>
+                                </div>
+                            </template>
                         </div>
                         <div class="backlog-summary">
-                            <span class="summary-line">Total cost of delay: €20,000</span>
-                            A sixth item would add €10,000 to the total cost of delay.
+                            <span class="summary-line"></span>
+                            <span class="next-item-note"></span>
                         </div>
                     </div>
                     <div class="cost-of-delay-chart">
