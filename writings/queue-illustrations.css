@@ -113,6 +113,10 @@ table.board tr>td:first-child {
     background-color: #ffffff55;
 }
 
+.backlog-summary {
+    margin: 1em 0;
+}
+
 .backlog-items span, .backlog-summary span {
     display: block;
 }
