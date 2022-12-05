@@ -54,14 +54,19 @@
             <figure id="figure-cost-of-delay" class="illustration">
                 <div class="cols">
                     <div class="backlog">
+                        <div class="backlog-controls">
+                            <span class="title">Backlog</span>
+                            <span class="">Contains <input name="items-in-backlog" type="number" value="10"> items</span>
+                            <span class="">Each item has a weekly value of € <input name="weekly-value-of-items" type="number" value="2000"></span>
+                        </div>
+                        <template id="backlog-item-template">
+                            <div class="backlog-item">
+                                <span class="title"></span>
+                                <span class="wait-time"></span>
+                                <span class="cost-of-delay"></span>
+                            </div>
+                        </template>
                         <div class="backlog-items">
-                            <template id="backlog-item-template">
-                                <div class="backlog-item">
-                                    <span class="title"></span>
-                                    <span class="wait-time"></span>
-                                    <span class="cost-of-delay"></span>
-                                </div>
-                            </template>
                         </div>
                         <div class="backlog-summary">
                             <span class="summary-line"></span>

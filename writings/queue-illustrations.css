@@ -106,16 +106,21 @@ table.board tr>td:first-child {
     flex: 150px;
 }
 
+.backlog-controls .title {
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 1em;
+}
+
 .backlog-item,
 .backlog-summary {
-    margin: 0.5em;
+    margin: 1em 1em 0 0;
     border: 1px solid #bbb;
     padding: 5px;
     background-color: #ffffff55;
 }
 
-.backlog-item span,
-.backlog-summary span {
+.backlog span {
     display: block;
 }
 
@@ -125,4 +130,13 @@ table.board tr>td:first-child {
 
 .backlog-items {
     font-size: 0.9em;
+}
+
+.backlog-items {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.backlog-item {
+    flex: 150px;
 }
