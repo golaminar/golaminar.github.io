@@ -55,8 +55,14 @@
                 <div class="cols">
                     <div class="backlog">
                         <div class="backlog-controls">
-                            <span class="control">Backlog contains <input name="items-in-backlog" type="number" value="10" min="0" step="2"> items</span>
-                            <span class="control">Each item is expected to earn € <input name="weekly-value-of-items" type="number" value="2000" min="0" step="500"> / week</span>
+                            <div class="control">
+                                Backlog contains <span class="items-in-backlog-value">10</span> items
+                                <br><input name="items-in-backlog" type="range" value="10" min="0" max="50">
+                            </div>
+                            <div class="control">
+                                Each item is expected to earn <span class="weekly-value-of-items-value">€2,000</span> / week
+                                <br><input name="weekly-value-of-items" type="range" value="2000" min="0" max="10000" step="500">
+                            </div>
                         </div>
                         <template id="backlog-item-template">
                             <div class="backlog-item">

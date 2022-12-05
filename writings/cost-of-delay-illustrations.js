@@ -29,6 +29,7 @@ const generateCostOfDelayChart = function (id, chartData, options) {
         type: 'bar',
         data: chartData,
         options: {
+            animation: false,
             aspectRatio: 1.5,
             barPercentage: options.barPercentage,
             scales: {
@@ -198,7 +199,18 @@ function displayBacklogSummary(cumulativeCosts, weeklyCost) {
     renderBacklog();
 
     [itemsInput, weeklyCostInput].forEach(elem => {
+        function updateDisplay(event) {
+            const display = document.querySelector(`.${event.target.name}-value`);
+            const value = parseInt(event.target.value);
+            const innerHTML = event.target.name === "weekly-value-of-items" ? formatCost(value) : value ;
+            display.innerHTML = innerHTML;
+        }
+
         elem.addEventListener("change", renderBacklog);
+        elem.addEventListener("input", renderBacklog);
+
+        elem.addEventListener("change", updateDisplay);
+        elem.addEventListener("input", updateDisplay);
     });
 
 })();
