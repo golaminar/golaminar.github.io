@@ -1,4 +1,4 @@
-function computeChartData(dataPerWeek) {
+function computeCostofDelayChartData(dataPerWeek) {
     const firstWeekData = dataPerWeek[0] || [];
 
     const labels = firstWeekData.map((_, i) => {
@@ -187,10 +187,10 @@ function displayBacklogSummary(cumulativeCosts, weeklyCost) {
         populateBacklog(items, weeklyCost);
         displayBacklogSummary(cumulativeWeeklyCosts, weeklyCost);
 
-        perWeekChart.data = computeChartData(weeklyCosts);
+        perWeekChart.data = computeCostofDelayChartData(weeklyCosts);
         perWeekChart.update();
 
-        cumulativeChart.data = computeChartData(cumulativeWeeklyCosts);
+        cumulativeChart.data = computeCostofDelayChartData(cumulativeWeeklyCosts);
         cumulativeChart.update();
     }
 
