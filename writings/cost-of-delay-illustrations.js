@@ -1,5 +1,7 @@
 function computeChartData(dataSets) {
-    const labels = dataSets[0].map((_, i) => {
+    const firstItemData = dataSets[0] || [];
+
+    const labels = firstItemData.map((_, i) => {
         return `Week ${i + 1}`;
     });
 
@@ -33,6 +35,7 @@ const generateCostOfDelayChart = function (id, chartData, options) {
                 y: {
                     stacked: true,
                     suggestedMin: 0,
+                    suggestedMax: 1000,
                 }
             },
             plugins: {
@@ -104,6 +107,13 @@ function populateBacklog(items, weeklyCost) {
     for (let i = 0; i < items; i++) {
         makeBacklogItem(backlogElem, i, weeklyCost);
     }
+
+    if (items === 0) {
+        const template = document.getElementById("backlog-item-template");
+        const elem = template.content.firstElementChild.cloneNode(true);
+        elem.innerHTML = "<span><i>The backlog is empty</i></span>";
+        backlogElem.appendChild(elem);
+    }
 }
 
 function makeBacklogItem(parent, position, weeklyCost) {
@@ -131,10 +141,15 @@ function makeBacklogItem(parent, position, weeklyCost) {
 }
 
 function displayBacklogSummary(cumulativeCosts, weeklyCost) {
-    const totalCost = cumulativeCosts.at(-1).reduce((total, next) => {
+    const finalWeekCosts = cumulativeCosts.at(-1) || [];
+
+    const totalCost = finalWeekCosts.reduce((total, next) => {
         return total + next;
     }, 0);
-    const nextItemCost = cumulativeCosts.at(-1).at(-1) + weeklyCost;
+
+    const nextItemCost = cumulativeCosts.length === 0
+                ? 0 // i.e. next item is the first item
+                : (finalWeekCosts.at(-1) || 0) + weeklyCost;
 
     const elem = document.querySelector(".backlog-summary");
     const summaryLine = `Total cost of delay: ${formatCost(totalCost)}`;
