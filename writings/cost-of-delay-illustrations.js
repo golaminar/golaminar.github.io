@@ -1,20 +1,22 @@
-function computeChartData(dataSets) {
-    const firstItemData = dataSets[0] || [];
+function computeChartData(dataPerWeek) {
+    const firstWeekData = dataPerWeek[0] || [];
 
-    const labels = firstItemData.map((_, i) => {
+    const labels = firstWeekData.map((_, i) => {
         return `Week ${i + 1}`;
+    });
+
+    const datasets = dataPerWeek.map((data, i) => {
+        return {
+            label: `Item ${i + 1}`,
+            backgroundColor: indexedColor(i, Math.floor(i / 10)),
+            data: data,
+            order: dataPerWeek.length - i,
+        };
     });
 
     const chartData = {
         labels: labels,
-        datasets: dataSets.map((data, i) => {
-            return {
-                label: `Item ${i + 1}`,
-                backgroundColor: indexedColor(i, Math.floor(i / 10)),
-                data: data,
-                order: dataSets.length - i,
-            };
-        })
+        datasets: datasets,
     };
 
     return chartData;
@@ -179,16 +181,16 @@ function displayBacklogSummary(cumulativeCosts, weeklyCost) {
         const items = parseInt(itemsInput.value);
         const weeklyCost = parseInt(weeklyCostInput.value);
 
-        const costsPerWeek = computeCostsPerWeek(items, weeklyCost);
-        const cumulativeCosts = costsPerWeek.map(computeCumulativeCosts);
+        const weeklyCosts = computeCostsPerWeek(items, weeklyCost);
+        const cumulativeWeeklyCosts = weeklyCosts.map(computeCumulativeCosts);
 
         populateBacklog(items, weeklyCost);
-        displayBacklogSummary(cumulativeCosts, weeklyCost);
+        displayBacklogSummary(cumulativeWeeklyCosts, weeklyCost);
 
-        perWeekChart.data = computeChartData(costsPerWeek);
+        perWeekChart.data = computeChartData(weeklyCosts);
         perWeekChart.update();
 
-        cumulativeChart.data = computeChartData(cumulativeCosts);
+        cumulativeChart.data = computeChartData(cumulativeWeeklyCosts);
         cumulativeChart.update();
     }
 
