@@ -56,8 +56,7 @@
                     <div class="backlog">
                         <div class="backlog-controls">
                             <span class="title">Backlog</span>
-                            <span class="">Contains <input name="items-in-backlog" type="number" value="10" min="0" step="5"> items</span>
-                            <span class="">Each item is expected to earn € <input name="weekly-value-of-items" type="number" value="2000" min="0" step="500"> / week</span>
+                            <span class="">Contains <input name="items-in-backlog" type="number" value="10" min="0" step="2"> items</span>
                         </div>
                         <template id="backlog-item-template">
                             <div class="backlog-item">
@@ -73,7 +72,11 @@
                             <span class="next-item-note"></span>
                         </div>
                     </div>
-                    <div class="cost-of-delay-chart">
+                    <div class="cost-of-delay-charts">
+                        <div class="backlog-controls">
+                            <span class="title">Cost of Delay</span>
+                            <span class="">Each item is expected to earn € <input name="weekly-value-of-items" type="number" value="2000" min="0" step="500"> / week</span>
+                        </div>
                         <canvas id="cost-of-delay-chart"></canvas>
                         <canvas id="cost-of-delay-cumulative-chart"></canvas>
                     </div>

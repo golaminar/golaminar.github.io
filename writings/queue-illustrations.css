@@ -108,23 +108,22 @@ table.board tr>td:first-child {
 
 .backlog-controls .title {
     font-weight: bold;
-    text-align: center;
-    margin-bottom: 1em;
 }
 
 .backlog-controls span {
-    margin: 0.5em 0;
+    margin: 1em 0;
+    text-align: center;
 }
 
 .backlog-item,
 .backlog-summary {
-    margin: 1em 1em 0 0;
+    margin: 0 0 1em 0;
     border: 1px solid #bbb;
     padding: 5px;
     background-color: #ffffff55;
 }
 
-.backlog span {
+#figure-cost-of-delay span {
     display: block;
 }
 
@@ -137,10 +136,10 @@ table.board tr>td:first-child {
 }
 
 .backlog-items {
-    display: flex;
-    flex-wrap: wrap;
+    columns: 2;
+    margin-bottom: 1em;
 }
 
 .backlog-item {
-    flex: 150px;
+    break-inside: avoid-column;
 }
