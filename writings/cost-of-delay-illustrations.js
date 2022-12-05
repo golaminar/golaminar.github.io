@@ -121,7 +121,12 @@ function makeBacklogItem(parent, position, weeklyCost) {
     parent.appendChild(itemElem);
 }
 
-function displayBacklogSummary(totalCost, nextItemCost) {
+function displayBacklogSummary(cumulativeCosts, weeklyCost) {
+    const totalCost = cumulativeCosts.at(-1).reduce((total, next) => {
+        return total + next;
+    }, 0);
+    const nextItemCost = cumulativeCosts.at(-1).at(-1) + weeklyCost;
+
     const elem = document.querySelector(".backlog-summary");
     const summaryLine = `Total cost of delay: ${formatCost(totalCost)}`;
     const nextItemNote = `Another item would add ${formatCost(nextItemCost)} to the total cost of delay.`
@@ -153,11 +158,6 @@ function displayBacklogSummary(totalCost, nextItemCost) {
         const costsPerWeek = computeCostsPerWeek(items, weeklyCost);
         const cumulativeCosts = costsPerWeek.map(computeCumulativeCosts);
 
-        const totalCostOfDelay = cumulativeCosts.at(-1).reduce((total, next) => {
-            return total + next;
-        }, 0);
-        const nextItemCost = cumulativeCosts.at(-1).at(-1) + weeklyCost;
-
         const backlogElem = document.querySelector(".backlog-items");
         backlogElem.innerHTML = "";
 
@@ -165,7 +165,7 @@ function displayBacklogSummary(totalCost, nextItemCost) {
             makeBacklogItem(backlogElem, i, weeklyCost);
         }
 
-        displayBacklogSummary(totalCostOfDelay, nextItemCost);
+        displayBacklogSummary(cumulativeCosts, weeklyCost);
 
         perWeekChart.data = computeChartData(costsPerWeek);
         perWeekChart.update();
