@@ -9,7 +9,7 @@ const generateCostOfDelayChart = function (id, dataSets, options) {
         datasets: dataSets.map ((data, i) => {
             return {
                 label: `Item ${i + 1}`,
-                backgroundColor: indexedColor(i, 2),
+                backgroundColor: indexedColor(i, Math.floor(i / 10)),
                 data: data,
                 order: dataSets.length - i,
             };
@@ -103,9 +103,12 @@ function makeBacklogItem(parent, position, weeklyCost) {
     const waitTime = `Waits for: ${position} week${position === 1 ? "" : "s"}`;
     const costOfDelay = `Cost of delay: ${formatCost(position * weeklyCost)}`;
 
-    itemElem.style.backgroundColor = indexedColor(position, 2);
-    itemElem.style.borderColor = indexedColor(position, 2);
-    itemElem.style.color = "white";
+    itemElem.style.backgroundColor = indexedColor(position, Math.floor(position / 10));
+    itemElem.style.borderColor = indexedColor(position, Math.floor(position / 10));
+
+    if ((position % 10) < 5) {
+        itemElem.style.color = "white";
+    }
 
     itemElem.querySelector(".title").textContent = title;
     itemElem.querySelector(".wait-time").textContent = waitTime;

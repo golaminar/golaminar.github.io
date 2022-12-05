@@ -46,30 +46,6 @@ function indexedColor(index, schemeIndex) {
             /*--blizzard-blue-2*/ "#b8ebf5ff",
             /*--powder-blue*/ "#c6eff7ff",
         ], [
-            // https://coolors.co/palette/ffedd8-f3d5b5-e7bc91-d4a276-bc8a5f-a47148-8b5e34-6f4518-603808-583101
-            /*--pullman-brown-ups-brown-2*/ "#583101ff",
-            /*--pullman-brown-ups-brown*/ "#603808ff",
-            /*--sepia*/ "#6f4518ff",
-            /*--coyote-brown*/ "#8b5e34ff",
-            /*--cafe-au-lait*/ "#a47148ff",
-            /*--camel*/ "#bc8a5fff",
-            /*--tan-crayola*/ "#d4a276ff",
-            /*--gold-crayola*/ "#e7bc91ff",
-            /*--peach-puff*/ "#f3d5b5ff",
-            /*--antique-white*/ "#ffedd8ff",
-        ], [
-            // https://coolors.co/palette/ff7b00-ff8800-ff9500-ffa200-ffaa00-ffb700-ffc300-ffd000-ffdd00-ffea00
-            /*--heat-wave*/ "#ff7b00ff",
-            /*--dark-orange*/ "#ff8800ff",
-            /*--yellow-orange-color-wheel*/ "#ff9500ff",
-            /*--orange-peel*/ "#ffa200ff",
-            /*--chrome-yellow*/ "#ffaa00ff",
-            /*--selective-yellow*/ "#ffb700ff",
-            /*--mikado-yellow*/ "#ffc300ff",
-            /*--cyber-yellow*/ "#ffd000ff",
-            /*--golden-yellow*/ "#ffdd00ff",
-            /*--middle-yellow*/ "#ffea00ff",
-        ], [
             // https://coolors.co/palette/310055-3c0663-4a0a77-5a108f-6818a5-8b2fc9-ab51e3-bd68ee-d283ff-dc97ff
             /*--russian-violet*/ "#310055ff",
             /*--persian-indigo*/ "#3c0663ff",
@@ -93,6 +69,30 @@ function indexedColor(index, schemeIndex) {
             /*--cardinal-2*/ "#c71f37ff",
             /*--crimson*/ "#da1e37ff",
             /*--rose-madder*/ "#e01e37ff",
+        ], [
+            // https://coolors.co/palette/ffedd8-f3d5b5-e7bc91-d4a276-bc8a5f-a47148-8b5e34-6f4518-603808-583101
+            /*--pullman-brown-ups-brown-2*/ "#583101ff",
+            /*--pullman-brown-ups-brown*/ "#603808ff",
+            /*--sepia*/ "#6f4518ff",
+            /*--coyote-brown*/ "#8b5e34ff",
+            /*--cafe-au-lait*/ "#a47148ff",
+            /*--camel*/ "#bc8a5fff",
+            /*--tan-crayola*/ "#d4a276ff",
+            /*--gold-crayola*/ "#e7bc91ff",
+            /*--peach-puff*/ "#f3d5b5ff",
+            /*--antique-white*/ "#ffedd8ff",
+        ], [
+            // https://coolors.co/palette/ff7b00-ff8800-ff9500-ffa200-ffaa00-ffb700-ffc300-ffd000-ffdd00-ffea00
+            /*--heat-wave*/ "#ff7b00ff",
+            /*--dark-orange*/ "#ff8800ff",
+            /*--yellow-orange-color-wheel*/ "#ff9500ff",
+            /*--orange-peel*/ "#ffa200ff",
+            /*--chrome-yellow*/ "#ffaa00ff",
+            /*--selective-yellow*/ "#ffb700ff",
+            /*--mikado-yellow*/ "#ffc300ff",
+            /*--cyber-yellow*/ "#ffd000ff",
+            /*--golden-yellow*/ "#ffdd00ff",
+            /*--middle-yellow*/ "#ffea00ff",
         ],
     ];
 
