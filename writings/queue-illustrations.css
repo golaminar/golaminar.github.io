@@ -106,13 +106,8 @@ table.board tr>td:first-child {
     flex: 150px;
 }
 
-.backlog-controls .title {
-    font-weight: bold;
-}
-
 .backlog-controls span {
     margin: 1em 0;
-    text-align: center;
 }
 
 .backlog-item,
@@ -133,13 +128,14 @@ table.board tr>td:first-child {
 
 .backlog-items {
     font-size: 0.9em;
-}
-
-.backlog-items {
     columns: 2;
-    margin-bottom: 1em;
+    padding: 1em 0;
 }
 
 .backlog-item {
     break-inside: avoid-column;
+}
+
+#figure-cost-of-delay canvas {
+    margin: 1em 0;
 }

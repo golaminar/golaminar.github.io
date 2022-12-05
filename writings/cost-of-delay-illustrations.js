@@ -29,6 +29,7 @@ const generateCostOfDelayChart = function (id, chartData, options) {
         type: 'bar',
         data: chartData,
         options: {
+            aspectRatio: 1.5,
             barPercentage: options.barPercentage,
             scales: {
                 x: {
@@ -125,7 +126,7 @@ function makeBacklogItem(parent, position, weeklyCost) {
     const itemElem = template.content.firstElementChild.cloneNode(true);
 
     const title = `Item ${position + 1}`;
-    const waitTime = `Waits: <nobr>${position} wk${position === 1 ? "" : "s"}</nobr>`;
+    const waitTime = `Waits: <nobr>${position} week${position === 1 ? "" : "s"}</nobr>`;
     const costOfDelay = `Cost of delay: ${formatCost(position * weeklyCost)}`;
 
     itemElem.style.backgroundColor = indexedColor(position, Math.floor(position / 10));
