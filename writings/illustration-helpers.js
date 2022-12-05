@@ -104,3 +104,12 @@ function indexedColor(index, schemeIndex) {
 
     return scheme[index % scheme.length];
 }
+
+// Array.prototype.at is fancy! Polyfill for older versions of Safari
+if (![].at) {
+    Array.prototype.at = function (pos) {
+        return pos < 0
+            ? this[this.length + pos]
+            : this.slice(pos, pos + 1)[0];
+    }
+}
