@@ -112,6 +112,10 @@ table.board tr>td:first-child {
     margin-bottom: 1em;
 }
 
+.backlog-controls span {
+    margin: 0.5em 0;
+}
+
 .backlog-item,
 .backlog-summary {
     margin: 1em 1em 0 0;
