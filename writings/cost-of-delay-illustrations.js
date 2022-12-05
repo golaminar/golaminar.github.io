@@ -97,6 +97,15 @@ function computeCostsPerWeek(items, costPerWeek) {
     return costs;
 }
 
+function populateBacklog(items, weeklyCost) {
+    const backlogElem = document.querySelector(".backlog-items");
+    backlogElem.innerHTML = "";
+
+    for (let i = 0; i < items; i++) {
+        makeBacklogItem(backlogElem, i, weeklyCost);
+    }
+}
+
 function makeBacklogItem(parent, position, weeklyCost) {
     // position => index starting at zero
 
@@ -158,13 +167,7 @@ function displayBacklogSummary(cumulativeCosts, weeklyCost) {
         const costsPerWeek = computeCostsPerWeek(items, weeklyCost);
         const cumulativeCosts = costsPerWeek.map(computeCumulativeCosts);
 
-        const backlogElem = document.querySelector(".backlog-items");
-        backlogElem.innerHTML = "";
-
-        for (let i = 0; i < items; i++) {
-            makeBacklogItem(backlogElem, i, weeklyCost);
-        }
-
+        populateBacklog(items, weeklyCost);
         displayBacklogSummary(cumulativeCosts, weeklyCost);
 
         perWeekChart.data = computeChartData(costsPerWeek);
