@@ -200,7 +200,6 @@ function displayBacklogSummary(cumulativeCosts, weeklyCost) {
 
     [itemsInput, weeklyCostInput].forEach(elem => {
         function updateDisplay(event) {
-            document.querySelector(".log").innerHTML = (`name is ${event.target.name}`)
             const display = document.querySelector(`.${event.target.name}-value`);
             const value = parseInt(event.target.value);
             const innerHTML = event.target.name === "weekly-value-of-items" ? formatCost(value) : value ;
