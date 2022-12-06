@@ -140,8 +140,11 @@ function queueSimulation(simIndex, queueDataset) {
         diableStartButton(startButton);
         resetSimulation();
 
-        const expectedArrivalInterval = parseInt(document.querySelector("[name=expected-arrival-time-interval]").value);
-        const expectedServiceTime = parseInt(document.querySelector("[name=expected-service-time]").value);
+        const expectedArrivals = parseInt(document.querySelector("[name=arrivals-per-cycle]").value);
+        const expectedArrivalInterval = 40 / expectedArrivals;
+
+        const expectedCompleted = parseInt(document.querySelector("[name=completed-per-cycle]").value);
+        const expectedServiceTime = 40 / expectedCompleted;
 
         const slowdownFactor = 1;
         const tickDuration = expectedArrivalInterval * 3 * 2 / slowdownFactor;
