@@ -110,7 +110,7 @@ function queueSimulation(simIndex, queueDataset) {
     }
 
     function advanceChartElapsedTime(elapsedTime) {
-        queueLengthsChart.options.scales.x.max = elapsedTime;
+        queueLengthsChart.options.scales.x.max = Math.floor(elapsedTime);
         queueLengthsChart.update();
     }
 
@@ -141,15 +141,15 @@ function queueSimulation(simIndex, queueDataset) {
         resetSimulation();
 
         const expectedArrivals = parseInt(document.querySelector("[name=arrivals-per-cycle]").value);
-        const expectedArrivalInterval = 40 / expectedArrivals;
+        const expectedArrivalInterval = 1 / expectedArrivals;
 
         const expectedCompleted = parseInt(document.querySelector("[name=completed-per-cycle]").value);
-        const expectedServiceTime = 40 / expectedCompleted;
+        const expectedServiceTime = 1 / expectedCompleted;
 
         const slowdownFactor = 1;
-        const tickDuration = expectedArrivalInterval * 3 * 2 / slowdownFactor;
-        const numberOfTicks = 240 / 2 * slowdownFactor;
-        const scalingFactor = expectedArrivalInterval / 12 / slowdownFactor;
+        const tickDuration = 1 / slowdownFactor / 6;
+        const numberOfTicks = 12 * 6 * slowdownFactor;
+        const scalingFactor = expectedArrivalInterval / slowdownFactor / 25;
         const totalTime = tickDuration * numberOfTicks / slowdownFactor;
 
         const arrivalTimes = generateArrivalTimes(expectedArrivalInterval, totalTime);
@@ -169,7 +169,7 @@ function queueSimulation(simIndex, queueDataset) {
         let queueEventsThisTick = [];
 
         pushEventsToChart(queueEvents);
-        advanceChartElapsedTime(1);
+        advanceChartElapsedTime(0);
 
         function animateQueue(timestamp) {
             tickEnd = tickStart + tickDuration;
@@ -244,40 +244,25 @@ const queueLengthsChartConfig = {
             x: {
                 type: 'linear',
                 suggestedMin: 0,
-                suggestedMax: 1,
+                suggestedMax: 12,
                 title: {
                     display: true,
-                    text: "Elapsed time",
+                    text: "Elapsed Weeks",
                 },
                 ticks: {
-                    display: false,
+                    display: true,
+                    stepSize: 1,
                 },
                 grid: {
                     display: false,
                 },
             },
             y: {
-                suggestedMin: -5,
+                suggestedMin: 0,
                 suggestedMax: 15,
                 title: {
                     display: true,
-                    text: "Queue length",
-                },
-                grid: {
-                    color: function (context) {
-                        if (context.tick.value === 0) {
-                            return '#f72585ff';
-                        } else {
-                            return 'rgb(201, 203, 207)';
-                        }
-                    },
-                    borderDash: function (context) {
-                        if (context.tick.value === 0) {
-                            return [5, 5];
-                        } else {
-                            return [0];
-                        }
-                    },
+                    text: "Items in backlog",
                 },
             },
         },
