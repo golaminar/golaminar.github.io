@@ -104,8 +104,8 @@ function computeCostsPerWeek(items, costPerWeek) {
     return costs;
 }
 
-function populateBacklog(items, weeklyCost) {
-    const backlogElem = document.querySelector(".backlog-items");
+function populateBacklog(figure, items, weeklyCost) {
+    const backlogElem = figure.querySelector(".backlog-items");
     backlogElem.innerHTML = "";
 
     for (let i = 0; i < items; i++) {
@@ -144,7 +144,7 @@ function makeBacklogItem(parent, position, weeklyCost) {
     parent.appendChild(itemElem);
 }
 
-function displayBacklogSummary(cumulativeCosts, weeklyCost) {
+function displayBacklogSummary(figure, cumulativeCosts, weeklyCost) {
     const finalWeekCosts = cumulativeCosts.at(-1) || [];
 
     const totalCost = finalWeekCosts.reduce((total, next) => {
@@ -155,7 +155,7 @@ function displayBacklogSummary(cumulativeCosts, weeklyCost) {
                 ? 0 // i.e. next item is the first item
                 : (finalWeekCosts.at(-1) || 0) + weeklyCost;
 
-    const elem = document.querySelector(".backlog-summary");
+    const elem = figure.querySelector(".backlog-summary");
     const summaryLine = `Total cost of delay: ${formatCost(totalCost)}`;
     const nextItemNote = `Another item would add ${formatCost(nextItemCost)} to the total cost of delay.`
 
@@ -182,9 +182,11 @@ function generateDevCostsDataset(data) {
 
 (function() {
 
-    const itemsInput = document.querySelector("[name=items-in-backlog]");
-    const weeklyCostInput = document.querySelector("[name=weekly-value-of-items]");
-    const devCostInput = document.querySelector("[name=weekly-dev-cost]");
+    const figure = document.querySelector("#figure-cost-of-delay");
+
+    const itemsInput = figure.querySelector("[name=items-in-backlog]");
+    const weeklyCostInput = figure.querySelector("[name=weekly-value-of-items]");
+    const devCostInput = figure.querySelector("[name=weekly-dev-cost]");
 
     const perWeekChart = generateCostOfDelayChart('cost-of-delay-chart',
         [[]], {
@@ -212,8 +214,8 @@ function generateDevCostsDataset(data) {
         const weeklyCosts = computeCostsPerWeek(items, weeklyCost);
         const cumulativeWeeklyCosts = weeklyCosts.map(computeCumulativeCosts);
 
-        populateBacklog(items, weeklyCost);
-        displayBacklogSummary(cumulativeWeeklyCosts, weeklyCost);
+        populateBacklog(figure, items, weeklyCost);
+        displayBacklogSummary(figure, cumulativeWeeklyCosts, weeklyCost);
 
         perWeekChart.data = computeCostofDelayChartData(weeklyCosts);
         perWeekChart.update();
@@ -228,7 +230,7 @@ function generateDevCostsDataset(data) {
 
     [itemsInput, weeklyCostInput, devCostInput].forEach(elem => {
         function updateDisplay(event) {
-            const display = document.querySelector(`.${event.target.name}-value`);
+            const display = figure.querySelector(`.${event.target.name}-value`);
             const value = parseInt(event.target.value);
             const innerHTML = event.target.name === "items-in-backlog" ? value : formatCost(value);
             display.innerHTML = innerHTML;
