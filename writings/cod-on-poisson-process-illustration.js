@@ -147,11 +147,9 @@ function queueSimulation(simIndex, queueDataset) {
         const expectedCompleted = parseInt(document.querySelector("[name=completed-per-cycle]").value);
         const expectedServiceTime = 1 / expectedCompleted;
 
-        const slowdownFactor = 1;
-        const tickDuration = 1 / slowdownFactor / 6;
-        const numberOfTicks = 12 * 6 * slowdownFactor;
-        const scalingFactor = expectedArrivalInterval / slowdownFactor / 25;
-        const totalTime = tickDuration * numberOfTicks / slowdownFactor;
+        const tickDuration = 1 / 6;
+        const scalingFactor = 0.01;
+        const totalTime = 12;
 
         const arrivalTimes = generateArrivalTimes(expectedArrivalInterval, totalTime);
         const serviceTimes = generateServiceTimes(expectedServiceTime, arrivalTimes.length);
