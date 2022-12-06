@@ -2,6 +2,9 @@
 // even if those functions are never called.
 
 let document = {
+    addEventListener: function () {
+        return this;
+    },
     querySelector: function () {
         return false;
     },
