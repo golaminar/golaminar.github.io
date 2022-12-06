@@ -229,18 +229,8 @@ function generateDevCostsDataset(data) {
     renderBacklog();
 
     [itemsInput, weeklyCostInput, devCostInput].forEach(elem => {
-        function updateDisplay(event) {
-            const display = figure.querySelector(`.${event.target.name}-value`);
-            const value = parseInt(event.target.value);
-            const innerHTML = event.target.name === "items-in-backlog" ? value : formatCost(value);
-            display.innerHTML = innerHTML;
-        }
-
         elem.addEventListener("change", renderBacklog);
         elem.addEventListener("input", renderBacklog);
-
-        elem.addEventListener("change", updateDisplay);
-        elem.addEventListener("input", updateDisplay);
     });
 
 })();

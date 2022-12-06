@@ -113,3 +113,31 @@ if (![].at) {
             : this.slice(pos, pos + 1)[0];
     }
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    const figures = document.querySelectorAll("figure");
+
+    [].forEach.call(figures, (figure) => {
+
+        const rangeInputs = figure.querySelectorAll("input[type=range]");
+
+        [].forEach.call(rangeInputs, elem => {
+            const display = figure.querySelector(`.${elem.name}-value`);
+
+            if (display === undefined) {
+                return;
+            }
+
+            function updateDisplay(event) {
+                const value = parseInt(event.target.value);
+                const innerHTML = event.target.dataset.unit === "euro" ? formatCost(value) : value;
+                display.innerHTML = innerHTML;
+            }
+
+            elem.addEventListener("input", updateDisplay);
+        });
+
+    });
+
+}, false);
