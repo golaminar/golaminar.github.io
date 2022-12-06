@@ -288,7 +288,10 @@ const queueLengthsChart = new Chart(
     queueLengthsChartConfig
 );
 
-const queueDataset = createQueueDataset(0);
-queueLengthsDatasets.push(queueDataset);
-queueLengthsChart.update();
-queueSimulation(0, queueDataset);
+(function () {
+    const queueDataset = createQueueDataset(0);
+    queueLengthsDatasets.push(queueDataset);
+    queueLengthsChart.update();
+    queueSimulation(0, queueDataset);
+})();
+
