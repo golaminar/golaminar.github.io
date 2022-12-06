@@ -1,7 +1,6 @@
 const { isDeepEqual } = require("./test-helpers");
 
-// this is the tests!!
-console.log("These are the tests:\n-----------------");
+console.log("These are the queue simulation tests:\n-----------------");
 
 (function () {
 
@@ -40,7 +39,6 @@ console.log("These are the tests:\n-----------------");
     console.log("ordered queue events are properly computed", isDeepEqual(queueEvents, expectedQueueEvents));
 })();
 
-// this is the tests!!
 console.log("These are the backlog behaviour tests:\n-----------------");
 
 (function () {
