@@ -174,16 +174,9 @@ function computeWeeklyDevCosts(items, weeklyDevCost) {
 function generateDevCostsDataset(data) {
     return {
         label: "Development Costs",
-            data: data,
-            type: 'line',
-            backgroundColor: "#999",
-            options: {
-                plugins: {
-                    legend: {
-                        display: true,
-                },
-            },
-        },
+        data: data,
+        type: 'line',
+        backgroundColor: "#999",
     };
 }
 
