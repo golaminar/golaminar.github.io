@@ -1,5 +1,3 @@
-const { isDeepEqual } = require("./test-helpers");
-
 // this is the tests!!
 console.log("These are the backlog behaviour tests:\n-----------------");
 

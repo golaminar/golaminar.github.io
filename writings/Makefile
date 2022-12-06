@@ -1,15 +1,11 @@
-test: clean queue-tests.js backlog-tests.js
-	node queue-tests.js
-	node backlog-tests.js
+test: clean tests.js
+	node tests.js
 
-queue-tests.js:
-	cat tests-header.js calculated-intervals.js illustration-helpers.js  queue-illustrations.js queue-illustration-tests.js > queue-tests.js
-
-backlog-tests.js:
-	cat tests-header.js illustration-helpers.js backlog-growth-illustrations.js backlog-behaviour-tests.js > backlog-tests.js
+tests.js:
+	cat test-helpers.js tests-header.js calculated-intervals.js illustration-helpers.js  queue-illustrations.js backlog-growth-illustrations.js queue-illustration-tests.js backlog-behaviour-tests.js > tests.js
 
 clean:
-	touch queue-tests.js backlog-tests.js
-	rm queue-tests.js backlog-tests.js
+	touch tests.js
+	rm tests.js
 
 .PHONY: test clean
