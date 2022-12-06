@@ -163,10 +163,35 @@ function displayBacklogSummary(cumulativeCosts, weeklyCost) {
     elem.querySelector(".next-item-note").textContent = nextItemNote;
 }
 
+function computeWeeklyDevCosts(items, weeklyDevCost) {
+    const costs = [];
+    for (let i = 0; i < items; i++) {
+        costs.push(weeklyDevCost);
+    }
+    return costs;
+}
+
+function generateDevCostsDataset(data) {
+    return {
+        label: "Development Costs",
+            data: data,
+            type: 'line',
+            backgroundColor: "#999",
+            options: {
+                plugins: {
+                    legend: {
+                        display: true,
+                },
+            },
+        },
+    };
+}
+
 (function() {
 
     const itemsInput = document.querySelector("[name=items-in-backlog]");
     const weeklyCostInput = document.querySelector("[name=weekly-value-of-items]");
+    const devCostInput = document.querySelector("[name=weekly-dev-cost]");
 
     const perWeekChart = generateCostOfDelayChart('cost-of-delay-chart',
         [[]], {
@@ -178,6 +203,14 @@ function displayBacklogSummary(cumulativeCosts, weeklyCost) {
         [[]], {
         title: "Cumulative cost of delay each week",
     });
+
+    function showDevCosts() {
+        const items = parseInt(itemsInput.value);
+        const weeklyCost = parseInt(devCostInput.value);
+        const weeklyCosts = computeWeeklyDevCosts(items, weeklyCost)
+        cumulativeChart.data.datasets.push(generateDevCostsDataset(computeCumulativeCosts(weeklyCosts)));
+        cumulativeChart.update();
+    }
 
     function renderBacklog() {
         const items = parseInt(itemsInput.value);
@@ -194,15 +227,17 @@ function displayBacklogSummary(cumulativeCosts, weeklyCost) {
 
         cumulativeChart.data = computeCostofDelayChartData(cumulativeWeeklyCosts);
         cumulativeChart.update();
+
+        showDevCosts();
     }
 
     renderBacklog();
 
-    [itemsInput, weeklyCostInput].forEach(elem => {
+    [itemsInput, weeklyCostInput, devCostInput].forEach(elem => {
         function updateDisplay(event) {
             const display = document.querySelector(`.${event.target.name}-value`);
             const value = parseInt(event.target.value);
-            const innerHTML = event.target.name === "weekly-value-of-items" ? formatCost(value) : value ;
+            const innerHTML = event.target.name === "items-in-backlog" ? value : formatCost(value);
             display.innerHTML = innerHTML;
         }
 

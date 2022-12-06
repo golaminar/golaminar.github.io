@@ -170,3 +170,7 @@ input[type="range"]::-webkit-slider-thumb:after {
     background: #333;
     background: linear-gradient(to right, #f088fc 1%, #AC6CFF 70%);
 }
+
+#figure-cost-of-delay .charts {
+    margin-bottom: 1em;
+}
