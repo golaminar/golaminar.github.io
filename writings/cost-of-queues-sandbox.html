@@ -80,7 +80,6 @@
               <button class="playback-queue-behaviour">Run simulation</button>
               <br><br><br>
 
-
               <div class="cols">
                 <div class="col">
                   <div class="backlog-controls">
@@ -119,7 +118,7 @@
                         <table class="queue-status">
                           <tr>
                             <th>Average wait time:</th>
-                            <td><span class="avg-wait-time">—</span> seconds</td>
+                            <td><span class="avg-wait-time">—</span> days</td>
                           </tr>
                         </table>
                       </div>
@@ -135,6 +134,7 @@
 
               <figcaption>This illustration shows the behaviour and costs of a backlog operating over time,
                 where items enter the queue at random intervals and developement velocity is subject to random variablity.
+                For simplicity, developement times and costs have been applied uniformly, not accounting for working hours.
                 Such queues operating at nearly 100% utilization have a tendency to grow,
                 which means the cost of delay per item grows.
                 For details about how these simulations are implemented,

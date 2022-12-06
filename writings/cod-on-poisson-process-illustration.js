@@ -82,7 +82,8 @@ function queueSimulation(simIndex, queueDataset) {
         newServiceTime: function (_, event) {
             d3.select(parentElem).select(".avg-wait-time")
                 .text(() => {
-                    return event === undefined ? "–" : Math.round(event.avgWaitTime);
+                    // show is days, rounded to one digit
+                    return event === undefined ? "–" : Math.round(event.avgWaitTime * 7 * 10)/10;
                 });
         },
     }
@@ -239,7 +240,7 @@ const queueLengthsChartConfig = {
         datasets: queueLengthsDatasets,
     },
     options: {
-        aspectRatio: 1,
+        aspectRatio: 1.5,
         scales: {
             x: {
                 type: 'linear',
@@ -259,7 +260,7 @@ const queueLengthsChartConfig = {
             },
             y: {
                 suggestedMin: 0,
-                suggestedMax: 15,
+                suggestedMax: 20,
                 title: {
                     display: true,
                     text: "Items in backlog",
