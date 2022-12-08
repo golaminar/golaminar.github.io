@@ -114,7 +114,6 @@ function computeQueueEvents(cumulativeArrivalTimes, serviceBehaviour) {
             timestamp: time,
             type: "arrival",
             waitTime: serviceBehaviour[i].waitTime,
-            serviceTime: serviceBehaviour[i].serviceTime,
         }
         events.push(event);
     });

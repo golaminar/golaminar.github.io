@@ -110,21 +110,33 @@ function queueSimulation(simIndex, queueDataset, figure) {
         });
     }
 
-    function initCostOfDelayChart() {
+    function createDevCostDataset(serviceBehaviour) {
+        const weekyCost = parseInt(figure.querySelector("[name=weekly-dev-cost]").value);
+        let cumulativeCost = 0;
+
+        const data = serviceBehaviour.map(service => {
+            return cumulativeCost += service.serviceTime * weekyCost;
+        });
+
+        return {
+            label: "Development Costs",
+            data: data,
+            type: 'line',
+            backgroundColor: "#999",
+            order: 0,
+            elements: {
+                point: {
+                    radius: 2,
+                },
+            },
+        };
+    }
+
+    function initCostOfDelayChart(serviceBehaviour) {
+        // By leaving labels empty, nothing is displayed
         poissonCostsChartData.labels = [];
         poissonCostsChartData.datasets = [
-            {
-                label: "Development Costs",
-                data: [],
-                type: 'line',
-                backgroundColor: "#999",
-                order: 0,
-                elements: {
-                    point: {
-                        radius: 2,
-                    },
-                },
-            }
+            createDevCostDataset(serviceBehaviour)
         ];
         costOfDelayChart.update();
     }
@@ -133,13 +145,7 @@ function queueSimulation(simIndex, queueDataset, figure) {
         arr.push(arr.at(-1));
     }
 
-    function updateCumulativeCostOfDelayDataset(dataset, serviceTime) {
-        const weekyCost = parseInt(figure.querySelector("[name=weekly-dev-cost]").value);
-        const cumulativeCost = dataset.data.at(-1) || 0;
-        dataset.data.push(cumulativeCost + weekyCost * serviceTime);
-    }
-
-    function updateCumulativeCostOfDelayChart(events) {
+    function advanceCostOfDelayChart(events) {
         const cost = parseInt(figure.querySelector("[name=weekly-value-of-items]").value);
         const devCostsDataset = poissonCostsChartData.datasets.pop();
 
@@ -149,9 +155,7 @@ function queueSimulation(simIndex, queueDataset, figure) {
             if (event.type === "arrival") {
                 const costOfDelay = event.waitTime * cost;
 
-                // the labels are needed for the chart to work,
-                // but the only way I have found to suppress them
-                // is set them to an empty string
+                // Adding a label is necessary to makes the bar visible
                 poissonCostsChartData.labels.push("");
 
                 const dataset = {
@@ -168,10 +172,7 @@ function queueSimulation(simIndex, queueDataset, figure) {
 
                 dataset.data.push(costOfDelay);
                 poissonCostsChartData.datasets.push(dataset);
-
-                updateCumulativeCostOfDelayDataset(devCostsDataset, event.serviceTime);
             }
-
         });
 
         poissonCostsChartData.datasets.push(devCostsDataset);
@@ -229,7 +230,7 @@ function queueSimulation(simIndex, queueDataset, figure) {
 
         pushEventsToChart(queueEvents);
         advanceChartElapsedTime(0);
-        initCostOfDelayChart();
+        initCostOfDelayChart(serviceBehaviour);
 
         let tickStart = 0;
         let tickEnd;
@@ -267,8 +268,8 @@ function queueSimulation(simIndex, queueDataset, figure) {
                 // advance the elapsed time shown on the chart to tickEnd
                 advanceChartElapsedTime(tickEnd);
 
-                // show the next batch of items on the cost of delay chart
-                updateCumulativeCostOfDelayChart(queueEventsThisTick)
+                // advance the cost of delay chart
+                advanceCostOfDelayChart(queueEventsThisTick);
 
                 if (tickEnd < totalTime) {
                     // advance to the next frame in time
@@ -385,7 +386,7 @@ const poissonCostOfDelayChartConfig = {
             y: {
                 stacked: true,
                 suggestedMin: 0,
-                suggestedMax: 2000,
+                suggestedMax: 30000,
             }
         },
         plugins: {
