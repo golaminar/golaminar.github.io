@@ -22,12 +22,11 @@ function computeCostofDelayChartData(dataPerWeek) {
     return chartData;
 }
 
-const generateCostOfDelayChart = function (id, chartData, options) {
+const generateCostOfDelayChart = function (id, options) {
     options = options ? options : {};
 
     const config = {
         type: 'bar',
-        data: chartData,
         options: {
             animation: false,
             aspectRatio: 1.5,
@@ -188,14 +187,12 @@ function generateDevCostsDataset(data) {
     const weeklyCostInput = figure.querySelector("[name=weekly-value-of-items]");
     const devCostInput = figure.querySelector("[name=weekly-dev-cost]");
 
-    const perWeekChart = generateCostOfDelayChart('cost-of-delay-chart',
-        [[]], {
+    const perWeekChart = generateCostOfDelayChart('cost-of-delay-chart', {
         barPercentage: 1.3,
         title: "Cost of delay incurred per week",
     });
 
-    const cumulativeChart = generateCostOfDelayChart('cost-of-delay-cumulative-chart',
-        [[]], {
+    const cumulativeChart = generateCostOfDelayChart('cost-of-delay-cumulative-chart', {
         title: "Cumulative cost of delay each week",
     });
 
