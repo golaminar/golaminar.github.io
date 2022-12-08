@@ -1,4 +1,4 @@
-function queueSimulation(simIndex, queueDataset) {
+function queueSimulation(simIndex, queueDataset, figure) {
 
     const template = document.getElementById("queue-simulation-template");
     const parentElem = document.getElementById("queue-simulations")
@@ -215,8 +215,8 @@ function queueSimulation(simIndex, queueDataset) {
         requestAnimationFrame(animateQueue);
     }
 
-  if (document.querySelector("#figure-cod-on-poisson-process .playback-queue-behaviour")) {
-    document.querySelector("#figure-cod-on-poisson-process .playback-queue-behaviour").addEventListener("click", playbackQueueBahaviour);
+    if (figure && figure.querySelector(".playback-queue-behaviour")) {
+        figure.querySelector(".playback-queue-behaviour").addEventListener("click", playbackQueueBahaviour);
     }
 }
 
@@ -289,9 +289,10 @@ const queueLengthsChart = new Chart(
 );
 
 (function () {
+    const figure = document.querySelector("#figure-cod-on-poisson-process");
     const queueDataset = createQueueDataset(0);
     queueLengthsDatasets.push(queueDataset);
     queueLengthsChart.update();
-    queueSimulation(0, queueDataset);
+    queueSimulation(0, queueDataset, figure);
 })();
 
