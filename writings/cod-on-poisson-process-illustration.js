@@ -112,7 +112,20 @@ function queueSimulation(simIndex, queueDataset, figure) {
 
     function initCostOfDelayChart() {
         poissonCostsChartData.labels = [];
-        poissonCostsChartData.datasets = [];
+        poissonCostsChartData.datasets = [
+            {
+                label: "Development Costs",
+                data: [],
+                type: 'line',
+                backgroundColor: "#999",
+                order: 0,
+                elements: {
+                    point: {
+                        radius: 2,
+                    },
+                },
+            }
+        ];
         costOfDelayChart.update();
     }
 
@@ -120,19 +133,28 @@ function queueSimulation(simIndex, queueDataset, figure) {
         arr.push(arr.at(-1));
     }
 
+    function updateCumulativeCostOfDelayDataset(dataset, serviceTime) {
+        const weekyCost = parseInt(figure.querySelector("[name=weekly-dev-cost]").value);
+        const cumulativeCost = dataset.data.at(-1) || 0;
+        dataset.data.push(cumulativeCost + weekyCost * serviceTime);
+    }
+
     function updateCumulativeCostOfDelayChart(events) {
         const cost = parseInt(figure.querySelector("[name=weekly-value-of-items]").value);
+        const devCostsDataset = poissonCostsChartData.datasets.pop();
 
         events.forEach((event) => {
             const index = poissonCostsChartData.datasets.length;
 
             if (event.type === "arrival") {
-                const costOfDelay = parseFloat(event.waitTime) * cost;
+                const costOfDelay = event.waitTime * cost;
+
                 poissonCostsChartData.labels.push(`Release: ${index}`);
                 const dataset = {
                     label: `Item ${index + 1}`,
                     backgroundColor: (indexedColor(index, 0)),
                     data: [],
+                    order: index + 1,
                 };
 
                 for (let i = 0; i < index; i++) {
@@ -141,11 +163,14 @@ function queueSimulation(simIndex, queueDataset, figure) {
                 }
 
                 dataset.data.push(costOfDelay);
+                poissonCostsChartData.datasets.push(dataset);
 
-                poissonCostsChartData.datasets.push(dataset)
+                updateCumulativeCostOfDelayDataset(devCostsDataset, event.serviceTime);
             }
+
         });
 
+        poissonCostsChartData.datasets.push(devCostsDataset);
         costOfDelayChart.update();
     }
 
