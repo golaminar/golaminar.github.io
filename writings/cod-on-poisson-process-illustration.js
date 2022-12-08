@@ -196,8 +196,8 @@ function queueSimulation(simIndex, queueDataset, figure) {
                 // animate what happened
                 updateQueueUI(queueEventsThisTick);
 
-                // advance the elapsed time shown on the chart
-                advanceChartElapsedTime(elapsedTime);
+                // advance the elapsed time shown on the chart to tickEnd
+                advanceChartElapsedTime(tickEnd);
 
                 if (tickEnd < totalTime) {
                     // advance to the next frame in time
