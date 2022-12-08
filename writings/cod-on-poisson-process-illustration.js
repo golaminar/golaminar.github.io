@@ -112,23 +112,37 @@ function queueSimulation(simIndex, queueDataset, figure) {
 
     function initCostOfDelayChart() {
         poissonCostsChartData.labels = [];
-        poissonCostsChartData.datasets = [{
-            data: [],
-            backgroundColor: [],
-        }];
+        poissonCostsChartData.datasets = [];
         costOfDelayChart.update();
     }
 
-    function updateCostOfDelayChart(events) {
+    function shiftFillArray(arr) {
+        arr.push(arr.at(-1));
+    }
+
+    function updateCumulativeCostOfDelayChart(events) {
         const cost = parseInt(figure.querySelector("[name=weekly-value-of-items]").value);
 
         events.forEach((event) => {
+            const index = poissonCostsChartData.datasets.length;
+
             if (event.type === "arrival") {
-                const index = poissonCostsChartData.datasets[0].data.length;
                 const costOfDelay = parseFloat(event.waitTime) * cost;
-                poissonCostsChartData.labels.push(`Item ${index + 1}`);
-                poissonCostsChartData.datasets[0].backgroundColor.push(indexedColor(index, 0));
-                poissonCostsChartData.datasets[0].data.push(costOfDelay);
+                poissonCostsChartData.labels.push(`Release: ${index}`);
+                const dataset = {
+                    label: `Item ${index + 1}`,
+                    backgroundColor: (indexedColor(index, 0)),
+                    data: [],
+                };
+
+                for (let i = 0; i < index; i++) {
+                    shiftFillArray(poissonCostsChartData.datasets[i].data)
+                    dataset.data.push(0);
+                }
+
+                dataset.data.push(costOfDelay);
+
+                poissonCostsChartData.datasets.push(dataset)
             }
         });
 
@@ -225,7 +239,7 @@ function queueSimulation(simIndex, queueDataset, figure) {
                 advanceChartElapsedTime(tickEnd);
 
                 // show the next batch of items on the cost of delay chart
-                updateCostOfDelayChart(queueEventsThisTick)
+                updateCumulativeCostOfDelayChart(queueEventsThisTick)
 
                 if (tickEnd < totalTime) {
                     // advance to the next frame in time
@@ -323,14 +337,24 @@ const poissonCostOfDelayChartConfig = {
     options: {
         animation: false,
         aspectRatio: 1.5,
+        barPercentage: 1.3,//options.barPercentage,
         scales: {
             x: {
+                stacked: true,
                 suggestedMin: 0,
                 grid: {
                     display: false,
                 },
+                ticks: {
+                    display: false,
+                },
+                title: {
+                    display: true,
+                    text: "Time",
+                },
             },
             y: {
+                stacked: true,
                 suggestedMin: 0,
                 suggestedMax: 500,
             }
@@ -341,9 +365,10 @@ const poissonCostOfDelayChartConfig = {
             },
             title: {
                 display: true,
-                text: "Cost of delay per item",
+                text: "Cumulative cost of delay",
             },
             tooltip: {
+                enabled: false,
                 callbacks: {
                     label: function (context) {
                         let label = context.dataset.label || '';
@@ -384,4 +409,3 @@ const costOfDelayChart = new Chart(
     queueLengthsChart.update();
     queueSimulation(0, queueDataset, figure);
 })();
-
