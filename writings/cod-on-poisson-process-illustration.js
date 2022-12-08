@@ -110,6 +110,31 @@ function queueSimulation(simIndex, queueDataset, figure) {
         });
     }
 
+    function initCostOfDelayChart() {
+        poissonCostsChartData.labels = [];
+        poissonCostsChartData.datasets = [{
+            data: [],
+            backgroundColor: [],
+        }];
+        costOfDelayChart.update();
+    }
+
+    function updateCostOfDelayChart(events) {
+        const cost = parseInt(figure.querySelector("[name=weekly-value-of-items]").value);
+
+        events.forEach((event) => {
+            if (event.type === "arrival") {
+                const index = poissonCostsChartData.datasets[0].data.length;
+                const costOfDelay = parseFloat(event.waitTime) * cost;
+                poissonCostsChartData.labels.push(`Item ${index + 1}`);
+                poissonCostsChartData.datasets[0].backgroundColor.push(indexedColor(index, 0));
+                poissonCostsChartData.datasets[0].data.push(costOfDelay);
+            }
+        });
+
+        costOfDelayChart.update();
+    }
+
     function advanceChartElapsedTime(elapsedTime) {
         queueLengthsChart.options.scales.x.max = Math.floor(elapsedTime);
         queueLengthsChart.update();
@@ -161,6 +186,7 @@ function queueSimulation(simIndex, queueDataset, figure) {
 
         pushEventsToChart(queueEvents);
         advanceChartElapsedTime(0);
+        initCostOfDelayChart();
 
         let tickStart = 0;
         let tickEnd;
@@ -169,7 +195,6 @@ function queueSimulation(simIndex, queueDataset, figure) {
         let elapsedTime;
 
         let queueEventsThisTick = [];
-
 
         function animateQueue(timestamp) {
             tickEnd = tickStart + tickDuration;
@@ -198,6 +223,9 @@ function queueSimulation(simIndex, queueDataset, figure) {
 
                 // advance the elapsed time shown on the chart to tickEnd
                 advanceChartElapsedTime(tickEnd);
+
+                // show the next batch of items on the cost of delay chart
+                updateCostOfDelayChart(queueEventsThisTick)
 
                 if (tickEnd < totalTime) {
                     // advance to the next frame in time
@@ -284,9 +312,69 @@ const queueLengthsChartConfig = {
     }
 };
 
+const poissonCostsChartData = {
+    labels: [],
+    datasets: [],
+};
+
+const poissonCostOfDelayChartConfig = {
+    type: 'bar',
+    data: poissonCostsChartData,
+    options: {
+        animation: false,
+        aspectRatio: 1.5,
+        scales: {
+            x: {
+                suggestedMin: 0,
+                grid: {
+                    display: false,
+                },
+            },
+            y: {
+                suggestedMin: 0,
+                suggestedMax: 500,
+            }
+        },
+        plugins: {
+            legend: {
+                display: false,
+            },
+            title: {
+                display: true,
+                text: "Cost of delay per item",
+            },
+            tooltip: {
+                callbacks: {
+                    label: function (context) {
+                        let label = context.dataset.label || '';
+
+                        if (label) {
+                            label += ': ';
+                        }
+                        if (context.parsed.y !== null) {
+                            label += formatCost(context.parsed.y);
+                        }
+                        return label;
+                    }
+                },
+            },
+        },
+        elements: {
+            line: {
+                borderWidth: 2,
+            },
+        },
+    },
+};
+
 const queueLengthsChart = new Chart(
     document.getElementById('queue-lengths-graph-canvas'),
     queueLengthsChartConfig
+);
+
+const costOfDelayChart = new Chart(
+    document.getElementById("poisson-cost-of-delay-chart"),
+    poissonCostOfDelayChartConfig
 );
 
 (function () {
