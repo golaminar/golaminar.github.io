@@ -149,7 +149,11 @@ function queueSimulation(simIndex, queueDataset, figure) {
             if (event.type === "arrival") {
                 const costOfDelay = event.waitTime * cost;
 
-                poissonCostsChartData.labels.push(`Release: ${index}`);
+                // the labels are needed for the chart to work,
+                // but the only way I have found to suppress them
+                // is set them to an empty string
+                poissonCostsChartData.labels.push("");
+
                 const dataset = {
                     label: `Item ${index + 1}`,
                     backgroundColor: (indexedColor(index, 4)),
@@ -393,7 +397,6 @@ const poissonCostOfDelayChartConfig = {
                 text: "Cumulative cost of delay",
             },
             tooltip: {
-                enabled: false,
                 callbacks: {
                     label: function (context) {
                         let label = context.dataset.label || '';
