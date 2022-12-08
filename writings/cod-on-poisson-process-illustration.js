@@ -148,7 +148,7 @@ function queueSimulation(simIndex, queueDataset) {
         const expectedServiceTime = 1 / expectedCompleted;
 
         const tickDuration = 1 / 6;
-        const scalingFactor = 0.01;
+        const scalingFactor = 0.005;
         const totalTime = 12;
 
         const arrivalTimes = generateArrivalTimes(expectedArrivalInterval, totalTime);
