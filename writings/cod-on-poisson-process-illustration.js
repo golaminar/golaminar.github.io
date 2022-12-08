@@ -260,16 +260,16 @@ const queueLengthsChartConfig = {
             y: {
                 suggestedMin: 0,
                 suggestedMax: 20,
-                title: {
-                    display: true,
-                    text: "Items in backlog",
-                },
             },
         },
         animation: false,
         plugins: {
             legend: {
                 display: false,
+            },
+            title: {
+                display: true,
+                text: "Items in backlog",
             },
         },
         elements: {
