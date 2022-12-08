@@ -362,7 +362,7 @@ const poissonCostOfDelayChartConfig = {
     options: {
         animation: false,
         aspectRatio: 1.5,
-        barPercentage: 1.3,//options.barPercentage,
+        barPercentage: 1.3,
         scales: {
             x: {
                 stacked: true,
