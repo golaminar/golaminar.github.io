@@ -381,7 +381,7 @@ const poissonCostOfDelayChartConfig = {
             y: {
                 stacked: true,
                 suggestedMin: 0,
-                suggestedMax: 500,
+                suggestedMax: 2000,
             }
         },
         plugins: {
