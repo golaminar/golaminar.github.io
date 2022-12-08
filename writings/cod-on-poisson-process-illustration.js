@@ -222,7 +222,7 @@ function queueSimulation(simIndex, queueDataset) {
 
 function createQueueDataset(index) {
     return {
-        label: `Queue ${index + 1}`,
+        label: `Queue length`,
         data: [{ x: 0, y: 0 }],
         backgroundColor: indexedColor(4, index),
         borderColor: indexedColor(4, index),
