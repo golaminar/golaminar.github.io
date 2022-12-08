@@ -141,6 +141,7 @@ function queueSimulation(simIndex, queueDataset, figure) {
         costOfDelayChart.update();
     }
 
+    // fills the next value in an array with its last value
     function shiftFillArray(arr) {
         arr.push(arr.at(-1));
     }
@@ -155,7 +156,7 @@ function queueSimulation(simIndex, queueDataset, figure) {
             if (event.type === "arrival") {
                 const costOfDelay = event.waitTime * cost;
 
-                // Adding a label is necessary to makes the bar visible
+                // Adding a label is necessary to make the bar visible
                 poissonCostsChartData.labels.push("");
 
                 const dataset = {
