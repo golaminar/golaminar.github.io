@@ -103,6 +103,74 @@
 
             <p>The other crucial thing that's missing in the simulation is the fact that while we're working on features, new feature requests can come in and be added to the queue. Below, we've paired our queue growth simulation from <a href="2022-11-29-two-weird-things.html">part 1</a> with a calculation of cost of delay. Observe how queue's uncontrolled growth -- even if we have similar rates of arrival and service -- causes cost of delay to increase, and how even if we recover and our queue size drops to zero, we have still paid a high cost of delay. And we're not even estimating the direct costs of the queue that we mentioned at the start of the article.</p>
 
+            <figure id="figure-cod-on-poisson-process" class="illustration">
+
+                <div class="cols">
+                    <div class="col">
+                        <button class="playback-queue-behaviour">Run simulation</button>
+
+                        <div class="backlog-controls">
+                            <div class="control">
+                                On average, <span class="arrivals-per-cycle-value">6</span> items arrive per week.
+                                <br><input name="arrivals-per-cycle" type="range" value="6" min="0" max="20" step="1">
+                            </div>
+                            <div class="control">
+                                On average, the team can complete <span class="completed-per-cycle-value">6</span> items per week.
+                                <br><input name="completed-per-cycle" type="range" value="6" min="0" max="20" step="1">
+                            </div>
+                            <div class="control">
+                                Each item is expected to earn <span class="weekly-value-of-items-value">€2,000</span> / week
+                                <br><input name="weekly-value-of-items" type="range" value="2000" data-unit="euro" min="0"
+                                    max="10000" step="100">
+                            </div>
+                        </div>
+
+                        <div id="queue-simulations" class="cols">
+
+                            <template id="queue-simulation-template">
+                                <div class="queue-simulation col">
+                                    <table class="queue-status">
+                                        <tr>
+                                            <th>Queue<br>length:</th>
+                                            <td><span class="queue-length">0</span></td>
+                                            <td class="queue-container">
+                                                <ol class="queue"></ol>
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                                    <table class="queue-status">
+                                        <tr>
+                                            <th>Average wait time:</th>
+                                            <td><span class="avg-wait-time">—</span> days</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </template>
+
+                        </div>
+
+                    </div>
+                    <div class="col">
+                        <div class="charts">
+                            <canvas id="queue-lengths-graph-canvas"></canvas>
+                            <canvas id="poisson-cost-of-delay-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <figcaption>This illustration shows the behaviour and costs of a backlog operating over time,
+                    where items enter the queue at random intervals and developement velocity is subject to random variablity.
+                    For simplicity, developement times and costs have been applied uniformly, not accounting for working hours.
+                    Such queues operating at nearly 100% utilization have a tendency to grow,
+                    which means the cost of delay per item grows.
+                    For details about how these simulations are implemented,
+                    see the footnotes.<sup><a href="#footnote-3" id="footnote-3-source">3</a></sup></figcaption>
+
+            </figure>
+            <script src="calculated-intervals.js"></script>
+            <script src="cod-on-poisson-process-illustration.js"></script>
+
             <p>It <em>is</em> possible to address the problem of growing queues by making teams more productive. If we can add people, or train the existing people, we can increase the amount of <em>stuff</em> the team can handle in a given time period. If we don't correspondingly increase demand on the team (and that's a pretty big 'if', in my experience) we would expect to see shorter queues. Two problems with this: first, it's expensive. Training costs money. Extra people cost money. Retaining good people costs money. If there are cheaper ways to achieve the same goal of shorter queues, we should explore them. Second, there are limits to what you can do on the capacity side -- people are only ever going to be <em>this</em> good at programming until a new paradigm comes along, they only have <em>this</em> much stamina, and a group of people collaborating on something can only be <em>this</em> size before the coordination efforts required start to be overwhelming. On the other hand, demand is potentially unlimited, and is likely to increase as stakeholders ask "we've added people to this team, shouldn't we be able to do more now?" Adding capacity works only in its relation to demand. That's at the macro (product backlog) level. At the micro level (e.g. code review queue), you can do similar -- make people's code reviews 50% faster. But again, that's expensive, and no amount of making people better at an activity will help if they're simply not spending enough of their time on that activity compared to others.</p>
 
             <p>I'd also like to note, in brief, the human costs of processes with long queues. Our focus here has been on directly measurable bottom-line costs, but there are significant downsides for the humans working in a process with long wait times. If developers are working on features which the designers worked on months ago, then both sides are robbed of an opportunity to work together closely. If anything, the developer coming to the designer and wanting to revisit the design because it doesn't work well with the technical solution -- theoretically an opportunity for both parties to learn from each other and to produce a better design together -- will result in frustration for the designer, who is already hard at work on the next feature, and struggles to remember their work from all that time ago, and hasn't planned in time for this kind of rework. This pattern repeats anywhere that work is handed off from one person to another, but waits in between: the waiting time causes frustration on both sides, incentivizes looser collaboration and lower quality, and robs people of the opportunity to work closely together and learn from each other.</p>
