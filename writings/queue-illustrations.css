@@ -142,3 +142,7 @@ table.board tr>td:first-child {
 #figure-cost-of-delay .charts {
     margin-bottom: 1em;
 }
+
+#figure-cod-on-poisson-process .cols {
+    align-items: center;
+}
