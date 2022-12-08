@@ -152,7 +152,7 @@ function queueSimulation(simIndex, queueDataset, figure) {
                 poissonCostsChartData.labels.push(`Release: ${index}`);
                 const dataset = {
                     label: `Item ${index + 1}`,
-                    backgroundColor: (indexedColor(index, 0)),
+                    backgroundColor: (indexedColor(index, 4)),
                     data: [],
                     order: index + 1,
                 };
@@ -429,8 +429,8 @@ const costOfDelayChart = new Chart(
 
 (function () {
     const figure = document.querySelector("#figure-cod-on-poisson-process");
-    const queueDataset = createQueueDataset(0);
+    const queueDataset = createQueueDataset(4);
     queueLengthsDatasets.push(queueDataset);
     queueLengthsChart.update();
-    queueSimulation(0, queueDataset, figure);
+    queueSimulation(4, queueDataset, figure);
 })();
