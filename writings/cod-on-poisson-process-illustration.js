@@ -357,14 +357,8 @@ const queueLengthsChartConfig = {
     }
 };
 
-const poissonCostsChartData = {
-    labels: [],
-    datasets: [],
-};
-
 const poissonCostOfDelayChartConfig = {
     type: 'bar',
-    data: poissonCostsChartData,
     options: {
         animation: false,
         aspectRatio: 1.5,
@@ -431,6 +425,8 @@ const costOfDelayChart = new Chart(
     document.getElementById("poisson-cost-of-delay-chart"),
     poissonCostOfDelayChartConfig
 );
+
+const poissonCostsChartData = costOfDelayChart.data;
 
 (function () {
     const figure = document.querySelector("#figure-cod-on-poisson-process");
