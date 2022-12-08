@@ -159,6 +159,9 @@ function queueSimulation(simIndex, queueDataset, figure) {
 
         const queueEvents = computeQueueEvents(cumulativeArrivalTimes, serviceBehaviour);
 
+        pushEventsToChart(queueEvents);
+        advanceChartElapsedTime(0);
+
         let tickStart = 0;
         let tickEnd;
 
@@ -167,8 +170,6 @@ function queueSimulation(simIndex, queueDataset, figure) {
 
         let queueEventsThisTick = [];
 
-        pushEventsToChart(queueEvents);
-        advanceChartElapsedTime(0);
 
         function animateQueue(timestamp) {
             tickEnd = tickStart + tickDuration;
