@@ -109,10 +109,11 @@ function computeServiceBehaviour(serviceTimes, cumulativeArrivalTimes) {
 function computeQueueEvents(cumulativeArrivalTimes, serviceBehaviour) {
     const events = [];
 
-    cumulativeArrivalTimes.forEach(time => {
+    cumulativeArrivalTimes.forEach((time, i) => {
         const event = {
             timestamp: time,
             type: "arrival",
+            waitTime: serviceBehaviour[i].waitTime,
         }
         events.push(event);
     });
