@@ -143,6 +143,6 @@ table.board tr>td:first-child {
     margin-bottom: 1em;
 }
 
-#figure-cod-on-poisson-process .cols {
-    align-items: center;
+#figure-cod-on-poisson-process .backlog-controls {
+    margin: 1.5em 0;
 }
