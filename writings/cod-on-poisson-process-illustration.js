@@ -146,7 +146,7 @@ function queueSimulation(simIndex, queueDataset, figure) {
         arr.push(arr.at(-1));
     }
 
-    function advanceCostOfDelayChart(events) {
+    function pushEventsToCostChart(events) {
         const cost = parseInt(figure.querySelector("[name=weekly-value-of-items]").value);
         const devCostsDataset = poissonCostsChartData.datasets.pop();
 
@@ -269,8 +269,8 @@ function queueSimulation(simIndex, queueDataset, figure) {
                 // advance the elapsed time shown on the chart to tickEnd
                 advanceChartElapsedTime(tickEnd);
 
-                // advance the cost of delay chart
-                advanceCostOfDelayChart(queueEventsThisTick);
+                // push events to the cost of delay chart
+                pushEventsToCostChart(queueEventsThisTick);
 
                 if (tickEnd < totalTime) {
                     // advance to the next frame in time
