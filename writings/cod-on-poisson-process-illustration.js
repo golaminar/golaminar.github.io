@@ -199,19 +199,27 @@ function queueSimulation(simIndex, queueDataset, figure) {
         resetChart();
     }
 
-    function disableStartButton(startButton) {
+    function disableControls(startButton) {
         startButton.innerText = "Running …";
         startButton.disabled = true;
+
+        [].forEach.call(figure.querySelectorAll("input"), elem => {
+            elem.disabled = true;
+        })
     }
 
-    function reengageStartButton(startButton) {
+    function reengageControls(startButton) {
         startButton.innerText = "Run again";
         startButton.disabled = false;
+
+        [].forEach.call(figure.querySelectorAll("input"), elem => {
+            elem.disabled = false;
+        })
     }
 
     function playbackQueueBahaviour(event) {
         const startButton = event.srcElement;
-        disableStartButton(startButton);
+        disableControls(startButton);
         resetSimulation();
 
         const expectedArrivals = parseInt(document.querySelector("[name=arrivals-per-cycle]").value);
@@ -283,7 +291,7 @@ function queueSimulation(simIndex, queueDataset, figure) {
                     // announce the end of the animation
                     console.log("ended at:", timestamp);
                     console.log("unscaled elapsed time", timestamp - animationStart);
-                    reengageStartButton(startButton);
+                    reengageControls(startButton);
                 }
             }
         }
