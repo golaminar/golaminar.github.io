@@ -125,7 +125,7 @@ function queueSimulation(simIndex, queueDataset) {
         resetChart();
     }
 
-    function diableStartButton(startButton) {
+    function disableStartButton(startButton) {
         startButton.innerText = "Running …";
         startButton.disabled = true;
     }
@@ -137,7 +137,7 @@ function queueSimulation(simIndex, queueDataset) {
 
     function playbackQueueBahaviour(event) {
         const startButton = event.srcElement;
-        diableStartButton(startButton);
+        disableStartButton(startButton);
         resetSimulation();
 
         const expectedArrivalInterval = parseInt(document.querySelector("[name=expected-arrival-time-interval]").value);

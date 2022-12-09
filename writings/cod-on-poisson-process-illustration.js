@@ -199,7 +199,7 @@ function queueSimulation(simIndex, queueDataset, figure) {
         resetChart();
     }
 
-    function diableStartButton(startButton) {
+    function disableStartButton(startButton) {
         startButton.innerText = "Running …";
         startButton.disabled = true;
     }
@@ -211,7 +211,7 @@ function queueSimulation(simIndex, queueDataset, figure) {
 
     function playbackQueueBahaviour(event) {
         const startButton = event.srcElement;
-        diableStartButton(startButton);
+        disableStartButton(startButton);
         resetSimulation();
 
         const expectedArrivals = parseInt(document.querySelector("[name=arrivals-per-cycle]").value);
