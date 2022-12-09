@@ -292,8 +292,21 @@ function queueSimulation(simIndex, queueDataset, figure) {
         requestAnimationFrame(animateQueue);
     }
 
+    function updateCostOfDelayChart(event) {
+        initCostOfDelayChart(createDevCostDataset(serviceBehaviour));
+        pushEventsToCostChart(queueEvents);
+    }
+
     if (figure && figure.querySelector(".playback-queue-behaviour")) {
         figure.querySelector(".playback-queue-behaviour").addEventListener("click", playbackQueueBahaviour);
+
+        const itemValueInput = figure.querySelector("[name=weekly-value-of-items]");
+        const devCostInput = figure.querySelector("[name=weekly-dev-cost]");
+
+        [itemValueInput, devCostInput].forEach(elem => {
+            elem.addEventListener("change", updateCostOfDelayChart);
+            elem.addEventListener("input", updateCostOfDelayChart);
+        });
     }
 }
 
