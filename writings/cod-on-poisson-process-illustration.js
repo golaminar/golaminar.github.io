@@ -1,5 +1,8 @@
 function queueSimulation(simIndex, queueDataset, figure) {
 
+    let serviceBehaviour;
+    let queueEvents;
+
     const template = document.getElementById("queue-simulation-template");
     const parentElem = document.getElementById("queue-simulations")
         .appendChild(template.content.firstElementChild.cloneNode(true));
@@ -225,9 +228,9 @@ function queueSimulation(simIndex, queueDataset, figure) {
         const serviceTimes = generateServiceTimes(expectedServiceTime, arrivalTimes.length);
 
         const cumulativeArrivalTimes = computeCumulativeArrivalTimes(arrivalTimes);
-        const serviceBehaviour = computeServiceBehaviour(serviceTimes, cumulativeArrivalTimes);
 
-        const queueEvents = computeQueueEvents(cumulativeArrivalTimes, serviceBehaviour);
+        serviceBehaviour = computeServiceBehaviour(serviceTimes, cumulativeArrivalTimes);
+        queueEvents = computeQueueEvents(cumulativeArrivalTimes, serviceBehaviour);
 
         pushEventsToChart(queueEvents);
         advanceChartElapsedTime(0);
