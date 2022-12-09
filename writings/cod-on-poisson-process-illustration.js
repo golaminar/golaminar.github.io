@@ -132,11 +132,11 @@ function queueSimulation(simIndex, queueDataset, figure) {
         };
     }
 
-    function initCostOfDelayChart(serviceBehaviour) {
+    function initCostOfDelayChart(devCostDataset) {
         // By leaving labels empty, nothing is displayed
         poissonCostsChartData.labels = [];
         poissonCostsChartData.datasets = [
-            createDevCostDataset(serviceBehaviour)
+            devCostDataset
         ];
         costOfDelayChart.update();
     }
@@ -231,7 +231,7 @@ function queueSimulation(simIndex, queueDataset, figure) {
 
         pushEventsToChart(queueEvents);
         advanceChartElapsedTime(0);
-        initCostOfDelayChart(serviceBehaviour);
+        initCostOfDelayChart(createDevCostDataset(serviceBehaviour));
 
         let tickStart = 0;
         let tickEnd;
