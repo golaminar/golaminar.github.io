@@ -228,7 +228,7 @@ function queueSimulation(simIndex, queueDataset, figure) {
         const expectedCompleted = parseInt(document.querySelector("[name=completed-per-cycle]").value);
         const expectedServiceTime = 1 / expectedCompleted;
 
-        const tickDuration = 1 / 6;
+        const tickDuration = expectedArrivals * 1/4; // i.e. render less frequently for higher values
         const scalingFactor = 0.005;
         const totalTime = 12;
 
