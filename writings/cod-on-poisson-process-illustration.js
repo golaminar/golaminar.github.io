@@ -301,8 +301,10 @@ function queueSimulation(simIndex, queueDataset, figure) {
     }
 
     function updateCostOfDelayChart(event) {
-        initCostOfDelayChart(createDevCostDataset(serviceBehaviour));
-        pushEventsToCostChart(queueEvents);
+        if (serviceBehaviour && serviceBehaviour.length) {
+            initCostOfDelayChart(createDevCostDataset(serviceBehaviour));
+            pushEventsToCostChart(queueEvents);
+        }
     }
 
     if (figure && figure.querySelector(".playback-queue-behaviour")) {
