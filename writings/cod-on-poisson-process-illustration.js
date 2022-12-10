@@ -230,7 +230,7 @@ function queueSimulation(simIndex, queueDataset, figure) {
 
         const tickDuration = expectedArrivals * 1/4; // i.e. render less frequently for higher values
         const scalingFactor = 0.005;
-        const totalTime = 12;
+        const totalTime = 20;
 
         const arrivalTimes = generateArrivalTimes(expectedArrivalInterval, totalTime);
         const serviceTimes = generateServiceTimes(expectedServiceTime, arrivalTimes.length);
@@ -343,7 +343,7 @@ const queueLengthsChartConfig = {
             x: {
                 type: 'linear',
                 suggestedMin: 0,
-                suggestedMax: 12,
+                suggestedMax: 20,
                 title: {
                     display: true,
                     text: "Elapsed Weeks",
