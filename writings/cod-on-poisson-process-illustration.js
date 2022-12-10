@@ -253,7 +253,7 @@ function queueSimulation(simIndex, queueDataset, figure) {
         let queueEventsThisTick = [];
 
         function animateQueue(timestamp) {
-            tickEnd = tickStart + tickDuration;
+            tickEnd = Math.min(tickStart + tickDuration, totalTime);
 
             if (animationStart === undefined) {
                 // anchor the start of the animation in time

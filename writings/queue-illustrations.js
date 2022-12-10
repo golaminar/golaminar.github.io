@@ -169,7 +169,7 @@ function queueSimulation(simIndex, queueDataset) {
         advanceChartElapsedTime(1);
 
         function animateQueue(timestamp) {
-            tickEnd = tickStart + tickDuration;
+            tickEnd = Math.min(tickStart + tickDuration, totalTime);
 
             if (animationStart === undefined) {
                 // anchor the start of the animation in time
