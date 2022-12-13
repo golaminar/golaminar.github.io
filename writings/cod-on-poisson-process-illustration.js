@@ -135,11 +135,11 @@ function queueSimulation(simIndex, queueDataset, figure) {
         };
     }
 
-    function initCostOfDelayChart(devCostDataset) {
+    function initCostOfDelayChart(devCostsDataset) {
         // By leaving labels empty, nothing is displayed
         poissonCostsChartData.labels = [];
         poissonCostsChartData.datasets = [
-            devCostDataset
+            devCostsDataset,
         ];
         costOfDelayChart.update();
     }
