@@ -343,7 +343,7 @@ const queueLengthsChartConfig = {
             x: {
                 type: 'linear',
                 suggestedMin: 0,
-                suggestedMax: 20,
+                suggestedMax: 52,
                 title: {
                     display: true,
                     text: "Elapsed Weeks",
