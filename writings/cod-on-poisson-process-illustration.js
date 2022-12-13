@@ -125,7 +125,7 @@ function queueSimulation(simIndex, queueDataset, figure) {
             label: "Development Costs",
             data: data,
             type: 'line',
-            backgroundColor: "#999",
+            borderColor: "#999",
             order: 0,
             elements: {
                 point: {
@@ -161,7 +161,7 @@ function queueSimulation(simIndex, queueDataset, figure) {
 
     function initCostOfDelayChart(serviceBehaviour) {
         // By leaving labels empty, nothing is displayed
-        poissonCostsChartData.labels = []; // ??
+        poissonCostsChartData.labels = [];
         poissonCostsChartData.datasets = [
             createDevCostDataset(serviceBehaviour),
             createDelayCostDataset(serviceBehaviour),
@@ -228,7 +228,7 @@ function queueSimulation(simIndex, queueDataset, figure) {
         const expectedCompleted = parseInt(document.querySelector("[name=completed-per-cycle]").value);
         const expectedServiceTime = 1 / expectedCompleted;
 
-        const tickDuration = expectedArrivals * 1/4; // i.e. render less frequently for higher values
+        const tickDuration = 1/4;
         const scalingFactor = 0.01;
         const totalTime = 52;
 
