@@ -114,11 +114,11 @@ function queueSimulation(simIndex, queueDataset, figure) {
     }
 
     function createDevCostDataset(serviceBehaviour) {
-        const weekyCost = parseInt(figure.querySelector("[name=weekly-dev-cost]").value);
+        const weeklyCost = parseInt(figure.querySelector("[name=weekly-dev-cost]").value);
         let cumulativeCost = 0;
 
         const data = serviceBehaviour.map(service => {
-            return cumulativeCost += service.serviceTime * weekyCost;
+            return cumulativeCost += service.serviceTime * weeklyCost;
         });
 
         return {
@@ -129,17 +129,42 @@ function queueSimulation(simIndex, queueDataset, figure) {
             order: 0,
             elements: {
                 point: {
-                    radius: 2,
+                    radius: 0,
                 },
             },
         };
     }
 
-    function initCostOfDelayChart(devCostsDataset) {
+    function createDelayCostDataset(serviceBehaviour) {
+        const weeklyCost = parseInt(figure.querySelector("[name=weekly-value-of-items]").value);
+        let cumulativeCost = 0;
+
+        const data = serviceBehaviour.map(service => {
+            return cumulativeCost += service.waitTime * weeklyCost;
+        });
+
+        return {
+            label: "Delay Costs",
+            data: data,
+            type: 'line',
+            fill: true,
+            borderColor: "rgb(255, 170, 0)",
+            backgroundColor: "rgb(255, 170, 0, 0.3)",
+            order: 0,
+            elements: {
+                point: {
+                    radius: 0,
+                },
+            },
+        };
+    }
+
+    function initCostOfDelayChart(serviceBehaviour) {
         // By leaving labels empty, nothing is displayed
-        poissonCostsChartData.labels = [];
+        poissonCostsChartData.labels = []; // ??
         poissonCostsChartData.datasets = [
-            devCostsDataset,
+            createDevCostDataset(serviceBehaviour),
+            createDelayCostDataset(serviceBehaviour),
         ];
         costOfDelayChart.update();
     }
@@ -150,36 +175,11 @@ function queueSimulation(simIndex, queueDataset, figure) {
     }
 
     function pushEventsToCostChart(events) {
-        const cost = parseInt(figure.querySelector("[name=weekly-value-of-items]").value);
-        const devCostsDataset = poissonCostsChartData.datasets.pop();
-
         events.forEach((event) => {
-            const index = poissonCostsChartData.datasets.length;
-
             if (event.type === "arrival") {
-                const costOfDelay = event.waitTime * cost;
-
-                // Adding a label is necessary to make the bar visible
                 poissonCostsChartData.labels.push("");
-
-                const dataset = {
-                    label: `Item ${index + 1}`,
-                    backgroundColor: (indexedColor(index, 4)),
-                    data: [],
-                    order: index + 1,
-                };
-
-                for (let i = 0; i < index; i++) {
-                    shiftFillArray(poissonCostsChartData.datasets[i].data)
-                    dataset.data.push(0);
-                }
-
-                dataset.data.push(costOfDelay);
-                poissonCostsChartData.datasets.push(dataset);
             }
         });
-
-        poissonCostsChartData.datasets.push(devCostsDataset);
         costOfDelayChart.update();
     }
 
@@ -242,7 +242,7 @@ function queueSimulation(simIndex, queueDataset, figure) {
 
         pushEventsToChart(queueEvents);
         advanceChartElapsedTime(0);
-        initCostOfDelayChart(createDevCostDataset(serviceBehaviour));
+        initCostOfDelayChart(serviceBehaviour);
 
         let tickStart = 0;
         let tickEnd;
@@ -302,7 +302,7 @@ function queueSimulation(simIndex, queueDataset, figure) {
 
     function updateCostOfDelayChart(event) {
         if (serviceBehaviour && serviceBehaviour.length) {
-            initCostOfDelayChart(createDevCostDataset(serviceBehaviour));
+            initCostOfDelayChart(serviceBehaviour);
             pushEventsToCostChart(queueEvents);
         }
     }
@@ -391,7 +391,6 @@ const poissonCostOfDelayChartConfig = {
         barPercentage: 1.3,
         scales: {
             x: {
-                stacked: true,
                 suggestedMin: 0,
                 grid: {
                     display: false,
@@ -401,11 +400,10 @@ const poissonCostOfDelayChartConfig = {
                 },
                 title: {
                     display: true,
-                    text: "Time",
+                    text: "Items completed",
                 },
             },
             y: {
-                stacked: true,
                 suggestedMin: 0,
                 suggestedMax: 30000,
             }
