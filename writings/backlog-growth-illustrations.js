@@ -53,17 +53,17 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
 
         const item = document.createElement("span");
         item.innerText = "Item";
-        item.class = "item";
+        item.className = "item";
         item.style.backgroundColor = colors[type];
 
         return item;
     }
 
     function cueStart() {
-        if (iterationIndex) {
-            iterationIndex++;
-        } else {
+        if (iterationIndex === undefined) {
             iterationIndex = 0;
+        } else {
+            iterationIndex++;
         }
 
         startInterationButton.disabled = false;
@@ -77,7 +77,13 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
 
     function startInteration() {
         // push "arrived" items into the "index" row of the "backlog" column
-        console.log(unboundedBacklog[iterationIndex]);
+        const iteration = unboundedBacklog[iterationIndex];
+        const row = unboundedBoard.querySelectorAll("tbody tr")[iterationIndex];
+        const backlogColumn = row.querySelectorAll("td")[0];
+
+        for (let i = 0; i < iteration.arrived; i++) {
+            backlogColumn.appendChild(itemElem());
+        }
 
         cueEnd();
     }
@@ -86,6 +92,19 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
         // push "done" items into the "index" row of the "done" column
         // remove "done" items from the "index" row of the "done" column
         console.log(unboundedBacklog[iterationIndex]);
+
+        const iteration = unboundedBacklog[iterationIndex];
+        const row = unboundedBoard.querySelectorAll("tbody tr")[iterationIndex];
+        const backlogColumn = row.querySelectorAll("td")[0];
+        const doneColumn = row.querySelectorAll("td")[1];
+
+        for (let i = 0; i < iteration.done; i++) {
+            doneColumn.appendChild(itemElem());
+        }
+
+        for (let i = 0; i < iteration.done; i++) {
+            backlogColumn.removeChild(backlogColumn.childNodes[0]);
+        }
 
         cueStart();
     }
