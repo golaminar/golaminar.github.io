@@ -47,7 +47,8 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
 
         const colors = {
             "default": "#f72585ff", // pink
-            "rejected": "#666", // grey
+            "rejected": "#333", // grey
+            "excess": "#bbb", // grey
             "aged": "#c51465ff", // pink but a bit transparent
         };
 
@@ -61,6 +62,11 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
         item.style.backgroundColor = itemColor(type);
 
         return item;
+    }
+
+    function rejectItem(item) {
+        item.style.backgroundColor = itemColor("rejected");
+        item.className = item.className + " rejected";
     }
 
     function cueStart() {
@@ -81,7 +87,7 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
 
     function startListener() {
         startIteration(unboundedBacklog, ".board.no-wip");
-        startIteration(boundedBacklog, ".board.with-wip");
+        startIteration(boundedBacklog, ".board.with-wip", wipLimit);
         cueEnd();
     }
 
@@ -91,9 +97,11 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
         cueStart();
     }
 
-    function startIteration(backlog, boardSelector) {
+    function startIteration(backlog, boardSelector, wipLimit) {
         // push "arrived" items into the "index" row of the "backlog" column
         const iteration = backlog[iterationIndex];
+
+        console.log(iteration)
 
         const board = figure.querySelector(boardSelector);
         const backlogColumn = board.querySelector(".backlog-column");
@@ -101,6 +109,12 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
         // add newly arrived items
         for (let i = 0; i < iteration.arrived; i++) {
             backlogColumn.appendChild(itemElem());
+        }
+
+        if (wipLimit !== undefined) {
+            for (let i = wipLimit; i < backlogColumn.childNodes.length; i++) {
+                rejectItem(backlogColumn.childNodes[i]);
+            }
         }
     }
 
@@ -114,6 +128,11 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
         const doneRow = board.querySelectorAll(".done-column tr")[iterationIndex];
         const doneColumn = doneRow.querySelector("td");
 
+        [].forEach.call(backlogColumn.querySelectorAll(".rejected"), (item) => {
+            console.log(item)
+            backlogColumn.removeChild(item)
+        })
+
         for (let i = 0; i < iteration.done; i++) {
             doneColumn.appendChild(itemElem());
         }
@@ -123,10 +142,15 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
         }
 
         // "age" all the existing items
-        [].forEach.call(backlogColumn.childNodes, (elem) => {
-            console.log(elem)
-            elem.style.backgroundColor = itemColor("aged");
-        })
+//        [].forEach.call(backlogColumn.childNodes, (item) => {
+//            item.style.backgroundColor = itemColor("aged");
+//        })
+
+        const idleCapacity = iteration.capacity - iteration.done;
+
+        for (let i = 0; i < idleCapacity; i++) {
+            doneColumn.appendChild(itemElem("excess"));
+        }
     }
 
     // each backlog as:
