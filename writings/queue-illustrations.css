@@ -68,7 +68,12 @@ table.board tr {
 }
 
 table.board td {
-    padding: 0.25em;
+    padding: 0.5em;
+    vertical-align: top;
+}
+
+table.iterations td {
+    padding: 0;
 }
 
 table.board th {
@@ -76,7 +81,7 @@ table.board th {
     padding: 0.5em;
 }
 
-table.board tr>td:first-child {
+.backlog-column {
     border-right: dashed 1px #999;
 }
 

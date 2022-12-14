@@ -78,8 +78,7 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
     function startInteration() {
         // push "arrived" items into the "index" row of the "backlog" column
         const iteration = unboundedBacklog[iterationIndex];
-        const row = unboundedBoard.querySelectorAll("tbody tr")[iterationIndex];
-        const backlogColumn = row.querySelectorAll("td")[0];
+        const backlogColumn = figure.querySelector(".board.no-wip .backlog-column");
 
         for (let i = 0; i < iteration.arrived; i++) {
             backlogColumn.appendChild(itemElem());
@@ -94,12 +93,15 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
         console.log(unboundedBacklog[iterationIndex]);
 
         const iteration = unboundedBacklog[iterationIndex];
-        const row = unboundedBoard.querySelectorAll("tbody tr")[iterationIndex];
-        const backlogColumn = row.querySelectorAll("td")[0];
-        const doneColumn = row.querySelectorAll("td")[1];
+        const backlogColumn = figure.querySelector(".board.no-wip .backlog-column");
+        const doneColumn = figure.querySelector(".board.no-wip .done-column");
+        const doneRow = doneColumn.querySelectorAll("tbody tr")[iterationIndex];
+        const doneCell = doneRow.querySelector("td");
+
+        //const doneRow = doneColumn.querySelectorAll("tbody tr")[iterationIndex][0];
 
         for (let i = 0; i < iteration.done; i++) {
-            doneColumn.appendChild(itemElem());
+            doneCell.appendChild(itemElem());
         }
 
         for (let i = 0; i < iteration.done; i++) {
