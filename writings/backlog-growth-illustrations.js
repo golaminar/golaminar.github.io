@@ -79,28 +79,37 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
         endIterationButton.disabled = false;
     }
 
-    function startIteration() {
-        // push "arrived" items into the "index" row of the "backlog" column
-        const iteration = unboundedBacklog[iterationIndex];
-
-        const board = figure.querySelector(".board.no-wip");
-        const backlogColumn = board.querySelector(".backlog-column");
-
-        for (let i = 0; i < iteration.arrived; i++) {
-            backlogColumn.appendChild(itemElem());
-        }
-
+    function startListener() {
+        startIteration(unboundedBacklog, ".board.no-wip");
+        startIteration(boundedBacklog, ".board.with-wip");
         cueEnd();
     }
 
-    function endIteration() {
+    function endListener() {
+        endIteration(unboundedBacklog, ".board.no-wip");
+        endIteration(boundedBacklog, ".board.with-wip");
+        cueStart();
+    }
+
+    function startIteration(backlog, boardSelector) {
+        // push "arrived" items into the "index" row of the "backlog" column
+        const iteration = backlog[iterationIndex];
+
+        const board = figure.querySelector(boardSelector);
+        const backlogColumn = board.querySelector(".backlog-column");
+
+        // add newly arrived items
+        for (let i = 0; i < iteration.arrived; i++) {
+            backlogColumn.appendChild(itemElem());
+        }
+    }
+
+    function endIteration(backlog, boardSelector) {
         // push "done" items into the "index" row of the "done" column
         // remove "done" items from the "index" row of the "done" column
-        console.log(unboundedBacklog[iterationIndex]);
+        const iteration = backlog[iterationIndex];
 
-        const iteration = unboundedBacklog[iterationIndex];
-
-        const board = figure.querySelector(".board.no-wip");
+        const board = figure.querySelector(boardSelector);
         const backlogColumn = board.querySelector(".backlog-column");
         const doneRow = board.querySelectorAll(".done-column tr")[iterationIndex];
         const doneColumn = doneRow.querySelector("td");
@@ -113,7 +122,6 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
             backlogColumn.removeChild(backlogColumn.childNodes[0]);
         }
 
-        cueStart();
         // "age" all the existing items
         [].forEach.call(backlogColumn.childNodes, (elem) => {
             console.log(elem)
@@ -126,8 +134,8 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
     // * a start iteration button (grow into backlog)
     // * an end iteration button (do work)
 
-    startIterationButton.addEventListener("click", startIteration);
-    endIterationButton.addEventListener("click", endIteration);
+    startIterationButton.addEventListener("click", startListener);
+    endIterationButton.addEventListener("click", endListener);
 
     cueStart();
 })();
