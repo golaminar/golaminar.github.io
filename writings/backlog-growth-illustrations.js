@@ -32,14 +32,62 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
     const unboundedBacklog = computeBacklogBehaviour(iterationArrivals, iterationCapacities);
     const boundedBacklog = computeBacklogBehaviour(iterationArrivals, iterationCapacities, wipLimit);
 
-    let iterationIndex = 0;
+    let iterationIndex; // leave undefined to start
 
-    function startInteration(index, backlogBehaviour) {
+    const figure = document.querySelector("#figure-backlog-growth");
 
+    const startInterationButton = figure.querySelector("button.start-iteration");
+    const endInterationButton = figure.querySelector("button.end-iteration");
+
+    const unboundedBoard = figure.querySelector(".board.no-wip");
+    const boundedBoard = figure.querySelector(".board.with-wip");
+
+    function itemElem(type) {
+        type = type || "default";
+
+        const colors = {
+            "default": "#f72585ff", // pink
+            "rejected": "#ddd", // grey
+            "aged": "f72585aa", // pink but a bit transparent
+        };
+
+        const item = document.createElement("span");
+        item.innerText = "Item";
+        item.class = "item";
+        item.style.backgroundColor = colors[type];
+
+        return item;
     }
 
-    function endInteration(index, backlogBehaviour) {
+    function cueStart() {
+        if (iterationIndex) {
+            iterationIndex++;
+        } else {
+            iterationIndex = 0;
+        }
 
+        startInterationButton.disabled = false;
+        endInterationButton.disabled = true;
+    }
+
+    function cueEnd() {
+        startInterationButton.disabled = true;
+        endInterationButton.disabled = false;
+    }
+
+    function startInteration() {
+        // push "arrived" items into the "index" row of the "backlog" column
+        console.log(unboundedBacklog[iterationIndex]);
+
+        cueEnd();
+    }
+
+    function endInteration() {
+        // push "done" items into the "index" row of the "done" column
+        // remove "done" items from the "index" row of the "done" column
+        console.log(unboundedBacklog[iterationIndex]);
+
+        cueStart();
     }
 
     // each backlog as:
@@ -47,10 +95,8 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
     // * a start iteration button (grow into backlog)
     // * an end iteration button (do work)
 
-    function backlogInterative() {
+    startInterationButton.addEventListener("click", startInteration);
+    endInterationButton.addEventListener("click", endInteration);
 
-    }
-
-    backlogInterative(unboundedBacklog);
-    backlogInterative(boundedBacklog);
+    cueStart();
 })();
