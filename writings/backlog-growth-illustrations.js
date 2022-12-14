@@ -36,8 +36,8 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
 
     const figure = document.querySelector("#figure-backlog-growth");
 
-    const startInterationButton = figure.querySelector("button.start-iteration");
-    const endInterationButton = figure.querySelector("button.end-iteration");
+    const startIterationButton = figure.querySelector("button.start-iteration");
+    const endIterationButton = figure.querySelector("button.end-iteration");
 
     const unboundedBoard = figure.querySelector(".board.no-wip");
     const boundedBoard = figure.querySelector(".board.with-wip");
@@ -66,16 +66,16 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
             iterationIndex++;
         }
 
-        startInterationButton.disabled = false;
-        endInterationButton.disabled = true;
+        startIterationButton.disabled = false;
+        endIterationButton.disabled = true;
     }
 
     function cueEnd() {
-        startInterationButton.disabled = true;
-        endInterationButton.disabled = false;
+        startIterationButton.disabled = true;
+        endIterationButton.disabled = false;
     }
 
-    function startInteration() {
+    function startIteration() {
         // push "arrived" items into the "index" row of the "backlog" column
         const iteration = unboundedBacklog[iterationIndex];
         const backlogColumn = figure.querySelector(".board.no-wip .backlog-column");
@@ -87,7 +87,7 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
         cueEnd();
     }
 
-    function endInteration() {
+    function endIteration() {
         // push "done" items into the "index" row of the "done" column
         // remove "done" items from the "index" row of the "done" column
         console.log(unboundedBacklog[iterationIndex]);
@@ -116,8 +116,8 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
     // * a start iteration button (grow into backlog)
     // * an end iteration button (do work)
 
-    startInterationButton.addEventListener("click", startInteration);
-    endInterationButton.addEventListener("click", endInteration);
+    startIterationButton.addEventListener("click", startIteration);
+    endIterationButton.addEventListener("click", endIteration);
 
     cueStart();
 })();
