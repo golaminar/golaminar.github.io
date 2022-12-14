@@ -42,19 +42,23 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
     const unboundedBoard = figure.querySelector(".board.no-wip");
     const boundedBoard = figure.querySelector(".board.with-wip");
 
-    function itemElem(type) {
+    function itemColor(type) {
         type = type || "default";
 
         const colors = {
             "default": "#f72585ff", // pink
-            "rejected": "#ddd", // grey
-            "aged": "f72585aa", // pink but a bit transparent
+            "rejected": "#666", // grey
+            "aged": "#c51465ff", // pink but a bit transparent
         };
 
+        return colors[type];
+    }
+
+    function itemElem(type) {
         const item = document.createElement("span");
         item.innerText = "Item";
         item.className = "item";
-        item.style.backgroundColor = colors[type];
+        item.style.backgroundColor = itemColor(type);
 
         return item;
     }
@@ -110,6 +114,11 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
         }
 
         cueStart();
+        // "age" all the existing items
+        [].forEach.call(backlogColumn.childNodes, (elem) => {
+            console.log(elem)
+            elem.style.backgroundColor = itemColor("aged");
+        })
     }
 
     // each backlog as:
