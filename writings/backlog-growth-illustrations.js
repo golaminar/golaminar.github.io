@@ -61,7 +61,7 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
         return item;
     }
 
-    function rejectItem(item) {
+    function markAsRejected(item) {
         item.style.backgroundColor = itemColor("rejected");
         item.className = item.className + " rejected";
     }
@@ -83,7 +83,7 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
     }
 
     function startListener() {
-        startIteration(unboundedBacklog, ".no-wip");
+        startIteration(unboundedBacklog, ".no-wip", Infinity);
         startIteration(boundedBacklog, ".with-wip", wipLimit);
         cueEnd();
     }
@@ -96,6 +96,7 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
 
     function startIteration(backlog, boardSelector, wipLimit) {
         const iteration = backlog[iterationIndex];
+        console.log(iteration)
         const board = figure.querySelector(boardSelector);
         const backlogColumn = board.querySelector(".backlog-column .items");
 
@@ -104,10 +105,8 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
             backlogColumn.appendChild(itemElem());
         }
 
-        if (wipLimit !== undefined) {
-            for (let i = wipLimit; i < backlogColumn.childNodes.length; i++) {
-                rejectItem(backlogColumn.childNodes[i]);
-            }
+        for (let i = wipLimit; i < backlogColumn.childNodes.length; i++) {
+            markAsRejected(backlogColumn.childNodes[i]);
         }
     }
 
@@ -118,8 +117,8 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
         const doneColumn = board.querySelectorAll(".done-column .iteration")[iterationIndex];
 
         [].forEach.call(backlogColumn.querySelectorAll(".rejected"), (item) => {
-            backlogColumn.removeChild(item)
-        })
+            backlogColumn.removeChild(item);
+        });
 
         for (let i = 0; i < iteration.done; i++) {
             doneColumn.appendChild(itemElem());
