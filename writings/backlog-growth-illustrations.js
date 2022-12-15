@@ -83,18 +83,19 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
     }
 
     function startListener() {
-        startIteration(unboundedBacklog[iterationIndex], ".no-wip");
-        startIteration(boundedBacklog[iterationIndex], ".with-wip", wipLimit);
+        startIteration(unboundedBacklog, ".no-wip");
+        startIteration(boundedBacklog, ".with-wip", wipLimit);
         cueEnd();
     }
 
     function endListener() {
-        endIteration(unboundedBacklog[iterationIndex], ".no-wip");
-        endIteration(boundedBacklog[iterationIndex], ".with-wip");
+        endIteration(unboundedBacklog, ".no-wip");
+        endIteration(boundedBacklog, ".with-wip");
         cueStart();
     }
 
-    function startIteration(iteration, boardSelector, wipLimit) {
+    function startIteration(backlog, boardSelector, wipLimit) {
+        const iteration = backlog[iterationIndex];
         const board = figure.querySelector(boardSelector);
         const backlogColumn = board.querySelector(".backlog-column .items");
 
@@ -110,13 +111,13 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
         }
     }
 
-    function endIteration(iteration, boardSelector) {
+    function endIteration(backlog, boardSelector) {
+        const iteration = backlog[iterationIndex];
         const board = figure.querySelector(boardSelector);
         const backlogColumn = board.querySelector(".backlog-column .items");
         const doneColumn = board.querySelectorAll(".done-column .iteration")[iterationIndex];
 
         [].forEach.call(backlogColumn.querySelectorAll(".rejected"), (item) => {
-            console.log(item)
             backlogColumn.removeChild(item)
         })
 
