@@ -83,23 +83,18 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
     }
 
     function startListener() {
-        startIteration(unboundedBacklog, ".board-example.no-wip");
-        startIteration(boundedBacklog, ".board-example.with-wip", wipLimit);
+        startIteration(unboundedBacklog[iterationIndex], ".no-wip");
+        startIteration(boundedBacklog[iterationIndex], ".with-wip", wipLimit);
         cueEnd();
     }
 
     function endListener() {
-        endIteration(unboundedBacklog, ".board-example.no-wip");
-        endIteration(boundedBacklog, ".board-example.with-wip");
+        endIteration(unboundedBacklog[iterationIndex], ".no-wip");
+        endIteration(boundedBacklog[iterationIndex], ".with-wip");
         cueStart();
     }
 
-    function startIteration(backlog, boardSelector, wipLimit) {
-        // push "arrived" items into the "index" row of the "backlog" column
-        const iteration = backlog[iterationIndex];
-
-        console.log(iteration)
-
+    function startIteration(iteration, boardSelector, wipLimit) {
         const board = figure.querySelector(boardSelector);
         const backlogColumn = board.querySelector(".backlog-column .items");
 
@@ -115,11 +110,7 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
         }
     }
 
-    function endIteration(backlog, boardSelector) {
-        // push "done" items into the "index" row of the "done" column
-        // remove "done" items from the "index" row of the "done" column
-        const iteration = backlog[iterationIndex];
-
+    function endIteration(iteration, boardSelector) {
         const board = figure.querySelector(boardSelector);
         const backlogColumn = board.querySelector(".backlog-column .items");
         const doneColumn = board.querySelectorAll(".done-column .iteration")[iterationIndex];
@@ -137,14 +128,7 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
             backlogColumn.removeChild(backlogColumn.childNodes[0]);
         }
 
-        // "age" all the existing items
-//        [].forEach.call(backlogColumn.childNodes, (item) => {
-//            item.style.backgroundColor = itemColor("aged");
-//        })
-
-        const idleCapacity = iteration.capacity - iteration.done;
-
-        for (let i = 0; i < idleCapacity; i++) {
+        for (let i = iteration.done; i < iteration.capacity; i++) {
             doneColumn.appendChild(itemElem("excess"));
         }
     }
