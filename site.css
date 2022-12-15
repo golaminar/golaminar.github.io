@@ -310,3 +310,7 @@ footer .names a:link, footer .names a:hover, footer .names a:visited, footer .na
         font-size: 0.6em;
     }
 }
+
+table {
+    border-spacing: 0;
+}
