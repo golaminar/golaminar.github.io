@@ -95,6 +95,32 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
         cueStart();
     }
 
+    function explainIterationStart(iteration, board) {
+        const backlogExplanation = board.querySelector(".backlog-column .frame-explanation");
+        const doneExplanation = board.querySelector(".done-column .frame-explanation");
+        const explanations = [`Incoming: ${iteration.arrived}`];
+
+        if (iteration.rejected) {
+            explanations.push(`Rejected: ${iteration.rejected}`);
+        }
+
+        backlogExplanation.innerHTML = explanations.join("<br>");
+        doneExplanation.innerHTML = "";
+    }
+
+    function explainIterationEnd(iteration, board) {
+        const backlogExplanation = board.querySelector(".backlog-column .frame-explanation");
+        const doneExplanation = board.querySelector(".done-column .frame-explanation");
+        const explanations = [`Completed: ${iteration.done}`];
+
+        if (iteration.done < iteration.capacity) {
+            explanations.push(`Excess capacity: ${iteration.capacity - iteration.done}`);
+        }
+
+        doneExplanation.innerHTML = explanations.join("<br>");
+        backlogExplanation.innerHTML = "";
+    }
+
     function startIteration(backlog, boardSelector, wipLimit) {
         const iteration = backlog[iterationIndex];
         console.log(iteration)
@@ -109,6 +135,8 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
         for (let i = 0; i < iteration.rejected; i++) {
             markAsRejected(backlogColumn.childNodes[wipLimit + i]);
         }
+
+        explainIterationStart(iteration, board);
     }
 
     function endIteration(backlog, boardSelector) {
@@ -132,6 +160,8 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
         for (let i = iteration.done; i < iteration.capacity; i++) {
             doneColumn.appendChild(itemElem("excess"));
         }
+
+        explainIterationEnd(iteration, board);
     }
 
     // each backlog as:

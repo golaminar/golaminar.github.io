@@ -84,6 +84,15 @@
     min-height: 3em;
 }
 
+.explanation {
+    font-size: 12px;
+    min-height: 2.6em;
+}
+
+.board-example .column .explanation {
+    margin-bottom: 0;
+}
+
 #figure-backlog-growth .cols>div {
     flex: 50px;
 }
