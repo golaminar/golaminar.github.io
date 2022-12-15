@@ -1,10 +1,9 @@
 function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
     const backlogBehaviour = [];
-    const backlogWipLimit = (wipLimit === undefined) ? Infinity : wipLimit;
     let backlogSize = 0;
 
     arrivals.forEach((arrived, index) => {
-        backlogSize = Math.min(backlogSize + arrived, backlogWipLimit);
+        backlogSize = Math.min(backlogSize + arrived, wipLimit);
 
         const capacity = capacities[index];
         const done = (capacity > backlogSize) ? backlogSize : capacity;
@@ -29,7 +28,7 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
     const iterationCapacities = [5, 4, 4, 6, 6];
     const wipLimit = 6;
 
-    const unboundedBacklog = computeBacklogBehaviour(iterationArrivals, iterationCapacities);
+    const unboundedBacklog = computeBacklogBehaviour(iterationArrivals, iterationCapacities, Infinity);
     const boundedBacklog = computeBacklogBehaviour(iterationArrivals, iterationCapacities, wipLimit);
 
     let iterationIndex; // leave undefined to start

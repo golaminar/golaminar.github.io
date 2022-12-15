@@ -62,7 +62,7 @@ console.log("These are the backlog behaviour tests:\n-----------------");
         { arrived: 5, capacity: 6, done: 5, backlogSizeAfter: 0 }, // iteration 5
     ];
 
-    const unboundedBacklog = computeBacklogBehaviour(iterationArrivals, iterationCapacities);
+    const unboundedBacklog = computeBacklogBehaviour(iterationArrivals, iterationCapacities, Infinity);
     const boundedBacklog = computeBacklogBehaviour(iterationArrivals, iterationCapacities, 6);
 
     console.log("correctly computes unbounded backlog behaviour", isDeepEqual(unboundedBacklog, unboundedBacklogExpectation));

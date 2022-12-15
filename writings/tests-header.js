@@ -6,7 +6,7 @@ let document = {
         return this;
     },
     querySelector: function () {
-        return false;
+        return this;
     },
     getElementById: function () {
         return this;
