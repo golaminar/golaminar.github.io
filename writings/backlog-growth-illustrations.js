@@ -3,17 +3,19 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
     let backlogSize = 0;
 
     arrivals.forEach((arrived, index) => {
-        backlogSize = Math.min(backlogSize + arrived, wipLimit);
+        backlogSize = backlogSize + arrived;
 
         const capacity = capacities[index];
         const done = (capacity > backlogSize) ? backlogSize : capacity;
+        const rejected = (backlogSize > wipLimit) ? backlogSize - wipLimit : 0;
 
-        backlogSize = backlogSize - done;
+        backlogSize = backlogSize - done - rejected;
 
         const iterationOutcome = {
             arrived,
             capacity,
             done,
+            rejected,
             backlogSizeAfter: backlogSize,
         };
 
@@ -104,8 +106,8 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
             backlogColumn.appendChild(itemElem());
         }
 
-        for (let i = wipLimit; i < backlogColumn.childNodes.length; i++) {
-            markAsRejected(backlogColumn.childNodes[i]);
+        for (let i = 0; i < iteration.rejected; i++) {
+            markAsRejected(backlogColumn.childNodes[wipLimit + i]);
         }
     }
 

@@ -47,19 +47,19 @@ console.log("These are the backlog behaviour tests:\n-----------------");
     const iterationCapacities = [5, 4, 4, 6, 6];
 
     const unboundedBacklogExpectation = [
-        { arrived: 5, capacity: 5, done: 5, backlogSizeAfter: 0 }, // iteration 1
-        { arrived: 5, capacity: 4, done: 4, backlogSizeAfter: 1 }, // iteration 2
-        { arrived: 6, capacity: 4, done: 4, backlogSizeAfter: 3 }, // iteration 3
-        { arrived: 6, capacity: 6, done: 6, backlogSizeAfter: 3 }, // iteration 4
-        { arrived: 5, capacity: 6, done: 6, backlogSizeAfter: 2 }, // iteration 5
+        { arrived: 5, capacity: 5, done: 5, rejected: 0, backlogSizeAfter: 0 }, // iteration 1
+        { arrived: 5, capacity: 4, done: 4, rejected: 0, backlogSizeAfter: 1 }, // iteration 2
+        { arrived: 6, capacity: 4, done: 4, rejected: 0, backlogSizeAfter: 3 }, // iteration 3
+        { arrived: 6, capacity: 6, done: 6, rejected: 0, backlogSizeAfter: 3 }, // iteration 4
+        { arrived: 5, capacity: 6, done: 6, rejected: 0, backlogSizeAfter: 2 }, // iteration 5
     ];
 
     const boundedBacklogExpectation = [
-        { arrived: 5, capacity: 5, done: 5, backlogSizeAfter: 0 }, // iteration 1
-        { arrived: 5, capacity: 4, done: 4, backlogSizeAfter: 1 }, // iteration 2
-        { arrived: 6, capacity: 4, done: 4, backlogSizeAfter: 2 }, // iteration 3
-        { arrived: 6, capacity: 6, done: 6, backlogSizeAfter: 0 }, // iteration 4
-        { arrived: 5, capacity: 6, done: 5, backlogSizeAfter: 0 }, // iteration 5
+        { arrived: 5, capacity: 5, done: 5, rejected: 0, backlogSizeAfter: 0 }, // iteration 1
+        { arrived: 5, capacity: 4, done: 4, rejected: 0, backlogSizeAfter: 1 }, // iteration 2
+        { arrived: 6, capacity: 4, done: 4, rejected: 1, backlogSizeAfter: 2 }, // iteration 3
+        { arrived: 6, capacity: 6, done: 6, rejected: 2, backlogSizeAfter: 0 }, // iteration 4
+        { arrived: 5, capacity: 6, done: 5, rejected: 0, backlogSizeAfter: 0 }, // iteration 5
     ];
 
     const unboundedBacklog = computeBacklogBehaviour(iterationArrivals, iterationCapacities, Infinity);
