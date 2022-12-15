@@ -67,8 +67,10 @@
     text-align: center;
 }
 
-.backlog-column {
-    border-right: dashed 1px #999;
+.board .column {
+    border: dashed 1px #999;
+    padding: 1em;
+    margin-bottom: 1em;
 }
 
 .board .iteration {
