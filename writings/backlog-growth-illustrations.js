@@ -39,9 +39,6 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
     const startIterationButton = figure.querySelector("button.start-iteration");
     const endIterationButton = figure.querySelector("button.end-iteration");
 
-    const unboundedBoard = figure.querySelector(".board.no-wip");
-    const boundedBoard = figure.querySelector(".board.with-wip");
-
     function itemColor(type) {
         type = type || "default";
 
@@ -86,14 +83,14 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
     }
 
     function startListener() {
-        startIteration(unboundedBacklog, ".board.no-wip");
-        startIteration(boundedBacklog, ".board.with-wip", wipLimit);
+        startIteration(unboundedBacklog, ".board-example.no-wip");
+        startIteration(boundedBacklog, ".board-example.with-wip", wipLimit);
         cueEnd();
     }
 
     function endListener() {
-        endIteration(unboundedBacklog, ".board.no-wip");
-        endIteration(boundedBacklog, ".board.with-wip");
+        endIteration(unboundedBacklog, ".board-example.no-wip");
+        endIteration(boundedBacklog, ".board-example.with-wip");
         cueStart();
     }
 
@@ -104,7 +101,7 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
         console.log(iteration)
 
         const board = figure.querySelector(boardSelector);
-        const backlogColumn = board.querySelector(".backlog-column");
+        const backlogColumn = board.querySelector(".backlog-column .items");
 
         // add newly arrived items
         for (let i = 0; i < iteration.arrived; i++) {
@@ -124,9 +121,8 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
         const iteration = backlog[iterationIndex];
 
         const board = figure.querySelector(boardSelector);
-        const backlogColumn = board.querySelector(".backlog-column");
-        const doneRow = board.querySelectorAll(".done-column tr")[iterationIndex];
-        const doneColumn = doneRow.querySelector("td");
+        const backlogColumn = board.querySelector(".backlog-column .items");
+        const doneColumn = board.querySelectorAll(".done-column .iteration")[iterationIndex];
 
         [].forEach.call(backlogColumn.querySelectorAll(".rejected"), (item) => {
             console.log(item)

@@ -86,151 +86,58 @@
                 </div>
 
                 <div class="cols">
+                    <div class="board-example no-wip">
+                        <span class="title">Backlog has no WIP limit</span>
+                        <span class="explanation limit-explanation">All items wait in the backlog until they are eventually completed.</span>
 
-                    <div class="col">
-                        <table class="board no-wip">
-                            <thead>
-                                <tr>
-                                    <th colspan="2">
-                                        Backlog has no WIP limit
-                                    </th>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
-                                        All items wait in the backlog until they are eventually completed.
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>
-                                        Backlog
-                                    </th>
-                                    <th>
-                                        Done
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="backlog-column"></td>
-                                    <td class="done-column">
-                                        <table class="iterations">
-                                            <tbody>
-                                                <tr>
-                                                    <td>
-                                                    </td>
-                                                    <td>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                    </td>
-                                                    <td>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                    </td>
-                                                    <td>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                    </td>
-                                                    <td>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                    </td>
-                                                    <td>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </td>
-                                </tr>
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <td colspan="2">
-                                        The backlog grows uncontrolled. The team is always working at capacity.
-                                    </td>
-                                </tr>
-                            </tfoot>
-                        </table>
+                        <div class="board cols">
+                            <div class="backlog-column">
+                                <span class="title">Backlog</span>
+                                <div class="items"></div>
+                                <span class="explanation frame-explanation"></span>
+                            </div>
+                            <div class="done-column">
+                                <span class="title">Done</span>
+                                <div class="iterations">
+                                    <div class="iteration"></div>
+                                    <div class="iteration"></div>
+                                    <div class="iteration"></div>
+                                    <div class="iteration"></div>
+                                    <div class="iteration"></div>
+                                    <div class="iteration"></div>
+                                </div>
+                                <span class="explanation frame-explanation"></span>
+                            </div>
+                        </div>
+
+                        <span class="explanation behaviour-explanation">The backlog grows uncontrolled. The team is always working at capacity.</span>
                     </div>
 
-                    <div class="col">
-                        <table class="board with-wip">
-                            <thead>
-                                <tr>
-                                    <th colspan="2">
-                                        Backlog is limited to 6 items
-                                    </th>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
-                                        When the backlog grows to above its limit, excess items are immediately rejected.
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>
-                                        Backlog
-                                    </th>
-                                    <th>
-                                        Done
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="backlog-column"></td>
-                                    <td class="done-column">
-                                        <table class="iterations">
-                                            <tbody>
-                                                <tr>
-                                                    <td>
-                                                    </td>
-                                                    <td>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                    </td>
-                                                    <td>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                    </td>
-                                                    <td>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                    </td>
-                                                    <td>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                    </td>
-                                                    <td>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </td>
-                                </tr>
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <td colspan="2">
-                                        The backlog is never allowed to grow. Occasionally, the team has excess capacity.
-                                    </td>
-                                </tr>
-                            </tfoot>
-                        </table>
+                    <div class="board-example with-wip">
+                        <span class="title">Backlog is limited to 6 items</span>
+                        <span class="explanation limit-explanation">When the backlog grows above its limit, excess items are immediately rejected.</span>
+
+                        <div class="board cols">
+                            <div class="backlog-column">
+                                <span class="title">Backlog</span>
+                                <div class="items"></div>
+                                <span class="explanation frame-explanation"></span>
+                            </div>
+                            <div class="done-column">
+                                <span class="title">Done</span>
+                                <div class="iterations">
+                                    <div class="iteration"></div>
+                                    <div class="iteration"></div>
+                                    <div class="iteration"></div>
+                                    <div class="iteration"></div>
+                                    <div class="iteration"></div>
+                                    <div class="iteration"></div>
+                                </div>
+                                <span class="explanation frame-explanation"></span>
+                            </div>
+                        </div>
+
+                        <span class="explanation behaviour-explanation">The backlog is never allowed to grow. Occasionally, the team has excess capacity.</span>
                     </div>
                 </div>
 

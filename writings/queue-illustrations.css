@@ -57,38 +57,26 @@
     background-color: #ffffff55;
 }
 
-table.board {
-    width: 100%;
-    font-size: 12px;
+.board-example span {
+    display: block;
+    margin-bottom: 1em;
 }
 
-table.board tr {
-    height: 2em;
-}
-
-table.board td {
-    padding: 0.5em;
-    vertical-align: top;
-}
-
-table.iterations td {
-    padding: 0;
-}
-
-table.board th {
-    padding: 0.5em;
+.board-example span.title {
+    font-weight: bold;
+    text-align: center;
 }
 
 .backlog-column {
     border-right: dashed 1px #999;
 }
 
-.backlog-column {
-    width: 40%;
+.board .iteration {
+    min-height: 2em;
 }
 
 #figure-backlog-growth .cols>div {
-    flex: 150px;
+    flex: 50px;
 }
 
 #figure-backlog-growth .controls {
