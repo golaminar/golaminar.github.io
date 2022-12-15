@@ -57,6 +57,10 @@
     background-color: #ffffff55;
 }
 
+.board {
+    margin-bottom: 1em;
+}
+
 .board-example span {
     display: block;
     margin-bottom: 1em;
@@ -70,11 +74,14 @@
 .board .column {
     border: dashed 1px #999;
     padding: 1em;
-    margin-bottom: 1em;
 }
 
 .board .iteration {
     min-height: 2em;
+}
+
+.backlog-column .items {
+    min-height: 3em;
 }
 
 #figure-backlog-growth .cols>div {
