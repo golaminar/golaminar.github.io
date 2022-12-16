@@ -198,6 +198,7 @@ function poissonArray(lambda, n) {
 
         if (size === "step" && direction === "forward") {
             stepForward();
+            return;
         }
 
         if (size === "jump" && direction === "forward") {
@@ -205,10 +206,12 @@ function poissonArray(lambda, n) {
             while (iterationIndex < Math.min(targetIteration, iterationsCount)) {
                 stepForward();
             }
+            return;
         }
 
         if (size === "step" && direction === "backward") {
             stepBackward();
+            return;
         }
 
         if (size === "jump" && direction === "backward") {
@@ -216,6 +219,7 @@ function poissonArray(lambda, n) {
             while (iterationIndex > Math.max(targetIteration, 0)) {
                 stepBackward();
             }
+            return;
         }
     }
 
