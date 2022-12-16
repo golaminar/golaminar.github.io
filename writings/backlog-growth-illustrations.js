@@ -126,8 +126,8 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
             revertEndIteration(boundedBacklog, ".with-wip");
             cueEnd();
         } else {
-            revertStartIteration(unboundedBacklog, ".no-wip", Infinity);
-            revertStartIteration(boundedBacklog, ".with-wip", wipLimit);
+            revertStartIteration(unboundedBacklog, ".no-wip");
+            revertStartIteration(boundedBacklog, ".with-wip");
             cueStart();
         }
     }
@@ -226,7 +226,7 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
         explainIterationEnd(iteration, board);
     }
 
-    function revertStartIteration(backlog, boardSelector, wipLimit) {
+    function revertStartIteration(backlog, boardSelector) {
         const iteration = backlog[iterationIndex];
         const prevIteration = backlog[iterationIndex - 1];
         const board = figure.querySelector(boardSelector);
