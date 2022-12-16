@@ -59,7 +59,7 @@
 
 .frame-title {
     display: inline-block;
-    vertical-align: middle;
+    vertical-align: text-bottom;
     padding: 0 1em;
     font-size: 10px;
     font-weight: bold;
@@ -121,6 +121,12 @@
 #figure-backlog-growth .controls {
     margin-bottom: 1em;
     text-align: center;
+}
+
+#figure-backlog-growth button {
+    font-size: 1.4em;
+    padding: 0.2em 0.4em;
+    border-radius: 6px;
 }
 
 .board .item {
