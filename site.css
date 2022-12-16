@@ -155,8 +155,8 @@ header {
     padding: 1em 2em;
 }
 
-.writing article {
-    max-width: 800px;
+.writing article, .writing header {
+    max-width: 45rem;
     margin: 0 auto;
 }
 
