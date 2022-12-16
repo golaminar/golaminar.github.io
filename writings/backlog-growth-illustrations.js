@@ -65,6 +65,12 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
         return item;
     }
 
+    function iterationElem() {
+        const div = document.createElement("div");
+        div.className = "iteration";
+        return div;
+    }
+
     function markAsRejected(item) {
         item.style.backgroundColor = itemColor("rejected");
         item.className = item.className + " rejected";
@@ -218,7 +224,9 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
         const iteration = backlog[iterationIndex];
         const board = figure.querySelector(boardSelector);
         const backlogColumn = board.querySelector(".backlog-column .items");
-        const doneColumn = board.querySelectorAll(".done-column .iteration")[iterationIndex];
+        const doneColumn = iterationElem();
+
+        board.querySelector(".done-column .iterations").appendChild(doneColumn);
 
         [].forEach.call(backlogColumn.querySelectorAll(".rejected"), (item) => {
             backlogColumn.removeChild(item);
@@ -257,7 +265,7 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
         const iteration = backlog[iterationIndex];
         const board = figure.querySelector(boardSelector);
         const backlogColumn = board.querySelector(".backlog-column .items");
-        const doneColumn = board.querySelectorAll(".done-column .iteration")[iterationIndex];
+        const doneColumn = board.querySelector(".done-column .iterations");
 
         // add back done to backlog
         for (let i = 0; i < iteration.done; i++) {
@@ -269,15 +277,8 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
             backlogColumn.appendChild(itemElem("rejected"));
         }
 
-        // remove excess from done
-        for (let i = 0; i < iteration.excess; i++) {
-            doneColumn.removeChild(doneColumn.lastChild);
-        }
-
-        // remove done from done
-        for (let i = 0; i < iteration.done; i++) {
-            doneColumn.removeChild(doneColumn.lastChild);
-        }
+        // remove done iteration
+        doneColumn.removeChild(doneColumn.lastChild);
 
         explainIterationStart(iteration, board);
     }

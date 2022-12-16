@@ -87,6 +87,10 @@
     padding-bottom: 3em;
 }
 
+.board .done-column {
+    min-height: 180px;
+}
+
 .board .iteration {
     min-height: 2em;
 }
