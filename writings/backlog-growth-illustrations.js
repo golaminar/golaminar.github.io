@@ -119,6 +119,19 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
         }
     }
 
+    function stepBackward() {
+        if (cuedStage === "start") {
+            iterationIndex--;
+            revertEndIteration(unboundedBacklog, ".no-wip");
+            revertEndIteration(boundedBacklog, ".with-wip");
+            cueEnd();
+        } else {
+            revertStartIteration(unboundedBacklog, ".no-wip", Infinity);
+            revertStartIteration(boundedBacklog, ".with-wip", wipLimit);
+            cueStart();
+        }
+    }
+
     function advanceFrame(event) {
         const size = event.target.dataset.size;
         const direction = event.target.dataset.direction;
@@ -132,6 +145,10 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
             while (iterationIndex < Math.min(targetIteration, iterationsCount)) {
                 stepForward();
             }
+        }
+
+        if (size === "step" && direction === "backward") {
+            stepBackward();
         }
     }
 
@@ -207,6 +224,23 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
         }
 
         explainIterationEnd(iteration, board);
+    }
+
+    function revertStartIteration(backlog, boardSelector, wipLimit) {
+        const iteration = backlog[iterationIndex];
+        const prevIteration = backlog[iterationIndex - 1];
+        const board = figure.querySelector(boardSelector);
+        const backlogColumn = board.querySelector(".backlog-column .items");
+
+        // remove newly arrived items
+        for (let i = 0; i < iteration.arrived; i++) {
+            backlogColumn.removeChild(backlogColumn.childNodes[0]);
+        }
+
+        explainIterationEnd(prevIteration, board);
+    }
+
+    function revertEndIteration(backlog, boardSelector) {
     }
 
     [].forEach.call(buttons, button => {
