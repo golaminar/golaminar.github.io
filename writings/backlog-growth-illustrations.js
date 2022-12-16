@@ -38,6 +38,7 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
 
     let iterationIndex = 0;
     let cuedStage = "start";
+    let jumpSize = 3;
 
     const figure = document.querySelector("#figure-backlog-growth");
 
@@ -153,7 +154,7 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
         }
 
         if (size === "jump" && direction === "forward") {
-            const targetIteration = iterationIndex + 3;
+            const targetIteration = iterationIndex + jumpSize;
             while (iterationIndex < Math.min(targetIteration, iterationsCount)) {
                 stepForward();
             }
@@ -164,7 +165,7 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
         }
 
         if (size === "jump" && direction === "backward") {
-            const targetIteration = iterationIndex - 3;
+            const targetIteration = iterationIndex - jumpSize;
             while (iterationIndex > Math.max(targetIteration, 0)) {
                 stepBackward();
             }
