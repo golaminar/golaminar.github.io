@@ -57,6 +57,15 @@
     background-color: #ffffff55;
 }
 
+.frame-title {
+    display: inline-block;
+    vertical-align: middle;
+    padding: 0 1em;
+    font-size: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
 .board {
     margin-bottom: 1em;
 }

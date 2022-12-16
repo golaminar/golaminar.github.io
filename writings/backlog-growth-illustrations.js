@@ -96,6 +96,11 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
         }
     }
 
+    function announceFrame() {
+        const frameTitle = `${cuedStage} of<br>iteration ${iterationIndex + 1}`;
+        figure.querySelector(".frame-title").innerHTML = frameTitle;
+    }
+
     function cueStart() {
         cuedStage = "start";
         setButtonEnabledState();
@@ -108,10 +113,12 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
 
     function stepForward() {
         if (cuedStage === "start") {
+            announceFrame();
             startIteration(unboundedBacklog, ".no-wip", Infinity);
             startIteration(boundedBacklog, ".with-wip", wipLimit);
             cueEnd();
         } else {
+            announceFrame();
             endIteration(unboundedBacklog, ".no-wip");
             endIteration(boundedBacklog, ".with-wip");
             iterationIndex++;
@@ -122,10 +129,12 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
     function stepBackward() {
         if (cuedStage === "start") {
             iterationIndex--;
+            announceFrame();
             revertEndIteration(unboundedBacklog, ".no-wip");
             revertEndIteration(boundedBacklog, ".with-wip");
             cueEnd();
         } else {
+            announceFrame();
             revertStartIteration(unboundedBacklog, ".no-wip");
             revertStartIteration(boundedBacklog, ".with-wip");
             cueStart();
