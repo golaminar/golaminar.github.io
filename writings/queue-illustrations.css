@@ -74,6 +74,8 @@
 .board .column {
     border: dashed 1px #999;
     padding: 1em;
+    position: relative;
+    padding-bottom: 3em;
 }
 
 .board .iteration {
@@ -91,6 +93,8 @@
 
 .board-example .column .explanation {
     margin-bottom: 0;
+    position: absolute;
+    bottom: 1em;
 }
 
 #figure-backlog-growth .cols>div {
