@@ -74,14 +74,25 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
     }
 
     function setButtonEnabledState() {
-        if (iterationIndex === 0 && iterationStage === "start") {
+        const firstFrame = iterationStage === "start" && iterationIndex === 0;
+        const lastFrame = iterationStage === "start" && iterationIndex >= iterationsCount;
+
+        [].forEach.call(buttons, button => {
+            button.disabled = false;
+        });
+
+        if (firstFrame) {
             // disable backward buttons
-            console.log("disable backwards buttons");
+            [].forEach.call(buttons, button => {
+                button.disabled = button.dataset.direction === "backward"
+            });
         }
 
-        if (iterationIndex >= iterationsCount && iterationStage === "end") {
+        if (lastFrame) {
             // disable forward buttons
-            console.log("disable forward buttons");
+            [].forEach.call(buttons, button => {
+                button.disabled = button.dataset.direction === "forward"
+            });
         }
     }
 
@@ -158,7 +169,6 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
 
     function startIteration(backlog, boardSelector, wipLimit) {
         const iteration = backlog[iterationIndex];
-        console.log(iteration)
         const board = figure.querySelector(boardSelector);
         const backlogColumn = board.querySelector(".backlog-column .items");
 
