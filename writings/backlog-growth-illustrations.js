@@ -6,11 +6,14 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
         backlogSize = backlogSize + arrived;
 
         const capacity = capacities[index];
-        const done = (capacity > backlogSize) ? backlogSize : capacity;
         const rejected = (backlogSize > wipLimit) ? backlogSize - wipLimit : 0;
+
+        backlogSize = backlogSize - rejected;
+
+        const done = (capacity > backlogSize) ? backlogSize : capacity;
         const excess = capacity - done;
 
-        backlogSize = backlogSize - done - rejected;
+        backlogSize = backlogSize - done;
 
         const iterationOutcome = {
             arrived,
