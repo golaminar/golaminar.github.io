@@ -265,12 +265,12 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
 
         // remove excess from done
         for (let i = 0; i < iteration.excess; i++) {
-            doneColumn.removeChild(doneColumn.childNodes[doneColumn.childNodes.length - 1]);
+            doneColumn.removeChild(doneColumn.lastChild);
         }
 
         // remove done from done
         for (let i = 0; i < iteration.done; i++) {
-            doneColumn.removeChild(doneColumn.childNodes[doneColumn.childNodes.length - 1]);
+            doneColumn.removeChild(doneColumn.lastChild);
         }
 
         explainIterationStart(iteration, board);
