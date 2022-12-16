@@ -234,7 +234,7 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
 
         // remove newly arrived items
         for (let i = 0; i < iteration.arrived; i++) {
-            backlogColumn.removeChild(backlogColumn.childNodes[0]);
+            backlogColumn.removeChild(backlogColumn.childNodes[backlogColumn.childNodes.length - 1]);
         }
 
         explainIterationEnd(prevIteration, board);
