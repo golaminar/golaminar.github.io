@@ -100,7 +100,10 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
     function explainIterationStart(iteration, board) {
         const backlogExplanation = board.querySelector(".backlog-column .frame-explanation");
         const doneExplanation = board.querySelector(".done-column .frame-explanation");
-        const explanations = [`Incoming: ${iteration.arrived}`];
+
+        const explanations = [
+            `Incoming: ${iteration.arrived}`,
+        ];
 
         if (iteration.rejected) {
             explanations.push(`Rejected: ${iteration.rejected}`);
@@ -113,7 +116,10 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
     function explainIterationEnd(iteration, board) {
         const backlogExplanation = board.querySelector(".backlog-column .frame-explanation");
         const doneExplanation = board.querySelector(".done-column .frame-explanation");
-        const explanations = [`Completed: ${iteration.done}`];
+
+        const explanations = [
+            `Completed: ${iteration.done}`,
+        ];
 
         if (iteration.excess) {
             explanations.push(`Excess capacity: ${iteration.excess}`);
@@ -165,11 +171,6 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
 
         explainIterationEnd(iteration, board);
     }
-
-    // each backlog as:
-    // * backlog behaviour
-    // * a start iteration button (grow into backlog)
-    // * an end iteration button (do work)
 
     startIterationButton.addEventListener("click", startListener);
     endIterationButton.addEventListener("click", endListener);
