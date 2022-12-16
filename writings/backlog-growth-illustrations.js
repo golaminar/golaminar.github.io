@@ -84,14 +84,14 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
         if (firstFrame) {
             // disable backward buttons
             [].forEach.call(buttons, button => {
-                button.disabled = button.dataset.direction === "backward"
+                button.disabled = button.dataset.direction === "backward";
             });
         }
 
         if (lastFrame) {
             // disable forward buttons
             [].forEach.call(buttons, button => {
-                button.disabled = button.dataset.direction === "forward"
+                button.disabled = button.dataset.direction === "forward";
             });
         }
     }
