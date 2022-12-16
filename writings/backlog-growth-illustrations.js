@@ -74,7 +74,7 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
     }
 
     function setButtonEnabledState() {
-        const firstFrame = cuedStage === "start" && iterationIndex === 0;
+        const firstFrame = iterationIndex === 0;
         const lastFrame = cuedStage === "start" && iterationIndex >= iterationsCount;
 
         [].forEach.call(buttons, button => {
