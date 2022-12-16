@@ -93,7 +93,7 @@
 }
 
 .board .iteration {
-    min-height: 2em;
+    margin-bottom: 0.5em;
 }
 
 .backlog-column .items {
