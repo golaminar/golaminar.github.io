@@ -280,5 +280,5 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
         button.addEventListener("click", advanceFrame);
     });
 
-    cueStart();
+    stepForward();
 })();
