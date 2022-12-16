@@ -92,12 +92,16 @@
     min-height: 180px;
 }
 
+.board .iterations {
+    font-size: 10px;
+}
+
 .board .iteration {
     margin-bottom: 0.5em;
 }
 
 .backlog-column .items {
-    min-height: 3em;
+    min-height: 4em;
 }
 
 .explanation {

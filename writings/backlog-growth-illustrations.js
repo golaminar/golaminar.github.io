@@ -30,9 +30,31 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
     return backlogBehaviour;
 };
 
+function getPoisson(lambda) {
+  const L = Math.exp(-lambda);
+  let p = 1.0;
+  let k = 0;
+
+    do {
+        k++;
+        p *= Math.random();
+    } while (p > L);
+
+    return k - 1;
+}
+
+function poissonArray(lambda, n) {
+    let arr = [];
+    for (let i = 0; i < n; i++) {
+        arr.push(getPoisson(lambda));
+    }
+    return arr;
+}
+
 (function () {
-    const iterationArrivals = [5, 5, 6, 6, 5];
-    const iterationCapacities = [5, 4, 4, 6, 6];
+    const iterationArrivals = [5, 5, 6, 6, 5].concat(poissonArray(5, 20));
+    const iterationCapacities = [5, 4, 4, 6, 6].concat(poissonArray(5, 20));
+
     const iterationsCount = iterationArrivals.length;
     const wipLimit = 6;
 
