@@ -59,8 +59,8 @@ function poissonArray(lambda, n) {
     const wipLimit = 6;
     const jumpSize = 3;
 
-    const unboundedBacklog = computeBacklogBehaviour(iterationArrivals, iterationCapacities, Infinity);
-    const boundedBacklog = computeBacklogBehaviour(iterationArrivals, iterationCapacities, wipLimit);
+    let unboundedBacklog = computeBacklogBehaviour(iterationArrivals, iterationCapacities, Infinity);
+    let boundedBacklog = computeBacklogBehaviour(iterationArrivals, iterationCapacities, wipLimit);
 
     let iterationIndex = 0;
     let cuedStage = "start";
@@ -68,6 +68,23 @@ function poissonArray(lambda, n) {
     const figure = document.querySelector("#figure-backlog-growth");
 
     const buttons = figure.querySelectorAll(".controls button");
+
+    function reloadAndReset() {
+        const iterationArrivals = poissonArray(5, iterationsCount);
+        const iterationCapacities = poissonArray(5, iterationsCount);
+
+        unboundedBacklog = computeBacklogBehaviour(iterationArrivals, iterationCapacities, Infinity);
+        boundedBacklog = computeBacklogBehaviour(iterationArrivals, iterationCapacities, wipLimit);
+
+        [].forEach.call(figure.querySelectorAll(".holder"), holder => {
+            holder.innerHTML = "";
+        });
+
+        iterationIndex = 0;
+        cuedStage = "start";
+
+        stepForward();
+    }
 
     function itemColor(type) {
         const colors = {
@@ -173,6 +190,11 @@ function poissonArray(lambda, n) {
     function advanceFrame(event) {
         const size = event.target.dataset.size;
         const direction = event.target.dataset.direction;
+
+        if (event.target.dataset.action === "reload") {
+            reloadAndReset();
+            return;
+        }
 
         if (size === "step" && direction === "forward") {
             stepForward();
