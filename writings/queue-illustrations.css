@@ -57,13 +57,35 @@
     background-color: #ffffff55;
 }
 
+#figure-backlog-growth .controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25em;
+    align-items: center;
+    justify-content: center;
+}
+
 .frame-title {
     display: inline-block;
-    vertical-align: text-bottom;
-    padding: 0 1em;
-    font-size: 10px;
+    padding: 1em 0;
     font-weight: bold;
     text-transform: uppercase;
+    min-width: 180px;
+}
+
+@media (max-width: 600px) {
+    #figure-backlog-growth .controls {
+        position: relative;
+        margin-top: 3em;
+    }
+    .frame-title {
+        position: absolute;
+        top: -3em;
+    }
+}
+
+table {
+    border-spacing: 0;
 }
 
 .board {

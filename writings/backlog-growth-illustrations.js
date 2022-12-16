@@ -143,7 +143,7 @@ function poissonArray(lambda, n) {
     }
 
     function announceFrame() {
-        const frameTitle = `${cuedStage} of<br>iteration ${iterationIndex + 1}`;
+        const frameTitle = `${cuedStage} of iteration ${iterationIndex + 1}`;
         figure.querySelector(".frame-title").innerHTML = frameTitle;
     }
 
@@ -204,6 +204,14 @@ function poissonArray(lambda, n) {
         if (size === "jump" && direction === "forward") {
             const targetIteration = iterationIndex + jumpSize;
             while (iterationIndex < Math.min(targetIteration, iterationsCount)) {
+                stepForward();
+            }
+            return;
+        }
+
+        if (size === "zoom" && direction === "forward") {
+            const targetIteration = iterationsCount;
+            while (iterationIndex < targetIteration) {
                 stepForward();
             }
             return;
