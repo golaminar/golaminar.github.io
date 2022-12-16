@@ -30,17 +30,21 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
 (function () {
     const iterationArrivals = [5, 5, 6, 6, 5];
     const iterationCapacities = [5, 4, 4, 6, 6];
+    const iterationsCount = iterationArrivals.length;
     const wipLimit = 6;
 
     const unboundedBacklog = computeBacklogBehaviour(iterationArrivals, iterationCapacities, Infinity);
     const boundedBacklog = computeBacklogBehaviour(iterationArrivals, iterationCapacities, wipLimit);
 
-    let iterationIndex; // leave undefined to start
+    let iterationIndex = 0;
+    let iterationStage = "start";
 
     const figure = document.querySelector("#figure-backlog-growth");
 
     const startIterationButton = figure.querySelector("button.start-iteration");
     const endIterationButton = figure.querySelector("button.end-iteration");
+
+    const buttons = figure.querySelectorAll(".controls button");
 
     function itemColor(type) {
         type = type || "default";
@@ -69,32 +73,55 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
         item.className = item.className + " rejected";
     }
 
-    function cueStart() {
-        if (iterationIndex === undefined) {
-            iterationIndex = 0;
-        } else {
-            iterationIndex++;
+    function setButtonEnabledState() {
+        if (iterationIndex === 0 && iterationStage === "start") {
+            // disable backward buttons
+            console.log("disable backwards buttons");
         }
 
-        startIterationButton.disabled = false;
-        endIterationButton.disabled = true;
+        if (iterationIndex >= iterationsCount && iterationStage === "end") {
+            // disable forward buttons
+            console.log("disable forward buttons");
+        }
+    }
+
+    function cueStart() {
+        iterationStage = "start";
+        setButtonEnabledState();
     }
 
     function cueEnd() {
-        startIterationButton.disabled = true;
-        endIterationButton.disabled = false;
+        iterationStage = "end";
+        setButtonEnabledState();
     }
 
-    function startListener() {
-        startIteration(unboundedBacklog, ".no-wip", Infinity);
-        startIteration(boundedBacklog, ".with-wip", wipLimit);
-        cueEnd();
+    function stepForward() {
+        if (iterationStage === "start") {
+            startIteration(unboundedBacklog, ".no-wip", Infinity);
+            startIteration(boundedBacklog, ".with-wip", wipLimit);
+            cueEnd();
+        } else {
+            endIteration(unboundedBacklog, ".no-wip");
+            endIteration(boundedBacklog, ".with-wip");
+            iterationIndex++;
+            cueStart();
+        }
     }
 
-    function endListener() {
-        endIteration(unboundedBacklog, ".no-wip");
-        endIteration(boundedBacklog, ".with-wip");
-        cueStart();
+    function advanceFrame(event) {
+        const size = event.target.dataset.size;
+        const direction = event.target.dataset.direction;
+
+        if (size === "step" && direction === "forward") {
+            stepForward();
+        }
+
+        if (size === "jump" && direction === "forward") {
+            const targetIteration = iterationIndex + 3;
+            while (iterationIndex < Math.min(targetIteration, iterationsCount)) {
+                stepForward();
+            }
+        }
     }
 
     function explainIterationStart(iteration, board) {
@@ -172,8 +199,9 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
         explainIterationEnd(iteration, board);
     }
 
-    startIterationButton.addEventListener("click", startListener);
-    endIterationButton.addEventListener("click", endListener);
+    [].forEach.call(buttons, button => {
+        button.addEventListener("click", advanceFrame);
+    });
 
     cueStart();
 })();
