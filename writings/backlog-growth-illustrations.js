@@ -241,6 +241,32 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
     }
 
     function revertEndIteration(backlog, boardSelector) {
+        const iteration = backlog[iterationIndex];
+        const board = figure.querySelector(boardSelector);
+        const backlogColumn = board.querySelector(".backlog-column .items");
+        const doneColumn = board.querySelectorAll(".done-column .iteration")[iterationIndex];
+
+        // add back done to backlog
+        for (let i = 0; i < iteration.done; i++) {
+            backlogColumn.appendChild(itemElem());
+        }
+
+        // add back rejected to backlog
+        for (let i = 0; i < iteration.rejected; i++) {
+            backlogColumn.appendChild(itemElem("rejected"));
+        }
+
+        // remove excess from done
+        for (let i = 0; i < iteration.excess; i++) {
+            doneColumn.removeChild(doneColumn.childNodes[doneColumn.childNodes.length - 1]);
+        }
+
+        // remove done from done
+        for (let i = 0; i < iteration.done; i++) {
+            doneColumn.removeChild(doneColumn.childNodes[doneColumn.childNodes.length - 1]);
+        }
+
+        explainIterationStart(iteration, board);
     }
 
     [].forEach.call(buttons, button => {
