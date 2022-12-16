@@ -115,8 +115,8 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
         const doneExplanation = board.querySelector(".done-column .frame-explanation");
         const explanations = [`Completed: ${iteration.done}`];
 
-        if (iteration.done < iteration.capacity) {
-            explanations.push(`Excess capacity: ${iteration.capacity - iteration.done}`);
+        if (iteration.excess) {
+            explanations.push(`Excess capacity: ${iteration.excess}`);
         }
 
         doneExplanation.innerHTML = explanations.join("<br>");
