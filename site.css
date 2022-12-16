@@ -168,6 +168,7 @@ header {
 
 .writing article p, .writing article ol, .writing article ul {
     font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+    line-height: 1.5;
 }
 
 .writing article h3 {
