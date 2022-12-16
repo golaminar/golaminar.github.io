@@ -68,3 +68,21 @@ console.log("These are the backlog behaviour tests:\n-----------------");
     console.log("correctly computes unbounded backlog behaviour", isDeepEqual(unboundedBacklog, unboundedBacklogExpectation));
     console.log("correctly computes bounded backlog behaviour", isDeepEqual(boundedBacklog, boundedBacklogExpectation));
 })();
+
+
+(function () {
+    const iterationArrivals = [5, 8];
+    const iterationCapacities = [5, 8];
+
+    const boundedBacklogExpectation = [
+        { arrived: 5, capacity: 5, done: 5, rejected: 0, excess: 0, backlogSizeAfter: 0 }, // iteration 1
+        { arrived: 8, capacity: 8, done: 6, rejected: 2, excess: 2, backlogSizeAfter: 0 }, // iteration 2
+    ];
+
+    const boundedBacklog = computeBacklogBehaviour(iterationArrivals, iterationCapacities, 6);
+
+    console.log(boundedBacklogExpectation);
+    console.log(boundedBacklog);
+
+    console.log("correctly rejects items before checking capacity", isDeepEqual(boundedBacklog, boundedBacklogExpectation));
+})();
