@@ -41,9 +41,6 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
 
     const figure = document.querySelector("#figure-backlog-growth");
 
-    const startIterationButton = figure.querySelector("button.start-iteration");
-    const endIterationButton = figure.querySelector("button.end-iteration");
-
     const buttons = figure.querySelectorAll(".controls button");
 
     function itemColor(type) {
