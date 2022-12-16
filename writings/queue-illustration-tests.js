@@ -81,8 +81,5 @@ console.log("These are the backlog behaviour tests:\n-----------------");
 
     const boundedBacklog = computeBacklogBehaviour(iterationArrivals, iterationCapacities, 6);
 
-    console.log(boundedBacklogExpectation);
-    console.log(boundedBacklog);
-
     console.log("correctly rejects items before checking capacity", isDeepEqual(boundedBacklog, boundedBacklogExpectation));
 })();
