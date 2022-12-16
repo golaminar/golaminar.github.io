@@ -37,7 +37,7 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
     const boundedBacklog = computeBacklogBehaviour(iterationArrivals, iterationCapacities, wipLimit);
 
     let iterationIndex = 0;
-    let iterationStage = "start";
+    let cuedStage = "start";
 
     const figure = document.querySelector("#figure-backlog-growth");
 
@@ -74,8 +74,8 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
     }
 
     function setButtonEnabledState() {
-        const firstFrame = iterationStage === "start" && iterationIndex === 0;
-        const lastFrame = iterationStage === "start" && iterationIndex >= iterationsCount;
+        const firstFrame = cuedStage === "start" && iterationIndex === 0;
+        const lastFrame = cuedStage === "start" && iterationIndex >= iterationsCount;
 
         [].forEach.call(buttons, button => {
             button.disabled = false;
@@ -97,17 +97,17 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
     }
 
     function cueStart() {
-        iterationStage = "start";
+        cuedStage = "start";
         setButtonEnabledState();
     }
 
     function cueEnd() {
-        iterationStage = "end";
+        cuedStage = "end";
         setButtonEnabledState();
     }
 
     function stepForward() {
-        if (iterationStage === "start") {
+        if (cuedStage === "start") {
             startIteration(unboundedBacklog, ".no-wip", Infinity);
             startIteration(boundedBacklog, ".with-wip", wipLimit);
             cueEnd();
