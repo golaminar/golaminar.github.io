@@ -150,6 +150,13 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
         if (size === "step" && direction === "backward") {
             stepBackward();
         }
+
+        if (size === "jump" && direction === "backward") {
+            const targetIteration = iterationIndex - 3;
+            while (iterationIndex > Math.max(targetIteration, 0)) {
+                stepBackward();
+            }
+        }
     }
 
     function explainIterationStart(iteration, board) {
