@@ -8,7 +8,13 @@ let document = {
     querySelector: function () {
         return this;
     },
+    querySelectorAll: function () {
+        return [this];
+    },
     getElementById: function () {
+        return this;
+    },
+    createElement: function () {
         return this;
     },
     appendChild: function () {
@@ -24,6 +30,8 @@ let document = {
             },
         },
     },
+    style: {},
+    dataset: {},
 };
 
 let d3 = {
