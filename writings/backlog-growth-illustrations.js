@@ -47,8 +47,6 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
     const buttons = figure.querySelectorAll(".controls button");
 
     function itemColor(type) {
-        type = type || "default";
-
         const colors = {
             "default": "#f72585ff", // pink
             "rejected": "#333", // grey
@@ -60,9 +58,11 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
     }
 
     function itemElem(type) {
+        type = type || "default";
+
         const item = document.createElement("span");
         item.innerText = "Item";
-        item.className = "item";
+        item.className = `item ${type}`;
         item.style.backgroundColor = itemColor(type);
 
         return item;
