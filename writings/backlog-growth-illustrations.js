@@ -57,13 +57,13 @@ function poissonArray(lambda, n) {
 
     const iterationsCount = iterationArrivals.length;
     const wipLimit = 6;
+    const jumpSize = 3;
 
     const unboundedBacklog = computeBacklogBehaviour(iterationArrivals, iterationCapacities, Infinity);
     const boundedBacklog = computeBacklogBehaviour(iterationArrivals, iterationCapacities, wipLimit);
 
     let iterationIndex = 0;
     let cuedStage = "start";
-    let jumpSize = 3;
 
     const figure = document.querySelector("#figure-backlog-growth");
 
