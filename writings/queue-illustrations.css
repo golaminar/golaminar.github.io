@@ -130,6 +130,11 @@ table {
     font-size: 12px;
 }
 
+.explanation.capacity-explanation {
+    min-height: 1.3em;
+    text-align: center;
+}
+
 .board-example .column .explanation {
     margin-bottom: 0;
     position: absolute;

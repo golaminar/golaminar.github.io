@@ -47,19 +47,19 @@ console.log("These are the backlog behaviour tests:\n-----------------");
     const iterationCapacities = [5, 4, 4, 6, 6];
 
     const unboundedBacklogExpectation = [
-        { arrived: 5, capacity: 5, done: 5, rejected: 0, excess: 0, backlogSizeAfter: 0 }, // iteration 1
-        { arrived: 5, capacity: 4, done: 4, rejected: 0, excess: 0, backlogSizeAfter: 1 }, // iteration 2
-        { arrived: 6, capacity: 4, done: 4, rejected: 0, excess: 0, backlogSizeAfter: 3 }, // iteration 3
-        { arrived: 6, capacity: 6, done: 6, rejected: 0, excess: 0, backlogSizeAfter: 3 }, // iteration 4
-        { arrived: 5, capacity: 6, done: 6, rejected: 0, excess: 0, backlogSizeAfter: 2 }, // iteration 5
+        { arrived: 5, capacity: 5, done: 5, rejected: 0, excess: 0, utilization: 1, backlogSizeAfter: 0 }, // iteration 1
+        { arrived: 5, capacity: 4, done: 4, rejected: 0, excess: 0, utilization: 1, backlogSizeAfter: 1 }, // iteration 2
+        { arrived: 6, capacity: 4, done: 4, rejected: 0, excess: 0, utilization: 1, backlogSizeAfter: 3 }, // iteration 3
+        { arrived: 6, capacity: 6, done: 6, rejected: 0, excess: 0, utilization: 1, backlogSizeAfter: 3 }, // iteration 4
+        { arrived: 5, capacity: 6, done: 6, rejected: 0, excess: 0, utilization: 1, backlogSizeAfter: 2 }, // iteration 5
     ];
 
     const boundedBacklogExpectation = [
-        { arrived: 5, capacity: 5, done: 5, rejected: 0, excess: 0, backlogSizeAfter: 0 }, // iteration 1
-        { arrived: 5, capacity: 4, done: 4, rejected: 0, excess: 0, backlogSizeAfter: 1 }, // iteration 2
-        { arrived: 6, capacity: 4, done: 4, rejected: 1, excess: 0, backlogSizeAfter: 2 }, // iteration 3
-        { arrived: 6, capacity: 6, done: 6, rejected: 2, excess: 0, backlogSizeAfter: 0 }, // iteration 4
-        { arrived: 5, capacity: 6, done: 5, rejected: 0, excess: 1, backlogSizeAfter: 0 }, // iteration 5
+        { arrived: 5, capacity: 5, done: 5, rejected: 0, excess: 0, utilization: 1, backlogSizeAfter: 0 }, // iteration 1
+        { arrived: 5, capacity: 4, done: 4, rejected: 0, excess: 0, utilization: 1, backlogSizeAfter: 1 }, // iteration 2
+        { arrived: 6, capacity: 4, done: 4, rejected: 1, excess: 0, utilization: 1, backlogSizeAfter: 2 }, // iteration 3
+        { arrived: 6, capacity: 6, done: 6, rejected: 2, excess: 0, utilization: 1, backlogSizeAfter: 0 }, // iteration 4
+        { arrived: 5, capacity: 6, done: 5, rejected: 0, excess: 1, utilization: 0.96, backlogSizeAfter: 0 }, // iteration 5
     ];
 
     const unboundedBacklog = computeBacklogBehaviour(iterationArrivals, iterationCapacities, Infinity);
@@ -69,17 +69,35 @@ console.log("These are the backlog behaviour tests:\n-----------------");
     console.log("correctly computes bounded backlog behaviour", isDeepEqual(boundedBacklog, boundedBacklogExpectation));
 })();
 
-
 (function () {
     const iterationArrivals = [5, 8];
     const iterationCapacities = [5, 8];
 
     const boundedBacklogExpectation = [
-        { arrived: 5, capacity: 5, done: 5, rejected: 0, excess: 0, backlogSizeAfter: 0 }, // iteration 1
-        { arrived: 8, capacity: 8, done: 6, rejected: 2, excess: 2, backlogSizeAfter: 0 }, // iteration 2
+        { arrived: 5, capacity: 5, done: 5, rejected: 0, excess: 0, utilization: 1, backlogSizeAfter: 0 }, // iteration 1
+        { arrived: 8, capacity: 8, done: 6, rejected: 2, excess: 2, utilization: (5+6)/(5+8), backlogSizeAfter: 0 }, // iteration 2
     ];
 
     const boundedBacklog = computeBacklogBehaviour(iterationArrivals, iterationCapacities, 6);
 
     console.log("correctly rejects items before checking capacity", isDeepEqual(boundedBacklog, boundedBacklogExpectation));
+})();
+
+(function () {
+    const iterationArrivals = [5, 8, 7];
+    const iterationCapacities = [5, 8, 9];
+
+    const utilizationExpectation = [
+        (5) / (5),
+        (5 + 6) / (5 + 8),
+        (5 + 6 + 6) / (5 + 8 + 9),
+    ];
+
+    const boundedBacklog = computeBacklogBehaviour(iterationArrivals, iterationCapacities, 6);
+
+    const utilization = boundedBacklog.map(iteration => {
+        return iteration.utilization;
+    });
+
+    console.log("correctly computes capacity utilization after each iteration", isDeepEqual(utilization, utilizationExpectation));
 })();

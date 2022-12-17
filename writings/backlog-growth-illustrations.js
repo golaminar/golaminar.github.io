@@ -2,6 +2,9 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
     const backlogBehaviour = [];
     let backlogSize = 0;
 
+    let totalDone = 0;
+    let totalCapacity = 0;
+
     arrivals.forEach((arrived, index) => {
         backlogSize = backlogSize + arrived;
 
@@ -15,12 +18,18 @@ function computeBacklogBehaviour(arrivals, capacities, wipLimit) {
 
         backlogSize = backlogSize - done;
 
+        totalDone += done;
+        totalCapacity += capacity;
+
+        const utilization = totalDone / totalCapacity;
+
         const iterationOutcome = {
             arrived,
             capacity,
             done,
             rejected,
             excess,
+            utilization,
             backlogSizeAfter: backlogSize,
         };
 
@@ -245,6 +254,7 @@ function poissonArray(lambda, n) {
 
         backlogExplanation.innerHTML = explanations.join("<br>");
         doneExplanation.innerHTML = "";
+        explainCapacity(iteration, board);
     }
 
     function explainIterationEnd(iteration, board) {
@@ -261,6 +271,17 @@ function poissonArray(lambda, n) {
 
         doneExplanation.innerHTML = explanations.join("<br>");
         backlogExplanation.innerHTML = "";
+        explainCapacity(iteration, board);
+    }
+
+    function explainCapacity(iteration, board) {
+        const capacityExplanation = board.querySelector(".capacity-explanation");
+
+        if (cuedStage === "start") {
+            capacityExplanation.innerHTML = "";
+        } else {
+            capacityExplanation.innerHTML = `Capacity utilization: ${Math.round(iteration.utilization * 100)}%`;
+        }
     }
 
     function startIteration(backlog, boardSelector, wipLimit) {
