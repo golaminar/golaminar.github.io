@@ -277,10 +277,10 @@ function poissonArray(lambda, n) {
     function explainCapacity(iteration, board) {
         const capacityExplanation = board.querySelector(".capacity-explanation");
 
-        if (cuedStage === "start") {
-            capacityExplanation.innerHTML = "";
-        } else {
+        if (cuedStage === "end") {
             capacityExplanation.innerHTML = `Capacity utilization: ${Math.round(iteration.utilization * 100)}%`;
+        } else if (iterationIndex === 0) { // i.e. start of first iteration
+            capacityExplanation.innerHTML = `Capacity utilization: –`;
         }
     }
 
