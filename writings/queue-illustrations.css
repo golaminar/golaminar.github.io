@@ -167,6 +167,7 @@ table {
     list-style-type: none;
     color: transparent;
     margin: 0.1em;
+    cursor: default;
 }
 
 #figure-cost-of-delay .cols>div {

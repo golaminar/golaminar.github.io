@@ -100,17 +100,27 @@ function poissonArray(lambda, n) {
             "default": "#f72585ff", // pink
             "rejected": "#333", // grey
             "excess": "#bbb", // grey
-            "aged": "#c51465ff", // pink but a bit transparent
         };
 
         return colors[type];
+    }
+
+    function itemTitle(type) {
+        const titles = {
+            "default": "Item",
+            "rejected": "Rejected Item",
+            "excess": "Excess Capacity",
+        };
+
+        return titles[type];
     }
 
     function itemElem(type) {
         type = type || "default";
 
         const item = document.createElement("span");
-        item.innerText = "Item";
+        item.innerText = itemTitle(type);
+        item.title = itemTitle(type);
         item.className = `item ${type}`;
         item.style.backgroundColor = itemColor(type);
 
@@ -125,6 +135,7 @@ function poissonArray(lambda, n) {
 
     function markAsRejected(item) {
         item.style.backgroundColor = itemColor("rejected");
+        item.title = itemTitle("rejected");
         item.className = item.className + " rejected";
     }
 
