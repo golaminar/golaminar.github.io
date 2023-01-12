@@ -140,6 +140,7 @@
 
                 <figcaption>This illustration shows an example of how a backlog grows over time when it is unbounded and the number of items that appear is random follow a <a href="https://en.wikipedia.org/wiki/Poisson_distribution">Poisson process</a>, compared to one that is limited in length. When a backlog is left to grow unbounded, the team will always be working at full capacity, and might never have the opportunity to catch up. Under these conditions, the backlog grows, causing the newest items to be left waiting longer and longer, accumulating high cost of delay.</figcaption>
             </figure>
+            <script src="backlog-growth-illustrations.js"></script>
 
             <p>How does this happen? Again, it's all about randomness. The team deals with 5 items per cycle on average, but not the same amount every cycle. That means that in some cycle, they are able to deal with 7 items. Other hours, they can only deal with 3. With no WIP limit on the queue and an arrival rate close to the service rate, there will almost always be something left over at the end of a cycle for them to work on and their capacity utilization will be at or near 100%, so the queue will grow. With a WIP limit on the queue -- let's say it's 6, as we set it by default -- there will be times when more items come in and we reject demand, capping the queue size at 6. It's possible that those times coincide with the times when the team is able to work quicker than average, leading to them running out of work before new items come into the queue and therefore having to wait (less than 100% capacity utilization.)</p>
 
@@ -163,8 +164,6 @@
 	* Recognize the massive impact of cost of delay. Build it into your financial reporting if you can.
 	* Whenever you see an opportunity for a queue to form, ask yourself: is it possible to avoid this queue? If I can't avoid the queue, can I make the asynchronous hand-off into a synchronous and blocking operation?
 	* Where queues exist, reduce capacity utilization. Don't try to do it directly -- apply WIP limits. EXAMPLES OF WIP LIMITS HERE -->
-
-            <script src="backlog-growth-illustrations.js"></script>
 
             <p class="author-bio">
                 Tom Stuart and Tiffany Conroy are consultants with a combined 35+ years of experience developing
