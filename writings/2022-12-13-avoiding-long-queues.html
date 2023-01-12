@@ -64,7 +64,11 @@
 
             <p>In queueing theory -- and maybe you saw this when playing with the airline check-in interactive in Part 1 -- there is a relation between the expected size of a queue and the extent to which the server's capacity is used. If a server is idle most of the time -- they can serve customers in 10 seconds on average, and customers arrive once every minute on average, for a capacity utilization of 1/6 or 16.67% -- then the queue will stay under control and stay very short. At the other extreme, perhaps obviously, if customers arrive every 5 seconds on average and the server still takes 10 seconds per customer (a capacity utilization of 200%), the queue will continue to grow over time with no upper bound. The exact shape of the relationship between capacity utilization is an exponential relation, as the graph below shows.</p>
 
-            <figure>GRAPH GOES HERE</figure>
+            <figure id="figure-capacity-utilization" class="illustration">
+                <canvas id="capacity-utilization-graph-canvas"></canvas>
+                <figcaption>Here's a nice caption</figcaption>
+            </figure>
+            <script src="capacity-utilization-illustration.js"></script>
 
             <p>What we can see here is that when capacity utilization is at or below roughly 80% (the server takes 8 seconds per customer, and customers arrive every 10 seconds) the queue size is fairly stable. Once we pass that point, we start to be on the steep part of the exponential curve, and the queue size quickly gets to unsustainably high levels, with correspondingly high cost of delay. This accounts for those surprising numbers from part 1, where a server with an average service time of 120 seconds, serving arrivals with an average interval of 121 seconds (capacity utilization: 120/121 = 99.17%) had an expected average queue size of 118, whereas two servers working the same queue at the same rate (capacity utilization: 60/121 = 49.59%) had an expected average queue size of 0.3.</p>
 
