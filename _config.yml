@@ -7,3 +7,9 @@ exclude:
   - _writings/tests.js
   - _writings/queue-tests.js
   - _writings/backlog-tests.js
+plugins:
+  - jekyll-feed
+feed:
+  collections:
+    writings:
+      path: "/writings.xml"
