@@ -1,3 +1,9 @@
 collections:
   writings:
     output: true
+exclude:
+  - Makefile
+  - _writings/Makefile
+  - _writings/tests.js
+  - _writings/queue-tests.js
+  - _writings/backlog-tests.js
