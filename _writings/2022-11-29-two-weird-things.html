@@ -1,37 +1,11 @@
 ---
+layout: writing
 title: Two Weird Things
+subtitle: "Why queues matter in software development: Part I of a series"
+description: If you work on a software team and you’re interested in how to work more effectively, I’d like to invite you on a little journey to understand two weirdly unintuitive things.
+image: 2022-11-29-two-weird-things.jpg
 ---
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Laminar | {{ page.title }}</title>
-    <link rel="alternate" type="application/atom+xml" title="Atom Feed for writings from golaminar.de" href="https://www.golaminar.de/writings.xml">
-    <link rel="stylesheet" href="../site.css">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
-    <meta property="og:title" content="{{ page.title }}">
-    <meta property="og:type" content="article">
-    <meta property="og:description" content="If you work on a software team and you're interested in how to work more effectively, I'd like to invite you on a little journey to understand two weirdly unintuitive things.">
-    <meta property="og:image" content="https://www.golaminar.de/writings/thumbnails/2022-11-29-two-weird-things.jpg">
-    <meta property="og:url" content="https://www.golaminar.de/writings/2022-11-29-two-weird-things.html">
-    <meta name="twitter:card" content="summary_large_image">
-    <script src="https://d3js.org/d3.v7.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
-    <link rel="stylesheet" href="illustrations.css">
-    <link rel="stylesheet" href="queue-illustrations.css">
-    <script src="illustration-helpers.js"></script>
-</head>
-<body class="writing">
-<header>
-    <h1><a href="https://golaminar.de">Laminar</a></h1>
-</header>
-<main>
-<article>
-    <h2>
-        Two weird things
-        <br><span class="subtitle">Why queues matter in software development: Part I of a series</span>
-    </h2>
+
     <div class="byline"><span class="image-frame"><img src="../images/tom.jpg"></span><span class="image-frame"><img src="../images/tiffany.jpg"></span> <nobr><span class="author"><a href="mailto:tom@golaminar.de">Tom</a> & <a href="mailto:tiffany@golaminar.de">Tiffany</a></span><span class="date">29<sup>th</sup> November 2022</span></nobr></div>
 
     <p>If you work on a software team and you're interested in how to work more effectively, I'd like to invite you on a little journey to understand two weirdly unintuitive things.
@@ -209,14 +183,3 @@ title: Two Weird Things
     <p class="footnote" id="footnote-2"><a href="#footnote-2-source">2</a>: As an additional exercise/head-scratcher: what happens when we instead have two check-in agents working at that same rate of 30 passengers per hour, and people arrive at the same rate — just under 30 passengers per hour. What would the average queue length be? Half of 118? Well, it&#39;s 0.3, with an average wait time of just over 39 seconds.</p>
     <p class="footnote" id="footnote-3"><a href="#footnote-3-source">3</a>: How the queue simulations are implemented: we pre-compute a series of arrival intervals and a series of service times such that they fall into a <a href= "https://en.wikipedia.org/wiki/Poisson_distribution">Poisson distribution</a> around their expected value. Using these times, we generate an ordered series of arrival and service events, as well as the queue length after each event. What is especially interesting to realize is that service events depend on whether anyone is actually in the queue. Service events start either when the previous service ends, or, if the queue is empty when the service is ready, when
     the next arrival occurs. We replay these events sped up; the event time and the queue length of each event is used as the x and y of data points on the chart.</p>
-</article>
-</main>
-<footer>
-<div class="footer-container">
-    <span class="names"><a href="https://www.linkedin.com/in/tconroy/">Tiffany Conroy</a> & <a href="https://www.linkedin.com/in/another-tom-stuart/">Thomas Stuart</a> GbR</span>
-    <span class="email"><a href="mailto:hello@golaminar.de">hello@golaminar.de</a></span>
-    <span class="address">Colbestr. 29, 10247 Berlin</span>
-</div>
-</footer>
-</body>
-</html>
