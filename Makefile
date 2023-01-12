@@ -7,4 +7,4 @@ run: _site
 vendor:
 	bundle install
 
-.PHONY: run  
+.PHONY: run _site vendor
