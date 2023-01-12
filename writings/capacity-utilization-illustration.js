@@ -8,15 +8,63 @@
             data: queueSizeData,
         }],
     };
-    for (var x = 0.1; x < 99; x += 0.1) {
+
+    let x = 0;
+    while (x < 99.5) {
         queueSizeData.push(x**2 / (100 - x));
         labels.push(x);
+        
+        if (x < 99) {
+            x += 1
+        } else {
+            x += 0.1
+        }
     }
-    console.log(chartData);
+    const maxValue = queueSizeData.at(-1);
+
     const config = {
         type: 'line',
         data: chartData,
-
+        options: {
+            elements: {
+                point: {
+                    pointRadius: 10,
+                    pointBorderColor: 'rgba(0,0,0,0)',
+                    pointBackgroundColor: 'rgba(0,0,0,0)',
+                },
+                line: {
+                    borderWidth: 3,
+                    cubicInterpolationMode: 'monotone',
+                    borderColor: '#480ca8ff',
+                },
+            },
+            scales: {
+                x: {
+                    type: 'linear',
+                    suggestedMin: 0,
+                    suggestedMax: 100,
+                    title: {
+                        display: true,
+                        text: "Capacity utilization",
+                    },
+                },
+                y: {
+                    max: maxValue, 
+                    ticks: {
+                        display: false,
+                    },
+                    title: {
+                        display: true,
+                        text: "Expected queue size",
+                    },
+                },
+            },
+            plugins: {
+                legend: {
+                    display: false,
+                },
+            },
+        }
     };
 
     new Chart(
