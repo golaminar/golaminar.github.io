@@ -1,42 +1,18 @@
 ---
+layout: writing
 title: The Cost of Long Queues
+subtitle: "Why queues matter in software development: Part II of a series"
+description: Why long queues present problems, and the surprising and escalating costs of those queues.
+image: 2022-12-06-the-cost-of-long-queues.png
 ---
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Laminar | {{ page.title }}</title>
-    <link rel="alternate" type="application/atom+xml" title="Atom Feed for writings from golaminar.de" href="https://www.golaminar.de/writings.xml">
-    <link rel="stylesheet" href="../site.css">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
-    <meta property="og:title" content="{{ page.title }}">
-    <meta property="og:type" content="article">
-    <meta property="og:description" content="Why long queues present problems, and the surprising and escalating costs of those queues.">
-    <meta property="og:image" content="https://www.golaminar.de/writings/thumbnails/2022-12-06-the-cost-of-long-queues.png">
-    <meta property="og:url" content="https://www.golaminar.de/writings/2022-12-06-the-cost-of-long-queues.html">
-    <script src="https://d3js.org/d3.v7.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
-    <link rel="stylesheet" href="illustrations.css">
-    <link rel="stylesheet" href="queue-illustrations.css">
-    <script src="illustration-helpers.js"></script>
-</head>
 
-<body class="writing">
-    <header>
-        <h1><a href="https://golaminar.de">Laminar</a></h1>
-    </header>
-    <main>
-        <article>
-            <h2>
-                The Cost of Long Queues
-                <br><span class="subtitle">Why queues matter in software development: Part II of a series</span>
-            </h2>
-            <div class="byline"><span class="image-frame"><img src="../images/tom.jpg"></span><span
-                    class="image-frame"><img src="../images/tiffany.jpg"></span>
+            <div class="byline">
+                <span class="image-frame"><img src="../images/tom.jpg"></span>
+                <span class="image-frame"><img src="../images/tiffany.jpg"></span>
                 <nobr><span class="author"><a href="mailto:tom@golaminar.de">Tom</a> & <a
-                            href="mailto:tiffany@golaminar.de">Tiffany</a></span><span class="date">6<sup>th</sup>
-                        December 2022</span></nobr>
+                            href="mailto:tiffany@golaminar.de">Tiffany</a></span>
+                    <span class="date">6<sup>th</sup> December 2022</span>
+                </nobr>
             </div>
 
             <p class="aside">This is part two of a series. Part 1, <a href="2022-11-29-two-weird-things.html">Two Weird Things</a>, aims to give you a better intuitive feel for how randomness makes queues likely to grow. In this part, you’ll explore the surprising and escalating costs of unmanaged queues. In the next part, you’ll see how to avoid long queues in software development processes.</p>
@@ -217,16 +193,3 @@ title: The Cost of Long Queues
             <p class="footnote" id="footnote-2"><a href="#footnote-2-source">2</a>: The good people at Black Swan Farming have <a href="https://blackswanfarming.com/cost-of-delay/">explained</a> cost of delay far better than I do here, and even have a handy video explainer. I recommend you check out that explanation too.</p>
             <p class="footnote" id="footnote-3"><a href="#footnote-3-source">3</a>: €50 per hour, 40 hours a week, translates to €92,000 for a full year (subtracting 6 weeks for annual leave and public holidays). Taking into account other costs of having engineers on staff, this seems like a pretty reasonable ballpark figure.</p>
             <p class="footnote" id="footnote-4"><a href="#footnote-4-source">4</a>: In that typical development process with dependent activities, our problems can become even worse, because even if step 4 is running well and able to work at high capacity, a slowdown at an earlier step can starve the process at step 4 of work. An example to illustrate: Assume you have a process with 6 steps. Each step can process between 1 and 6 items per day. Each day, we throw a dice for each step to determine how many items they <em>could</em> process that day. How many items will the process deliver per day, on average? 3? 3.5? It’s 1.436!</p>
-        </article>
-    </main>
-    <footer>
-        <div class="footer-container">
-            <span class="names"><a href="https://www.linkedin.com/in/tconroy/">Tiffany Conroy</a> & <a
-                    href="https://www.linkedin.com/in/another-tom-stuart/">Thomas Stuart</a> GbR</span>
-            <span class="email"><a href="mailto:hello@golaminar.de">hello@golaminar.de</a></span>
-            <span class="address">Colbestr. 29, 10247 Berlin</span>
-        </div>
-    </footer>
-</body>
-
-</html>
