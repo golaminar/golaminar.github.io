@@ -143,6 +143,10 @@ custom_js:
 
             <p>How does this happen? Again, it’s all about randomness. The team deals with 5 items per cycle on average, but not the same amount every cycle. That means that in some cycles, they are able to deal with 7 items. Other cycles, they can only deal with 3. With no WIP limit on the queue and an arrival rate close to the service rate, there will almost always be something left over at the end of a cycle for them to work on and their capacity utilization will be at or near 100%, so the queue will grow. With a WIP limit on the queue – let’s say it’s 6, as we set it by default – there will be times when more items come in and we reject demand, capping the queue size at 6. It’s possible that those times coincide with the times when the team is able to work quicker than average, leading to them running out of work before new items come into the queue and therefore having to wait (less than 100% capacity utilization.)</p>
 
+            <p>What about controlling and reducing randomness? Six Sigma is a thing, right? Unfortunately, we aren’t manufacturing bolts or performing repetitive service tasks. Software developement and operation is inherently unpredictable. The value of what we do is often in direct proportion to how novel – and hence how unpredictable – it is. Even if we could reduce randomness, that wouldn’t help us at high capacity utilization levels; lowering the variablity will shift the inflection point of our curve, but so long as there is any variablity, the queue length will always be unbounded as capacity utilization approaches 100%.</p>
+
+            <!-- INSERT GRAPH showing curves with varying variablity always shooting to infinity? -->
+
             <h2>Rejecting work and idle hands?</h2>
 
             <p>“OK,” you might say, “but how does this look in practice? It sounds a bit scary when we say that we ‘reject demand’ and that the team has to wait. The whole point of this is supposed to be that we improve our process so that we can meet our users’ and stakeholders’ demands and that we work effectively, isn’t it?”</p>
@@ -151,27 +155,34 @@ custom_js:
 
             <p>Second, although it can happen that the team (or an individual) runs out of work and is made to wait because of WIP limits, this is not a situation that you can expect to occur for prolonged periods of time. 80% capacity utilization doesn’t manifest as people working for four days per week and then sitting idle on a Friday, waiting for new work to be offered. Instead, you would expect to see people waiting ten minutes at a time while the process they depend on clears its queue and they can move on, and multiple short waits like this add up to 20% of their time.</p>
 
-            <!-- <p>What does the world look like when WIP limits are applied? We're focusing and finishing things, not starting.</p> -->
+            <p>What does the world look like when WIP limits are applied? We’re focussed on finishing things, not starting them.</p>
 
-<!-- * Why haven't I talked about controlling and reducing randomness? Six Sigma is a thing, right? We don't want things to be unpredictable.
-	* Software is inherently unpredictable
-	* The value of what we do is often in direct proportion to how novel -- and hence how unpredictable it is.
-	* Even if we could, and even if we wanted to, reduce randomness, it wouldn't help us at high capacity utilization levels. GRAPH HERE
-* OK, but how bad are queues really? I don't want people sitting idle.
-	* Of course it's an optimization. Airline check-in economics are a bit different from software development economics. We're trading off cost of capacity vs cost of delay.
-		* GRAPH HERE, PROBABLY SOME ABILITY TO TWEAK VARIABLES
-	* The thing is: if you pay 0 cost of capacity, you eventually pay _infinite_ cost of delay. You can build new stuff for a while, but you'll get slower and slower, and eventually you have no ability to innovate and bring new stuff to the market in a timely fashion, so your competitors  eat your lunch. If you want to avoid this, you must introduce _some_ slack into the system. Things need to be idle at least some of the time so that there's an ability to deal with new information. You could crunch all the numbers and optimize to the nth degree, or you could just bear in mind that 80% is roughly toward the bottom end and shoot for that (or even better, apply WIP limits and let the randomness do it for you.)
-* So in summary, what do I suggest you do?
-	* Recognize the massive impact of cost of delay. Build it into your financial reporting if you can.
-	* Whenever you see an opportunity for a queue to form, ask yourself: is it possible to avoid this queue? If I can't avoid the queue, can I make the asynchronous hand-off into a synchronous and blocking operation?
-	* Where queues exist, reduce capacity utilization. Don't try to do it directly -- apply WIP limits. EXAMPLES OF WIP LIMITS HERE -->
+            <h2>Avoid the queues you can, control the queues you can’t</h2>
+
+            <p>So in summary, what do I suggest you do to avoid long queues, and hence avoid high costs of delay while staying nimble and responsive to your market demands?</p>
+
+            <ul>
+                <li>Recognize the massive impact of cost of delay. Build it into your financial reporting if you can.</li>
+                <li>Whenever you see an opportunity for a queue to form, ask: is it possible to avoid this queue? If we can’t
+                avoid the queue, can we make the asynchronous hand-off into a synchronous and blocking operation?</li>
+                <li>Where queues exist, reduce capacity utilization. Don’t try to do it directly – apply WIP limits.</li>
+            </ul>
+
+            <p>If you are looking for support on these topics in your workplace – from promoting and investigations, to hands-on training and change management – we’re available. <a href="https://calendly.com/golaminar/30-minute-call">Book a time to chat with us!</a></p>
+
+            <h2>Further reading</h2>
+
+            <p>There are many more aspects to this topic than we’ve covered so far. We may add more parts to this series in the future, however, there are already many resources you can turn to now for further study. Here are some that we recommend:</p>
+
+            <ul>
+                <li><a href="">[existing article on how to setup WIP]</a> – now that you are convinced you need to establish WIP limits, refer to this article for how to determine which ones work for your team.</li>
+                <li><a href="https://books.google.de/books/about/The_Principles_of_Product_Development_Fl.html?id=1HlPPgAACAAJ&redir_esc=y"><i>The Principles of Product Development Flow</i></a> by Donald G. Reinertsen – every “but wait, what about …” question you have about queues in product developement workflow are answered in this book. A classic.</li>
+                <li>XXX</li>
+            </ul>
 
             <p class="author-bio">
                 Tom Stuart and Tiffany Conroy are consultants with a combined 35+ years of experience developing
-                software and leading teams.
-                They help software teams change their processes to eliminate or reduce queues in their development
-                cycle.
-                Hire them!
+                software and leading teams. They help software teams change their processes to eliminate or reduce queues in their development cycle. Hire them!
                 Get in touch at <a href="mailto:hello@golaminar.de">hello@golaminar.de</a>.
             </p>
             <p class="footnote" id="footnote-1"><a href="#footnote-1-source">1</a>: serving customers in 10 seconds who arrive every 60 seconds will result in an capacity utilization of 1/6 or 16.67%.</p>
