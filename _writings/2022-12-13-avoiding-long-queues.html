@@ -24,25 +24,31 @@ custom_js:
 
             <p>Three ways:</p>
             <ul>
-                <li>Remove opportunities for queues to form if possible;</li>
+                <li>Remove opportunities for queues to form, if possible;</li>
                 <li>Make hand-offs synchronous;</li>
                 <li>Limit capacity utilization.</li>
             </ul>
 
-            <p>If there is an opportunity to remove the ability for a queue to form, you should seriously consider taking it. For example: manually testing every change before releasing it to beta testers, TODO TWO MORE.</p>
+            <h2>Remove opportunities for queues to form</h2>
 
-            <p>If the hand-off is unavoidable, consider making it a synchronous, blocking action rather than asynchronous. TODO INSERT EXAMPLE THAT INVOLVES TWO PEOPLE - don't add stuff to the left because you're increasing demand on a queue you're already waiting in</p>
+            <p>Queues can form throughout your development process wherever there is a hand-off from one person to another, or from one type of work phase to another. If there is an opportunity to remove such a hand-off, you should seriously consider taking it. For example: do you really need to manually test every change before it can be released to beta testers, or would it suffice to manually test in the beta version?</p>
 
-            <!-- <p>For example: if automated tests need to pass before a code change can be pushed to the main branch, it is better for the author of the code change to wait for the tests to run and pass (for example, by running them on their local machine) than for them to run them on a build server and work on the next change. Why is this? Well, the next change _also_ needs to pass the tests, and so allowing work on it while the tests for the previous change are running adds to the queue of changes needing to be tested. There are other benefits to making some portion of the automated test suite into a blocking set -- what I call a check-in build -- among them an incentive to keep the build running fast, and some guarantee that it's possible to run the software locally in some form. But for now let's concentrate on just the queue aspect. There are actually _two_ potential queues in this example. The other queue arises when the tests fail and the code change needs to be reworked. If the author is busy working on some other code change, they're not going to get to that rework as soon as it's clear it needs to be done, and so a rework queue can form.</p> -->
+            <p>Take an inventory of all the points in your process where a change waits before someone carries it to the next stage, and evaluate what benefits that activity brings, and whether there is an way to achieve the same benefit without preventing a change from being intergrated and deployed.</p>
 
-            <p>Other examples of unavoidable hand-offs that can benefit from being made synchronous include: security reviews  deployment to production; code review; and acceptance testing with the product owner.</p>
-<!-- THIS WAS AN EXPLANATORY CLAUSE ON SECURITY REVIEWS BUT I THINK IT'S TOO LONG -- instead of working for six months, handing our stuff off to a security team for audit, and one month later we receiving a laundry list of vulnerabilities, we instead involve the security team as quickly as possible for any significant architectural change, and don't start work on it until we've agreed an approach -- -->
+            <h2>Make hand-offs synchronous</h2>
 
-            <p>If the hand-off is unavoidable and it's not feasible to make it a synchronous, blocking action, you should limit capacity utilization.</p>
+            <p>If a hand-off is unavoidable, consider making it a synchronous, blocking action rather than asynchronous. For example, if your compliance regulations require that a second person signs off on a code change, make it someone’s priority to perform such sign-offs ahead of any other work, so that they are aways available to do so.</p>
 
-            <p>"Capacity utilization? What's that? Just when you were starting to get practical and make some concrete recommendations, you throw in another theory term?"</p>
+            <p>Other examples of unavoidable hand-offs that can benefit from being made synchronous include: security reviews; deployment to production; code review; and acceptance testing with the product owner.</p>
 
-            <p>Yes, sorry about that. We need to take another quick dive into queueing theory to understand what I'm talking about here, and then I promise it will get practical again.</p>
+            <h2>Limit capacity utilization</h2>
+
+            <p>If the hand-off is unavoidable and it’s not feasible to make it a synchronous, blocking action, you should limit
+            capacity utilization.</p>
+
+            <p>“Capacity utilization? What’s that? Just when you were starting to get practical and make some concrete recommendations, you throw in another theory term?”</p>
+
+            <p>Yes, sorry about that. We need to take another quick dive into queueing theory to understand what I’m talking about here, and then I promise it will get practical again.</p>
 
             <p>In queueing theory -- and maybe you saw this when playing with the airline check-in interactive in Part 1 -- there is a relation between the expected size of a queue and the extent to which the server's capacity is used. If a server is idle most of the time -- they can serve customers in 10 seconds on average, and customers arrive once every minute on average, for a capacity utilization of 1/6 or 16.67% -- then the queue will stay under control and stay very short. At the other extreme, perhaps obviously, if customers arrive every 5 seconds on average and the server still takes 10 seconds per customer (a capacity utilization of 200%), the queue will continue to grow over time with no upper bound. The exact shape of the relationship between capacity utilization is an exponential relation, as the graph below shows.</p>
 
