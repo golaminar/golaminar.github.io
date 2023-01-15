@@ -1,4 +1,11 @@
 (function() {
+    function formatNumber(num, digits) {
+        return new Intl.NumberFormat("en-GB",
+            {
+                maximumSignificantDigits: digits,
+            }).format(num);
+    }
+
     const queueSizeData = [];
     const labels = [];
     const chartData = {
@@ -13,7 +20,7 @@
     while (x < 99.5) {
         queueSizeData.push(x**2 / (100 - x));
         labels.push(x);
-        
+
         if (x < 99) {
             x += 1
         } else {
@@ -49,7 +56,7 @@
                     },
                 },
                 y: {
-                    max: maxValue, 
+                    max: maxValue,
                     ticks: {
                         display: false,
                     },
@@ -62,6 +69,21 @@
             plugins: {
                 legend: {
                     display: false,
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function (context) {
+                            let label = context.dataset.label || '';
+
+                            if (label) {
+                                label += ': ';
+                            }
+                            if (context.parsed.y !== null) {
+                                label += formatNumber(context.parsed.y, 3);
+                            }
+                            return label;
+                        }
+                    },
                 },
             },
         }
