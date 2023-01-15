@@ -52,7 +52,7 @@
                     suggestedMax: 100,
                     title: {
                         display: true,
-                        text: "Capacity utilization",
+                        text: "Capacity utilization (%)",
                     },
                 },
                 y: {
