@@ -18,7 +18,7 @@
 
     let x = 0;
     while (x < 99.5) {
-        queueSizeData.push(x**2 / (100 - x));
+        queueSizeData.push((x/100)**2 / (100 - x));
         labels.push(x);
 
         if (x < 99) {
