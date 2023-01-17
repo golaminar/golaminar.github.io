@@ -69,7 +69,7 @@ custom_js:
             <p>So we agree on the value of limiting capacity utilization, and we have a target of 80%. How do we achieve that? Well, at first glance it’s not easy.</p>
 
             <!-- is this paragraph adding to the argument? -->
-            <p>Let’s take a look at the macro level: a Scrum team could decide they want to control capacity utilization by only taking on 80% of the story points their velocity suggests they can handle in an average sprint. And indeed, if they could do this accurately and not take on any unplanned work during the duration of their sprint, they would be controlling capacity utilization at 80%. But this would require their estimation of story points to be <em>really</em> accurate. Being off by 20% on an estimate isn’t uncommon, but would totally blow up this team’s strategy for controlling their capacity utilization.</p>
+            <p>Let’s take a look at the macro level: a Scrum team could decide they want to control capacity utilization by only taking on 80% of the story points their velocity suggests they can handle in an average sprint. And indeed, if they could do this accurately and not take on any unplanned work during the duration of their sprint, they would be controlling capacity utilization at 80%. But this would require their estimation of story points to be <em>really</em> accurate. Being off by 20% on an estimate isn’t uncommon, but would totally blow up this team’s strategy for controlling their capacity utilization.<sup><a href="#footnote-1" id="footnote-1-source">1</a></p>
 
             <p>When we look at the micro level of individual queues within a software development process, it’s much more difficult to understand how we would apply this kind of direct approach to controlling capacity utilization. Take code review as an example. The available capacity for this activity is elastic, since it’s done by people who also do other things. There’s a theoretical maximum capacity — all the developers exclusively do code review and no other activity — and a theoretical minimum — no developer ever performs code review — and obviously, the former case would lead to there being nothing in the code review queue and the latter would lead to a review queue that grows forever. So the appropriate amount of time to spend on code review as a team lies somewhere in between the two extremes. But I’m at a loss for how one would determine this amount of time in advance so that you would hit 80% capacity utilization for the process.</p>
 
@@ -169,25 +169,34 @@ custom_js:
                 <li>Where queues exist, introduce slack into the system by reducing capacity utilization. Don’t try to do it directly — consider using WIP limits instead.</li>
             </ul>
 
+            <h2>Establishing good WIP limits</h2>
+            <p>We were hoping, in the further reading section below, to be able to link to a 'ready-made' article showing a recommended approach to setting and monitoring work-in-progress limits. Unfortunately, we found that we could not link to any of the articles we found without some additional commentary and/or caveats.</p>
+            <p>Instead, we would like to invite you to a live reading and discussion session where we can digest the articles we found as a group, share our learnings, and discuss how the articles' guidance matches up with the goals of establishing WIP limits, and how the suggested approach would land with your teams. The session will take place on the 2nd of February, and we'd love to see you there. Use this link to sign up!</p>
             <p>If you are looking for support on these topics in your workplace — from promoting and investigations, to hands-on training and change management — we’re available. <a href="https://calendly.com/golaminar/30-minute-call">Book a time to chat with us!</a></p>
+
+
+            <hr>
 
             <h2>Further reading</h2>
 
             <p>There are many more aspects to this topic than we’ve covered so far. We may add more parts to this series in the future. However, there are already many resources you can turn to now for further study. Here are some that we recommend:</p>
 
             <ul>
-                <li><a href="">[existing article on how to setup WIP]</a> — now that you are convinced you need to establish WIP limits, refer to this article for how to determine which ones work for your team.</li>
                 <li><a href="https://books.google.de/books/about/The_Principles_of_Product_Development_Fl.html?id=1HlPPgAACAAJ&redir_esc=y"><i>The Principles of Product Development Flow</i></a> by Donald G. Reinertsen — every “but wait, what about …” question you have about queues in product developement workflow are answered in this book. A classic.</li>
                 <li><a href="https://www.google.de/books/edition/The_Goal/6vdJLwEACAAJ?hl=de"><i>The Goal</i></a> by Eliyahu Goldratt — If you’re looking to dig even deeper on principles, as opposed to specific practices, <i>The Goal</i> has you covered. Look past its slightly cheesy ‘business novel’ format and you’ll find an excellent and insightful examination of where we should really focus our efforts if we want our organizations to be successful.</li>
             </ul>
 
+
             <!-- I imagine we could do this in smaller print somewhere that doesn't make it look like a footnote? -->
             <h2>Acknowledgements</h2>
-            <p>We were very grateful for feedback, comments, and other input provided by our friends and colleagues: Esther Weidauer, Justine Lera, Denis Defreyne, Fronx Wurmus, James Coglan, Alicia Hickey, Benjamin Schumann, ...</p>
+            <p>We were very grateful for feedback, comments, and other input provided by our friends and colleagues: Esther Weidauer, Justine Lera, Denis Defreyne, Fronx Wurmus, James Coglan, Alicia Hickey, Benjamin Schumann, and Michele Guido.</p>
 
             <p class="author-bio">
                 Tom Stuart and Tiffany Conroy are consultants with a combined 35+ years of experience developing
                 software and leading teams. They help software teams change their processes to eliminate or reduce queues in their development cycle. Hire them!
                 Get in touch at <a href="mailto:hello@golaminar.de">hello@golaminar.de</a>.
             </p>
-            <p class="footnote" id="footnote-1"><a href="#footnote-1-source">1</a>: serving customers in 10 seconds who arrive every 60 seconds will result in an capacity utilization of 1/6 or 16.67%.</p>
+
+            <p class="footnote" id="footnote-1"><a href="#footnote-1-source">1</a>: Some of you might be looking at the recommended 80% capacity utilization and be thinking of schemes like 20% time, in which team members are allowed to use their Fridays to work on self-directed projects outside of the main backlog, and wondering if this is a good way to control capacity utilization. I don't recommend this. We want to control capacity utilization so that, in the times when there is unexpected extra demand on the team, the team has a higher chance of being available to work on that demand. If we make extra headroom available by giving them 20% time, we can only get this benefit by expecting them to sacrifice the 20% time when it's a busy time.</p>
+            <!-- this footnote seems to be orphaned -->
+            <!-- <p class="footnote" id="footnote-1"><a href="#footnote-1-source">1</a>: serving customers in 10 seconds who arrive every 60 seconds will result in an capacity utilization of 1/6 or 16.67%.</p> -->
