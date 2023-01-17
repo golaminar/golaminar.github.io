@@ -315,3 +315,8 @@ footer .names a:link, footer .names a:hover, footer .names a:visited, footer .na
 table {
     border-spacing: 0;
 }
+
+var {
+    font-family: 'monospace';
+    font-style: normal;
+}
