@@ -13,8 +13,6 @@
     {% if page.description %}<meta property="og:description" content="{{ page.description }}">{% endif %}
     {% if page.image %}<meta property="og:image" content="https://www.golaminar.de/writings/thumbnails/{{ page.image }}">{% endif %}
     <meta property="og:url" content="https://www.golaminar.de{{ page.url }}">
-    <script src="https://d3js.org/d3.v7.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
 {% if page.custom_css %}
 {% for css_file in page.custom_css %}
     <link rel="stylesheet" href="{{ css_file }}.css">
