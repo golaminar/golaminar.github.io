@@ -1,0 +1,23 @@
+<div class="byline">
+    {% if page.author.name == "Tom Stuart" %}
+    <span class="image-frame"><img src="../images/tom.jpg"></span>
+    <nobr>
+        <span class="author"><a href="mailto:tom@golaminar.de">Tom</a></span>
+        <span class="date">{{ page.date | date_to_long_string: "ordinal" }}</span>
+    </nobr>
+    {% elsif page.author.name == "Tiffany Conroy" %}
+    <span class="image-frame"><img src="../images/tiffany.jpg"></span>
+    <nobr>
+        <span class="author"><a href="mailto:tiffany@golaminar.de">Tiffany</a></span>
+        <span class="date">{{ page.date | date_to_long_string: "ordinal" }}</span>
+    </nobr>
+    {% else %}
+    <span class="image-frame"><img src="../images/tom.jpg"></span>
+    <span class="image-frame"><img src="../images/tiffany.jpg"></span>
+    <nobr>
+        <span class="author"><a href="mailto:tom@golaminar.de">Tom</a> & <a
+                href="mailto:tiffany@golaminar.de">Tiffany</a></span>
+        <span class="date">{{ page.date | date_to_long_string: "ordinal" }}</span>
+    </nobr>
+    {% endif %}
+</div>

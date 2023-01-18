@@ -1,6 +1,14 @@
 collections:
   writings:
     output: true
+defaults:
+  -
+    scope:
+      path: ""
+      type: "writings"
+    values:
+      author:
+        name: "Tom Stuart & Tiffany Conroy"
 exclude:
   - Makefile
   - _writings/Makefile
