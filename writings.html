@@ -21,25 +21,38 @@ description: Writings on software developement practices.
     <meta property="og:url" content="https://www.golaminar.de{{ page.url }}">
 </head>
 
-<body class="writing">
+<body class="writing index">
     <header>
         <h1><a href="https://golaminar.de">Laminar</a></h1>
     </header>
     <main>
-        <article>
+
+        <header>
             <h2>
                 {{ page.title }}
             </h2>
+        </header>
 
-            {% for writing in site.writings %}
-                <h2>{{ writing.title }}
-                    {% if writing.subtitle %}<br><span class="subtitle">{{ writing.subtitle }}</span>{% endif %}
-                </h2>
-                <div>{{ writing.date | date_to_long_string: "ordinal" }}</div>
-                <p>{{ writing.description }}</p>
-            {% endfor %}
+        <section class="author-bio">
+            Tom Stuart and Tiffany Conroy are consultants with a combined 35+ years of experience developing
+            software and leading teams.
+            They help software teams change their processes to deliver more value, more frequently, and have fun doing so.
+            Get in touch at <a href="mailto:hello@golaminar.de">hello@golaminar.de</a>.
+        </section>
 
+        {% for writing in site.writings %}
+        <article>
+            <h3>
+                <a href="{{ writing.url }}">{{ writing.title }}</a>
+                {% if writing.subtitle %}<br><span class="subtitle">{{ writing.subtitle }}</span>{% endif %}
+            </h3>
+            <div class="byline">
+                <span class="date">{{ writing.date | date_to_long_string: "ordinal" }}</span>
+            </div>
+
+            <p>{{ writing.description }}</p>
         </article>
+        {% endfor %}
     </main>
 
     {% include footer.html %}
