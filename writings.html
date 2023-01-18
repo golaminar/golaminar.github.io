@@ -1,0 +1,49 @@
+---
+title: Thoughts from Tom and Tiffany
+description: Writings on software developement practices.
+---
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Laminar | {{ page.title }}</title>
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed for writings from golaminar.de"
+        href="https://www.golaminar.de/writings.xml">
+    <link rel="stylesheet" href="../site.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
+    <meta property="og:title" content="{{ page.title }}">
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="{{ page.description }}">
+    <meta property="og:image" content="https://www.golaminar.de/IMAGE_HERE">
+    <meta property="og:url" content="https://www.golaminar.de{{ page.url }}">
+</head>
+
+<body class="writing">
+    <header>
+        <h1><a href="https://golaminar.de">Laminar</a></h1>
+    </header>
+    <main>
+        <article>
+            <h2>
+                {{ page.title }}
+            </h2>
+
+            {% for writing in site.writings %}
+                <h2>{{ writing.title }}
+                    {% if writing.subtitle %}<br><span class="subtitle">{{ writing.subtitle }}</span>{% endif %}
+                </h2>
+                <div>{{ writing.date | date_to_long_string: "ordinal" }}</div>
+                <p>{{ writing.description }}</p>
+            {% endfor %}
+
+        </article>
+    </main>
+
+    {% include footer.html %}
+
+</body>
+
+</html>
