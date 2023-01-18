@@ -7,6 +7,7 @@ defaults:
       path: ""
       type: "writings"
     values:
+      layout: writing
       author:
         name: "Tom Stuart & Tiffany Conroy"
 exclude:
