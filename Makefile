@@ -4,6 +4,9 @@ _site: vendor
 run: _site
 	bundle exec jekyll serve --skip-initial-build --no-watch
 
+dev: _site
+	bundle exec jekyll serve
+
 vendor:
 	bundle install
 
