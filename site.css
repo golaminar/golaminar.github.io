@@ -65,6 +65,12 @@ h1:after {
     line-height: 1.2;
 }
 
+header h2 {
+    font-size: 2.2em;
+    margin-bottom: 0.5em;
+    font-weight: normal;
+}
+
 .cols {
     display: flex;
     flex-wrap: wrap;
@@ -155,6 +161,30 @@ header {
     padding: 1em 2em;
 }
 
+main header {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.writing header.breadcrumbs {
+    font-size: 0.8em;
+    color: #8b8b8b;
+    border-width: 0 0 1px 0;
+    border-style: solid;
+    border-color: #ccc;
+    margin-bottom: 2em;
+    text-align: right;
+}
+
+.writing header.breadcrumbs a {
+    border-bottom-width: 0;
+    font-weight: bold;
+}
+
+.writing header.breadcrumbs a:hover {
+    border-bottom-width: 1px;
+}
+
 .writing article, .writing header, .writing section {
     max-width: 45rem;
     margin: 0 auto;
@@ -193,10 +223,12 @@ header {
     border-width: 1px 0;
     border-style: solid;
     border-color: #ccc;
+    font-style: italic;
 }
 
-.author-bio {
-    font-style: italic;
+.index .author-bio {
+    border-top-width: 0;
+    margin-top: 0;
 }
 
 #what-we-offer .col {
