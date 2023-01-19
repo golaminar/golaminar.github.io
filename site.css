@@ -27,12 +27,18 @@ a {
     border-bottom-color: #666;
 }
 
+.thought main a:hover:not(.button) {
+    color: #333;
+    border-bottom-color: #333;
+}
+
 .aside {
     font-style: italic;
 }
 
 a:hover {
     color: #333;
+    border-bottom-color: #333;
 }
 
 h1 {
@@ -166,7 +172,7 @@ main header {
     padding-right: 0;
 }
 
-.thought header.breadcrumbs {
+header.breadcrumbs {
     font-size: 0.8em;
     color: #8b8b8b;
     border-width: 0 0 1px 0;
@@ -176,12 +182,12 @@ main header {
     text-align: right;
 }
 
-.thought header.breadcrumbs a {
+.header.breadcrumbs a {
     border-bottom-width: 0;
     font-weight: bold;
 }
 
-.thought header.breadcrumbs a:hover {
+.header.breadcrumbs a:hover {
     border-bottom-width: 1px;
 }
 
