@@ -1,4 +1,6 @@
 ---
+title: Embedded training and mentoring for software teams.
+description: We help your teams deliver more value, more frequently, and have fun doing so.
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -8,6 +10,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <meta property="og:title" content="Laminar | {{ page.title }}">
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="{{ page.description }}">
+    <meta property="og:image" content="https://www.golaminar.de/images/laminar.png">
+    <meta property="og:url" content="https://www.golaminar.de{{ page.url }}">
 </head>
 <body class="homepage">
     <header>
@@ -15,12 +22,14 @@
     </header>
     <section class="page" id="intro">
         <p class="tagline">
-            Embedded training and mentoring for software teams.
+            {{ page.title }}
         </p>
 
         <div class="cols">
             <div class="col">
-                <p>We help your teams deliver more value, more frequently, and have fun doing so.</p>
+                <p>
+                    {{ page.description }}
+                </p>
                 <p>
                     We look holistically to identify root causes of bottlenecks,
                     whether they are technical, structural, or behavioural in nature.
