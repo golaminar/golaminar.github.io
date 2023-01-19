@@ -196,7 +196,7 @@ main header {
     padding: 0.5em 2em 3em 2em;
 }
 
-.thought article p, .thought article ol, .thought article ul, .thought section {
+.thought p, .thought ol, .thought ul, .thought section {
     font-family: Georgia, Cambria, "Times New Roman", Times, serif;
     line-height: 1.5;
 }
@@ -371,5 +371,12 @@ var {
 
 .call-to-action {
     text-align: center;
-    padding: 0 2em;
+    padding: 0.25em 0 1.5em 0;
+}
+
+.call-to-action p, .call-to-action .button {
+    font-family: "proxima-nova","Helvetica Neue",Helvetica,Arial,sans-serif;
+    max-width: 20rem;
+    margin-left: auto;
+    margin-right: auto;
 }
