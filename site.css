@@ -69,10 +69,16 @@ h1:after {
     content: ".";
 }
 
+.homepage .tagline {
+    padding-top: 1em;
+}
+
 .tagline {
     font-size: 2.6em;
     margin-bottom: 1em;
     line-height: 1.2;
+    padding-top: 0;
+    margin-top: 0;
 }
 
 header h2 {
