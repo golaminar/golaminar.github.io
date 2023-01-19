@@ -376,7 +376,7 @@ var {
 
 .call-to-action p, .call-to-action .button {
     font-family: "proxima-nova","Helvetica Neue",Helvetica,Arial,sans-serif;
-    max-width: 20rem;
+    max-width: 24rem;
     margin-left: auto;
     margin-right: auto;
 }
