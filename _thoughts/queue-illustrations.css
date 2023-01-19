@@ -150,7 +150,7 @@ table {
     text-align: center;
 }
 
-#figure-backlog-growth button {
+#figure-backlog-growth .button {
     font-size: 1.4em;
     padding: 0.2em 0.4em;
     border-radius: 6px;

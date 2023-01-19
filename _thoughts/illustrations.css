@@ -21,22 +21,6 @@ figure input {
     min-width: 300px;
 }
 
-figure button {
-    font-size: 1em;
-    border: 1px solid #bbb;
-    background: #e6e6e6 url(button-bg.png) 50% 50% repeat-x;
-    font-weight: normal;
-    border-radius: 4px;
-    padding: 0.4em 1em;
-    cursor: pointer;
-}
-
-figure button:not(:disabled):hover {
-    border-color: #999;
-    background-image: url(button-bg-hover.png);
-    color: #000;
-}
-
 .illustration {
     margin: 2em 0;
 }
