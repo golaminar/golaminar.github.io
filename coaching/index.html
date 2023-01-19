@@ -1,0 +1,99 @@
+---
+title: Empathic professional coaching for technical leaders.
+description: We are available as coaches for engineering leaders. Hire us individually, but benefit from our partnership.
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Laminar | {{ page.title }}</title>
+    <link rel="stylesheet" href="/site.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    <meta property="og:title" content="Laminar | {{ page.title }}">
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="{{ page.description }}">
+    <meta property="og:image" content="https://www.golaminar.de/images/laminar.png">
+    <meta property="og:url" content="https://www.golaminar.de{{ page.url }}">
+</head>
+<body class="profiles">
+    <header>
+        <h1><a href="https://golaminar.de">Laminar</a></h1>
+    </header>
+    <section class="page" id="intro">
+        <p class="tagline">
+            {{ page.title }}
+        </p>
+        <div class="cols">
+            <div class="col">
+                <p>
+                    {{ page.description }}
+                </p>
+            </div>
+            <div class="col">
+                <p>
+                    If you want to discuss coaching options for yourself or someone in your team, let’s talk!
+                </p>
+                <p>
+                    <a href="https://calendly.com/golaminar/30-minute-call">→ Book an intro call.</a>
+                </p>
+            </div>
+        </div>
+
+    </section>
+    <section class="page cols" id="about-us">
+        <div class="bio col">
+            <div class="image-frame">
+                <img src="/images/tiffany.jpg" alt="Portrait of Tiffany">
+            </div>
+            <h2>Tiffany Conroy</h2>
+            <ul>
+                <li>20 years of professional experience, former VP Engineering at SoundCloud</li>
+                <li>Has worked as a developer, designer, product manager, people manager, and engineering leader</li>
+                <li>Particular experience in process engineering, UI/UX, payments systems, and empathetic collaboration</li>
+                <li>Photographer, amateur cook, storyteller</li>
+            </ul>
+            <div class="contact-methods">
+                <span><a href="mailto:tiffany@golaminar.de">Email Tiffany</a></span>
+                <span><a href="https://calendly.com/tiffany-conroy/trial-coaching-session">Book a trial session</a></span>
+            </div>
+        </div>
+        <div class="bio col">
+            <div class="image-frame">
+                <img src="/images/tom.jpg" alt="Portrait of Tom">
+            </div>
+            <h2>Tom Stuart</h2>
+            <ul>
+                <li>15 years of professional experience, including at SoundCloud and BCG Digital Ventures</li>
+                <li>Has worked as a developer, trainer, consultant, and engineering leader</li>
+                <li>Particular expertise in software architecture, infrastructure, and lean ways of working</li>
+                <li>Runner and standup comedian</li>
+            </ul>
+            <div class="contact-methods">
+                <span><a href="mailto:tom@golaminar.de">Email Tom</a></span>
+                <span><a href="https://calendly.com/get-time-with-tom/trial-coaching-session">Book a trial session</a></span>
+            </div>
+        </div>
+    </section>
+    <section class="page" id="testimonials">
+        <h2>Testimonials</h2>
+        <div class="cols">
+            <div class="col testimonial">
+                <!--  coaching -->
+                <p>Tom has massively supported my career development – he has been a wonderful mentor and given me a great deal of confidence in my own capabilities, being incredibly available, empathetic and supportive throughout.</p>
+                <!--p class="attribution">— Head of Product Management</p-->
+            </div>
+            <div class="col testimonial">
+                <!--  coaching -->
+                <p>Tiffany’s coaching was on point. She took the lead whenever necessary without taking away the work I was supposed to do. I felt a lot more confident about handling similar situations more autonomously in the future.</p>
+                <p class="attribution">— Engineering Manager</p>
+            </div>
+        </div>
+    </section>
+    <section class="page" id="final-pitch">
+        <h2>Ready to learn more about how we can help you?</h2>
+        <p>Email us at <a href="mailto:hello@golaminar.de">hello@golaminar.de</a> or <a href="https://calendly.com/golaminar/30-minute-call">pick a time to talk</a>.</p>
+    </section>
+{% include footer.html %}
+</body>
+</html>
