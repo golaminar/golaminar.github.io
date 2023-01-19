@@ -10,10 +10,14 @@ body {
 }
 
 .page {
-    padding: 2em;
     max-width: 800px;
     margin: auto;
     margin-bottom: 3em;
+    padding: 0 2em 2em 2em;
+}
+
+.homepage .page {
+    padding-top: 2em;
 }
 
 a {
@@ -100,10 +104,19 @@ header h2 {
     text-align: center;
 }
 
+#about-us > div ul {
+    text-align: left;
+}
+
+#about-us .contact-methods > span:not(:last-child):after {
+    padding: 0 0.5em;
+    content: " | ";
+    color: #999;
+}
+
 .homepage ul {
     list-style: square;
     margin: 0;
-    text-align: left;
 }
 
 .homepage li {
@@ -271,6 +284,13 @@ header.breadcrumbs {
 
 .testimonial > p:first-child {
     text-indent: 1.75em;
+}
+
+.testimonial .attribution {
+    text-align: right;
+    margin-top: -0.5em;
+    font-style: normal;
+    font-size: 0.8em;
 }
 
 @media (min-width: 724px) {
