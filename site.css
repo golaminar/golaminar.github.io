@@ -22,7 +22,7 @@ a {
     border-bottom: 1px solid #ccc;
 }
 
-.thought article a {
+.thought main a:not(.button) {
     color: #666;
     border-bottom-color: #666;
 }
@@ -213,11 +213,6 @@ main header {
     margin-bottom: 0.5em;
 }
 
-.thought main a {
-    color: #666;
-    border-bottom: 1px solid #666;
-}
-
 .author-bio {
     padding: 1em 0;
     border-width: 1px 0;
@@ -355,4 +350,21 @@ table {
 var {
     font-family: 'monospace';
     font-style: normal;
+}
+
+.button {
+    color: #111;
+    font-size: 1em;
+    border: 1px solid #bbb;
+    background: #e6e6e6 url(button-bg.png) 50% 50% repeat-x;
+    font-weight: normal;
+    border-radius: 4px;
+    padding: 0.4em 1em;
+    cursor: pointer;
+}
+
+.button:not(:disabled):hover {
+    border-color: #999;
+    background-image: url(button-bg-hover.png);
+    color: #000;
 }
