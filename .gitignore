@@ -1,7 +1,7 @@
 images/.DS_Store
-_writings/tests.js
-_writings/queue-tests.js
-_writings/backlog-tests.js
+_thoughts/tests.js
+_thoughts/queue-tests.js
+_thoughts/backlog-tests.js
 vendor/
 _site/
 Gemfile.lock

@@ -1,24 +1,25 @@
 collections:
-  writings:
+  thoughts:
     output: true
 defaults:
   -
     scope:
       path: ""
-      type: "writings"
+      type: "thoughts"
     values:
-      layout: writing
+      layout: thought
       author:
         name: "Tom Stuart & Tiffany Conroy"
 exclude:
   - Makefile
-  - _writings/Makefile
-  - _writings/tests.js
-  - _writings/queue-tests.js
-  - _writings/backlog-tests.js
+  - _thoughts/Makefile
+  - _thoughts/tests.js
+  - _thoughts/queue-tests.js
+  - _thoughts/backlog-tests.js
 plugins:
   - jekyll-feed
+  - jekyll-redirect-from
 feed:
   collections:
-    writings:
-      path: "/writings.xml"
+    thoughts:
+      path: "/thoughts.xml"

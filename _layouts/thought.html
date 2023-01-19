@@ -3,7 +3,7 @@
 
 <head>
     <title>Laminar | {{ page.title }}</title>
-    <link rel="alternate" type="application/atom+xml" title="Atom Feed for writings from golaminar.de" href="https://www.golaminar.de/writings.xml">
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed for thoughts from golaminar.de" href="https://www.golaminar.de/thoughts.xml">
     <link rel="stylesheet" href="../site.css">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,7 +11,7 @@
     <meta property="og:title" content="{{ page.title }}">
     <meta property="og:type" content="article">
     {% if page.description %}<meta property="og:description" content="{{ page.description }}">{% endif %}
-    {% if page.image %}<meta property="og:image" content="https://www.golaminar.de/writings/thumbnails/{{ page.image }}">{% endif %}
+    {% if page.image %}<meta property="og:image" content="https://www.golaminar.de/thoughts/thumbnails/{{ page.image }}">{% endif %}
     <meta property="og:url" content="https://www.golaminar.de{{ page.url }}">
 {% if page.custom_css %}
 {% for css_file in page.custom_css %}
@@ -25,13 +25,13 @@
 {% endif %}
 </head>
 
-<body class="writing">
+<body class="thought">
     <header>
         <h1><a href="https://golaminar.de">Laminar</a></h1>
     </header>
     <main>
         <header class="breadcrumbs">
-            Other <a href="/writings/">Thoughts from Tom and Tiffany</a>
+            Other <a href="/thoughts/">Thoughts from Tom and Tiffany</a>
         </header>
 
         <article>

@@ -1,7 +1,7 @@
 ---
 title: Thoughts from Tom and Tiffany
 description: Writings on software developement practices.
-permalink: /writings/index.html
+permalink: /thoughts/index.html
 ---
 
 <!DOCTYPE html>
@@ -9,8 +9,8 @@ permalink: /writings/index.html
 
 <head>
     <title>Laminar | {{ page.title }}</title>
-    <link rel="alternate" type="application/atom+xml" title="Atom Feed for writings from golaminar.de"
-        href="https://www.golaminar.de/writings.xml">
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed for thoughts from golaminar.de"
+        href="https://www.golaminar.de/thoughts.xml">
     <link rel="stylesheet" href="../site.css">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,7 @@ permalink: /writings/index.html
     <meta property="og:url" content="https://www.golaminar.de{{ page.url }}">
 </head>
 
-<body class="writing index">
+<body class="thought index">
     <header>
         <h1><a href="https://golaminar.de">Laminar</a></h1>
         <h2>{{ page.title }}</h2>
@@ -36,17 +36,17 @@ permalink: /writings/index.html
             Get in touch at <a href="mailto:hello@golaminar.de">hello@golaminar.de</a>.
         </section>
 
-        {% for writing in site.writings %}
+        {% for thought in site.thoughts %}
         <article>
             <h3>
-                <a href="{{ writing.url }}">{{ writing.title }}</a>
-                {% if writing.subtitle %}<br><span class="subtitle">{{ writing.subtitle }}</span>{% endif %}
+                <a href="{{ thought.url }}">{{ thought.title }}</a>
+                {% if thought.subtitle %}<br><span class="subtitle">{{ thought.subtitle }}</span>{% endif %}
             </h3>
             <div class="byline">
-                <span class="date">{{ writing.date | date_to_long_string: "ordinal" }}</span>
+                <span class="date">{{ thought.date | date_to_long_string: "ordinal" }}</span>
             </div>
 
-            <p>{{ writing.description }}</p>
+            <p>{{ thought.description }}</p>
         </article>
         {% endfor %}
     </main>

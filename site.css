@@ -22,7 +22,7 @@ a {
     border-bottom: 1px solid #ccc;
 }
 
-.writing article a {
+.thought article a {
     color: #666;
     border-bottom-color: #666;
 }
@@ -41,7 +41,7 @@ h1 {
     margin: 1em 0;
 }
 
-.writing .subtitle {
+.thought .subtitle {
     font-style: italic;
     font-size: 0.75em;
     font-weight: normal;
@@ -166,7 +166,7 @@ main header {
     padding-right: 0;
 }
 
-.writing header.breadcrumbs {
+.thought header.breadcrumbs {
     font-size: 0.8em;
     color: #8b8b8b;
     border-width: 0 0 1px 0;
@@ -176,44 +176,44 @@ main header {
     text-align: right;
 }
 
-.writing header.breadcrumbs a {
+.thought header.breadcrumbs a {
     border-bottom-width: 0;
     font-weight: bold;
 }
 
-.writing header.breadcrumbs a:hover {
+.thought header.breadcrumbs a:hover {
     border-bottom-width: 1px;
 }
 
-.writing article, .writing header, .writing section {
+.thought article, .thought header, .thought section {
     max-width: 45rem;
     margin: 0 auto;
 }
 
-.writing main {
+.thought main {
     background-color: #eee;
     color: #111;
     padding: 0.5em 2em 3em 2em;
 }
 
-.writing article p, .writing article ol, .writing article ul, .writing section {
+.thought article p, .thought article ol, .thought article ul, .thought section {
     font-family: Georgia, Cambria, "Times New Roman", Times, serif;
     line-height: 1.5;
 }
 
-.writing article h3 {
+.thought article h3 {
     margin-top: 1.5em;
 }
 
-.writing.index article h3 {
+.thought.index article h3 {
     margin-bottom: 0.5em;
 }
 
-.writing article li {
+.thought article li {
     margin-bottom: 0.5em;
 }
 
-.writing main a {
+.thought main a {
     color: #666;
     border-bottom: 1px solid #666;
 }
