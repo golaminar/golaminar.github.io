@@ -105,10 +105,6 @@ header h2 {
     flex: 435px;
 }
 
-.two-column {
-    columns: 2;
-}
-
 .cols p {
     margin: 0;
 }
@@ -142,8 +138,8 @@ header h2 {
 }
 
 .image-frame {
-    width: 200px;
-    height: 200px;
+    width: 175px;
+    height: 175px;
     position: relative;
     overflow: hidden;
     border-radius: 50%;
@@ -426,24 +422,47 @@ var {
     margin-bottom: 0.5em;
 }
 
+.cv h2 {
+    margin-bottom: 0;
+}
 
 #skills ul {
+    columns: 2;
     list-style: none;
+    margin-right: -2.1em;
+    letter-spacing: 0.03em;
+}
+
+#skills li {
+    position: relative;
+    margin-right: 2.1em;
 }
 
 #skills li:before {
     content: '→';
-    margin-left: -2.1em;
-    width: 2.1em;
     display: inline-block;
+    position: absolute;
+    left: -2em;
 }
 
-.cv #skills>div {
+#skills>div {
     border: solid white;
     border-width: 2px 0px;
+    padding: 1em 0;
+}
+
+@media (max-width: 724px) {
+    #skills ul {
+        columns: 1;
+    }
 }
 
 @media print {
+
+    #skills ul {
+        columns: 2;
+    }
+
     body.cv header, body.cv footer {
         display: none;
     }
@@ -453,14 +472,6 @@ var {
         color: #333;
     }
 
-    .cv #skills {
-        margin: 1em 0;
-    }
-
-    .cv #skills > div {
-        border-color: #333;
-    }
-
     body.cv #testimonials {
         page-break-before: always;
         font-size: 1.44em;
@@ -468,7 +479,12 @@ var {
 
     body.cv .page {
         margin-bottom: 0;
-        padding: 0 1em 1em 1em;
+    }
+
+    #skills > div {
+        border-color: #333;
+        border-width: 1px 0;
+        padding: 0.5em 0;
     }
 
     .cols>div.col-sidebar {
@@ -480,8 +496,8 @@ var {
     }
 
     body.cv .image-frame {
-        width: 100px;
-        height: 100px;
+        width: 110px;
+        height: 110px;
     }
 
     .web-only {
