@@ -128,13 +128,12 @@ header h2 {
     color: #999;
 }
 
-.homepage ul {
+.page ul {
     list-style: square;
-    margin: 0;
 }
 
-.homepage li {
-    margin-bottom: .25em;
+.page li {
+    margin-bottom: 0.5em;
 }
 
 .image-frame {
@@ -418,10 +417,6 @@ var {
     display: none;
 }
 
-.cv .page li {
-    margin-bottom: 0.5em;
-}
-
 .cv h2 {
     margin-bottom: 0;
 }
@@ -429,29 +424,22 @@ var {
 #skills ul {
     columns: 2;
     list-style: none;
-    margin-right: -2.1em;
     letter-spacing: 0.03em;
+    padding-left: 0;
+    margin-bottom: 0.5em;
 }
 
 #skills li {
-    position: relative;
-    margin-right: 2.1em;
-}
-
-#skills li:before {
-    content: '→';
-    display: inline-block;
-    position: absolute;
-    left: -2em;
+    margin-bottom: 0.75em;
 }
 
 #skills>div {
     border: solid white;
     border-width: 2px 0px;
-    padding: 1em 0;
+    padding: 0.5em 1.5em;
 }
 
-@media (max-width: 724px) {
+@media (max-width: 600px) {
     #skills ul {
         columns: 1;
     }
