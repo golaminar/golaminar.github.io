@@ -417,7 +417,7 @@ var {
     display: none;
 }
 
-.cv h2 {
+.cv .col-sidebar h2 {
     margin-bottom: 0;
 }
 
