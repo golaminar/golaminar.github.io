@@ -98,13 +98,16 @@ header h2 {
 }
 
 .cols > div.col-sidebar {
-    flex: 150px;
+    flex: 175px;
 }
 
 .cols > div.col-main {
-    flex: 450px;
+    flex: 435px;
 }
 
+.two-column {
+    columns: 2;
+}
 
 .cols p {
     margin: 0;
@@ -419,6 +422,27 @@ var {
     display: none;
 }
 
+.cv .page li {
+    margin-bottom: 0.5em;
+}
+
+
+#skills ul {
+    list-style: none;
+}
+
+#skills li:before {
+    content: '→';
+    margin-left: -2.1em;
+    width: 2.1em;
+    display: inline-block;
+}
+
+.cv #skills>div {
+    border: solid white;
+    border-width: 2px 0px;
+}
+
 @media print {
     body.cv header, body.cv footer {
         display: none;
@@ -429,7 +453,16 @@ var {
         color: #333;
     }
 
+    .cv #skills {
+        margin: 1em 0;
+    }
+
+    .cv #skills > div {
+        border-color: #333;
+    }
+
     body.cv #testimonials {
+        page-break-before: always;
         font-size: 1.44em;
     }
 
@@ -439,11 +472,11 @@ var {
     }
 
     .cols>div.col-sidebar {
-        flex: 75px;
+        flex: 100px;
     }
 
     .cols>div.col-main {
-        flex: 525px;
+        flex: 500px;
     }
 
     body.cv .image-frame {
