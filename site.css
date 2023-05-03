@@ -3,10 +3,14 @@ body {
     font-size: 1.2em;
     line-height: 1.3;
     margin: 0;
-    color: #fff;
-    background-color: #595959;
-    background-image: url(data:image/png;base64,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);
+    background-color: #fff;
+    color: #333;
     -webkit-font-smoothing: antialiased;
+}
+
+body.thought {
+    color: #fff;
+    background-color: #333;
 }
 
 .page {
@@ -24,9 +28,9 @@ body {
 }
 
 a {
-    color: #ccc;
+    color: #8c6e40; /* higher contrast against white than #A4814C */
     text-decoration: none;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #8c6e40; /* higher contrast against white than #A4814C */
 }
 
 .thought main a:not(.button) {
@@ -65,6 +69,13 @@ h1 {
 h1 a:link, h1 a:hover, h1 a:visited, h1 a:active {
     text-decoration: none;
     border-bottom: none;
+    color: #333;
+}
+
+.thought h1 a:link,
+.thought h1 a:hover,
+.thought h1 a:visited,
+.thought h1 a:active {
     color: #fff;
 }
 
@@ -82,6 +93,11 @@ h1:after {
     line-height: 1.2;
     padding-top: 0;
     margin-top: 0;
+    background: linear-gradient(140deg, #4C8A89 12.09%, #404445 42.58%, #A4814C 84.96%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: bold;
 }
 
 header h2 {
@@ -254,13 +270,21 @@ header.breadcrumbs {
     margin-top: 0;
 }
 
+#what-we-offer {
+    background: linear-gradient(140deg, #4C8A89 12.09%, #A4814C 84.96%);
+}
+
+#what-we-offer h2 {
+    color: #fff;
+}
+
 #what-we-offer .col {
     padding: 0.75em 2em 2.5em 2em;
 }
 
 .offering {
-    background-color: rgba(255, 255, 255, 0.7);
-    color: #444;
+    background-color: #ffffff99;
+    box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.1);
 }
 
 .offering p, .offering ul {
@@ -338,7 +362,8 @@ footer {
     bottom: 0;
     left: 0;
     width: 100%;
-    background-color: #8b8b8b;
+    background-color: #333;
+    color: #ccc;
     font-size: 0.8em;
     padding: 0;
 }
@@ -353,12 +378,13 @@ footer span {
 }
 
 footer a {
-    color: #333;
-    border-bottom: 1px solid #333;
+    color: #ccc;
+    border-bottom: 1px solid #ccc;
 }
 
 footer a:hover {
-    color: #111;
+    color: #fff;
+    border-bottom: 1px solid #fff;
 }
 
 footer span:not(:last-child):after {
