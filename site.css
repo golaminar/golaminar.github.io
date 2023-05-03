@@ -10,10 +10,14 @@ body {
 }
 
 .page {
-    max-width: 800px;
-    margin: auto;
     margin-bottom: 3em;
     padding: 0 2em 2em 2em;
+}
+
+.page > * {
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .homepage .page {
@@ -70,7 +74,7 @@ h1:after {
 }
 
 .homepage .tagline {
-    padding-top: 1em;
+    margin-top: 1em;
 }
 
 .tagline {
