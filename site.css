@@ -356,6 +356,11 @@ header.breadcrumbs {
     text-align: center;
 }
 
+#newsletter-and-thoughts iframe {
+    width: 100%;
+    max-width: 480px;
+}
+
 footer {
     text-align: center;
     position: fixed;
