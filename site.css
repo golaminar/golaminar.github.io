@@ -8,6 +8,10 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
+::selection {
+    background: #a4804c61;
+}
+
 body.thought {
     color: #fff;
     background-color: #333;
