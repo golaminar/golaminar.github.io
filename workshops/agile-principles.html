@@ -1,0 +1,50 @@
+---
+title: Book your spot — Agile Principles Workshop
+description: Equip yourself to be able to critique and adjust agile techniques in order to get the benefits of agile.
+---
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Laminar | {{ page.title }}</title>
+  <link rel="stylesheet" href="/site.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+  <meta property="og:title" content="Laminar | {{ page.title }}">
+  <meta property="og:type" content="website">
+  <meta property="og:description" content="{{ page.description }}">
+  <meta property="og:image" content="https://www.golaminar.de/images/laminar.png">
+  <meta property="og:url" content="https://www.golaminar.de{{ page.url }}">
+</head>
+
+<body class="profiles">
+  <header>
+    <h1><a href="https://golaminar.de">Laminar</a></h1>
+  </header>
+  <section class="page" id="intro">
+    <p class="tagline">
+      {{ page.title }}
+    </p>
+    <div class="cols">
+      <div class="col">
+        <p>
+          {{ page.description }}
+        </p>
+      </div>
+      <div class="col">
+        <p>
+          [text here]
+        </p>
+        <p>
+          <a href="https://golaminar.de">→ Register now.</a>
+        </p>
+      </div>
+    </div>
+
+  </section>
+  {% include about-us.html %}
+  {% include footer.html %}
+</body>
+
+</html>
