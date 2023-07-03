@@ -1,0 +1,19 @@
+.offer {
+  text-align: center;
+}
+
+.price {
+  text-align: center;
+  font-weight: normal;
+  font-size: 3em;
+}
+
+.full-price {
+  color: #A4814C;
+  text-decoration: line-through;
+}
+
+.early-bird-price {
+  color: #4C8A89;
+  font-weight: bold;
+}
