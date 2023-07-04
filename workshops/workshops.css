@@ -104,6 +104,38 @@ p.deets {
   background-color: hsl(179deg 42% 42% / 19%);
 }
 
-#final-pitch {
+
+.register-link {
+  text-align: center;
+}
+
+#registration-form {
   padding-bottom: 4em;
 }
+
+.workshop #about-us>div {
+  margin-bottom: 0;
+}
+
+.workshop #about-us h2 {
+  font-size: 1.17em;
+}
+
+.bio .image-frame {
+  width: 180px;
+  height: 180px;
+}
+
+.workshop .button {
+  color: #eee;
+  border: none;
+  background: linear-gradient(140deg, #4C8A89 12.09%, #404445 42.58%, #A4814C 84.96%);
+  opacity: 0.9;
+  display: inline-block;
+}
+
+.workshop .button:hover {
+  color: white;
+  border: none;
+  opacity: 1;
+  background: linear-gradient(140deg, #4C8A89 12.09%, #404445 42.58%, #A4814C 84.96%);}
