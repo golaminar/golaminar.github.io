@@ -11,10 +11,13 @@
                     <li>Particular experience in process engineering, UI/UX, payments systems, and empathetic collaboration</li>
                     <li>Photographer, amateur cook, storyteller</li>
                 </ul>
+                {% if include.just_bios == true %}
+                {% else %}
                 <div class="contact-methods">
                     <span><a href="mailto:tiffany@golaminar.de">Email Tiffany</a></span>
                     <span><a href="https://calendly.com/tiffany-conroy">Meet with Tiffany</a></span>
                 </div>
+                {% endif %}
             </div>
             <div class="bio col">
                 <div class="image-frame">
@@ -27,10 +30,13 @@
                     <li>Particular expertise in software architecture, infrastructure, and lean ways of working</li>
                     <li>Runner and standup comedian</li>
                 </ul>
+                {% if include.just_bios == true %}
+                {% else %}
                 <div class="contact-methods">
                     <span><a href="mailto:tom@golaminar.de">Email Tom</a></span>
                     <span><a href="https://calendly.com/get-time-with-tom">Meet with Tom</a></span>
                 </div>
+                {% endif %}
             </div>
-        <div>
+        </div>
     </section>

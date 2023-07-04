@@ -103,3 +103,7 @@ p.deets {
   margin-bottom: 2em;
   background-color: hsl(179deg 42% 42% / 19%);
 }
+
+#final-pitch {
+  padding-bottom: 4em;
+}
