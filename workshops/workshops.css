@@ -143,8 +143,21 @@ p.deets {
 
 .page ul.features {
   list-style: none;
+  margin-left: 0;
+  padding: 0;
+}
+
+.features li {
+  position: relative;
 }
 
 .features .icon {
-  margin-right: 1em;
+  padding-left: 0.5em;
+  position: absolute;
+}
+
+.features .content {
+  display: inline-block;
+  padding-left: 2em;
+  padding-bottom: 0.5em;
 }
