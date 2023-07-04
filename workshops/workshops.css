@@ -138,4 +138,13 @@ p.deets {
   color: white;
   border: none;
   opacity: 1;
-  background: linear-gradient(140deg, #4C8A89 12.09%, #404445 42.58%, #A4814C 84.96%);}
+  background: linear-gradient(140deg, #4C8A89 12.09%, #404445 42.58%, #A4814C 84.96%);
+}
+
+.page ul.features {
+  list-style: none;
+}
+
+.features .icon {
+  margin-right: 1em;
+}
