@@ -54,6 +54,15 @@
   list-style-type: none;
 }
 
+.workshop .learnings .cols {
+  row-gap: 0px;
+}
+
+.workshop .learnings ul {
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
 .title {
   font-size: 1.8em;
   line-height: 1.2;
