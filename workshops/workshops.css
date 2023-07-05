@@ -21,17 +21,6 @@
   font-weight: bold;
 }
 
-/* TODO this doesn't actually work. Add html elements with the text and then hide them without removing from the DOM */
-@media speech {
-  .full-price::before {
-    content: "Full price: ";
-  }
-
-  .early-bird-price::before {
-    content: "Early-bird price: ";
-  }
-}
-
 .workshop-cover {
 }
 
