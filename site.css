@@ -136,6 +136,15 @@ header h2 {
     margin-bottom: 1em;
 }
 
+.col-sidebar h2 {
+    margin: 0;
+}
+
+.col-main h3 {
+    margin-top: 0;
+    margin-bottom: 0.5em;
+}
+
 #about-us > div {
     margin-bottom: 2em;
     text-align: center;
