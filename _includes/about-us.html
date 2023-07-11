@@ -2,7 +2,7 @@
         <div class="cols">
             <div class="bio col">
                 <div class="image-frame">
-                    <a href="/tiffany/cv.html"><img src="/images/tiffany.jpg" alt="Portrait of Tiffany"></a>
+                    <a href="/tiffany/"><img src="/images/tiffany.jpg" alt="Portrait of Tiffany"></a>
                 </div>
                 <h2>Tiffany Conroy</h2>
                 <ul>
@@ -15,13 +15,17 @@
                 {% else %}
                 <div class="contact-methods">
                     <span><a href="mailto:tiffany@golaminar.de">Email Tiffany</a></span>
+                    {% if include.meeting_type == "trial_coaching" %}
+                    <span><a href="https://calendly.com/tiffany-conroy/trial-coaching-session?back=1">Book a Trial Session</a></span>
+                    {% else %}
                     <span><a href="https://calendly.com/tiffany-conroy">Meet with Tiffany</a></span>
+                    {% endif %}
                 </div>
                 {% endif %}
             </div>
             <div class="bio col">
                 <div class="image-frame">
-                    <a href="/tom/cv.html"><img src="/images/tom.jpg" alt="Portrait of Tom"></a>
+                    <a href="/tom/"><img src="/images/tom.jpg" alt="Portrait of Tom"></a>
                 </div>
                 <h2>Tom Stuart</h2>
                 <ul>
@@ -34,7 +38,11 @@
                 {% else %}
                 <div class="contact-methods">
                     <span><a href="mailto:tom@golaminar.de">Email Tom</a></span>
+                    {% if include.meeting_type == "trial_coaching" %}
+                    <span><a href="https://calendly.com/get-time-with-tom/trial-coaching-call?back=1">Book a Trial Session</a></span>
+                    {% else %}
                     <span><a href="https://calendly.com/get-time-with-tom">Meet with Tom</a></span>
+                    {% endif %}
                 </div>
                 {% endif %}
             </div>
