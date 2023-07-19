@@ -28,8 +28,11 @@ body.thought {
 }
 
 .homepage .page {
-    padding-top: 2em;
     padding: 2em 2em 4em 2em;
+}
+
+#intro {
+    padding-bottom: 4em;
 }
 
 ul {
