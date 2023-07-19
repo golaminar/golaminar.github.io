@@ -77,14 +77,6 @@ p.deets {
   margin-bottom: 0.5em;
 }
 
-.workshop {
-  line-height: 1.5;
-}
-
-.workshop ul {
-  line-height: 1.3;
-}
-
 .workshop .page {
   padding: 0em 1.5em 1.5em 1.5em;
 }
@@ -94,11 +86,6 @@ p.deets {
   padding-bottom: 50px;
   margin-bottom: 2em;
   background-color: hsl(179deg 42% 42% / 19%);
-}
-
-
-.register-link {
-  text-align: center;
 }
 
 #registration-form {
@@ -116,21 +103,6 @@ p.deets {
 .bio .image-frame {
   width: 180px;
   height: 180px;
-}
-
-.workshop .button {
-  color: #eee;
-  border: none;
-  background: linear-gradient(140deg, #4C8A89 12.09%, #404445 42.58%, #A4814C 84.96%);
-  opacity: 0.9;
-  display: inline-block;
-}
-
-.workshop .button:hover {
-  color: white;
-  border: none;
-  opacity: 1;
-  background: linear-gradient(140deg, #4C8A89 12.09%, #404445 42.58%, #A4814C 84.96%);
 }
 
 .page ul.features {
