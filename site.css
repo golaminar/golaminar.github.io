@@ -568,6 +568,24 @@ var {
         padding: 0.5em 0;
     }
 
+    .page.reverse {
+        background: transparent;
+        color: #333;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        border-style: solid;
+        border-color: #333;
+        border-width: 2px;
+    }
+
+    body.cv #intro {
+        padding-bottom: 1.5em;
+    }
+
+    #coaching-approach {
+        font-size: 1.2em;
+    }
+
     .cols>div.col-sidebar {
         flex: 100px;
     }
