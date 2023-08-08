@@ -148,10 +148,7 @@ header h2 {
 }
 
 .cols p {
-    margin: 0;
-}
-
-.cols p:not(:last-child) {
+    margin-top: 0;
     margin-bottom: 1em;
 }
 
@@ -313,6 +310,7 @@ header.breadcrumbs {
     color: #fff;
 }
 
+#about-us .cols,
 #what-we-offer .cols {
     row-gap: 40px;
 }
