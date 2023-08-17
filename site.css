@@ -140,11 +140,11 @@ header h2 {
 }
 
 .cols > div.col-sidebar {
-    flex: 175px;
+    flex: 30px;
 }
 
 .cols > div.col-main {
-    flex: 435px;
+    flex: 450px;
 }
 
 .cols p {
