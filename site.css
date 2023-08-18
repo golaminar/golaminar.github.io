@@ -567,8 +567,12 @@ body.cv #intro {
         page-break-before: always;
     }
 
-    body.cv #testimonials {
-        font-size: 1.25em;
+    .testimonial:nth-child(even) {
+        margin-left: 0;
+    }
+
+    .testimonial:nth-child(odd) {
+        margin-right: 0;
     }
 
     .testimonial:before {
