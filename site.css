@@ -533,6 +533,10 @@ var {
     padding: 0.5em 1.5em;
 }
 
+body.cv #intro {
+    padding-bottom: 1.5em;
+}
+
 @media (max-width: 600px) {
     #skills ul {
         columns: 1;
@@ -588,10 +592,6 @@ var {
         border-width: 1px;
         margin: 1em 1em 3em 1em;
         padding: 1em 2em 1em 2em;
-    }
-
-    body.cv #intro {
-        padding-bottom: 1.5em;
     }
 
     body.cv #intro .description {
