@@ -541,6 +541,10 @@ var {
 
 @media print {
 
+    .cols>div {
+        flex: 270px;
+    }
+
     #skills ul {
         columns: 2;
     }
@@ -555,13 +559,17 @@ var {
         line-height: 1.3;
     }
 
-    body.cv #packages,
-    body.cv #testimonials {
+    body.cv #packages {
         page-break-before: always;
     }
 
     body.cv #testimonials {
-        font-size: 1.44em;
+        font-size: 1.25em;
+    }
+
+    .testimonial:before {
+        padding-left: 10px;
+        font-size: 60px;
     }
 
     #skills > div {
