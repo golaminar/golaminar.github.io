@@ -544,6 +544,9 @@ body.cv #intro {
 }
 
 @media print {
+    .tagline {
+        font-size: 2.5em;
+    }
 
     .cols>div {
         flex: 270px;
