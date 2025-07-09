@@ -609,11 +609,11 @@ body.cv #intro {
     }
 
     .cols>div.col-sidebar {
-        flex: 50px;
+        flex: 30px;
     }
 
     .cols>div.col-main {
-        flex: 550px;
+        flex: 500px;
     }
 
     body.cv .image-frame {
