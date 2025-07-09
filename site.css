@@ -616,6 +616,14 @@ body.cv #intro {
         flex: 500px;
     }
 
+    h4 {
+        margin-bottom: 0.5em;
+    }
+    
+    ul {
+        margin-top: 0;
+    }
+
     body.cv .image-frame {
         width: 110px;
         height: 110px;
