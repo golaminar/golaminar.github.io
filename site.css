@@ -515,6 +515,10 @@ var {
     margin-bottom: 0;
 }
 
+#skills-and-technologies h3 {
+    font-size: 1em;
+}
+
 #skills ul {
     columns: 2;
     list-style: none;
@@ -609,10 +613,10 @@ body.cv #intro {
         font-size: 1.2em;
     }
 
-    .col-main h4 {
+    .col-main h4, #skills-and-technologies h3 {
         margin-bottom: 0.5em;
     }
-    
+
     .col-main ul {
         margin-top: 0;
     }
